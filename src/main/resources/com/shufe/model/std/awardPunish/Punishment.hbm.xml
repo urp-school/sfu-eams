@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.std.awardPunish">
+	<!--学生处分记录-->
+	<class name="Punishment" table="XS_CF_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_XS_CF_T</param>
+			</generator>
+		</id>
+		<property name="name" column="CFMC" not-null="true"/>
+		<many-to-one name="std" column="XSID" not-null="true"/>
+		<many-to-one name="type" column="CFLXID" not-null="true"/>
+        <many-to-one name="calendar" column="JXRLID"
+            class="com.shufe.model.system.calendar.TeachCalendar"/>
+		<property name="presentOn" column="BFRQ" not-null="true"/>
+		<property name="withdrawOn" column="CXRQ"/>
+		<property name="depart" length="200" column="BM"/>
+		<property name="remark" length="1000" column="BZ"/>
+		<property name="isValid" not-null="true" column="SFYX"/>
+	</class>
+</hibernate-mapping>

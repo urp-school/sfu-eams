@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 教学活动表 -->
+<hibernate-mapping>
+	<class name="com.shufe.model.course.arrange.Activity" table="JXHD_T"
+		discriminator-value="0">
+		<cache usage="read-write" region="taskCache"/>
+		<id name="id" column="id" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXHD_T</param>
+			</generator>
+		</id>
+		<discriminator column="ZYYY" type="integer"/>
+		<many-to-one name="room" column="JSID" not-null="false"/>
+		<component name="time" class="com.ekingstar.eams.system.time.TimeUnit">
+			<property name="year" column="NF" not-null="true"/>
+			<property name="validWeeks" column="YXZ" length="53" not-null="true"/>
+			<property name="weekId" column="ZJ" not-null="true"/>
+			<property name="startUnit" column="KSXJ" not-null="true"/>
+			<property name="endUnit" column="JSXJ" not-null="true"/>
+			<property name="validWeeksNum" column="YXZSZ" not-null="true"/>
+			<property name="startTime" column="QSSJ" not-null="true"/>
+			<property name="endTime" column="JSSJ" not-null="true"/>
+		</component>
+		<subclass name="com.shufe.model.course.arrange.TaskActivity"
+			discriminator-value="3">
+			<many-to-one name="task" column="JXRWID" not-null="false"/>
+			<many-to-one name="calendar" column="JXRLID" not-null="false"/>
+			<subclass name="com.shufe.model.course.arrange.task.CourseActivity"
+				discriminator-value="1">
+				<many-to-one name="teacher" column="JZGID" not-null="false"/>
+			</subclass>
+			<subclass name="com.shufe.model.course.arrange.exam.ExamActivity"
+				discriminator-value="2">
+				<many-to-one name="examType" column="KSLXID"/>
+				<many-to-one name="department" column="ZKYXID"/>
+				<many-to-one name="teacher" column="JZGID" not-null="false"/>
+				<set name="examTakes" inverse="true" cascade="all" table="PK_JG_T">
+					<key column="JXHDID"/>
+					<one-to-many
+						class="com.shufe.model.course.arrange.exam.ExamTake"/>
+				</set>
+				<many-to-one name="examMonitor" column="JKID" not-null="false" cascade="all"/>
+			</subclass>
+		</subclass>
+		
+		<filter name="validWeeksFilter"
+			condition="bitand(YXZSZ, :validWeeksNum)>0"/>
+	</class>
+
+	<filter-def name="validWeeksFilter">
+		<filter-param type="long" name="validWeeksNum"/>
+	</filter-def>
+	
+</hibernate-mapping>

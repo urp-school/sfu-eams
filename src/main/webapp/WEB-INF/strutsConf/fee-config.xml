@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<struts-config>
+	<action-mapping>
+		<action path="/feeDetail" scope="request" parameter="method"/>
+		<action path="/feeSearch" scope="request" name="page20Form"
+			parameter="method"/>
+		
+		<action path="/feeOfStd" scope="request" parameter="method"/>
+		<action path="/courseAndFee" scope="request" parameter="method"/>
+		<action path="/feeStat" scope="request" parameter="method"/>
+		
+		<action path="/feeDefaultConfig" scope="request" parameter="method"/>
+		<action path="/feeDefault" scope="request" parameter="method"/>
+		<action path="/creditFeeDefault" scope="request" parameter="method"/>
+		
+		<action path="/feeImport" scope="request" parameter="method"/>
+		<action path="/tuitionFee" scope="request" parameter="method"/>
+	</action-mapping>
+</struts-config>

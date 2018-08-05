@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 培养计划课程组表 -->
+<hibernate-mapping package="com.shufe.model.course.plan">
+	<class name="CourseGroup" table="V_PYJH_KCZ_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_PYJH_KCZ_T</param>
+			</generator>
+		</id>
+		
+		<many-to-one name="courseType" column="KCLBID" not-null="true"/>
+		<many-to-one name="parent" column="FKCZID" not-null="false"/>
+		<many-to-one name="teachPlan" column="PYJHID" not-null="true"/>
+		
+		<property name="creditHour" column="ZXS" not-null="true"/>
+		<property name="credit" column="ZXF" not-null="true"/>
+		
+		<property name="creditPerTerms" column="XFFB" not-null="true" length="60"/>
+		<property name="weekHourPerTerms" column="ZKSFB" not-null="true"
+			length="60"/>
+		<set name="planCourses" inverse="true" cascade="all,delete-orphan">
+			<key column="KCZID" not-null="true"/>
+			<one-to-many class="com.shufe.model.course.plan.PlanCourse"/>
+		</set>
+		<property name="remark" column="BZ" length="500"/>
+	</class>
+	<query name="getUsedCourseTypes">
+		<![CDATA[
+			select courseGroup.courseType
+			 from TeachPlan as plan join plan.courseGroups as courseGroup
+			 where plan=? 
+		]]>
+	</query>
+</hibernate-mapping>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 学分奖励标准表 -->
+<hibernate-mapping package="com.shufe.model.course.election">
+	<class name="CreditAwardCriteria" table="XK_JLXFBZ_T">
+		<id name="id" column="id" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_XK_JLXFBZ_T</param>
+			</generator>
+		</id>
+		<property name="floorAvgGrade" column="JDXJ" not-null="true"/>
+		<property name="ceilAvgGrade" column="JDSJ" not-null="true"/>
+		<property name="awardCredits" column="JLFZ" not-null="true"/>
+	</class>
+	<query name="getCreditAwardCriteria">
+		<![CDATA[
+			from CreditAwardCriteria as awardCriteria 
+			where awardCriteria.floorAvgGrade<=(?)
+			and awardCriteria.ceilAvgGrade>(?)
+			]]>
+	</query>
+</hibernate-mapping>

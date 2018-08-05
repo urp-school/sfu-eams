@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.degree.study">
+  <!-- 项目获奖情况 -->
+  <class name="ProjectAward" table="KY_XM_HJ_T">
+		<id name="id" column="ID" length="32">
+	      <generator class="sequence">
+	          <param name="sequence">SEQ_KY_XM_HJ_T</param>
+	      </generator>
+	   </id>
+      <many-to-one name="student" column="XSID" not-null="true"/>		 
+	  <property name="awardName" column="HJMC" length="200" not-null="true"/>
+	  <property name="departmentName" column="BJDW" length="200"/>
+	  <property name="awardedOn" column="HJSJ" not-null="true"/>
+	  <property name="isPassCheck" column="SFTGSH" not-null="true"/>
+      <property name="remark" column="BZ" length="500"/>
+	  <many-to-one name="type" column="KYHJDJID" not-null="true"/>
+	  <many-to-one name="project" column="XMID" not-null="true"/>
+  </class>
+	
+  <class name="LiteratureAward" table="KY_ZZ_HJ_T">
+		<id name="id" column="ID" length="32">
+	      <generator class="sequence">
+	          <param name="sequence">SEQ_KY_ZZ_HJ_T</param>
+	      </generator>
+	   </id>
+      <many-to-one name="student" column="XSID" not-null="true"/>		 
+	  <property name="awardName" column="HJMC" length="200" not-null="true"/>
+	  <property name="departmentName" column="BJDW" length="200"/>
+	  <property name="awardedOn" column="HJSJ" not-null="true" />
+	  <property name="isPassCheck" column="SFTGSH" not-null="true"/>
+      <property name="remark" column="BZ" length="500"/>
+	  <many-to-one name="type" column="KYHJDJID" not-null="true"/>
+	  <many-to-one name="literature" column="ZZID" not-null="true"/>
+  </class>
+	
+  <class name="StudyThesisAward" table="KY_LW_HJ_T">
+		<id name="id" column="ID" length="32">
+	      <generator class="sequence">
+	          <param name="sequence">SEQ_KY_LW_HJ_T</param>
+	      </generator>
+	   </id>
+      <many-to-one name="student" column="XSID" not-null="true"/>		 
+	  <property name="awardName" column="HJMC" length="200"/>
+	  <property name="departmentName" column="BJDW" length="200"/>
+	  <property name="awardedOn" column="HJSJ" not-null="true" />
+	  <property name="isPassCheck" column="SFTGSH" not-null="true"/>
+      <property name="remark" column="BZ" length="500"/>
+	  <many-to-one name="type" column="KYHJDJID" not-null="true"/>
+	  <many-to-one name="studyThesis" column="LWID" not-null="true"/>
+  </class>
+	
+   <class name="StudyMeetingAward" table="KY_HY_HJ_T">
+		<id name="id" column="ID" length="32">
+	      <generator class="sequence">
+	          <param name="sequence">SEQ_KY_HY_HJ_T</param>
+	      </generator>
+	   </id>
+      <many-to-one name="student" column="XSID" not-null="true"/>		 
+	  <property name="awardName" column="HJMC" length="200"/>
+	  <property name="departmentName" column="BJDW" length="200"/>
+	  <property name="awardedOn" column="HJSJ" not-null="true" />
+	  <property name="isPassCheck" column="SFTGSH" not-null="true"/>
+      <property name="remark" column="BZ" length="500"/>
+	  <many-to-one name="type" column="KYHJDJID" not-null="true"/>
+	  <many-to-one name="studyMeeting" column="HYID" not-null="true"/>
+  </class>
+</hibernate-mapping>

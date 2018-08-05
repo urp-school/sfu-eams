@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.std.speciality2nd" >
+	<class name="SignUpStdScope" table="SZYBM_FW_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_SZYBM_FW_T</param>
+			</generator>
+		</id>
+		
+		<many-to-one name="setting"  column="SZYBMSZID"/>
+		<property name="enrollTurn" length="10" column="RXNF"/>
+		<many-to-one name="department"  column ="BMID"/>
+		<many-to-one name="speciality" column ="ZYID"/>
+		<many-to-one name="aspect"  column ="ZYFXID"/>
+		<many-to-one name="stdType"  column ="XSLBID"/>
+	</class>
+</hibernate-mapping>

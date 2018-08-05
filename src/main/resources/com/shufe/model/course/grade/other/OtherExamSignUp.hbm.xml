@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.shufe.model.course.grade.other">
+  <!--校外考试报名  -->
+  <class name="OtherExamSignUp" table="CJ_QTKS_BM_T">
+      <id name="id" column="id" unsaved-value="null">
+            <generator class="sequence">
+                <param name="sequence">SEQ_CJ_QTKS_BM_T</param>
+            </generator>
+      </id>
+      <!-- 学生、学年学期和考试种类是业务主键 -->
+      <many-to-one name="std" not-null="true" column="XSID"/>
+      <many-to-one name="calendar"  column="JXRLID" not-null="true"/>       
+      <many-to-one name="category"  column ="QTKSKMID" not-null="true" />
+      
+	  <property name="signUpAt" column="BMSJ" />
+  </class>
+</hibernate-mapping>

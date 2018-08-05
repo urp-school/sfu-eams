@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.shufe.model.system.notice">
+	<class name="Notice" table="XTGG_T">
+		<cache usage="read-write" region="systemCache"/>
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_XTGG_T</param>
+			</generator>
+		</id>
+		<discriminator column="GGLB" type="string" length="1"/>
+		<property name="title" column="GGBT" not-null="true" length="100"/>
+		<property name="startDate" column="KSRQ" not-null="false"/>
+        <property name="finishDate" column="JSRQ" not-null="false"/>
+        <property name="isUp" column="SFZD"/>
+        <many-to-one name="content" column="NRID" not-null="true" cascade="all"/>
+		<property name="modifyAt" column="XGRQ" not-null="true"/>
+		<many-to-one name="publisher" column="FBRID" not-null="true" />
+		<subclass name="StudentNotice" discriminator-value="S">
+			<set name="studentTypes" table="XTGG_XSLB_T">
+				<key column="XTGGID"/>
+				<many-to-many column="XSLBID" class="com.ekingstar.eams.system.baseinfo.StudentType"/>
+			</set>
+			<set name="departs" table="XTGG_BM_T">
+				<key column="XTGGID"/>
+				<many-to-many column="BMID"
+					class="com.shufe.model.system.baseinfo.Department"/>
+			</set>
+		</subclass>
+		<subclass name="TeacherNotice" discriminator-value="T"/>
+		<subclass name="ManagerNotice" discriminator-value="M"/>
+	</class>
+    
+    <!--系统公告内容-->
+    <class name="NoticeContent" table="XTGG_NR_T">
+        <id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_XTGG_NR_T</param>
+			</generator>
+		</id>
+		<property name="content" column="GGNR" not-null="true" type="org.springframework.orm.hibernate3.support.ClobStringType"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.system.baseinfo">
+	<!--部门院系代码-->
+	<class name="Department" table="JCXX_BM_T">
+		<cache usage="read-write" region="baseinfo"/>
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JCXX_BM_T</param>
+			</generator>
+		</id>
+		<!--base info-->
+		<property name="code" column="BMDM" length="25" unique="true"/>
+		<property name="name" column="BMMC" length="50"/>
+		<property name="engName" column="BMMC_EN" length="100"/>
+		<property name="abbreviation" column="BMJC" length="50"/>
+		<property name="createAt" column="ZDSJ"/>
+		<property name="modifyAt" column="XGSJ"/>
+		<property name="remark" update="true" insert="true" column="BZ"
+			length="500"/>
+		<property name="state" column="ZTDM"/>
+		<!--department specific-->
+		<property name="dateEstablished" column="SLNY"/>
+		<property name="isTeaching" column="SFKK"/>
+		<property name="isCollege" column="SFYX"/>
+		
+		<set name="specialitis"  cascade="none" sort="unsorted"
+			inverse="true">
+			<cache usage="read-write"/>
+			<key column="BMID"></key>
+			<one-to-many class="com.shufe.model.system.baseinfo.Speciality"/>
+		</set>
+		<set name="stdTypes" table="JCXX_BM_XSLB_T"  sort="unsorted">
+			<cache usage="read-write"/>
+			<key column="BMID"></key>
+			<many-to-many class="com.ekingstar.eams.system.baseinfo.StudentType"
+				column="XSLBID" outer-join="auto"/>
+		</set>
+		<set name="teachers"  cascade="none" inverse="true"
+			where="JZGLBBS in('D','T') and SFRK=true" batch-size="100">
+			<key column="BMID"></key>
+			<one-to-many class="com.shufe.model.system.baseinfo.Teacher"/>
+		</set>
+		<set name="classrooms" table="JCXX_BM_JS_T" cascade="none"
+			sort="unsorted">
+			<key column="BMID"/>
+			<many-to-many class="com.shufe.model.system.baseinfo.Classroom"
+				column="JSID" outer-join="auto"/>
+		</set>
+	</class>
+</hibernate-mapping>

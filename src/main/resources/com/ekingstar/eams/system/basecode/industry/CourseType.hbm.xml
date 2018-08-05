@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.ekingstar.eams.system.basecode.industry" >
+	<!--课程类别代码-->
+	<class name="CourseType" table="BZHB_KCLB_T">
+		<cache region="basecode" usage="read-write"/>
+	    <id name="id" column="ID" unsaved-value="null" >
+			<generator class="sequence">
+				<param name="sequence">SEQ_BZHB_KCLB_T</param>
+			</generator>
+		</id>
+		<property name="code" not-null="true" column="KCLBDM" length="32" unique="true"/>
+		<property name="name" not-null="true" column="KCLBMC" length="100"/>
+		<property name="engName" column="KCLBMC_EN" length="100"/>
+		<property name="createAt" column="ZDSJ" not-null="true"/>
+		<property name="modifyAt" column="XGSJ" not-null="true"/>	
+		<property name="state" column="SFSY" not-null="true"/>
+		<property name="priority" column="LBYXJ"/>
+		<property name="isModuleType" column="SFMKK" not-null="true"/>
+		<property name="isCompulsory" column="SFBX" not-null="true"/>
+		<property name="isDegree" column="SFXWK" not-null="true"/>
+		<property name="isPractice" column="SFSJK" not-null="true"/>
+		<many-to-one name="superType" column="SJLBID" not-null="false"/>
+	</class>
+</hibernate-mapping>

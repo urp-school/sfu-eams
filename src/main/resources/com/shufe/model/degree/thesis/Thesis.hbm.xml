@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.shufe.model.degree.thesis">
+	<class name="ThesisManage" table="LW_LWGL_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_LW_LWGL_T</param>
+			</generator>
+		</id>
+		<many-to-one name="student" column="xsxxid" lazy="proxy" />
+		<set name="preAnswerSet"  inverse="true">
+			<key column="LWGLID"/>
+			<one-to-many  class="com.shufe.model.degree.thesis.answer.PreAnswer"/>
+		</set>
+		<many-to-one name="annotate" column="LWPYid" unique="true"/>
+		<many-to-one name="topicOpen" column="LWKTID" unique="true"/>
+		<many-to-one name="formalAnswer" column="LWDBID" unique="true"/>
+		<many-to-one name="teachCalendar" column="JXRLID"/>
+		<many-to-one name="schedule" column="LWJDID"/>
+		<many-to-one name="thesis" column="DGLWID"/>
+		<many-to-one name="majorType" column="ZYLBID" not-null="true"/>
+		<many-to-one name="tutor" column="DSID"/>
+	</class>
+	<!-- 定稿论文-->
+	<class name="Thesis" table="LW_DGLW_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_LW_DGLW_T</param>
+			</generator>
+		</id>
+		<property name="name" column="LWTM" length="400"/>
+		<property name="keyWords" column="LWZTZ" length="400"/>
+		<property name="abstract_cn" column="ZWZY" type="org.springframework.orm.hibernate3.support.ClobStringType"/>
+		<property name="abstract_en" column="YWZY" type="org.springframework.orm.hibernate3.support.ClobStringType"/>
+		<property name="startOn" column="LWKSSJ"/>
+		<property name="endOn" column="LWJSSJ"/>
+		<property name="finishOn" column="LWTJSJ"/>
+		<property name="affirm" column="SFQR"/>
+		<property name="isExcellentThesis" column="SFYXLW"/>
+		<property name="thesisNum" column="LWZS" length="10"/>
+		<many-to-one name="thesisType" column="LWLBID"/>
+		<many-to-one name="thesisSource" column="LWLYID"/>
+		<many-to-one name="thesisManage" column="LWGLID"/>
+		<many-to-one name="student" column="xsxxid"/>
+		<property name="remark" column="BZ" length="1000"/>
+		<property name="downloadName" column="DGLWXZMC" length="100"/>
+		<property name="displayName" column="DGLWXSMC" length="100"/>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 教学任务变更申请表 -->
+<hibernate-mapping>
+	<class name="com.shufe.model.course.task.TaskAlterRequest" table="JXRW_BGSQ_T" discriminator-value="0">
+		<id name="id" column="id" unsaved-value="null" length="32">
+	      <generator class="sequence">
+	          <param name="sequence">SEQ_JXRW_BGSQ_T</param>
+	      </generator>
+		</id>
+		<many-to-one name="teacher" column="JZGID"  />
+		<many-to-one name="task" column="JXRWID"  />
+		<property name="requisition" column="BGYY" length="300" />
+		<property name="time" column="BGSJ" type="date" not-null="true" />
+		<property name="availability" column="YXX" not-null="true" />
+    </class>
+</hibernate-mapping>

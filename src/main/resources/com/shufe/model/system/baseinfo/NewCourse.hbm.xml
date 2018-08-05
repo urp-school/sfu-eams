@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<!--新开课程代码	-->
+	<class name="com.shufe.model.system.baseinfo.NewCourse" table="JCXX_XKKC_T">
+		<cache usage="read-write" region="baseinfo"/>
+		<id name="id" column="ID">
+			<generator class="sequence">
+				<param name="sequence">SEQ_XKKC_KC_T</param>
+			</generator>
+		</id>
+		<property name="ordernum" column="SXH" />
+		<property name="priority" column="ZD" />
+		<many-to-one name="course" column="KCID" unique="true"/>
+		
+	</class>
+	
+</hibernate-mapping>

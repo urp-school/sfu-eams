@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.shufe.model.quality.evaluate.stat.EvaluateTeacherStat"
+        table="JXZL_PJ_JSGR_T">
+        <id name="id" column="ID">
+            <generator class="sequence">
+                <param name="sequence">SEQ_JXZL_PJ_JSGR_T</param>
+            </generator>
+        </id>
+        
+        <!--业务主键-->
+        <many-to-one name="calendar" column="JXRLID" not-null="true"/>
+        <many-to-one name="course" column="KCID" not-null="true"/>
+        <many-to-one name="teacher" column="JZGID" not-null="true"/>
+        <!--评教时院系-->
+        <many-to-one name="department" column="PJSYXID" not-null="true"/>
+        <property name="sumScore" column="PJZF"/>
+        
+        <property name="rank" column="GRPM"/>
+        <property name="departRank" column="YXPM"/>
+        <property name="validTickets" column="TPRS" not-null="true"/>
+        
+        <bag name="questionsStat" inverse="true" cascade="all,all-delete-orphan">
+            <cache usage="read-write"/>
+            <key column="JSGRID"/>
+            <one-to-many
+                entity-name="com.shufe.model.quality.evaluate.stat.QuestionTeacherStat"/>
+        </bag>
+    </class>
+    <sql-query name="insertQuestionResults">
+        <![CDATA[
+            INSERT INTO JXZL_PJ_WTTJ_JZG_WTJG_T (PJJZGID, WTJGID)
+            (
+                SELECT B3.ID, B1.ID FROM JXZL_PJ_WTJG_T B1, JXZL_PJ_PJJG_T B2,
+                (
+                    SELECT T2.ID, T1.JXRLID, T1.KCID, T1.JZGID, T2.PJWTID from JXZL_PJ_JSGR_T T1, JXZL_PJ_WTTJ_JZG_T T2 WHERE T1.ID = T2.JSGRID
+                ) B3
+                 WHERE B1.PJJGID = B2.ID AND B3.JXRLID = B2.JXRLID AND B2.JXRWID IN (SELECT ID FROM JXRW_T C1, JXRW_LS_T C2 WHERE C1.ID = C2.JXRWID AND C1.KCID = B3.KCID AND C1.JXRLID = B3.JXRLID AND B3.JZGID = C2.LSID)
+                   AND B1.WTID = B3.PJWTID AND B3.JXRLID = :calendarId
+            )
+            ]]>
+    </sql-query>
+</hibernate-mapping>

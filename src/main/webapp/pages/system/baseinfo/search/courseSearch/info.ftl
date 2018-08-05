@@ -1,0 +1,1 @@
+<#include "/pages/system/baseinfo/course/info.ftl"/>

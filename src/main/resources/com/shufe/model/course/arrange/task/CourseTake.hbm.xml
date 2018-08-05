@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 教学班中的单个别学生修读信息 -->
+<hibernate-mapping package="com.shufe.model.course.arrange.task">
+	<class name="CourseTake" table="JXBXS_T">
+		<id name="id" column="id" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXBXS_T</param>
+			</generator>
+		</id>
+		<!-- 一个学生只能参加一次教学任务的课程 -->
+		<!-- natural-id -->
+		<many-to-one name="task" column="JXRWID" not-null="true"/>
+		<many-to-one name="student" column="XSID" not-null="true"/>
+		<many-to-one name="courseTakeType" column="XDLBID" not-null="true"/>
+		<many-to-one name="courseGrade" column="CJID"/>
+		<property name="isCourseEvaluated" column="SFPJWC" />
+		<map name="examTakes" cascade="all" inverse="true">
+			<key column="JXBXSID"/>
+			<map-key type="long" column="KSLXID"/>
+			<one-to-many class="com.shufe.model.course.arrange.exam.ExamTake"/>
+		</map>
+	</class>
+	<query name="getTakeCount">
+		<![CDATA[
+			select count(*) from  
+			   CourseTake where task = :task
+    			and student.id =:stdId
+		]]>
+	</query>
+	<sql-query name="statCreditFor">
+		<return-scalar column="yxxf" type="float"/>
+		SELECT sum (take.xf) yxxf
+		 FROM jxbxs_t take INNER JOIN jxrw_t jxrw ON take.jxrwid = jxrw.ID 
+		 WHERE take.xsid = :stdId AND jxrw.jxrlid in (:calendarIds) </sql-query>
+	<query name="getCourseTakesOfStd">
+		<![CDATA[from CourseTake as take where take.student=:std]]>
+	</query>
+	<!--查询学生的在指定学年学期的课程id集合-->
+	<query name="getTakeCourseIdsOfStd">
+		<![CDATA[select task.course.id 
+			 from CourseTake as take 
+			  join take.task as task 
+			  where take.student.id=:stdId 
+			  and task.calendar in(:calendars)]]>
+	</query>
+</hibernate-mapping>

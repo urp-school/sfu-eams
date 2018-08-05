@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="false">
+	<class    
+		name="com.ekingstar.eams.teach.program.major.model.MajorPlan" 
+		entity-name="com.ekingstar.eams.teach.program.major.MajorPlan"
+		table="PYFA_ZYFA_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_PYFA_ZYFA_T</param>
+			</generator>
+		</id>
+		<property name="credits" column="YQXF" not-null="true" />
+		<bag name="courseGroups" inverse="true" cascade="all">
+			<key column="ZYFAID" />
+			<one-to-many
+				entity-name="com.ekingstar.eams.teach.program.major.MajorPlanCourseGroup" />
+		</bag>
+				<many-to-one name="degree"
+			entity-name="com.ekingstar.eams.basecode.state.Degree"
+			column="XWID"/>
+		<property name="grade" column="NJ" not-null="true" />
+		<many-to-one name="trainingLevel" column="PYCCID" />
+		<many-to-one name="major" column="ZYID" />
+		<!-- 
+			<many-to-one name="majorField"
+			entity-name="com.ekingstar.eams.baseinfo.MajorField"
+			column="ZYFXID" />
+		-->
+		<property name="duration" column="XZ" not-null="true" />
+		<property name="requirements" column="PYYQ" length="1800" />
+		<property name="target" column="PYMB" length="1800" />
+		<!--
+			<many-to-one name="studentType"
+			entity-name="com.ekingstar.eams.baseinfo.StudentType"
+			column="XSLBID" />
+		-->
+		<property name="active" column="SFKY" />
+	</class>
+</hibernate-mapping>

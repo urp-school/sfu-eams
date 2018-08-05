@@ -1,0 +1,249 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 教学资源查询-->
+<hibernate-mapping >
+	<!-- 教学资源是否占用查询 -->
+	<query name="isRoomOccupied">
+		<![CDATA[
+		 select count(distinct activity.room.id)
+			from com.shufe.model.course.arrange.Activity as activity
+			where activity.room.id = :roomId
+		    and BITAND (activity.time.validWeeksNum, :validWeeksNum) > 0
+				 AND activity.time.year = :year
+				 AND activity.time.weekId = :weekId
+				 AND activity.time.startUnit <= :endUnit
+			     AND :startUnit <= activity.time.endUnit
+                 AND activity.room.isCheckActivity = true
+	 ]]>
+	</query>
+	<sql-query name="isTeachersOccupied">
+		<return-scalar column="jxhdsl" type="integer"/>
+		SELECT count(jxhd.ID)  as jxhdsl
+			   FROM jxhd_t jxhd,JXRW_XZB_T XZB
+			  WHERE jxhd.jzgid in (:teacherIds)
+				AND XZB.JXRWID = JXHD.JXRWID
+				AND BITAND (jxhd.yxzsz, :validWeeksNum) > 0
+				AND jxhd.nf = :year
+				AND jxhd.zj = :weekId
+				AND jxhd.ksxj &lt;= :endUnit
+		        AND :startUnit &lt;= jxhd.jsxj
+	</sql-query>
+	<!--查询监考老师的教学活动是否冲突-->
+	<sql-query name="isTeacherCollision">
+		<return-scalar column="count_value" type="integer"/>
+		SELECT count(*) as count_value
+			   FROM PK_JK_T P
+			  WHERE P.JXHDID IN (SELECT ID
+										FROM JXHD_T J
+									   WHERE J.NF = :V_NF
+										 AND J.ZJ = :V_ZJ
+										 AND J.QSSJ &lt;= :V_JSSJ
+										 AND :V_QSSJ &lt;= J.JSSJ
+									     AND BITAND (J.YXZSZ, :V_YXZSZ) > 0)
+				AND P.JKLSID = :V_TEACHER_ID
+		        AND P.JXHDID &lt;&gt; :V_JXHDID
+	</sql-query>
+	<sql-query name="isAdminClassesOccupied">
+		<return-scalar column="jxhdsl" type="integer"/>
+		SELECT count(jxhd.ID)  as jxhdsl
+			   FROM jxhd_t jxhd,JXRW_XZB_T XZB
+			  WHERE  XZB.BJID in (:adminClassIds)
+				AND XZB.JXRWID = JXHD.JXRWID
+				AND BITAND (jxhd.yxzsz, :validWeeksNum) > 0
+				AND jxhd.nf = :year
+				AND jxhd.zj = :weekId
+				AND jxhd.ksxj &lt;= :endUnit
+		        AND :startUnit &lt;= jxhd.jsxj
+	</sql-query>
+	
+	<sql-query name="occupiedAdminClasses">
+		<return-scalar column="BJID" type="long"/>
+		SELECT distinct XZB.BJID as BJID
+			   FROM jxhd_t jxhd,JXRW_XZB_T XZB
+			  WHERE  XZB.BJID in (:adminClassIds)
+				AND XZB.JXRWID = JXHD.JXRWID
+				AND BITAND (jxhd.yxzsz, :validWeeksNum) > 0
+				AND jxhd.nf = :year
+				AND jxhd.zj = :weekId
+				AND jxhd.ksxj &lt;= :endUnit
+		        AND :startUnit &lt;= jxhd.jsxj
+	</sql-query>
+	
+	<sql-query name="isStdsOccupied">
+		<return-scalar column="jxhdsl" type="integer"/>
+		SELECT count(jxhd.ID) as jxhdsl
+			   FROM jxhd_t jxhd,JXBXS_T JXBXS
+			  WHERE  JXBXS.xsid in (:stdIds)
+				AND JXBXS.JXRWID = JXHD.JXRWID
+				AND BITAND (jxhd.yxzsz, :validWeeksNum) > 0
+				AND jxhd.nf = :year
+				AND jxhd.zj = :weekId
+				AND jxhd.ksxj  &lt;= :endUnit
+		        AND :startUnit &lt;= jxhd.jsxj
+	</sql-query>
+	<sql-query name="courseOccupiedStdCount">
+		<return-scalar column="xssl" type="integer"/>
+		SELECT count(distinct JXBXS.xsid) as xssl
+			   FROM jxhd_t jxhd,JXBXS_T JXBXS
+			  WHERE  JXBXS.xsid in (:stdIds)
+				AND JXBXS.JXRWID = JXHD.JXRWID
+				AND BITAND (jxhd.yxzsz, :validWeeksNum) > 0
+				AND jxhd.nf = :year
+				AND jxhd.zj = :weekId
+				AND jxhd.ksxj  &lt;= :endUnit
+		        AND :startUnit &lt;= jxhd.jsxj
+	</sql-query>
+	<sql-query name="examOccupiedStdCount">
+		<return-scalar column="xssl" type="integer"/>
+		SELECT count(distinct pk.xsid) as xssl
+			   FROM jxhd_t jxhd,pk_jg_t pk
+			  WHERE pk.xsid in (:stdIds)
+				AND pk.jxhdid = JXHD.ID
+				AND BITAND (jxhd.yxzsz, :validWeeksNum) > 0
+				AND jxhd.nf = :year
+				AND jxhd.zj = :weekId
+				AND jxhd.ksxj  &lt;= :endUnit
+		        AND :startUnit &lt;= jxhd.jsxj
+	</sql-query>
+	
+	<sql-query name="isStdsOccupiedExcept">
+		<return-scalar column="jxhdsl" type="integer"/>
+		SELECT count(jxhd.ID) as jxhdsl
+			   FROM jxhd_t jxhd,JXBXS_T JXBXS
+			  WHERE  JXBXS.xsid in (:stdIds)
+				AND JXBXS.JXRWID = JXHD.JXRWID
+				AND BITAND (jxhd.yxzsz, :validWeeksNum) > 0
+				AND jxhd.nf = :year
+				AND jxhd.zj = :weekId
+				AND jxhd.ksxj  &lt;= :endUnit
+		        AND :startUnit &lt;= jxhd.jsxj
+		        and jxhd.jxrwid &lt;&gt; :taskId
+	</sql-query>
+	<!-- 教学资源占用信息查询 -->
+	<query name="getRoomOccupyInfos">
+		<![CDATA[
+			select
+			New com.shufe.model.course.arrange.resource.OccupyUnit(
+			  activity.time.year,
+			  activity.time.validWeeksNum,
+			               activity.time.weekId ,
+			               activity.time.startUnit,
+			               activity.time.endUnit)
+			from Activity as activity
+			where activity.room.id= (:id)
+			and activity.time.year=(:year)		
+			and BITAND(activity.time.validWeeksNum,:validWeeksNum) >0	
+			]]>
+	</query>
+	<query name="getTeacherOccupyInfos">
+		<![CDATA[
+			select
+			New com.shufe.model.course.arrange.resource.OccupyUnit(
+			               activity.time.year,
+			               activity.time.validWeeksNum,
+			               activity.time.weekId,
+			               activity.time.startUnit,
+			               activity.time.endUnit)
+			from CourseActivity as activity
+			where activity.teacher.id= (:id)
+			and activity.time.year=(:year)	
+			and BITAND(activity.time.validWeeksNum,:validWeeksNum)  >0
+			]]>
+	</query>
+	<query name="getAdminClassOccupyInfos">
+		<![CDATA[
+			select distinct
+			New com.shufe.model.course.arrange.resource.OccupyUnit(
+			               activity.time.year,
+			               activity.time.validWeeksNum,
+			               activity.time.weekId,
+			               activity.time.startUnit,
+			               activity.time.endUnit)
+			from TaskActivity as activity
+			join activity.task as task
+			join task.teachClass.adminClasses as adminClass
+			where adminClass.id= (:id)
+			and activity.time.year=(:year)	
+			and BITAND(activity.time.validWeeksNum,:validWeeksNum) >0
+			]]>
+	</query>
+	<sql-query name="getExamRoomUtilizations">
+		<return-scalar column="jshdid" type="long"/>
+		<return-scalar column="rnksrs" type="integer"/>
+		<return-scalar column="ksrs" type="integer"/>
+		<return-scalar column="kxrs" type="integer"/>
+		 select jsly.jxhdid	jshdid,js.rnksrs rnksrs,jsly.ksrs ksrs,(js.rnksrs-jsly.ksrs ) as kxrs
+		 from (
+		   select jxhd.id as jxhdid,jsid,(select count(*) from pk_jg_t where jxhdid=jxhd.id) as ksrs 
+		   from
+		   jxhd_t jxhd,jxrw_t rw 
+		   where jxhd.kslxid=(:examTypeId) and jxhd.jxrlid=(:calendarId)
+		   and jxhd.jxrwid= rw.id and rw.xslbid in(:stdTypeIds)  and (rw.kkyx in(:departIds) or rw.bmid in(:departIds))
+		 ) jsly,jcxx_js_t js
+	    where jsly.jsid=js.id
+		and jsly.ksrs &lt; (:ratio * js.rnksrs)
+		order by jsly.ksrs
+	</sql-query>
+	
+	<sql-query name="weekAccount">
+		<return-scalar column="M_WEEK" type="string"/>
+		<return-scalar column="M_COUNT" type="long"/>
+		<return-scalar column="M_TOTAL" type="long"/>
+		SELECT *
+		  FROM (SELECT   TO_CHAR (J.KSRQ, 'day') AS M_WEEK, COUNT (*) AS M_COUNT
+					FROM JXYX_JSSQ_T J
+				   WHERE TO_CHAR (J.KSRQ, 'yyyy') = :V_YEAR
+					 AND TO_CHAR (J.KSRQ, 'yyyy') = :V_YEAR
+					 AND J.SFQR = 1
+				GROUP BY TO_CHAR (J.KSRQ, 'day')),
+			   (SELECT COUNT (*) AS M_TOTAL
+				  FROM JXYX_JSSQ_T J
+				 WHERE TO_CHAR (J.KSRQ, 'yyyy') = :V_YEAR AND J.SFQR = 1)
+	</sql-query>
+	<sql-query name="placeAccount">
+		<return-scalar column="M_CLASSID" type="long"/>
+		<return-scalar column="M_CLASSNAME" type="string"/>
+		<return-scalar column="M_NUM" type="long"/>
+		<return-scalar column="M_TOTAL" type="long"/>
+		SELECT *
+		  FROM (SELECT   (SELECT JC.ID
+							FROM JCXX_JS_T JC
+						   WHERE JC.ID = JX.JSID) AS M_CLASSID,
+						 (SELECT JC.JSMC
+							FROM JCXX_JS_T JC
+						   WHERE JC.ID = JX.JSID) AS M_CLASSNAME, COUNT (*) AS M_NUM
+					FROM JXYX_JSSQ_T JX
+				   WHERE TO_CHAR (JX.KSRQ, 'yyyy') = :V_YEAR
+					 AND TO_CHAR (JX.KSRQ, 'yyyy') = :V_YEAR
+					 AND JX.SFQR = 1
+				GROUP BY JX.JSID
+				ORDER BY M_NUM DESC),
+			   (SELECT COUNT (*) AS M_TOTAL
+				  FROM JXYX_JSSQ_T J
+				 WHERE TO_CHAR (J.KSRQ, 'yyyy') = :V_YEAR AND J.SFQR = 1)
+	</sql-query>
+	<sql-query name="activityAccount">
+		<return-scalar column="M_ACTIVITEID" type="long"/>
+		<return-scalar column="M_ACTIVITENAME" type="string"/>
+		<return-scalar column="M_NUM" type="long"/>
+		<return-scalar column="M_TOTAL" type="long"/>
+		SELECT *
+		  FROM (SELECT   (SELECT B.ID
+							FROM BZHB_YYHDXM_T B
+						   WHERE B.ID = J.HDLXID) AS M_ACTIVITEID,
+						 (SELECT B.YYHDXMMC
+							FROM BZHB_YYHDXM_T B
+						   WHERE B.ID = J.HDLXID) AS M_ACTIVITENAME,
+						 COUNT (*) AS M_NUM
+					FROM JXYX_JSSQ_T J
+				   WHERE TO_CHAR (J.KSRQ, 'yyyy') = :V_YEAR
+					 AND TO_CHAR (J.KSRQ, 'yyyy') = :V_YEAR
+					 AND J.SFQR = 1
+				GROUP BY J.HDLXID
+				ORDER BY M_NUM DESC),
+			   (SELECT COUNT (*) AS M_TOTAL
+				  FROM JXYX_JSSQ_T J
+				 WHERE TO_CHAR (J.KSRQ, 'yyyy') = :V_YEAR AND J.SFQR = 1)
+	</sql-query>
+</hibernate-mapping>

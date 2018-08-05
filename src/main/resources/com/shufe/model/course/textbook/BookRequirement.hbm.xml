@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.course.textbook" >
+	<class name="BookRequirement" table="JCXQ_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JCXQ_T</param>
+			</generator>
+		</id>
+		<property name="countForStd" column="XSYSL" not-null="true"/>
+		<property name="countForTeacher" column="JSYSL" not-null="true"/>
+		<many-to-one name="task" column="jxrwid"/>
+		<many-to-one name="textbook" column="jcid"/>
+		<property name="checked" column="SFTG"/>
+		<property name="remark" column="BZ"/>
+	</class>
+</hibernate-mapping>

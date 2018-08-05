@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<struts-config>
+    <action-mapping>
+        <action path="/rationWorkload" scope="request" parameter="method"/>
+        <action path="/rationWorkloadConfig" scope="request" parameter="method"/>
+        <action path="/teachModulus" scope="request" parameter="method">
+            <forward name="workloadModuleUpdateOrDeleteErrors"
+                path="/pages/evaluate/updateOrDeleteErrors.ftl"/>
+        </action>
+        <action path="/workloadOpenSwitch" scope="request" parameter="method"/>
+        <action path="/teachWorkload" scope="request" parameter="method"/>
+        <action path="/teachWorkloadSearch" scope="request" parameter="method"/>
+        <action path="/teacherWorkload" scope="request" parameter="method"/>
+        <action path="/teachCategory" scope="request" parameter="method"/>
+        <action path="/teachWorkloadStat" scope="request" parameter="method"/>
+        <action path="/teachWorkloadMultiTermStat" scope="request" parameter="method"/>
+        <action path="/teachWorkloadAlteration" scope="request" parameter="method"/>
+        <action path="/instructWorkload" scope="request" parameter="method"/>
+        <action path="/instructWorkloadSearch" scope="request" parameter="method"/>
+        <action path="/instructModulus" scope="request" parameter="method"/>
+        <action path="/collegeWorkloadQuery" scope="request" parameter="method"/>
+    </action-mapping>
+</struts-config>

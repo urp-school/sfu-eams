@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.degree.tutorManager">
+  <!-- 助教管理 -->
+	<class name="Assistant" table="ZJGL_T">
+		<id name="id" column="ID" length="32">
+			<generator class="sequence">
+				<param name="sequence">SEQ_ZJGL_T</param>
+			</generator>
+		</id>
+		<property name="startTime" column="KSSJ"/>
+		<property name="endTime" column="JSSJ"/>
+		<property name="job" column="SZGZ"/>
+		<property name="period" column="XS"/>
+		<property name="isConfirm" column="DSQR"/>
+		<many-to-one name="std" column="XSID" not-null="true"/>
+		<many-to-one name="tutor" column="DSID" not-null="true"/>
+	</class>			
+</hibernate-mapping>

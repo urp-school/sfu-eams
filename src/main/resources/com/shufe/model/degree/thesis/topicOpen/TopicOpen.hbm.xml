@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.degree.thesis.topicOpen">
+	<!-- 论文开题 -->
+	<class name="TopicOpen" table="LW_KT_T" lazy="true">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_LW_KT_T</param>
+			</generator>
+		</id>
+		<property name="thesisTopic" column="LWTM" length="200"/>
+		<many-to-one name="thesisType" column="LWLXID"/>
+		<property name="fare" column="MQJZQK" type="org.springframework.orm.hibernate3.support.ClobStringType"/>
+		<property name="memo" column="BZ" length="500"/>
+		<component name="taskSource" class="TaskSource">
+			<many-to-one name="taskLevel" column="KTJBID"/>
+			<many-to-one name="thesisSourse" column="KTLYID"/>
+			<property name="projectTaskName" column="XMKTMC" length="200"/>
+			<property name="outlaySource" column="JFLY" length="200"/>
+			<property name="passCompany" column="PZDW" length="200"/>
+			<property name="money" column="ZZJE" length="100"/>
+		</component>
+		<property name="referrenceLiterature" column="ZYCKWX" type="org.springframework.orm.hibernate3.support.ClobStringType"/>
+		<component name="content" class="Content">
+			<property name="keyWords" column="LWZZC" length="100"/>
+			<property name="meaning" column="YYJZ" type="org.springframework.orm.hibernate3.support.ClobStringType"/>
+			<property name="researchActuality" column="YJXZ" type="org.springframework.orm.hibernate3.support.ClobStringType"/>
+			<property name="thinkingAndMethod" column="SLFF" type="org.springframework.orm.hibernate3.support.ClobStringType"/>
+			<property name="innovate" column="CXD" type="org.springframework.orm.hibernate3.support.ClobStringType"/>
+			<property name="expectHarvest" column="YQCG" type="org.springframework.orm.hibernate3.support.ClobStringType"/>
+			<property name="researchArea" column="NRFW" type="org.springframework.orm.hibernate3.support.ClobStringType"/>
+			<property name="aboutThesisNumber" column="LWDYZS" length="32"/>
+		</component>
+		<component name="openReport">
+			<property name="experts" column="YHZJ" length="400"/>
+			<property name="participatorCount" column="YHRS"/>
+			<property name="opinions" column="ZYYJ" length="2000"/>
+			<property name="openOn" column="XSKTSJ"/>
+			<property name="address" column="XSKTDD" length="200"/>
+		</component>
+		<component name="thesisPlan">
+			<property name="researchTime" column="YJSJ"/>
+			<property name="thesisWriteTime" column="LWZXSJ"/>
+			<property name="thesisFinishTime" column="LWWCSJ"/>
+			<property name="rehearseAnswerTime" column="YDBSJ"/>
+			<property name="biBlindTime" column="SMSJ"/>
+			<property name="thesisAnswerTime" column="LWDBSJ"/>
+			<property name="thesisTopicArranged" column="LWTMTZH" length="100"/>
+		</component>
+		<property name="isTutorAgree" column="DSSFTY"/>
+		<property name="isDepartAgree" column="YXSFTY"/>
+		<property name="departmentAffirm" column="YXQR"/>
+		<property name="tutorAffirm" column="DSQR"/>
+		<property name="isPassed" column="KTDBZT" length="1"/><!--开题答辩是否通过-->
+		<property name="thesisUpName" column="LWWJMC" length="100"/>
+		<property name="finishOn" column="KTWCSJ"/>
+		<property name="downloadName" column="XZWJM"/>
+		<property name="displayName" column="XZXSWJM"/>
+	</class>
+</hibernate-mapping>

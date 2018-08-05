@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 选课筛选保留学生范围 -->
+<hibernate-mapping package="com.shufe.model.course.election">
+	<class name="ReservedStudent" table="XK_BLXS_T">
+		<id name="id" column="id" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_XK_BLXS_T</param>
+			</generator>
+		</id>
+		<many-to-one name="major" column="ZYID" />
+		<many-to-one name="majorField" column="ZYFXID" />
+		<many-to-one name="calendar" column="JXRLID" />
+		<property name="grade" column="NJ"/>
+	</class>
+</hibernate-mapping>

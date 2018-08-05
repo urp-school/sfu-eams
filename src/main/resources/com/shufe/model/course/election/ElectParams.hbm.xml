@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 选课参数实体映射关系 -->
+<hibernate-mapping package="com.shufe.model.course.election">
+	<class name="ElectParams" table="XK_CS_T">
+		<cache usage="read-write" region="taskCache"/>
+		<id name="id" column="id" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_XK_CS_T</param>
+			</generator>
+		</id>
+		<property name="turn" column="XKLC" not-null="true"/>
+		<set name="departs" table="XKCS_BM_T">
+			<key column="XKCSID"/>
+			<many-to-many column="BMID"
+				class="com.shufe.model.system.baseinfo.Department"/>
+		</set>
+		<set name="majors" table="XKCS_ZY_T">
+			<key column="XKCSID"/>
+			<many-to-many column="ZYID"
+				class="com.shufe.model.system.baseinfo.Speciality"/>
+		</set>
+		<set name="majorFields" table="XKCS_ZYFX_T">
+			<key column="XKCSID"/>
+			<many-to-many column="ZYFXID"
+				class="com.shufe.model.system.baseinfo.SpecialityAspect"/>
+		</set>
+		<set name="stdTypes" table="XKCS_XSLB_T">
+			<key column="XKCSID"/>
+			<many-to-many column="XSLBID"
+				class="com.ekingstar.eams.system.baseinfo.StudentType"/>
+		</set>
+		<set name="stds" table="XKCS_XS_T">
+			<key column="XKCSID"/>
+			<many-to-many column="XSID" class="com.shufe.model.std.Student"/>
+		</set>
+		<set name="enrollTurns" table="XKCS_RXPC_T">
+			<key column="XKCSID"/>
+			<element type="string" column="RXPC" length="100"/>
+		</set>
+        <set name="notCurrentCourseTypes" table="XKCS_TK_FDLKCLB_T">
+            <key column="XKCSID"/>
+            <many-to-many column="KCLBID"
+                class="com.ekingstar.eams.system.basecode.industry.CourseType"/>
+        </set>
+		<many-to-one name="calendar" column="JXRLID" not-null="true"/>
+		<property name="startDate" column="KSRQ" not-null="true"/>
+		<property name="finishDate" column="JZRQ" not-null="true"/>
+		<property name="startTime" column="KSSJ" not-null="true"/>
+		<property name="finishTime" column="JZSJ" not-null="true"/>
+		<property name="isOpenElection" column="SFXK"/>
+		<property name="isRestudyAllowed" column="SFCX"/>
+		<property name="isOverMaxAllowed" column="SFCGRSSX"/>
+		<property name="isUnderMinAllowed" column="SFDYRSXX"/>
+		<property name="isCancelAnyTime" column="SFZYTK"/>
+		<property name="isCheckEvaluation" column="SFJCPJ"/>
+		<property name="isSchoolDistrictRestrict" column="SFXZXQ" not-null="true"/>
+		<property name="isAwardCreditConsider" column="SYJLXF"/>
+		<property name="isInPlanOfCourse" column="SFJHNKC"/>
+		<!--是否从范围上限制重修-->
+		<property name="isCheckScopeForReSturdy" column="SFXZCX"/>
+		<property name="floatCredit" column="FDXF"/>
+		<property name="notice" column="ZYSX" length="500"/>
+	</class>
+	<query name="getElectParams">
+		<![CDATA[
+			select distinct params
+			from ElectParams as params 
+			join params.stdTypes as stdType
+			where stdType.id in (:stdTypeIds)
+			and params.calendar=(:calendar)
+			]]>
+	</query>
+</hibernate-mapping>

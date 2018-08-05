@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.ekingstar.eams.research.project.model">
+	<!-- 项目建设 -->
+	<class name="TeachProject" table="JXKY_XMGL_T">
+		<id name="id" column="ID">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXKY_XMGL_T</param>
+			</generator>
+		</id>
+		
+		<property name="code" column="XMDM" not-null="true" unique="true" length="32"/>
+		<property name="name" column="XMMC" not-null="true" length="200"/>
+		<property name="describe" column="XMMS" not-null="true" length="500"/>
+		<many-to-one name="teachProjectState" column="XMZTID" not-null="false"/>
+		<many-to-one name="teachProjectType" column="XMLBID" not-null="false"/>
+		<many-to-one name="petitionBy" column="SQYHID"
+                entity-name="com.ekingstar.security.User"/>
+        <property name="principal" column="XMFZR"/>        
+        <property name="createAt" column="CJSJ"/>
+		
+		<set name="projectDocuments" cascade="all">
+		  <key column="XMID"/>
+		  <one-to-many class="com.ekingstar.eams.research.project.model.ProjectDocument"/>
+		</set>
+		<set name="projectMembers" cascade="all">
+		  <key column="XMID"/>
+		  <one-to-many class="com.ekingstar.eams.research.project.model.ProjectMember"/>
+		</set>
+	</class>
+	<!-- 团队建设 -->
+	<class name="ProjectMember" table="JXKY_XMCY_T">
+		<id name="id" column="ID">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXKY_XMCY_T</param>
+			</generator>
+		</id>
+		
+		<property name="name" column="CYMC" not-null="true" length="50" type="string"/>
+		<many-to-one name="gender" column="CYXBID" not-null="false"/>
+		<property name="birthday" column="CSNY"/>
+		<many-to-one name="teachProject" column="XMID" not-null="true"/>
+		<many-to-one name="teacherTitle" column="ZCID" not-null="true"/>
+		<property name="resume" column="GRJJ" length="500" />
+	</class>
+	<!-- 项目文档 -->
+	<class name="ProjectDocument" table="JXKY_XMWD_T">
+		<id name="id" column="ID">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXKY_XMWD_T</param>
+			</generator>
+		</id>
+		
+		<property name="fileName" column="FILE_NAME" length="100" />
+		<property name="filePath" column="FILE_PATH" length="100" />
+		<many-to-one name="teachProject" column="XMID" not-null="true"/>
+		<property name="describe" column="WDMS" length="500" />
+	</class>
+</hibernate-mapping>

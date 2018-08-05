@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	<!--学费初始化-->
+<hibernate-mapping>
+    <class name="com.ekingstar.eams.fee.model.TuitionFee" table="SF_XFMRZ_T">
+        <id name="id" column="ID" unsaved-value="null">
+            <generator class="sequence">
+                <param name="sequence">SEQ_SF_XFMRZ_T</param>
+            </generator>
+        </id>
+        <!-- std & calendar 业务主键 -->
+        <many-to-one name="std" column="XSID" not-null="true"
+            class="com.shufe.model.std.Student"/>
+        <many-to-one name="calendar" column="JXRLID" not-null="true"
+            class="com.shufe.model.system.calendar.TeachCalendar"/>
+        
+        <property name="isCompleted" column="SFJFWC"/>
+        <property name="fee" column="XF"/>
+        <property name="remark" column="BZ"/>
+    </class>
+</hibernate-mapping>

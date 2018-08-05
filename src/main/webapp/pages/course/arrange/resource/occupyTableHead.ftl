@@ -1,0 +1,1 @@
+ <label align="center"><#if occupyTable.resource?exists><@i18nName occupyTable.resource/><#else><@getBeanListNames resources/></#if>时间占用表</label>

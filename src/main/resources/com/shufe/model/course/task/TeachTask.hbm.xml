@@ -1,0 +1,228 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 教学任务表
+	业务主键，教学日历id和课程序号。 -->
+
+<hibernate-mapping package="com.shufe.model.course.task" >
+	<class name="TeachTask" table="JXRW_T">
+		<cache usage="read-write" region="taskCache"/>
+		<id name="id" column="id" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXRW_T</param>
+			</generator>
+		</id>
+		
+		<!-- 同学年学期 课程序号不允许重复 -->
+		<!-- natural-id -->
+		<property name="seqNo" column="KCXH" length="32"/>
+		<many-to-one name="calendar" column="JXRLID" not-null="true"/>
+		
+		<!--教什么-->
+		<many-to-one name="course" column="KCID" not-null="true"/>
+		<many-to-one name="courseType" column="KCLBID" not-null="true"/>
+		<!--教学班信息-->
+		<component name="teachClass" class="TeachClass">
+			<parent name="task"/>
+			<property name="name" column="JXBMC" length="500" not-null="true"/>
+			<many-to-one name="gender" column="XBID" not-null="false"/>
+			<property name="enrollTurn" column="RXNFPC" length="10"
+				not-null="false"/>
+			<many-to-one name="stdType" column="XSLBID" not-null="true"/>
+			<many-to-one name="depart" column="BMID" not-null="true"/>
+			<many-to-one name="speciality" column="ZYID"/>
+			<many-to-one name="aspect" column="ZYFXID"/>
+			<property name="stdCount" column="BJRS" not-null="true"/>
+			<property name="planStdCount" column="JHRS" not-null="true"/>
+			<property name="isUpperLimit" column="JHRSSFSX"/>
+			<property name="stdState" column="XSZT" not-null="true"/>
+			
+			<set name="adminClasses" table="JXRW_XZB_T">
+				<key column="JXRWID"/>
+				<many-to-many column="BJID"
+					class="com.shufe.model.system.baseinfo.AdminClass"/>
+			</set>
+			<!--不要使用 delete-orphan-->
+			<set name="courseTakes" inverse="true" cascade="all">
+				<key column="JXRWID"/>
+				<one-to-many
+					class="com.shufe.model.course.arrange.task.CourseTake"/>
+			</set>
+			<set name="examTakes" inverse="true" cascade="all">
+				<key column="JXRWID"/>
+				<one-to-many
+					class="com.shufe.model.course.arrange.exam.ExamTake"/>
+			</set>
+			<set name="withdraws" inverse="true" cascade="all,delete-orphan">
+				<key column="JXRWID"/>
+				<one-to-many
+					class="com.shufe.model.course.election.WithdrawRecord"/>
+			</set>
+		</component>
+		
+		<!--具体安排-->
+        <component name="arrangeInfo" class="com.shufe.model.course.arrange.ArrangeInfo" >
+            <many-to-one name="teachDepart" column="KKYX" not-null="true" />
+            <list name="teachers" table="JXRW_LS_T">
+                <cache usage="read-write" />
+                <key column="JXRWID" not-null="true"/>
+                <index column= "XL"/>
+                <many-to-many class="com.shufe.model.system.baseinfo.Teacher" column="LSID" />
+            </list>
+            
+            <property name="weeks" column="ZS" not-null="true"/>
+            <property name="weekCycle" column="JXZZYZQ" not-null="true"/>
+            <property name="weekStart" column="QSZ" not-null="true"/>
+            <property name="weekUnits" column="ZHKS" not-null="true"/>
+            <property name="courseUnits" column="XJS" not-null="true"/>
+            <property name="overallUnits" column="ZKS" not-null="true"/>
+            <many-to-one name="schoolDistrict" column="XQID"/>
+            <property name="isArrangeComplete" column="SFPW"/>
+            <set name="activities" inverse="true" cascade="all" where="ZYYY=1">
+                <cache usage="read-write"/>
+                <key column="JXRWID"/>
+                <one-to-many class="com.shufe.model.course.arrange.task.CourseActivity"/>
+            </set>
+            <set name="examActivities" inverse="true" cascade="all" where="ZYYY=2">
+                <key column="JXRWID"/>
+                <one-to-many class="com.shufe.model.course.arrange.exam.ExamActivity"/>
+            </set>
+            <set name="examGroups" table="PK_KCZ_RW_T">
+                <key column="JXRWID"/>
+                <many-to-many column="KCZID" class="com.shufe.model.course.arrange.exam.ExamGroup"/>
+            </set>
+            <!-- 排课建议-->
+            <component name="suggest">
+                <many-to-one name="time" column="JYSJID"
+                    class="com.shufe.model.course.arrange.AvailableTime" unique="true" cascade="all"/>
+                <set name="rooms" table="JXRW_JS_T">
+                    <cache usage="read-write"/>
+                    <key column="JXRWID" not-null="true"/>
+                    <many-to-many class="com.shufe.model.system.baseinfo.Classroom" column="JSID"/>
+                </set>
+            </component>
+            <set name="arrangeAlterations" inverse="true" cascade="all">
+                <key column="JXRWID" not-null="true"/>
+                <one-to-many class="com.shufe.model.course.arrange.task.CourseArrangeAlteration"/>
+            </set>
+        </component>
+		<!--选课情况-->
+		<component name="electInfo" class="TaskElectInfo">
+			<property name="maxStdCount" column="XKRSSX" not-null="true"/>
+			<property name="minStdCount" column="XKRSXX" not-null="true"/>
+			<property name="isElectable" column="SFCX" not-null="true"/>
+			<property name="isCancelable" column="SFYXTK" not-null="true"/>
+			<set name="electResults" table="XKJG_T" inverse="true"
+				cascade="all-delete-orphan">
+				<key column="JXRWID"/>
+				<one-to-many
+					class="com.shufe.model.course.election.ElectRecord"/>
+			</set>
+			<set name="electScopes" table="XKFW_T" inverse="true"
+				cascade="all-delete-orphan">
+				<cache usage="read-write"/>
+				<key column="JXRWID"/>
+				<one-to-many
+					class="com.shufe.model.course.election.ElectStdScope"/>
+			</set>
+			<many-to-one name="HSKDegree" column="HSKDJ"/>
+			<set name="prerequisteCourses" table="JXRW_XXKC_T">
+				<cache usage="read-write"/>
+				<key column="JXRWID"/>
+				<many-to-many class="com.shufe.model.system.baseinfo.Course"
+					column="KCID"/>
+			</set>
+		</component>
+		<!--任务要求-->
+		<component name="requirement" class="TaskRequirement">
+			<many-to-one name="roomConfigType" column="JSSBPZID" not-null="true"/>
+			<set name="textbooks" table="JXRW_JC_T">
+				<key column="JXRWID"/>
+				<many-to-many column="JCID"
+					class="com.shufe.model.course.textbook.Textbook"/>
+			</set>
+			<property name="referenceBooks" column="CKS" length="500"/>
+			<property name="cases" column="AL" length="1000"/>
+			<many-to-one name="teachLangType"  column="SKYYLXID" not-null="true"/>
+			<property name="isGuaPai" column="SFGP"/>
+			<property name="evaluateByTeacher" column="SFJSPJ" not-null="true"/>
+			<many-to-one name="courseCategory" column="KCZLID"/>
+			<property name="requireRemark" column="YQBZ" not-null="false"
+				length="100"/>
+		</component>
+		<!--其他信息-->
+		<many-to-one name="examMode" column="KSFS"/>
+		<many-to-one name="questionnaire" column="DCWJID"/>
+		<many-to-one name="gradeState" cascade="delete, save-update" unique="true"
+			column="CJZTID"/>
+		<many-to-one name="fromPlan" column="PYJHID" not-null="false"/>
+		<many-to-one name="taskGroup" column="KCZID" not-null="false"/>
+		<property name="createAt" column="CJSJ" not-null="true"/>
+		<property name="modifyAt" column="XGSJ" not-null="true"/>
+		<property name="isConfirm" column="SFQR" not-null="true"/>
+		<property name="remark" column="BZ" not-null="false" length="500"/>
+	</class>
+	<query name="getTeachTasks.stdTypeIds.departIds">
+		<![CDATA[
+		from TeachTask as task where task.teachClass.stdType.id in (:stdTypeIds) and task.teachClass.depart.id in (:departIds)
+    ]]>
+	</query>
+	<query name="getCourseTypesOfTask">
+		<![CDATA[
+			select distinct task.courseType
+     		from TeachTask as task 
+			where task.teachClass.stdType.id in (:stdTypeIds)
+			 and task.arrangeInfo.teachDepart.id in (:departIds)
+ 			 and task.calendar.id = :calendarId
+    ]]>
+	</query>
+	<query name="getDepartsOfTask">
+		<![CDATA[
+			select distinct task.teachClass.depart
+     		from TeachTask as task 
+			where task.teachClass.stdType.id in (:stdTypeIds)
+			 and task.arrangeInfo.teachDepart.id in (:departIds)
+ 			 and task.calendar.id = :calendarId
+    ]]>
+	</query>
+	<query name="getTeachDepartsOfTask">
+		<![CDATA[
+			select distinct task.arrangeInfo.teachDepart
+     		from TeachTask as task 
+			where task.teachClass.stdType.id in (:stdTypeIds)
+			 and task.arrangeInfo.teachDepart.id in (:departIds)
+ 			 and task.calendar in (:calendars)
+    ]]>
+	</query>
+	<query name="getTeachersOfTask">
+		<![CDATA[
+			select distinct teacher 
+     		from TeachTask as task 
+			join task.arrangeInfo.teachers as teacher
+			where task.teachClass.stdType.id in (:stdTypeIds)
+			 and task.arrangeInfo.teachDepart.id in (:departIds)
+ 			 and task.calendar.id = :calendarId
+    ]]>
+	</query>
+	<query name="getTeachTasksByCalendar">
+		<![CDATA[
+		    select distinct 
+		    	task.id
+     		from 
+     			TeachTask as task 
+			where
+				 task.teachClass.stdType.id in (:stdTypeIds)
+			 	 and task.teachClass.depart.id in (:departIds)
+ 			     and task.calendar.id = :calendarId
+    ]]>
+	</query>
+	<query name="getStdTypeOfTeachDepartInTask">
+		<![CDATA[
+			select distinct task.teachClass.stdType
+     		from TeachTask as task join task.calendar as calendar
+			where task.arrangeInfo.teachDepart.id = (:departId)
+ 			 and calendar.year = :year
+			 and calendar.term = :term
+    ]]>
+	</query>
+</hibernate-mapping>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 校内外其他考试的报名控制类-->
+<hibernate-mapping package="com.shufe.model.course.grade.other">
+  <class name="OtherExamSignUpSetting" table="CJ_QTKS_BMSZ_T">
+      <id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_CJ_QTKS_BMSZ_T</param>
+			</generator>
+      </id>
+      <property name="startAt" column="KSSJ" />
+      <property name="endAt" column="JZSJ" />
+      <property name="isOpen" column="SFKF"  not-null="true"/>
+      <property name="availMonth" column="YXQ"  not-null="true"/>
+      <many-to-one name="examCategory" column="QTKSKMID"  not-null="true"/>
+	  <many-to-one name="superCategory" column="SJKSKMID" />
+      <set name="freeStdTypes"  table="CJ_QTKS_MSXSLB_T">
+          <key column="BMSZID" />
+          <many-to-many column="XSLBID" class="com.ekingstar.eams.system.baseinfo.StudentType" />
+      </set>
+  </class>
+</hibernate-mapping>

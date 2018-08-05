@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<query name="getAvailElectParams">
+		<![CDATA[
+        	select distinct params
+            from ElectParams as params
+			join params.stdTypes as stdType
+			join params.departs as depart
+			where stdType.id =:stdTypeId
+			and depart.id=:departId
+			and (size(params.majors)=0 or :major=some elements(params.majors))
+			and (size(params.majorFields)=0 or :majorField=some elements(params.majorFields))
+			and (size(params.enrollTurns)=0 or :enrollTurn= some elements(params.enrollTurns))	
+			and (size(params.stds)=0 or :stdId= some elements(params.stds))	
+			and params.finishDate>= current_date
+			]]>
+	</query>
+</hibernate-mapping>

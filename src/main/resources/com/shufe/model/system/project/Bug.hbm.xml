@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.shufe.model.system.project">
+	<class name="Bug" table="XTCW_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_XTCW_T</param>
+			</generator>
+		</id>
+		<property name="description" column="NR" not-null="true" length="500"/>
+		<property name="module" column="MKMC" not-null="true" length="50"/>
+		<property name="reporter" column="BGR" not-null="true" length="20"/>
+		<property name="priority" column="YXJ" not-null="true"/>
+		<property name="solution" column="JJFA" length="300"/>
+		<property name="planCompleteOn" column="JHWCSJ" not-null="true"/>
+		<property name="status" column="XQZT" not-null="true"/>
+		<property name="comments" column="PL" length="200"/>
+		<property name="lastModifiedOn" column="XGSJ" not-null="true"/>
+		<property name="createdOn" column="CJSJ" not-null="true"/>
+	</class>
+</hibernate-mapping>

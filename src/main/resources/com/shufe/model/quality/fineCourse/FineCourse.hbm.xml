@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.quality.fineCourse">
+  <!-- 精品课程 -->
+	<class name="FineCourse" table="JXZL_JPKC_T">
+		<id name="id" column="id" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXZL_JPKC_T</param>
+			</generator>
+		</id>
+		<!-- natural-id -->
+		<property name="courseName" column="KCMC" not-null="true"/>
+		<many-to-one name="level" column="JPKCDJID" not-null="true"/>
+		
+		<property name="remark" column="BZ"/>
+		<property name="passedYear" column="PZND"/>
+		<many-to-one name="department" column="BMID"/>
+		
+		<set name="charges" table="JXZL_JPKC_FZR_T">
+			<key column="JPKCID"/>
+			<many-to-many class="com.shufe.model.system.baseinfo.Teacher"
+				column="JZGID"/>
+		</set>
+	</class>
+						
+</hibernate-mapping>

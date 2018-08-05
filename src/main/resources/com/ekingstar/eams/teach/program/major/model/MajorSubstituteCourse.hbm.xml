@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 专业替代课程表 -->
+<hibernate-mapping>
+    <class
+        name="com.ekingstar.eams.teach.program.major.model.MajorSubstituteCourse"
+        entity-name="com.ekingstar.eams.teach.program.major.MajorSubstituteCourse"
+        table="major_course_subs" schema="edu_program">
+        <id name="id" column="ID" unsaved-value="null">
+            <generator class="sequence">
+                <param name="sequence">SEQ_PYFA_ZYTDKC_T</param>
+            </generator>
+        </id>
+        <property name="enrollTurn" column="from_grade" not-null="true"/>
+        <many-to-one name="stdType" column="std_type_id" not-null="true"/>
+        <many-to-one name="major" column="major_id"/>
+        <many-to-one name="department" column="department_id"
+            class="com.shufe.model.system.baseinfo.Department"/>
+        <many-to-one name="majorField" column="direction_id"/>
+        <set name="origins" table="major_course_subs_olds" schema="edu_program">
+            <key column="major_course_subs_id" not-null="true"/>
+            <many-to-many class="com.shufe.model.system.baseinfo.Course"     column="course_id"/>
+        </set>
+        <set name="substitutes" table="major_course_subs_news"  schema="edu_program">
+            <key column="major_course_subs_id" not-null="true"/>
+            <many-to-many class="com.shufe.model.system.baseinfo.Course"        column="course_id"/>
+        </set>
+        <property name="createAt" column="created_at"/>
+        <property name="modifyAt" column="updated_at"/>
+        <property name="remark" column="remark" length="500"/>
+    </class>
+</hibernate-mapping>

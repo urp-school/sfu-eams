@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.shufe.model.quality.evaluate">
+<class name="QuestionnaireStat" table="JXZL_PJ_HZDCWJ_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXZL_PJ_HZDCWJ_T</param>
+			</generator>
+		</id>
+		<property name="statAt" column="TJSJ"/>
+		<property name="score" column="JSZP"/>
+		<property name="validTickets" column="YXPS" length="10"/>
+		<property name="taskSeqNo" column="KCXH" length="50"/>
+		<many-to-one name="calendar" column="JXRLID"/>
+		<many-to-one name="course" column="KCID"/>
+		<many-to-one name="task" column="JXRWID"/>
+		<many-to-one name="teacher" column="JZGID"/>
+		<many-to-one name="depart" column="KKYX"/>
+		<many-to-one name="stdType" column="XSLBID"/>
+		<set name="questionTypeStats"  cascade="all,all-delete-orphan" inverse="true">
+			<key column="WJHZID"/>
+			<one-to-many class="QuestionTypeStat"/>
+		</set>
+	</class>
+</hibernate-mapping>

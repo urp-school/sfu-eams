@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 教学班中的单个学生排考信息 -->
+<hibernate-mapping package="com.shufe.model.course.arrange.exam">
+	<class name="ExamTake" table="PK_JG_T">
+		<id name="id" column="id" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_PK_JG_T</param>
+			</generator>
+		</id>
+        <!-- 业务主键courseTake&examType -->
+		<many-to-one name="courseTake" column="JXBXSID" />
+        <many-to-one name="examType" column="KSLXID" not-null="true"/>
+		
+        <many-to-one name="task" column="JXRWID" not-null="true"/>
+		<many-to-one name="std" column="XSID" not-null="true"/>
+		<many-to-one name="calendar" column="JXRLID" not-null="true"/>
+		<many-to-one name="activity" column="JXHDID"/>
+		<many-to-one name="examStatus" column="KSQKID" not-null="true"/>
+		<property name="applyDate" column="SQSJ"/>
+		<many-to-one name="delayReason" column="HKYYID"/>
+		<property name="remark" column="BZ" length="100"/>
+		<property name="userIp" column="SQIP" length="100"/>
+		<property name="applyUser" column="SQYH" length="100"/>
+	</class>
+</hibernate-mapping>

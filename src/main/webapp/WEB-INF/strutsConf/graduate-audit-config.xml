@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<struts-config>
+    <action-mappings>
+        
+        <action path="/studentAuditManager" scope="request" name="page20Form" parameter="method"/>
+        <action path="/secondSpecialityStudentAuditManager" scope="request" parameter="method"/>
+        
+        <action path="/studentAuditOperation" scope="request" parameter="method">
+            <forward name="auditSecondSuccess"
+                path="/secondSpecialityStudentAuditManager.do?method=secondSpecialityStudentList&amp;moduleName=SecondSpecialityStudentAuditManager"/>
+            <forward name="failure" path="/pages/error.ftl"/>
+            <forward name="detail" path="/pages/graduate/auditResultDetail.ftl"/>
+        </action>
+        
+        <action path="/auditOperationByStudent" scope="request" parameter="method">
+        </action>
+        
+        <action path="/auditResultSearch" name="page20Form" scope="request" parameter="method">
+        </action>
+        
+        <action path="/secondAuditResultSearch" name="page20Form" scope="request" parameter="method">
+        </action>
+        
+        <action path="/auditResultDetail" scope="request" parameter="method">
+            <forward name="detail" path="/pages/graduate/auditResultDetail.ftl"/>
+        </action>
+        
+        <action path="/studentAuditResultDetail" scope="request" parameter="method">
+            <forward name="detail" path="/pages/graduate/studentAuditResultDetail.ftl"/>
+        </action>
+        
+        <action path="/secondSpecialityStudentAuditManager" scope="request" name="page20Form"
+            parameter="method"/>
+        
+    </action-mappings>
+</struts-config>

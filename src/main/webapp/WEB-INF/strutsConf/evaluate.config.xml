@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<struts-config>
+    
+	<form-beans>
+		<form-bean name="questionnaireRecycleRateForm"
+			type="org.apache.struts.action.DynaActionForm">
+			<form-property
+				type="com.shufe.model.evaluate.QuestionnaireRecycleRate"
+				name="questionnaireRecycleRate"></form-property>
+		</form-bean>
+	</form-beans>
+	<action-mappings>
+
+	<!-- questionnaireRecycleRate action-->
+	<action path="/questionnaireRecycleRateAction" name="questionnaireRecycleRateForm" scope="request" parameter="method">
+		<forward path="/pages/evaluate/statistic/recycleRateStatisticErrors/loadErrors.ftl" name="finish"></forward>
+		<forward path="/questionnaireRecycleRateAction.do?method=doQuery" name="finishOver" redirect="true"></forward>
+		<forward path="/pages/evaluate/statistic/recycleRateStatisticErrors/recycleRateQuery.ftl" name="query"></forward>
+		<forward path="/pages/evaluate/statistic/recycleRateStatisticErrors/loadStatisticRecycleRateQuery.ftl" name="doLoadStatisticPage"></forward>
+		<forward path="/pages/evaluate/statistic/recycleRateStatisticErrors/loadDetailInfoOfTask.ftl" name="doGetDetailInfoOfTask"></forward>
+	</action>
+	<!--teachQualityStatisticAction-->
+	<action path="/teachQualityStatisticAction" parameter="method" scope="request">
+		<forward path="/pages/evaluate/teachQualityStatistic/studentStatistic.ftl" name="student"></forward>
+		<forward path="/pages/evaluate/teachQualityStatistic/teacherStatistic.ftl" name="teacher"></forward>
+		<forward path="/pages/evaluate/teachQualityStatistic/evaluateStatistic.ftl" name="evaluate"></forward>
+		<forward path="/pages/evaluate/teachQualityStatistic/workloadStatistic.ftl" name="workload"></forward>
+		<forward path="/pages/evaluate/teachQualityStatistic/teachAwardStatistic.ftl" name="teachAward"></forward>
+		<forward path="/pages/evaluate/teachQualityStatistic/teachInfoStatistic.ftl" name="teachInfo"></forward>
+	</action>		
+	</action-mappings>
+</struts-config>

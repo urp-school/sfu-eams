@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+	package="com.ekingstar.eams.std.registration.model">
+	<class name="RegisterUserGroup" table="XS_ZCYHZ_T">
+		<id name="id" column="ID" length="32">
+			<generator class="sequence">
+				<param name="sequence">SEQ_XS_ZCYHZ_T</param>
+			</generator>
+		</id>
+		<property name="name" column="zmc" not-null="true"/>
+		<property name="beginAt" column="kssj" not-null="true"/>
+		<property name="endAt" column="jssj" not-null="true"/>
+        <set name="users" table="XS_ZCYHZ_YH_T">
+            <key column="ZCYHZID"/>
+            <many-to-many entity-name="com.ekingstar.security.User" column="YHID"/>
+        </set>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.quality.product">
+	<!-- 教学成果-->
+	<class name="TeachProduct" table="JXZL_JXCG_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXZL_JXCG_T</param>
+			</generator>
+		</id>
+		<property name="cooperateOfTeacher" column="JSMCS" length="200"/>
+		<property name="productName" column="CGMC" length="200"/>
+		<property name="awardTime" column = "HJSJ"/>
+		<property name="remark" column="BZ" length="500"/>
+		<property name="giveAwardPlace" column="BJJG" length="200"/>
+		<property name="awardName" column="HJMC" length="200"/>	
+		<many-to-one name="department" column="BMID" />
+		<many-to-one name="productionType" column="CGLXID"/>
+		<many-to-one name="productionAwardType" column="CGHJLBID" />
+		<many-to-one name="productionAwardLevel" column="CGHJDJID" />
+		<set name="teacherRank" cascade="all,all-delete-orphan">
+			<key column="JXCGID"></key>
+			<one-to-many class="RankOfTeachProduct"/>
+		</set>
+	</class>
+	
+	<!-- RankOfTeachProduct model-->
+	<class name="RankOfTeachProduct" table="JXZL_JXCG_PM_T">
+		<id name="id" column="ID" unsaved-value="null" length="32">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXZL_JXCG_PM_T</param>
+			</generator>
+		</id>
+		<property name="rank" column="PMC" length="10" not-null="true"/>
+		<many-to-one name="teacher"  column="JZGID"/>
+		<many-to-one name="teachProduct" column="JXCGID"/>
+	</class>
+</hibernate-mapping>

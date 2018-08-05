@@ -1,0 +1,1 @@
+<#include "../stdTermGradeReport/multiStdReport.ftl"/>

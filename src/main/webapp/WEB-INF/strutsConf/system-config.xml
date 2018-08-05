@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<struts-config>
+	
+	<form-beans>
+		<form-bean type="org.apache.struts.action.DynaActionForm"
+			name="page20Form">
+			<form-property type="java.lang.Integer" name="pageNo" initial="1"/>
+			<form-property type="java.lang.Integer" name="pageSize" initial="20"/>
+		</form-bean>
+		<form-bean type="org.apache.struts.action.DynaActionForm"
+			name="page10Form">
+			<form-property type="java.lang.Integer" name="pageNo" initial="1"/>
+			<form-property type="java.lang.Integer" name="pageSize" initial="10"/>
+		</form-bean>
+		<form-bean name="loginForm" type="com.ekingstar.security.web.formbean.LoginForm" />
+	</form-beans>
+
+    <action-mappings>
+        <action path="/login" name="loginForm" scope="request" validate="true" input="/index.do">
+            <forward name="success" path="/home.do?method=index" redirect="true"/>
+            <forward name="failure" path="/index.do"/>
+        </action>
+		<action path="/loginForm" forward="/pages/system/loginForm.ftl"/>
+		
+        <action path="/loadDispatch">
+            <forward name="success" path="/index.do" redirect="true"/>
+            <forward name="failure" path="/pages/system/loadDispatch.ftl"/>
+        </action>
+		
+        <action path="/index">
+            <forward name="index" path="/home.do?method=index"></forward>
+            <forward name="login" path="/pages/system/loginForm.ftl"></forward>
+        </action>
+        <action path="/logout" scope="request">
+            <forward path="/index.do" name="success"/>
+        </action>
+        <action path="/home" scope="request" parameter="method"/>
+        <action path="/defaultHome" scope="request" parameter="method"/>
+        <action path="/simpleHome" scope="request" parameter="method"/>
+        <action path="/help" scope="request" parameter="method"/>
+        <!--消息公告-->
+        <action path="/systemMessage" name="page20Form" scope="request" parameter="method"/>
+        <action path="/notice" name="page20Form" scope="request" parameter="method"/>
+        <action path="/noticeSearch" scope="request" parameter="method"/>
+        <action path="/download" scope="request" parameter="method"/>
+        <action path="/document" scope="request" parameter="method"/>
+        <action path="/dataTemplate" scope="request" parameter="method"/>
+        <!--基本信息-->
+        <action path="/baseInfoSearch" scope="request" parameter="method"/>
+        <action path="/baseCode" scope="request" parameter="method"/>
+        <action path="/courseSearch" scope="request" parameter="method"/>
+        <action path="/course" scope="request" parameter="method"/>
+        <action path="/classRoomSearch" scope="request" parameter="method"/>
+        <action path="/classroom" scope="request" parameter="method"/>
+        <action path="/classroomStat" scope="request" parameter="method"/>
+        <action path="/specialitySearch" scope="request" parameter="method"/>
+        <action path="/speciality" scope="request" parameter="method"/>
+        <action path="/specialityStat" scope="request" parameter="method"/>
+        <action path="/specialityAspectSearch" scope="request" parameter="method"/>
+        <action path="/specialityAspect" scope="request" parameter="method"/>
+        <action path="/teacherSearch" scope="request" parameter="method"/>
+        <action path="/teacher" scope="request" parameter="method"/>
+        <action path="/teacherStat" scope="request" parameter="method"/>
+        <action path="/adminClassSearch" scope="request" parameter="method"/>
+        <action path="/adminClass" scope="request" parameter="method"/>
+        <action path="/studentTypeSearch" scope="request" parameter="method"/>
+        <action path="/studentType" scope="request" parameter="method"/>
+        <action path="/departmentSearch" scope="request" parameter="method"/>
+        <action path="/department" scope="request" parameter="method"/>
+        <action path="/building" scope="request" parameter="method"/>
+        <action path="/schoolDistrict" scope="request" parameter="method"/>
+        <!--日历.时间管理-->
+        <action path="/calendar" scope="request" parameter="method"/>
+        <action path="/timeSetting" scope="request" parameter="method"/>
+        <!--权限管理-->
+        <action path="/user" scope="request" parameter="method"/>
+        <action path="/role" scope="request" parameter="method"/>
+        <action path="/stdUser" scope="request" parameter="method"/>
+        <action path="/teacherUser" scope="request" parameter="method"/>
+        <action path="/resource" scope="request" parameter="method"/>
+        <action path="/authority" scope="request" parameter="method"/>
+        <action path="/onlineUser" scope="request" parameter="method"/>
+        <action path="/onlineRecord" scope="request" parameter="method"/>
+		<action path="/randomCodeImage" scope="session"/>
+		
+        <action path="/systemLog" scope="request" parameter="method"/>
+        
+		<action path="/password" scope="request" parameter="method"/>
+		<action path="/management" scope="request" parameter="method"/>
+		<action path="/menu" scope="request" parameter="method"/>
+		<action path="/menuProfile" scope="request" parameter="method"/>
+		<action path="/menuAuthority" scope="request" parameter="method"/>
+		<action path="/onlineRecord" scope="request" parameter="method"/>
+		<action path="/onlineUser" scope="request" parameter="method"/>
+		<action path="/restrictionPattern" scope="request" parameter="method"/>
+		<action path="/restriction" scope="request" parameter="method"/>
+		<action path="/patternParam" scope="request" parameter="method"/>
+		
+        
+        <!--其他-->
+        <action path="/preference" scope="request" parameter="method"/>
+        <action path="/systemConfig" scope="request" parameter="method"/>
+        <action path="/requirement" scope="request" parameter="method"/>
+        <action path="/codeScript" scope="request" parameter="method"/>
+        
+        <!-- 规则部分 -->
+        <action path="/rule" scope="request" parameter="method"/>
+        <action path="/ruleParameter" scope="request" parameter="method"/>
+        <action path="/ruleConfig" scope="request" parameter="method"/>
+        
+        <action path="/newCourse" scope="request" parameter="method"/>
+        <action path="/newCourseSearch" scope="request" parameter="method"/>
+    </action-mappings>
+</struts-config>

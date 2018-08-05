@@ -1,0 +1,1 @@
+<#include "../stdGradeSearch/info.ftl"/>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 考勤机状态监控表-->
+<hibernate-mapping package="com.shufe.model.course.attend" >
+	<class name="AttendDevice" table="DEVICE_JS"
+		discriminator-value="0">
+		<cache usage="read-write" region="taskCache"/>
+		<!--
+		<id name="devid" column="devid" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXKQTJ_T</param>
+			</generator>
+		</id>
+		<property name="devid" column="devid" />
+		-->
+		<id name="devid" column="devid" unsaved-value="null">
+			<generator class="assigned"/>
+		</id>
+		<many-to-one name="jsid" column="jsid" not-null="true"/>		
+		<property name="qdsj" column="qdsj" />
+		<property name="kqjzt" column="kqjzt" />
+		<property name="ip" column="ip" />
+	</class>
+</hibernate-mapping>

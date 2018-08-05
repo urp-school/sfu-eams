@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<struts-config>
+
+	<form-beans>
+		<form-bean name="examinationPaperForm"
+			type="org.apache.struts.action.DynaActionForm">
+			<form-property type="org.apache.struts.upload.FormFile"
+				name="formFile"/>
+		</form-bean>
+	</form-beans>
+	
+	<action-mapping>
+		
+		<action path="/filePrintApply" name="examinationPaperForm" scope="request" 
+			parameter="method"/>
+		<action path="/filePrintAudit" name="examinationPaperForm" scope="request" 
+			parameter="method"/>
+		<action path="/filePrintManage" name="examinationPaperForm" scope="request" 
+			parameter="method"/>
+		
+		<action path="/examinationPaper" name="examinationPaperForm" scope="request"
+			parameter="method"/>
+	</action-mapping>
+</struts-config>

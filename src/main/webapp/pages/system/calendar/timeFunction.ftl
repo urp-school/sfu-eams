@@ -1,0 +1,1 @@
+<#macro getTimeStr(time)>${time?string?left_pad(4,"0")[0..1]}:${time?string?left_pad(4,"0")[2..3]}</#macro>

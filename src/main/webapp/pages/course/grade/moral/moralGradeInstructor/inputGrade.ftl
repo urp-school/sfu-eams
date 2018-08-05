@@ -1,0 +1,1 @@
+<#include "../moralGradeClass/inputGrade.ftl"/>

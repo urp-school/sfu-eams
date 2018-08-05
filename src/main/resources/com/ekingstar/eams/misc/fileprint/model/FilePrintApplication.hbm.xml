@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	<!--文印申请-->
+<hibernate-mapping package="com.ekingstar.eams.misc.fileprint.model">
+	<class name="FilePrintApplication" table="WYGL_WYSQ_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_WYGL_WYSQ_T</param>
+			</generator>
+		</id>
+		<many-to-one name="applyBy" column="XTYHID"
+                entity-name="com.ekingstar.security.User"/>
+		<many-to-one name="calendar"  column="JXRLID" not-null="true"/>
+
+		<property name="applicationCode" column="QYDBH" length="50"/>
+		<many-to-one name="depart" column="QYBMID" not-null="true"/>
+		<property name="fileName" column="FILE_NAME" length="100" />
+		<property name="filePath" column="FILE_PATH" length="100" />
+		<many-to-one name="auditBy" column="SHYHID"
+                entity-name="com.ekingstar.security.User"/>
+        <many-to-one name="managerBy" column="JBYHID"
+                entity-name="com.ekingstar.security.User"/>
+                
+        <set name="materials" cascade="all">
+		  <key column="QYSQID"/>
+		  <one-to-many class="com.ekingstar.eams.misc.fileprint.model.FilePrintMaterial"/>
+		</set>
+
+		<property name="addAt" column="CJSJ"/>
+		<property name="printAt" column="QYSJ"/>
+		<property name="copyAt" column="FYSJ"/>
+		<property name="auditState" column="SHZT"/>
+		<property name="filePrintState" column="QYZT"/>
+		<property name="value" column="QYSL"/>
+		<property name="payed" column="ZFYJE"/>
+		<property name="remark" column="BZ" length="500" />
+	</class>	
+</hibernate-mapping>

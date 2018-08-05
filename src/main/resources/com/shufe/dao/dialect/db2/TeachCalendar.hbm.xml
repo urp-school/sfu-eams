@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<query name="getNearestCalendar">
+		<![CDATA[from 
+				TeachCalendar as calendar
+				where  calendar.studentType.id=:studentTypeId and
+			          ((calendar.start-current_date)*(calendar.finish-current_date))
+			          <= all(select (c.start-current_date)*(c.finish-current_date) from TeachCalendar as c where c.studentType.id=:studentTypeId)
+		 	)			
+			]]>
+	</query>
+	
+	<query name="getTermsOrderByDistance">
+		<![CDATA[select calendar.term from 
+				TeachCalendar as calendar
+				where 
+				      calendar.year=:year and 
+				      calendar.studentType.id=:studentTypeId 			
+				      order by ((calendar.start-current_date)*(calendar.finish-current_date))]]>
+	</query>
+	<query name="getYearsOrderByDistance">
+		<![CDATA[select calendar.year from 				 
+				 TeachCalendar as calendar 
+				 where calendar.studentType.id=:studentTypeId 
+				 order by ((calendar.start-current_date)*(calendar.finish-current_date))]]>
+	</query>
+	<query name="getCurTeachCalendar">
+		<![CDATA[select calendar from 
+				 TeachCalendar as calendar
+				 where calendar.studentType.id=:studentTypeId and
+			           current_date between calendar.start and calendar.finish]]>
+	</query>
+	<query name="getNextTeachCalendar">
+		<![CDATA[select calendar from 
+				 TeachCalendar as calendar
+				 where calendar.studentType.id=:studentTypeId and
+			           current_date < calendar.start order by calendar.start asc]]>
+	</query>
+	<query name="getPreviousTeachCalendar">
+		<![CDATA[select calendar from 
+				 TeachCalendar as calendar
+				 where calendar.studentType.id=:studentTypeId and
+			           current_date > calendar.finish order by calendar.start desc]]>
+	</query>
+	<query name="getCurTeachCalendars">
+		<![CDATA[
+		    from  TeachCalendar as calendar 
+			where  current_date between calendar.start and calendar.finish 
+		]]>
+	</query>
+</hibernate-mapping>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.ekingstar.eams.std.graduation.audit.model">
+    <class name="AuditStandard" table="BYSH_JHBZ_T">
+        <id name="id" column="ID" unsaved-value="null">
+            <generator class="sequence">
+                <param name="sequence">SEQ_BYSH_JHBZ_T</param>
+            </generator>
+        </id>
+        <property name="name" column="MC"/>
+        <property name="isDualConvert" column="SFSXZH" not-null="true"/>
+        <many-to-one name="studentType" column="XSLBID"/>
+        <many-to-one name="publicCourseType" column="RYXXKLBID"/>
+        
+        <set name="disauditCourseTypes" table="BYSH_JHBZ_HLKCLB_T">
+            <key column="SHBZID"/>
+            <many-to-many column="KCLBID"
+                class="com.ekingstar.eams.system.basecode.industry.CourseType"/>
+        </set>
+        
+        <set name="convertableCourseTypes" table="BYSH_JHBZ_RXKCLB_T">
+            <key column="SHBZID"/>
+            <many-to-many column="KCLBID"
+                class="com.ekingstar.eams.system.basecode.industry.CourseType"/>
+        </set>
+        
+        <property name="remark" column="BZ" length="500"/>
+        <filter name="filterAuthorityByStudentType" condition="XSLBID in (:studentTypeIds)"/>
+    </class>
+			
+</hibernate-mapping>

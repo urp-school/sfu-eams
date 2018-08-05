@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.course.achivement"  >
+	<class name="GradeAchivement" table="JXJ_PDJG_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXJ_PDJG_T</param>
+			</generator>
+		</id>
+		<many-to-one name="fromSemester" column="KSJXRLID" not-null="true"/>
+		<many-to-one name="toSemester" column="JSJXRLID" not-null="true"/>
+		<many-to-one name="std" column="XSID" not-null="true"/>
+		
+		<property name="grade" column="RXNFPC"/>
+		<many-to-one name="department" column="BMID" not-null="true"/>
+		<many-to-one name="major" column="ZYID" />
+		<many-to-one name="adminClass" column="BJID" />
+		
+		<property name="moralScore" column="DYCJ"/>
+		<property name="ieScore" column="ZYCJ" />
+		<property name="peScore" column="TYCJ"/>
+		<property name="score" column="CJ" />
+		<property name="gpa" column="JD" />
+		<property name="cet4Score" column="CET4CJ"/>
+
+		<property name="iePassed" column="ZYSFTG"/>
+		<property name="pePassed" column="TYSFTG"/>
+		<property name="cet4Passed" column="CETSFTG"/>
+		<property name="unpassed" column="BJGMS"/>
+		
+		<property name="createdAt" column="CJSJ"/>
+		<property name="updatedAt" column="XGSJ"/>
+		
+		<property name="confirmed" column="SFQR"/>
+
+		<property name="remark" column="bz" length="2000"/>
+	</class>
+	<sql-query name="insertGradeAchivement">
+		<![CDATA[
+		insert into JXJ_PDJG_T(id,ksjxrlid,jsjxrlid,xsid,rxnfpc,bmid,zyid,bjid,zysftg,tysftg,cetsftg,sfqr)
+		select seq_JXJ_PDJG_T.nextval,rl.SGXQ,rl.id,xs.id,xs.rxnfpc,xs.bmid,xs.yzyid,(select min(bj.id) from jcxx_bj_t bj,
+		jcxx_bj_xs_t bjxs ,jcxx_zy_t zy where bjxs.bjid=bj.id and bjxs.xsid=xs.id and bj.zyid=zy.id and zy.zylbid=1),0,0,0,0
+		from xsxx_t xs,jxrl_t rl where xs.sfzx=1 and xs.sfzj=1 and xs.rxnfpc=:grade and rl.id=:toSemesterId
+		and not exists(select * from JXJ_PDJG_T jg where jg.xsid=xs.id and jg.jsjxrlid=rl.id)
+		 ]]>
+	</sql-query>
+	
+	<sql-query name="queryStdAlteration">
+		<![CDATA[
+select jg.id jgid,bdxx.rxny rxnfpc,bdxx.bmid bmid,bdxx.zyid zyid,bdxx.bjid bjid 
+from xs_xjyd_t xjyd,xs_xjyd_bdxx_t bdxx,jxj_pdjg_t jg where xjyd.bdqid=bdxx.id 
+and xjyd.bdqsrq > :lastDay
+and not exists(select * from xs_xjyd_t xjyd2 where xjyd2.xsid=xjyd.xsid and xjyd2.bdqsrq > xjyd.bdqsrq)
+and jg.ksjxrlid = :fromSemesterId and jg.jsjxrlid=:toSemesterId and jg.xsid=xjyd.xsid
+		 ]]>
+	</sql-query>
+	
+		<sql-query name="insertNotInSchoolGradeAchivement">
+		<![CDATA[
+insert into JXJ_PDJG_T(id,ksjxrlid,jsjxrlid,xsid,rxnfpc,bmid,zyid,bjid,zysftg,tysftg,cetsftg,sfqr)
+
+select seq_JXJ_PDJG_T.nextval,rl.sgxq,rl.id,xs.id,bdqxx.rxny rxnfpc ,bdqxx.bmid,bdqxx.zyid,bdqxx.bjid,0,0,0,0 from xsxx_t xs,xs_xjyd_t xjyd,xs_xjyd_bdxx_t bdqxx,jxrl_t rl  
+where  xs.sfzx=0 and xs.sfzj=1 and  xjyd.xsid=xs.id  and bdqxx.rxny=:grade
+and bdqxx.id= xjyd.bdqid and bdqxx.sfzx=1 
+and xjyd.bdqsrq > rl.jzsj
+and exists(select * from xs_xjyd_bdxx_t bdhxx where bdhxx.id= xjyd.bdhid and bdhxx.sfzx=0)
+and not exists(select * from xs_xjyd_t xjyd2 where xjyd2.xsid=xjyd.xsid and xjyd2.bdqsrq > xjyd.bdqsrq)
+and not exists(select * from JXJ_PDJG_T jg where jg.xsid=xs.id and jg.jsjxrlid=rl.id)
+and rl.id=:toSemesterId
+		 ]]>
+	</sql-query>
+</hibernate-mapping>  
+

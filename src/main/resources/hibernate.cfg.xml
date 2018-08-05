@@ -1,0 +1,563 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- 数据库相关的查询-->
+        <mapping resource="com/shufe/dao/dialect/oracle/TeachCalendar.hbm.xml"/>
+        <mapping resource="com/shufe/dao/dialect/oracle/ElectParams.hbm.xml"/>
+        <mapping resource="com/shufe/dao/dialect/oracle/AttendDevice.hbm.xml"/>
+        
+        <!--系统管理-->
+        <mapping resource="com/shufe/model/system/baseinfo/Classroom.hbm.xml"/>
+        <mapping resource="com/shufe/model/system/baseinfo/Department.hbm.xml"/>
+        <mapping resource="com/shufe/model/system/baseinfo/Course.hbm.xml"/>
+		<!--
+        <mapping resource="com/shufe/model/system/baseinfo/NewCourse.hbm.xml"/>
+		-->
+        <mapping
+            resource="com/ekingstar/eams/system/baseinfo/model/CourseExtInfo.hbm.xml"/>
+        <mapping resource="com/shufe/model/system/baseinfo/Teacher.hbm.xml"/>
+        <mapping resource="com/shufe/model/system/baseinfo/Speciality.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/system/baseinfo/SpecialityAspect.hbm.xml"/>
+        <mapping resource="com/shufe/model/system/baseinfo/AdminClass.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/baseinfo/model/StudentType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/baseinfo/model/Building.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/baseinfo/model/SchoolDistrict.hbm.xml"/>
+        
+        <mapping resource="com/shufe/model/system/calendar/TimeSetting.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/system/calendar/OnCampusTime.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/system/calendar/TeachCalendar.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/time/model/TeachCalendarScheme.hbm.xml"/>
+        <mapping resource="com/shufe/model/system/calendar/CourseUnit.hbm.xml"/>
+        
+        <!-- 权限系统 -->
+        <mapping resource="com/ekingstar/security/model/UserCategory.hbm.xml"/>
+        <mapping resource="com/ekingstar/security/model/User.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/security/model/EamsRole.hbm.xml"/>
+        <mapping resource="com/ekingstar/security/model/Resource.hbm.xml"/>
+        <mapping resource="com/ekingstar/security/model/Authority.hbm.xml"/>
+        
+        <mapping resource="com/ekingstar/security/portal/model/Menu.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/security/portal/model/MenuProfile.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/security/portal/model/MenuAuthority.hbm.xml"/>
+            
+        <mapping
+            resource="com/ekingstar/security/restriction/model/Restriction.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/security/restriction/model/RestrictionItem.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/security/restriction/model/RestrictionPattern.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/security/restriction/model/PatternParam.hbm.xml"/>
+        
+        <mapping resource="com/ekingstar/security/audit/OnlineRecord.hbm.xml"/>
+        
+        <mapping resource="com/shufe/model/system/message/Message.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/system/message/SystemMessage.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/system/message/DefaultMessage.hbm.xml"/>
+        
+        <mapping resource="com/shufe/model/system/file/Document.hbm.xml"/>
+        <mapping resource="com/shufe/model/system/notice/Notice.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/config/model/SystemConfigItem.hbm.xml"/>
+        <mapping resource="com/shufe/model/system/project/Requirement.hbm.xml"/>
+        <mapping resource="com/shufe/model/system/project/Bug.hbm.xml"/>
+        <mapping resource="com/shufe/model/system/log/SystemLog.hbm.xml"/>
+        <mapping resource="com/shufe/model/system/codeGen/CodeScript.hbm.xml"/>
+        <!--教学管理模块-->
+        <mapping resource="com/shufe/model/course/plan/TeachPlan.hbm.xml"/>
+        <mapping resource="com/shufe/model/course/plan/CourseGroup.hbm.xml"/>
+        <mapping resource="com/shufe/model/course/plan/PlanCourse.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/course/plan/TeachPlanArrangeAlteration.hbm.xml"/>
+        <mapping resource="com/shufe/model/course/plan/PlanSingleInfo.hbm.xml"/>
+        
+        <mapping
+            resource="com/ekingstar/eams/course/program/model/SubstitutionCourse.hbm.xml"/>
+        
+        <mapping resource="com/shufe/model/course/task/TeachTask.hbm.xml"/>
+		<mapping resource="com/shufe/model/course/attend/AttendWarn.hbm.xml"/>
+		<!--实验室要求-->
+		<mapping resource="com/shufe/model/course/task/LaboratoryRequirement.hbm.xml"/>
+        <mapping resource="com/shufe/model/course/task/MultimediaRequirement.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/course/task/TaskAlterRequest.hbm.xml"/>
+        <mapping resource="com/shufe/model/course/task/RequirePrefer.hbm.xml"/>
+        <mapping resource="com/shufe/model/course/task/TeachTaskParam.hbm.xml"/>
+        <mapping resource="com/shufe/model/course/task/CourseTakeForTaskParam.hbm.xml"/>
+        <mapping resource="com/shufe/model/course/arrange/Activity.hbm.xml"/>
+        <mapping resource="com/shufe/model/course/arrange/task/TaskInDepartment.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/course/arrange/AvailableTime.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/course/arrange/resource/Resource.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/course/arrange/resource/RoomPriceConfig.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/course/arrange/resource/RoomPriceCatalogue.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/course/arrange/task/TaskGroup.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/course/arrange/task/CourseTake.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/course/arrange/task/CourseTableCheck.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/course/arrange/task/CourseArrangeAlteration.hbm.xml"/>
+        
+        <mapping
+            resource="com/shufe/model/course/arrange/exam/ExamTurn.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/course/arrange/exam/ExamTake.hbm.xml"/>
+		<!--
+        <mapping
+            resource="com/shufe/model/course/arrange/exam/ExamApplyParam.hbm.xml"/>
+		-->
+        <mapping
+            resource="com/shufe/model/course/arrange/exam/ExamGroup.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/course/arrange/exam/ExamMonitor.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/course/arrange/apply/RoomApply.hbm.xml"/>
+        
+        <mapping resource="com/shufe/model/course/election/ElectRecord.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/course/election/WithdrawRecord.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/course/election/ElectStdScope.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/course/election/CreditConstraint.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/course/election/CreditAwardCriteria.hbm.xml"/>
+        <mapping resource="com/shufe/model/course/election/ElectParams.hbm.xml"/>
+		<!--
+        <mapping resource="com/shufe/model/course/election/ReservedStudent.hbm.xml"/>
+		-->
+        
+        <mapping
+            resource="com/shufe/model/course/textbook/BookRequirement.hbm.xml"/>
+        <mapping resource="com/shufe/model/course/textbook/Textbook.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/course/arrange/CourseArrangeSwitch.hbm.xml"/> 
+        <mapping
+            resource="com/shufe/model/course/arrange/task/ManualArrangeParam.hbm.xml"/> 
+        <mapping
+            resource="com/ekingstar/eams/quality/lessoncheck/model/LessonCheck.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/LessonCheckType.hbm.xml"/>
+        <!--成绩-->
+        <mapping resource="com/shufe/model/course/grade/Grade.hbm.xml"/>
+		<!--
+        <mapping resource="com/shufe/model/course/grade/GradeLog.hbm.xml"/>
+		-->
+        <mapping
+            resource="com/shufe/model/course/grade/GradeInputSwitch.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/course/grade/gp/GradePointRule.hbm.xml"/>
+        <mapping resource="com/shufe/model/course/grade/gp/GPMapping.hbm.xml"/>
+        <mapping resource="com/shufe/model/course/grade/StdTermCredit.hbm.xml"/>
+        
+        <mapping
+            resource="com/shufe/model/course/grade/other/OtherExamSignUp.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/course/grade/other/OtherGrade.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/course/grade/other/OtherExamSignUpSetting.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/course/grade/alter/CourseGradeAlterInfo.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/course/grade/alter/ExamGradeAlterInfo.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/course/grade/alter/OtherExamAlterInfo.hbm.xml"/>
+        <mapping resource="com/shufe/model/course/grade/MoralGrade.hbm.xml"/>
+        
+        <mapping
+            resource="com/ekingstar/eams/course/grade/converter/DefaultConverterConfig.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/course/grade/converter/DefaultConverterItem.hbm.xml"/>
+        <!--学位学科-->
+        <mapping resource="com/shufe/model/std/degree/DegreeInfo.hbm.xml"/>
+        <mapping resource="com/shufe/model/std/degree/MasterDegreeInfo.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/std/degree/UndergraduateDegreeInfo.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/std/degree/EquivalentDegreeInfo.hbm.xml"/>
+        <!--学科-->
+        <mapping
+            resource="com/shufe/model/degree/subject/Level1Subject.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/degree/subject/Level2Subject.hbm.xml"/>
+        <!--论文管理-->
+        <mapping resource="com/shufe/model/degree/thesis/Thesis.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/degree/thesis/topicOpen/TopicOpen.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/degree/thesis/annotate/Annotate.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/degree/thesis/answer/PreAnswer.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/degree/thesis/answer/AnswerTeam.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/degree/thesis/annotate/ThesisAnnotateBook.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/degree/thesis/answer/FormalAnswer.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/degree/thesis/process/Schedule.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/degree/thesis/process/TacheSetting.hbm.xml"/>
+        
+        <mapping resource="com/shufe/model/degree/instruct/Instruction.hbm.xml"/>
+        <!--科研管理-->
+        <mapping resource="com/shufe/model/degree/study/StudyThesis.hbm.xml"/>
+        <mapping resource="com/shufe/model/degree/study/Award.hbm.xml"/>
+        <mapping resource="com/shufe/model/degree/study/Literature.hbm.xml"/>
+        <mapping resource="com/shufe/model/degree/study/Project.hbm.xml"/>
+        <mapping resource="com/shufe/model/degree/study/StudyMeeting.hbm.xml"/>
+        <mapping resource="com/shufe/model/degree/study/ThesisIndex.hbm.xml"/>
+        <!--导师管理-->
+        <mapping
+            resource="com/shufe/model/degree/tutorManager/Assistant.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/degree/tutorManager/ChooseTutor.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/degree/tutorManager/tutor/TutorApply.hbm.xml"/>
+        <!--收费-->
+        <mapping resource="com/shufe/model/fee/FeeDetail.hbm.xml"/>
+        <mapping resource="com/shufe/model/fee/FeeDefault.hbm.xml"/>
+        <mapping resource="com/shufe/model/fee/CreditFeeDefault.hbm.xml"/>
+        <mapping resource="com/shufe/model/fee/stat/CreditFeeStat.hbm.xml"/>
+        <mapping resource="com/ekingstar/eams/fee/model/TuitionFee.hbm.xml"/>
+        
+        <mapping
+            resource="com/ekingstar/eams/misc/fileprint/model/FilePrintApplication.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/misc/fileprint/model/FilePrintMaterial.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/misc/examinationpaper/model/ExaminationPaper.hbm.xml"/>
+        <!--教学质量管理-->
+        <mapping
+            resource="com/shufe/model/quality/accident/TeachAccident.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/quality/product/TeachProduct.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/quality/fineCourse/FineCourse.hbm.xml"/>
+        <mapping resource="com/shufe/model/quality/review/ReviewDetail.hbm.xml"/>
+        <mapping resource="com/shufe/model/quality/review/TeachReview.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/quality/evaluate/stat/EvaluateTeacherStat.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/quality/evaluate/stat/EvaluateDepartmentStat.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/quality/evaluate/stat/EvaluateCollegeStat.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/quality/evaluate/stat/QuestionTeacherStat.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/quality/evaluate/stat/QuestionDepartmentStat.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/quality/evaluate/stat/QuestionCollegeStat.hbm.xml"/>
+        <!--评教模块-->
+        <mapping resource="com/shufe/model/evaluate/evaluate.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/quality/evaluate/EvaluationCriteria.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/quality/evaluate/EvaluationCriteriaItem.hbm.xml"/>
+        <mapping resource="com/shufe/model/quality/evaluate/Option.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/quality/evaluate/OptionGroup.hbm.xml"/>
+        <mapping resource="com/shufe/model/quality/evaluate/Question.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/quality/evaluate/Questionnaire.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/quality/evaluate/QuestionType.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/quality/evaluate/QuestionnaireStat.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/quality/evaluate/EvaluateStatics.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/quality/evaluate/QuestionTypeStat.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/quality/evaluate/EvaluateResult.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/quality/evaluate/QuestionResult.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/quality/evaluate/EvaluateSwitch.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/quality/evaluate/EvaluateQuerySwitch.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/quality/evaluate/TextEvaluation.hbm.xml"/>
+        <!--工作量-->
+        <mapping resource="com/shufe/model/workload/Workload.hbm.xml"/>
+        <mapping resource="com/shufe/model/workload/Modulus.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/workload/ration/RationWorkload.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/workload/ration/RationWorkloadConfig.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/workload/course/TeachCategory.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/workload/course/TeachWorkloadAlteration.xml"/>
+        <mapping
+            resource="com/shufe/model/workload/course/TeachWorkloadStatus.xml"/>
+        <mapping
+            resource="com/shufe/model/workload/course/WorkloadOpenSwitch.hbm.xml"/>
+        <!--学籍管理-->
+        <mapping resource="com/shufe/model/std/Student.hbm.xml"/>
+        <mapping resource="com/shufe/model/duty/dutyRecord.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/std/speciality2nd/SignUpGPASetting.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/std/speciality2nd/SignUpSetting.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/std/speciality2nd/SignUpSpecialitySetting.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/std/speciality2nd/SignUpStdScope.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/std/speciality2nd/SignUpStudent.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/std/speciality2nd/SignUpStudentRecord.hbm.xml"/>
+        <mapping resource="com/shufe/model/std/awardPunish/Punishment.hbm.xml"/>
+        <mapping resource="com/shufe/model/std/awardPunish/Award.hbm.xml"/>
+        <!--学籍变动-->
+        <mapping
+            resource="com/shufe/model/std/alteration/StudentAlteration.hbm.xml"/>
+        <mapping resource="com/shufe/model/std/alteration/StdStatus.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/std/changeMajor/model/AuditInfo.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/std/changeMajor/model/ChangeMajorApplication.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/std/changeMajor/model/ChangeMajorPlan.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/std/changeMajor/model/MajorPlan.hbm.xml"/>
+        <!--毕业管理-->
+        <mapping resource="com/shufe/model/degree/apply/DegreeApply.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/std/graduation/audit/model/DegreeAuditStandard.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/std/graduation/audit/model/AuditResult.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/std/graduation/audit/model/DegreeAuditInfo.hbm.xml"/>    
+        <mapping
+            resource="com/ekingstar/eams/std/graduation/audit/model/AuditStandard.hbm.xml"/>
+        <mapping
+            resource="com/shufe/model/std/graduation/practice/GraduatePractice.hbm.xml"/>
+        <!--register-->
+        <mapping
+            resource="com/ekingstar/eams/std/registration/model/Register.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/std/registration/model/RegisterUserGroup.hbm.xml"/>
+        <!-- 基础代码种类-->
+        <mapping resource="com/ekingstar/eams/system/basecode/Coder.hbm.xml"/>
+        <!-- 基础代码(国标)(13) -->
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/state/AbroadPurpose.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/state/ChineseLanguage.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/state/Country.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/state/Degree.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/state/EduDegree.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/state/Gender.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/state/LanguageAbility.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/state/Language.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/state/Nation.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/state/PoliticVisage.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/state/SubjectCategory.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/state/TeacherTitle.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/state/TeacherTitleLevel.hbm.xml"/>
+        <!-- 基础代码(行业标准)(66) -->
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/ActivityType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/AlterMode.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/AlterReason.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/AttendanceType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/AuditType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/AwardType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/BookType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/CertificateType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/ClassroomType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/CorporationKind.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/CourseCategory.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/CourseTakeType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/CourseType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/CurrencyCategory.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/EducationMode.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/EngagementType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/EnrollMode.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/ExamDelayReason.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/ExamMode.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/ExamStatus.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/ExamType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/FeeMode.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/FeeOrigin.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/FeeType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/FineCourseLevel.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/GradeType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/GraduateState.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/HandleType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/HSKDegree.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/LeaveSchoolCause.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/LeaveType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/LiteratureType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/MaritalStatus.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/MajorType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/MarkStyle.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/MeetingType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/MessageType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/OtherExamCategory.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/OtherExamKind.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/PassportType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/PracticeSource.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/Press.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/PressLevel.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/ProductionAwardLevel.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/ProductionAwardType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/ProductionType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/ProjectType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/Publication.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/PublicationLevel.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/PunishmentType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/RegisterState.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/ResearchAwardType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/School.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/TeacherType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/StudentState.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/StudyType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/Tache.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/TaskLevel.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/TeacherWorkState.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/TeachLangType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/TeachMode.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/TextbookAwardLevel.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/ThesisIndexType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/ThesisTopicSource.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/ThesisType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/TrainingType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/TutorType.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/TypeInfo.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/VisaType.hbm.xml"/>
+        <!-- 教学科研-项目管理 -->
+        <mapping
+            resource="com/ekingstar/eams/research/project/model/TeachProject.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/research/project/model/TeachProjectTemplate.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/TeachProjectState.hbm.xml"/>
+        <mapping
+            resource="com/ekingstar/eams/system/basecode/industry/TeachProjectType.hbm.xml"/>
+        
+        <mapping resource="com/ekingstar/eams/teach/program/major/model/MajorSubstituteCourse.hbm.xml"/>
+        <mapping resource="com/ekingstar/eams/teach/program/std/model/StdSubstituteCourse.hbm.xml"/>
+        <!--
+        <mapping resource="com/ekingstar/eams/teach/program/std/model/SubstitueCourse.hbm.xml"/>
+        -->
+        
+        <!-- 规则部分 -->
+        <mapping resource="org/beanfuse/rule/model/BusinessRule.hbm.xml"/>
+		<mapping resource="org/beanfuse/rule/model/RuleParameter.hbm.xml"/>
+		<mapping resource="org/beanfuse/rule/model/RuleConfig.hbm.xml"/>
+		<mapping resource="org/beanfuse/rule/model/RuleConfigParam.hbm.xml"/>
+		<!--考勤管理-->
+        <mapping resource="com/shufe/model/course/attend/AttendStatic.hbm.xml"/>
+		<!-- 考勤报表 -->
+		<mapping resource="com/shufe/model/course/attend/AttendStaticReport.hbm.xml"/>
+		<!-- 考勤监控 -->
+		<mapping resource="com/shufe/model/course/attend/AttendDevice.hbm.xml"/>
+
+        <!--综合测评-->
+        <mapping resource="com/shufe/model/course/achivement/GradeAchivement.hbm.xml" />
+        <mapping resource="com/shufe/model/course/achivement/GradeAchivementSetting.hbm.xml" />
+
+    </session-factory>
+</hibernate-configuration>
+

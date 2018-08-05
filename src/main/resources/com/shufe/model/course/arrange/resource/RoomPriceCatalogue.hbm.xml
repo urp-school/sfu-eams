@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 教室借用级差价目表 -->
+<hibernate-mapping>
+	<class name="com.shufe.model.course.arrange.resource.RoomPriceCatalogue"
+		table="JXYX_JSJMB_T">
+		<id name="id" column="id" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXYX_JSJMB_T</param>
+			</generator>
+		</id>
+		<many-to-one name="schoolDistrict" column="XQID"/>
+		<many-to-one name="department" column="FBBMID" not-null="true"/>
+		<property name="publishedOn" column="FBRQ" not-null="true"/>
+		<property name="remark" column="BZ" not-null="true"/>
+		<set name="prices" cascade="all">
+			<key column="JSJMBID"/>
+			<one-to-many
+				class="com.shufe.model.course.arrange.resource.RoomPriceConfig"/>
+		</set>
+		<set name="auditDeparts" table="JXYX_JSSQ_SHBM_T">
+			<key column="JSJMBID"/>
+			<many-to-many
+				class="com.shufe.model.system.baseinfo.Department" column="SHBMID"/>
+		</set>
+	</class>
+</hibernate-mapping>

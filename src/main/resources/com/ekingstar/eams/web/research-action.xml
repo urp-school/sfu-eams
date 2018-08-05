@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean name="/teachProject" autowire="byName" scope="prototype"
+		class="com.ekingstar.eams.research.project.web.action.TeachProjectAction">
+		<property name="entityName" value="teachProject"/>
+		<property name="entityClass"
+			value="com.ekingstar.eams.research.project.model.TeachProject"/>
+	</bean>
+	
+	<bean name="/teachProjectApply" autowire="byName" scope="prototype"
+		class="com.ekingstar.eams.research.project.web.action.TeachProjectApplyAction">
+		<property name="entityName" value="teachProject"/>
+		<property name="entityClass"
+			value="com.ekingstar.eams.research.project.model.TeachProject"/>
+	</bean>
+	
+	<bean name="/projectDocument" autowire="byName" scope="prototype"
+		class="com.ekingstar.eams.research.project.web.action.ProjectDocumentAction">
+		<property name="entityName" value="projectDocument"/>
+		<property name="entityClass"
+			value="com.ekingstar.eams.research.project.model.ProjectDocument"/>
+	</bean>
+	
+	<bean name="/projectMember" autowire="byName" scope="prototype"
+		class="com.ekingstar.eams.research.project.web.action.ProjectMemberAction">
+		<property name="entityName" value="projectMember"/>
+		<property name="entityClass"
+			value="com.ekingstar.eams.research.project.model.ProjectMember"/>
+	</bean>
+	
+	<bean name="/teachProjectType" autowire="byName" scope="prototype"
+		class="com.ekingstar.eams.research.project.web.action.TeachProjectTypeAction">
+		<property name="entityName" value="teachProjectType"/>
+		<property name="entityClass"
+			value="com.ekingstar.eams.system.basecode.industry.TeachProjectType"/>
+	</bean>
+	
+	<bean name="/teachProjectTemplate" autowire="byName" scope="prototype"
+		class="com.ekingstar.eams.research.project.web.action.TeachProjectTemplateAction">
+		<property name="entityName" value="teachProjectTemplate"/>
+		<property name="entityClass"
+			value="com.ekingstar.eams.research.project.model.TeachProjectTemplate"/>
+	</bean>
+</beans>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.shufe.model.degree.thesis.process">
+	<class name="Schedule" table="LW_JD_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_LW_JD_T</param>
+			</generator>
+		</id>
+		<many-to-one name="studentType" column="xslbid"/>
+		<property name="enrollYear" column="RXNFPC" length="10" not-null="true"/>
+		<property name="studyLength" column="XZ" length="10" not-null="true"/>
+		<property name="remark" column="BZ" length="500"/>
+		<set name="tacheSettings"  inverse="true" cascade="all">
+			<key column="LWJDID"/>
+			<one-to-many  class="com.shufe.model.degree.thesis.process.TacheSetting"></one-to-many>
+		</set>
+	</class>
+</hibernate-mapping>

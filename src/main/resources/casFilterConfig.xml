@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <loginServer>http://202.121.252.116/cas/</loginServer>
+    <validateServer>http://202.121.252.116/cas/</validateServer>
+    <this>202.121.252.116</this>
+    <wrapRequest>true</wrapRequest>
+    <checkAlive>false</checkAlive>
+    <notForceAuthUrls>
+        <url-pattern>\.js$</url-pattern>
+         <url-pattern>\.xsl$</url-pattern>
+         <url-pattern>\.xml$</url-pattern>
+         <url-pattern>\.gif$</url-pattern>
+         <url-pattern>\.jpg$</url-pattern>
+         <url-pattern>\.bmp$</url-pattern>
+         <url-pattern>\.css$</url-pattern>
+         <url-pattern><![CDATA[.*\.ftl.*]]></url-pattern>
+         <url-pattern>\.htm$</url-pattern>
+         <url-pattern>\.html$</url-pattern>
+         <url-pattern><![CDATA[.*/dwr/.*]]></url-pattern>
+         <url-pattern><![CDATA[.*/count.*]]></url-pattern>
+         <url-pattern><![CDATA[.*/remote.*]]></url-pattern>
+         <url-pattern><![CDATA[.*/services/DcmWebService.*]]></url-pattern>
+         <url-pattern><![CDATA[.*/freshman.*]]></url-pattern>
+         <url-pattern><![CDATA[.*certificationForStd\.do.*]]></url-pattern>
+         <url-pattern><![CDATA[.*courseTablePublic\.do.*]]></url-pattern>
+    </notForceAuthUrls>
+</config>

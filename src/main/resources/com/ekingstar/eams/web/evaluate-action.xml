@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<!--questionnaireRecycleRate bean-->
+	<bean name="/questionnaireRecycleRateAction" autowire="byName" scope="prototype" 
+		class="com.shufe.web.action.evaluate.statistic.QuestionnaireRecycleRateAction">
+		<property name="questionnaireRecycleRateService">
+			<ref bean="questionnaireRecycleRateService"/>
+		</property>
+	</bean>
+	
+	<!--teachQualityAction-->
+	<bean name="/teachQualityStatisticAction" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.evaluate.TeachQualityStatisticAction">
+		<property name="teachQualityStatisticService">
+			<ref bean="teachQualityStatisticService"></ref>
+		</property>
+	</bean>
+</beans>

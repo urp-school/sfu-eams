@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <description>graduate struts beans</description>
+    
+    <bean name="/studentAuditManager" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.graduate.StudentAuditManagerAction"/>
+    
+    <bean name="/secondSpecialityStudentAuditManager" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.graduate.SecondSpecialityStudentAuditManagerAction"/>
+    
+    <bean name="/studentAuditOperation" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.graduate.StudentAuditOperation">
+        <property name="studentService">
+            <ref bean="studentService"/>
+        </property>
+    </bean>
+    
+    <bean name="/auditOperationByStudent" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.graduate.AuditOperationByStudent">
+        <property name="studentService">
+            <ref bean="studentService"/>
+        </property>
+    </bean>
+    
+    <bean name="/auditResultSearch" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.graduate.AuditResultSearchAction">
+        <property name="studentService">
+            <ref bean="studentService"/>
+        </property>
+        <property name="graduateAuditService">
+            <ref bean="graduateAuditService"/>
+        </property>
+    </bean>
+    
+    <bean name="/secondAuditResultSearch" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.graduate.SecondAuditResultSearchAction">
+        <property name="studentService">
+            <ref bean="studentService"/>
+        </property>
+        <property name="graduateAuditService">
+            <ref bean="graduateAuditService"/>
+        </property>
+        <property name="auditStandardService">
+            <ref bean="auditStandardService"/>
+        </property>
+    </bean>
+    
+    <bean name="/studentAuditResultDetail" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.graduate.AuditOperationByStudent">
+    </bean>
+</beans>

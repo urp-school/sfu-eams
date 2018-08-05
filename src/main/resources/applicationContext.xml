@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<description>general spring beans</description>
+	<import resource="classpath:applicationContext-model.xml"/>
+	<import resource="classpath:com/ekingstar/commons/utils/spring-beans.xml"/>
+	<import
+		resource="classpath:com/ekingstar/eams/system/baseinfo/spring-beans.xml"/>
+	<import resource="classpath:applicationContext-security.xml"/>
+	<import resource="classpath:applicationContext-dao.xml"/>
+	<import resource="classpath:applicationContext-service.xml"/>
+	<import resource="classpath:applicationContext-mail.xml"/>
+	<import resource="classpath:dispatch-action.xml"/>
+	
+	<bean id="defaultDataSource"
+		class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName">
+			<value>java:comp/env/jdbc/hibernate</value>
+		</property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="configLocation">
+			<value>classpath:hibernate.cfg.xml</value>
+		</property>
+		<property name="dataSource">
+			<ref bean="defaultDataSource"/>
+		</property>
+		<property name="lobHandler" ref="oracleLobHandler"/>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+				<!--<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>-->
+				<prop key="hibernate.connection.provider_class">org.hibernate.connection.DatasourceConnectionProvider</prop>
+				<prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+				<prop key="hibernate.query.factory_class">org.hibernate.hql.ast.ASTQueryTranslatorFactory</prop>
+				<prop key="hibernate.max_fetch_depth">1</prop>
+				<prop key="hibernate.default_batch_fetch_size">8</prop>
+				<prop key="hibernate.jdbc.fetch_size">8</prop>
+				<prop key="hibernate.jdbc.batch_size">20</prop>
+				<prop key="hibernate.jdbc.batch_versioned_data">true</prop>
+				<prop key="hibernate.jdbc.use_streams_for_binary">true</prop>
+				<prop key="hibernate.jdbc.use_get_generated_keys">true</prop>
+				<prop key="hibernate.cache.use_second_level_cache">true</prop>
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<prop key="hibernate.query.substitutions">true 1, false 0, yes 'Y', no 'N'</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.format_sql"></prop>
+				<prop key="hibernate.default_schema">eams</prop>
+				<prop key="hibernate.hbm2ddl.auto"></prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	
+	<!-- baseTransactionProxy,subclass must supply target property -->
+	<bean id="baseTransactionProxy"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
+		abstract="true">
+		<property name="transactionManager">
+			<ref bean="transactionManager"/>
+		</property>
+		<!--
+		use CGLIB 
+		如果代理的不是接口，这里应该使用“代理目标类”.因为我们项目dao全是接口，这里就注释掉了。
+		<property name="proxyTargetClass">
+		<value>true</value>
+		</property>
+		-->
+		<property name="transactionAttributes">
+			<props>
+				<prop key="save*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+				<prop key="batch*">PROPAGATION_REQUIRED</prop>
+				<prop key="execute*">PROPAGATION_REQUIRED</prop>
+				<prop key="remove*">PROPAGATION_REQUIRED</prop>
+				<prop key="gen*">PROPAGATION_REQUIRED</prop>
+				<prop key="init*">PROPAGATION_REQUIRED</prop>
+				<prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="oracleLobHandler"
+		class="org.springframework.jdbc.support.lob.OracleLobHandler"
+		lazy-init="true">
+		<property name="nativeJdbcExtractor" ref="nativeJdbcExtractor"/>
+	</bean>
+	
+	<bean id="nativeJdbcExtractor"
+		class="org.springframework.jdbc.support.nativejdbc.CommonsDbcpNativeJdbcExtractor"
+		lazy-init="true"/>
+	
+	<!--basic DAO-->
+	<bean id="basicDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.shufe.dao.BasicHibernateDAO" autowire="byName"/>
+		</property>
+	</bean>
+	
+	<import resource="classpath:applicationContext-local.xml"/>
+</beans>

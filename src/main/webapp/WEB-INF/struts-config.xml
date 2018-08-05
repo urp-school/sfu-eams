@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_1.dtd">
+
+<struts-config>
+  <form-beans>
+    <form-bean type="org.apache.struts.action.DynaActionForm" name="page20Form"> 
+      <form-property type="java.lang.Integer" name="pageNo" initial="1"/>  
+      <form-property type="java.lang.Integer" name="pageSize" initial="20"/> 
+    </form-bean>
+    <form-bean type="org.apache.struts.action.DynaActionForm" name="page10Form"> 
+      <form-property type="java.lang.Integer" name="pageNo" initial="1"/>  
+      <form-property type="java.lang.Integer" name="pageSize" initial="10"/> 
+    </form-bean>
+    <form-bean name="loginForm" type="com.ekingstar.security.web.formbean.LoginForm"/>
+    <form-bean name="importStudentFileForm" type="org.apache.struts.action.DynaActionForm"> 
+      <form-property type="org.apache.struts.upload.FormFile" name="studentFile"/> 
+    </form-bean>
+    <form-bean name="tutorStd" type="org.apache.struts.action.DynaActionForm"> 
+      <form-property type="com.shufe.model.system.baseinfo.Tutor" name="tutor"/>  
+      <form-property type="java.lang.Integer" name="pageNo" initial="1"/>  
+      <form-property type="java.lang.Integer" name="pageSize" initial="10"/> 
+    </form-bean>
+    <form-bean name="examinationPaperForm" type="org.apache.struts.action.DynaActionForm"> 
+      <form-property type="org.apache.struts.upload.FormFile" name="formFile"/> 
+    </form-bean>
+    <form-bean name="projectDocumentForm" type="org.apache.struts.action.DynaActionForm"> 
+      <form-property type="org.apache.struts.upload.FormFile" name="formFile"/> 
+    </form-bean>
+    <form-bean name="questionnaireRecycleRateForm" type="org.apache.struts.action.DynaActionForm"> 
+      <form-property type="com.shufe.model.evaluate.QuestionnaireRecycleRate" name="questionnaireRecycleRate"/> 
+    </form-bean>
+  </form-beans>
+  <global-exceptions> 
+    <exception key="error.loginFailed" type="com.ekingstar.commons.security.monitor.AuthenticationException" path="/pages/system/loginFailure.ftl"/>  
+    <exception key="error.notEnoughAuthority" type="com.ekingstar.commons.security.monitor.AuthorityException" path="/pages/system/loginFailure.ftl"/> 
+  </global-exceptions>
+  <global-forwards> 
+    <forward name="error" path="/pages/error.ftl"/>  
+    <forward name="redirector" path="/templates/redirector.ftl"/>  
+    <forward name="processDisplay" path="/templates/processDisplay.ftl"/>  
+    <forward name="actionResult" path="/templates/actionResult.ftl"/> 
+  </global-forwards>
+  <action-mappings>
+    <action path="/departmentSelector" scope="request" parameter="method"> 
+      <forward path="/pages/selector/departmentSelector.ftl" name="success"/> 
+    </action>
+    <action path="/specialitySelector" scope="request" parameter="method"> 
+      <forward path="/pages/selector/specialitySelector.ftl" name="success"/> 
+    </action>
+    <action path="/specialityAspectSelector" scope="request" parameter="method"> 
+      <forward path="/pages/selector/specialityAspectSelector.ftl" name="success"/>  
+      <forward path="/pages/selector/secondSpecialityAspectSelector.ftl" name="secondSuccess"/> 
+    </action>
+    <action path="/adminClassSelector" scope="request" parameter="method"> 
+      <forward path="/pages/selector/adminClassSelector.ftl" name="success"/> 
+    </action>
+    <action path="/studentTypeSelector" scope="request" parameter="method"> 
+      <forward path="/pages/selector/studentTypeSelector.ftl" name="success"/> 
+    </action>
+    <action path="/courseTypeSelector" scope="request" parameter="method"> 
+      <forward path="/pages/selector/courseTypeSelector.ftl" name="success"/> 
+    </action>
+    <action path="/courseSelector" scope="request" parameter="method"> 
+      <forward name="list" path="/pages/selector/courseSelector.ftl"/> 
+    </action>
+    <action path="/collegeSelector" scope="request" parameter="method"> 
+      <forward name="list" path="/pages/selector/collegeSelector.ftl"/> 
+    </action>
+    <action path="/auditStandardSearch" scope="request" name="page20Form" parameter="method"/>
+    <action path="/auditStandard" scope="request" name="page20Form" parameter="method"/>
+    <action path="/rationWorkload" scope="request" parameter="method"/>
+    <action path="/rationWorkloadConfig" scope="request" parameter="method"/>
+    <action path="/teachModulus" scope="request" parameter="method"> 
+      <forward name="workloadModuleUpdateOrDeleteErrors" path="/pages/evaluate/updateOrDeleteErrors.ftl"/> 
+    </action>
+    <action path="/workloadOpenSwitch" scope="request" parameter="method"/>
+    <action path="/teachWorkload" scope="request" parameter="method"/>
+    <action path="/teachWorkloadSearch" scope="request" parameter="method"/>
+    <action path="/teacherWorkload" scope="request" parameter="method"/>
+    <action path="/teachCategory" scope="request" parameter="method"/>
+    <action path="/teachWorkloadStat" scope="request" parameter="method"/>
+    <action path="/teachWorkloadMultiTermStat" scope="request" parameter="method"/>
+    <action path="/teachWorkloadAlteration" scope="request" parameter="method"/>
+    <action path="/instructWorkload" scope="request" parameter="method"/>
+    <action path="/instructWorkloadSearch" scope="request" parameter="method"/>
+    <action path="/instructModulus" scope="request" parameter="method"/>
+    <action path="/collegeWorkloadQuery" scope="request" parameter="method"/>
+    <action path="/inputDutyRecord" scope="request" name="page20Form" parameter="method"> 
+      <forward name="search" path="/pages/duty/searchTeachTask.ftl"/>  
+      <forward name="inputForm" path="/pages/duty/dutyRecordInputForm.ftl"/>  
+      <forward name="inputRedirector" path="/pages/duty/dutyRecordInputRedirector.ftl"/>  
+      <forward name="success" path="/inputDutyRecord.do?method=searchTeachTask" redirect="true"/>  
+      <forward name="maintainRecordByTeachTaskForm" path="/pages/duty/maintainRecordByTeachTaskForm.ftl"/>  
+      <forward name="maintainRecordByTeachTask" path="/pages/duty/maintainRecordByTeachTask.ftl"/>  
+      <forward name="maintainRecordByTeachTaskSuccess" path="/pages/duty/maintainRecordByTeachTaskSuccess.ftl"/> 
+    </action>
+    <action path="/inputDutyRecordWithTeacher" scope="request" name="page20Form" parameter="method"> 
+      <forward name="search" path="/pages/duty/searchTeachTask.ftl"/>  
+      <forward name="inputForm" path="/pages/duty/dutyRecordInputForm.ftl"/>  
+      <forward name="inputRedirector" path="/pages/duty/dutyRecordInputRedirector.ftl"/>  
+      <forward name="success" path="/inputDutyRecord.do?method=searchTeachTask" redirect="true"/>  
+      <forward name="maintainRecordByTeachTaskForm" path="/pages/duty/maintainRecordByTeachTaskForm.ftl"/>  
+      <forward name="maintainRecordByTeachTask" path="/pages/duty/maintainRecordByTeachTask.ftl"/>  
+      <forward name="maintainRecordByTeachTaskSuccess" path="/pages/duty/maintainRecordByTeachTaskSuccess.ftl"/> 
+    </action>
+    <action path="/dutyRecordManager" scope="request" name="page20Form" parameter="method"> 
+      <forward name="search" path="/pages/duty/dutyRecordManager.ftl"/>  
+      <forward name="dutyRecordBatchManage" path="/pages/duty/dutyRecordBatchManage.ftl"/>  
+      <forward name="recordList" path="/pages/duty/dutyRecordList.ftl"/>  
+      <forward name="recordUpdateForm" path="/pages/duty/recordUpdateForm.ftl"/>  
+      <forward name="messageSendForm" path="/pages/duty/messageSendForm.ftl"/>  
+      <forward name="recordUpdateRedirector" path="/pages/duty/recordUpdateRedirector.ftl"/>  
+      <forward name="dutyRecordUpdateForm" path="/pages/duty/dutyRecordUpdateForm.ftl"/>  
+      <forward name="success" path="/dutyRecordManager.do?method=manager" redirect="true"/>  
+      <forward name="recordUpdateSuccess" path="/dutyRecordManager.do?method=modifyRecordByTeachTask"/>  
+      <forward name="fromInputRecordUpdateSuccess" path="/inputDutyRecord.do?method=searchTeachTask"/>  
+      <forward name="dutyRecordStatisticsFrame" path="/pages/duty/dutyRecordStatisticsFrame.ftl"/>  
+      <forward name="studentStatisticsForm" path="/pages/duty/studentStatisticsForm.ftl"/>  
+      <forward name="adminClassStatisticsForm" path="/pages/duty/adminClassStatisticsForm.ftl"/>  
+      <forward name="stdDutyRecordStatistics" path="/pages/duty/stdDutyRecordStatistics.ftl"/>  
+      <forward name="adminClassRecordStatistics" path="/pages/duty/adminClassRecordStatistics.ftl"/> 
+    </action>
+    <action path="/dutyRecordManagerWithTeacher" name="page20Form" scope="request" parameter="method"> 
+      <forward name="search" path="/pages/duty/dutyRecordManagerWithTeacher.ftl"/>  
+      <forward name="recordList" path="/pages/duty/dutyRecordList.ftl"/>  
+      <forward name="recordUpdateForm" path="/pages/duty/recordUpdateForm.ftl"/>  
+      <forward name="messageSendForm" path="/pages/duty/messageSendForm.ftl"/>  
+      <forward name="dutyRecordUpdateForm" path="/pages/duty/dutyRecordUpdateForm.ftl"/>  
+      <forward name="recordUpdateRedirector" path="/pages/duty/recordUpdateRedirector.ftl"/>  
+      <forward name="fromInputRecordUpdateSuccess" path="/dutyRecordManagerWithTeacher.do?method=managerByTeacher"/>  
+      <forward name="success" path="/dutyRecordManager.do?method=manager" redirect="true"/>  
+      <forward name="inputForm" path="/pages/duty/dutyRecordInputForm.ftl"/>  
+      <forward name="inputRedirector" path="/pages/duty/dutyRecordInputRedirector.ftl"/>  
+      <forward name="maintainRecordByTeachTaskForm" path="/pages/duty/maintainRecordByTeachTaskForm.ftl"/>  
+      <forward name="maintainRecordByTeachTask" path="/pages/duty/maintainRecordByTeachTask.ftl"/>  
+      <forward name="maintainRecordByTeachTaskSuccess" path="/pages/duty/maintainRecordByTeachTaskSuccess.ftl"/> 
+    </action>
+    <action path="/dutyRecordSearch" name="page20Form" scope="request" parameter="method"> 
+      <forward name="recordByStudentList" path="/pages/duty/recordByStudentList.ftl"/>  
+      <forward name="manageByStudentList" path="/pages/duty/manageByStudentList.ftl"/>  
+      <forward name="recordList" path="/pages/duty/recordListBySearch.ftl"/>  
+      <forward name="manageRecordList" path="/pages/duty/manageRecordList.ftl"/>  
+      <forward name="recordDetailList" path="/pages/duty/recordDetailListBySearch.ftl"/> 
+    </action>
+    <action path="/studentDutyRecord" scope="request" parameter="method"> 
+      <forward name="recordList" path="/pages/duty/studentRecordList.ftl"/>  
+      <forward name="recordDetailList" path="/pages/duty/studentRecordDetailList.ftl"/> 
+    </action>
+    <action path="/login" name="loginForm" scope="request" validate="true" input="/index.do"> 
+      <forward name="success" path="/home.do?method=index" redirect="true"/>  
+      <forward name="failure" path="/index.do"/> 
+    </action>
+    <action path="/loginForm" forward="/pages/system/loginForm.ftl"/>
+    <action path="/loadDispatch"> 
+      <forward name="success" path="/index.do" redirect="true"/>  
+      <forward name="failure" path="/pages/system/loadDispatch.ftl"/> 
+    </action>
+    <action path="/index"> 
+      <forward name="index" path="/home.do?method=index"/>  
+      <forward name="login" path="/pages/system/loginForm.ftl"/> 
+    </action>
+    <action path="/logout" scope="request"> 
+      <forward path="/index.do" name="success"/> 
+    </action>
+    <action path="/home" scope="request" parameter="method"/>
+    <action path="/defaultHome" scope="request" parameter="method"/>
+    <action path="/simpleHome" scope="request" parameter="method"/>
+    <action path="/help" scope="request" parameter="method"/>
+    <action path="/systemMessage" name="page20Form" scope="request" parameter="method"/>
+    <action path="/notice" name="page20Form" scope="request" parameter="method"/>
+    <action path="/noticeSearch" scope="request" parameter="method"/>
+    <action path="/download" scope="request" parameter="method"/>
+    <action path="/document" scope="request" parameter="method"/>
+    <action path="/dataTemplate" scope="request" parameter="method"/>
+    <action path="/baseInfoSearch" scope="request" parameter="method"/>
+    <action path="/baseCode" scope="request" parameter="method"/>
+    <action path="/courseSearch" scope="request" parameter="method"/>
+    <action path="/course" scope="request" parameter="method"/>
+    <action path="/classRoomSearch" scope="request" parameter="method"/>
+    <action path="/classroom" scope="request" parameter="method"/>
+    <action path="/classroomStat" scope="request" parameter="method"/>
+    <action path="/specialitySearch" scope="request" parameter="method"/>
+    <action path="/speciality" scope="request" parameter="method"/>
+    <action path="/specialityStat" scope="request" parameter="method"/>
+    <action path="/specialityAspectSearch" scope="request" parameter="method"/>
+    <action path="/specialityAspect" scope="request" parameter="method"/>
+    <action path="/teacherSearch" scope="request" parameter="method"/>
+    <action path="/teacher" scope="request" parameter="method"/>
+    <action path="/teacherStat" scope="request" parameter="method"/>
+    <action path="/adminClassSearch" scope="request" parameter="method"/>
+    <action path="/adminClass" scope="request" parameter="method"/>
+    <action path="/studentTypeSearch" scope="request" parameter="method"/>
+    <action path="/studentType" scope="request" parameter="method"/>
+    <action path="/departmentSearch" scope="request" parameter="method"/>
+    <action path="/department" scope="request" parameter="method"/>
+    <action path="/building" scope="request" parameter="method"/>
+    <action path="/schoolDistrict" scope="request" parameter="method"/>
+    <action path="/calendar" scope="request" parameter="method"/>
+    <action path="/timeSetting" scope="request" parameter="method"/>
+    <action path="/user" scope="request" parameter="method"/>
+    <action path="/role" scope="request" parameter="method"/>
+    <action path="/stdUser" scope="request" parameter="method"/>
+    <action path="/teacherUser" scope="request" parameter="method"/>
+    <action path="/resource" scope="request" parameter="method"/>
+    <action path="/authority" scope="request" parameter="method"/>
+    <action path="/onlineUser" scope="request" parameter="method"/>
+    <action path="/onlineRecord" scope="request" parameter="method"/>
+    <action path="/randomCodeImage" scope="session"/>
+    <action path="/systemLog" scope="request" parameter="method"/>
+    <action path="/password" scope="request" parameter="method"/>
+    <action path="/management" scope="request" parameter="method"/>
+    <action path="/menu" scope="request" parameter="method"/>
+    <action path="/menuProfile" scope="request" parameter="method"/>
+    <action path="/menuAuthority" scope="request" parameter="method"/>
+    <action path="/onlineRecord" scope="request" parameter="method"/>
+    <action path="/onlineUser" scope="request" parameter="method"/>
+    <action path="/restrictionPattern" scope="request" parameter="method"/>
+    <action path="/restriction" scope="request" parameter="method"/>
+    <action path="/patternParam" scope="request" parameter="method"/>
+    <action path="/preference" scope="request" parameter="method"/>
+    <action path="/systemConfig" scope="request" parameter="method"/>
+    <action path="/requirement" scope="request" parameter="method"/>
+    <action path="/codeScript" scope="request" parameter="method"/>
+    <action path="/rule" scope="request" parameter="method"/>
+    <action path="/ruleParameter" scope="request" parameter="method"/>
+    <action path="/ruleConfig" scope="request" parameter="method"/>
+    <action path="/newCourse" scope="request" parameter="method"/>
+    <action path="/newCourseSearch" scope="request" parameter="method"/>
+    <action path="/instructorStd" scope="request" parameter="method"/>
+    <action path="/freshman" scope="request" parameter="method"/>
+    <action path="/searchStudent" scope="request" name="page20Form" parameter="method"> 
+      <forward name="success" path="/pages/std/studentSearchForm.ftl"/>  
+      <forward name="detail" path="/pages/std/studentInfoDetail.ftl"/> 
+    </action>
+    <action path="/studentManager" scope="request" name="page20Form" parameter="method"> 
+      <forward name="success" path="/pages/std/studentManager.ftl"/> 
+    </action>
+    <action path="/studentCodeManager" scope="request" name="page20Form" parameter="method"></action>
+    <action path="/stdStatusStat" scope="request" parameter="method"/>
+    <action path="/studentOperation" scope="request" name="page20Form" parameter="method"> 
+      <forward name="addForm" path="/pages/std/studentInfoAddForm.ftl"/>  
+      <forward name="updateForm" path="/pages/std/studentInfoUpdateForm.ftl"/>  
+      <forward name="success" path="/studentManager.do?method=manager&amp;moduleName=StudentManager" redirect="true"/>  
+      <forward name="failure" path="/pages/error.ftl"/> 
+    </action>
+    <action path="/studentDetailByManager" scope="request" parameter="method"> 
+      <forward name="detail" path="/pages/std/studentInfoDetail.ftl"/> 
+    </action>
+    <action path="/stdDetail" scope="request" parameter="method"/>
+    <action path="/loadStudentBasicInfoUpdateForm" scope="request" parameter="method"> 
+      <forward name="basicInfoUpdateForm" path="/pages/std/studentBasicInfoUpdateForm.ftl"/> 
+    </action>
+    <action path="/updateStudentBasicInfo" scope="request" name="page20Form" parameter="method"> 
+      <forward name="success" path="/studentDetail.do?method=studentDetail" redirect="true"/> 
+    </action>
+    <action path="/studentAlteration" scope="request" parameter="method"/>
+    <action path="/alterationForStd" scope="request" parameter="method"/>
+    <action path="/studentStatus" scope="request" parameter="method"/>
+    <action path="/studentChartStatistics" scope="request" parameter="method"/>
+    <action path="/studentCountStatistics" scope="request" parameter="method"/>
+    <action path="/studentFile" name="importStudentFileForm" scope="request" parameter="method"/>
+    <action path="/studentPhoto" scope="request" parameter="method"/>
+    <action path="/photoByStudent" scope="request" parameter="method"/>
+    <action path="/specialityAlerationAudit" scope="request" parameter="method"/>
+    <action path="/studentInfoUpdateSetting" scope="request" parameter="method"/>
+    <action path="/specialityAlerationApplicaton" scope="request" parameter="method"/>
+    <action path="/graduatePractice" scope="request" parameter="method"/>
+    <action path="/stdOnCampusStat" scope="request" parameter="method"/>
+    <action path="/degreeAuditStandard" scope="request" parameter="method"/>
+    <action path="/degreeAudit" scope="request" parameter="method"/>
+    <action path="/auditResultSearch" scope="request" parameter="method"/>
+    <action path="/studentAuditStandardDetail" scope="request" parameter="method"/>
+    <action path="/speciality2ndStd" scope="request" parameter="method"/>
+    <action path="/speciality2ndSignUp" scope="request" parameter="method"/>
+    <action path="/signUpGPASetting" scope="request" parameter="method"/>
+    <action path="/speciality2ndSignUpGPASetting" scope="request" parameter="method"/>
+    <action path="/speciality2ndSignUpSetting" scope="request" parameter="method"/>
+    <action path="/speciality2ndSignUpSpecialitySetting" scope="request" parameter="method"/>
+    <action path="/speciality2ndSignUpStudent" scope="request" parameter="method"/>
+    <action path="/speciality2ndSignUpStdScope" scope="request" parameter="method"/>
+    <action path="/register" scope="request" parameter="method"/>
+    <action path="/registerUserGroup" scope="request" parameter="method"/>
+    <action path="/stdRegister" scope="request" parameter="method"/>
+    <action path="/registerStat" scope="request" parameter="method"/>
+    <action path="/awardPunishSearch" scope="request" parameter="method"/>
+    <action path="/awardPunish" scope="request" parameter="method"/>
+    <action path="/stdAwardPunish" scope="request" parameter="method"/>
+    <action path="/stdPractice" scope="request" parameter="method"/>
+    <action path="/abroadInfo" scope="request" parameter="method"/>
+    <action path="/teachAccident" scope="request" parameter="method"/>
+    <action path="/teachAccidentTeacher" scope="request" parameter="method"/>
+    <action path="/teachAccidentSearch" scope="request" parameter="method"/>
+    <action path="/teachReview" scope="request" parameter="method"/>
+    <action path="/lessonCheck" scope="request" parameter="method"/>
+    <action path="/teachProduct" scope="request" parameter="method"/>
+    <action path="/teachProductForTeacher" scope="request" parameter="method"/>
+    <action path="/teachProductStat" scope="request" parameter="method"/>
+    <action path="/fineCourseStat" scope="request" parameter="method"/>
+    <action path="/fineCourse" scope="request" parameter="method"/>
+    <action path="/questionnaireStat" scope="request" parameter="method"/>
+    <action path="/questionnaireStatSearch" scope="request" parameter="method"/>
+    <action path="/questionnaireStatTeacher" scope="request" parameter="method"/>
+    <action path="/evaluateDetailSearch" scope="request" parameter="method"/>
+    <action path="/evaluateDetailStat" scope="request" parameter="method"/>
+    <action path="/evaluateStatistics" scope="request" parameter="method"/>
+    <action path="/evaluateStd" scope="request" parameter="method"/>
+    <action path="/evaluateSwitch" scope="request" parameter="method"/>
+    <action path="/evaluateQuerySwitch" scope="request" parameter="method"/>
+    <action path="/questionnaireTask" scope="request" parameter="method"/>
+    <action path="/evaluateResult" scope="request" parameter="method"/>
+    <action path="/question" scope="request" parameter="method"/>
+    <action path="/questionType" scope="request" parameter="method"/>
+    <action path="/optionGroup" scope="request" parameter="method"/>
+    <action path="/questionnaire" scope="request" parameter="method"/>
+    <action path="/evaluationCriteria" scope="request" parameter="method"/>
+    <action path="/evaluationConfig" scope="request" parameter="method"/>
+    <action path="/textEvaluationStd" scope="request" parameter="method"/>
+    <action path="/textEvaluationTeacher" scope="request" parameter="method"/>
+    <action path="/textEvaluation" scope="request" parameter="method"/>
+    <action path="/textEvaluationSearch" scope="request" parameter="method"/>
+    <action path="/studentClassManager" scope="request" name="page20Form" parameter="method"> 
+      <forward name="success" path="/pages/studentClass/studentClassManager.ftl"/> 
+    </action>
+    <action path="/adminClassManager" scope="request" name="page20Form" parameter="method"> 
+      <forward name="success" path="/pages/studentClass/adminClassManager.ftl"/> 
+    </action>
+    <action path="/studentClassOperation" scope="request" name="page20Form" parameter="method"> 
+      <forward name="splitForm" path="/pages/studentClass/studentClassSplitForm.ftl"/>  
+      <forward name="autoSplitForm" path="/pages/studentClass/studentClassAutoSplitForm.ftl"/>  
+      <forward name="assingClassForm" path="/pages/studentClass/assingStudentClassForm.ftl"/>  
+      <forward name="detail" path="/pages/studentClass/studentClassDetail.ftl"/>  
+      <forward name="success" path="/studentClassManager.do?method=classManager" redirect="true"/>  
+      <forward name="adminSuccess" path="/adminClassManager.do?method=classManager" redirect="true"/>  
+      <forward name="assingSuccess" path="/studentClassManager.do?method=studentClassManager" redirect="true"/>  
+      <forward name="cancelSuccess" path="/adminClassManager.do?method=classManager" redirect="true"/>  
+      <forward name="cancelStudentClassSuccess" path="/studentClassManager.do?method=studentClassManager" redirect="true"/>  
+      <forward name="setClassStudentForm" path="/pages/studentClass/setClassStudentForm.ftl"/>  
+      <forward name="failure" path="/pages/error.ftl"/> 
+    </action>
+    <action path="/studentClassDetail" scope="request" parameter="method"> 
+      <forward name="detailByStudent" path="/pages/studentClass/detailByStudent.ftl"/> 
+    </action>
+    <action path="/degreeApplyStd" scope="request" parameter="method"/>
+    <action path="/degreeApply" scope="request" parameter="method"/>
+    <action path="/studyProduct" scope="request" parameter="method"/>
+    <action path="/studyAward" scope="request" parameter="method"/>
+    <action path="/studyProductStd" scope="request" parameter="method"/>
+    <action path="/level1Subject" scope="request" name="page20Form" parameter="method"/>
+    <action path="/level2Subject" scope="request" name="page20Form" parameter="method"/>
+    <action path="/thesisSchedule" scope="request" parameter="method"/>
+    <action path="/thesisDocument" scope="request" parameter="method"/>
+    <action path="/thesisManageStd" scope="request" parameter="method"/>
+    <action path="/thesisManage" scope="request" parameter="method"/>
+    <action path="/thesisManageTutor" scope="request" parameter="method"/>
+    <action path="/thesisDownload" scope="request" parameter="method"/>
+    <action path="/thesisAdmin" scope="request" parameter="method"/>
+    <action path="/thesisStd" scope="request" parameter="method"/>
+    <action path="/instruction" scope="request" parameter="method"/>
+    <action path="/thesisTopicOpen" scope="request" name="page20Form" parameter="method"/>
+    <action path="/thesisTopicOpen_tutor" scope="request" name="page20Form" parameter="method"/>
+    <action path="/loadThesisTopic_std" scope="request" parameter="method"/>
+    <action path="/preAnswer" scope="request" name="page20Form" parameter="method"/>
+    <action path="/preAnswer_std" scope="request" name="page20Form" parameter="method"/>
+    <action path="/preAnswer_tutor" scope="request" name="page20Form" parameter="method"/>
+    <action path="/annotateAdmin" scope="request" name="page20Form" parameter="method"/>
+    <action path="/annotateTutor" scope="request" name="page20Form" parameter="method"/>
+    <action path="/annotateStd" scope="request" parameter="method"/>
+    <action path="/formalAnswerAdmin" scope="request" name="page20Form" parameter="method"/>
+    <action path="/formalAnswerStd" scope="request" name="page20Form" parameter="method"/>
+    <action path="/thesisStatistic" scope="request" name="page20Form" parameter="method"/>
+    <action path="/tutorManager" scope="request" name="page20Form" parameter="method"/>
+    <action path="/tutorManager_tutor" scope="request" name="page20Form" parameter="method"> 
+      <forward name="doTutorInfo" path="/pages/tutorManager/tutor/tutorInfo.ftl"/>  
+      <forward name="doDefault" path="/tutorManager.do?method=doDefault"/>  
+      <forward name="failure" path="/pages/tutorManager/errorPage.ftl"/> 
+    </action>
+    <action path="/appointTutor" scope="request" name="page20Form" parameter="method"/>
+    <action path="/appointStd" scope="request" name="page20Form" parameter="method"/>
+    <action path="/assistant" scope="request" parameter="method"/>
+    <action path="/assistantTutor" scope="request" parameter="method"/>
+    <action path="/assistantStd" scope="request" parameter="method"/>
+    <action path="/tutorChoose" scope="request" name="page20Form" parameter="method"/>
+    <action path="/tutorChoose_tutor" scope="request" name="page20Form" parameter="method"/>
+    <action path="/tutorStatistic" scope="request" name="page20Form" parameter="method"/>
+    <action path="/tutorStd" scope="request" name="page20Form" parameter="method"/>
+    <action path="/filePrintApply" name="examinationPaperForm" scope="request" parameter="method"/>
+    <action path="/filePrintAudit" name="examinationPaperForm" scope="request" parameter="method"/>
+    <action path="/filePrintManage" name="examinationPaperForm" scope="request" parameter="method"/>
+    <action path="/examinationPaper" name="examinationPaperForm" scope="request" parameter="method"/>
+    <action path="/teachProject" scope="request" parameter="method"/>
+    <action path="/teachProjectApply" scope="request" parameter="method"/>
+    <action path="/projectDocument" name="projectDocumentForm" scope="request" parameter="method"/>
+    <action path="/projectMember" scope="request" parameter="method"/>
+    <action path="/teachProjectType" scope="request" parameter="method"/>
+    <action path="/teachProjectTemplate" name="projectDocumentForm" scope="request" parameter="method"/>
+    <action path="/feeDetail" scope="request" parameter="method"/>
+    <action path="/feeSearch" scope="request" name="page20Form" parameter="method"/>
+    <action path="/feeOfStd" scope="request" parameter="method"/>
+    <action path="/courseAndFee" scope="request" parameter="method"/>
+    <action path="/feeStat" scope="request" parameter="method"/>
+    <action path="/feeDefaultConfig" scope="request" parameter="method"/>
+    <action path="/feeDefault" scope="request" parameter="method"/>
+    <action path="/creditFeeDefault" scope="request" parameter="method"/>
+    <action path="/feeImport" scope="request" parameter="method"/>
+    <action path="/tuitionFee" scope="request" parameter="method"/>
+    <action path="/error" scope="request"> 
+      <forward path="/pages/error.ftl" name="error"/> 
+    </action>
+    <action path="/studentAuditManager" scope="request" name="page20Form" parameter="method"/>
+    <action path="/secondSpecialityStudentAuditManager" scope="request" parameter="method"/>
+    <action path="/studentAuditOperation" scope="request" parameter="method"> 
+      <forward name="auditSecondSuccess" path="/secondSpecialityStudentAuditManager.do?method=secondSpecialityStudentList&amp;moduleName=SecondSpecialityStudentAuditManager"/>  
+      <forward name="failure" path="/pages/error.ftl"/>  
+      <forward name="detail" path="/pages/graduate/auditResultDetail.ftl"/> 
+    </action>
+    <action path="/auditOperationByStudent" scope="request" parameter="method"></action>
+    <action path="/auditResultSearch" name="page20Form" scope="request" parameter="method"></action>
+    <action path="/secondAuditResultSearch" name="page20Form" scope="request" parameter="method"></action>
+    <action path="/auditResultDetail" scope="request" parameter="method"> 
+      <forward name="detail" path="/pages/graduate/auditResultDetail.ftl"/> 
+    </action>
+    <action path="/studentAuditResultDetail" scope="request" parameter="method"> 
+      <forward name="detail" path="/pages/graduate/studentAuditResultDetail.ftl"/> 
+    </action>
+    <action path="/secondSpecialityStudentAuditManager" scope="request" name="page20Form" parameter="method"/>
+    <action path="/questionnaireRecycleRateAction" name="questionnaireRecycleRateForm" scope="request" parameter="method"> 
+      <forward path="/pages/evaluate/statistic/recycleRateStatisticErrors/loadErrors.ftl" name="finish"/>  
+      <forward path="/questionnaireRecycleRateAction.do?method=doQuery" name="finishOver" redirect="true"/>  
+      <forward path="/pages/evaluate/statistic/recycleRateStatisticErrors/recycleRateQuery.ftl" name="query"/>  
+      <forward path="/pages/evaluate/statistic/recycleRateStatisticErrors/loadStatisticRecycleRateQuery.ftl" name="doLoadStatisticPage"/>  
+      <forward path="/pages/evaluate/statistic/recycleRateStatisticErrors/loadDetailInfoOfTask.ftl" name="doGetDetailInfoOfTask"/> 
+    </action>
+    <action path="/teachQualityStatisticAction" parameter="method" scope="request"> 
+      <forward path="/pages/evaluate/teachQualityStatistic/studentStatistic.ftl" name="student"/>  
+      <forward path="/pages/evaluate/teachQualityStatistic/teacherStatistic.ftl" name="teacher"/>  
+      <forward path="/pages/evaluate/teachQualityStatistic/evaluateStatistic.ftl" name="evaluate"/>  
+      <forward path="/pages/evaluate/teachQualityStatistic/workloadStatistic.ftl" name="workload"/>  
+      <forward path="/pages/evaluate/teachQualityStatistic/teachAwardStatistic.ftl" name="teachAward"/>  
+      <forward path="/pages/evaluate/teachQualityStatistic/teachInfoStatistic.ftl" name="teachInfo"/> 
+    </action>
+    <action path="/teachPlan" scope="request" parameter="method"/>
+    <action path="/teachPlanArrangeAlteration" scope="request" parameter="method"/>
+    <action path="/teachPlanConfirm" scope="request" parameter="method"/>
+    <action path="/teachPlanSearch" scope="request" parameter="method"/>
+    <action path="/stdTeachPlan" scope="request" parameter="method"/>
+    <action path="/stdTeachPlanSearch" scope="request" parameter="method"/>
+    <action path="/stdTeachPlanInfo" scope="request" parameter="method"/>
+    <action path="/courseGroup" scope="request" parameter="method"/>
+    <action path="/planCourse" scope="request" parameter="method"/>
+    <action path="/teachPlanCourseStat" scope="request" parameter="method"/>
+    <action path="/teachPlanStat" scope="request" parameter="method"/>
+    <action path="/teachPlanActivityStat" scope="request" parameter="method"/>
+    <action path="/stdSubstitutionCourse" scope="request" parameter="method"/>
+    <action path="/teachTask" scope="request" parameter="method"/>
+    <action path="/teachTaskCheck" scope="request" parameter="method"/>
+    <action path="/teachTaskCollege" scope="request" parameter="method"/>
+    <action path="/teachTaskSearch" scope="request" parameter="method"/>
+    <action path="/teacherOtherOption" scope="request" parameter="method"/>
+    <action path="/teachTaskConfirm" scope="request" parameter="method"/>
+    <action path="/teachTaskGen" scope="request" parameter="method"/>
+    <action path="/teachTaskGenDuplicate" scope="request" parameter="method"/>
+    <action path="/teachTaskStat" parameter="method"/>
+    <action path="/teachTaskParam" parameter="method"/>
+    <action path="/courseTakeForTaskParam" parameter="method"/>
+    <action path="/examUpdate" parameter="method"/>
+    <action path="/examStudent" parameter="method"/>
+    <action path="/requirePrefer" scope="request" parameter="method"/>
+    <action path="/laboratoryRequirement" scope="request" parameter="method"/>
+    <action path="/multimediaRequirement" scope="request" parameter="method"/>
+    <action path="/teacherTask" scope="request" parameter="method"/>
+    <action path="/manualArrangeParam" scope="request" parameter="method"/>
+    <action path="/collegeCourseTable" scope="request" parameter="method"/>
+    <action path="/courseArrangeSwitch" scope="request" parameter="method"/>
+    <action path="/teacherTime" scope="request" parameter="method"/>
+    <action path="/teacherAvailTime" scope="request" parameter="method"/>
+    <action path="/roomAvailTime" scope="request" parameter="method"/>
+    <action path="/arrangeSuggest" scope="request" parameter="method"/>
+    <action path="/taskGroup" scope="request" parameter="method"/>
+    <action path="/autoArrange" scope="request" parameter="method"/>
+    <action path="/courseTable" scope="request" parameter="method"/>
+    <action path="/courseTablePublic" scope="request" parameter="method"/>
+    <action path="/courseTableForStd" scope="request" parameter="method"/>
+    <action path="/courseTableForTeacher" scope="request" parameter="method"/>
+    <action path="/manualArrange" scope="request" parameter="method"/>
+    <action path="/allocateTaskForArrange" scope="request" parameter="method"/>
+    <action path="/adjustCourse" scope="request" parameter="method"/>
+    <action path="/courseTableCheck" scope="request" parameter="method"/>
+    <action path="/roomResource" scope="request" parameter="method"/>
+    <action path="/teacherResource" scope="request" parameter="method"/>
+    <action path="/classResource" scope="request" parameter="method"/>
+    <action path="/electScope" scope="request" parameter="method"/>
+    <action path="/creditConstraint" scope="request" parameter="method"/>
+    <action path="/electParams" scope="request" parameter="method"/>
+    <action path="/electCourse" scope="request" parameter="method"/>
+    <action path="/quickElectCourse" scope="request" parameter="method"/>
+    <action path="/examApplyParam" scope="request" parameter="method"/>
+    <action path="/examArrange" scope="request" parameter="method"/>
+    <action path="/examTable" scope="request" parameter="method"/>
+    <action path="/examTurn" scope="request" parameter="method"/>
+    <action path="/examGroup" scope="request" parameter="method"/>
+    <action path="/examiner" scope="request" parameter="method"/>
+    <action path="/examTake" scope="request" parameter="method"/>
+    <action path="/stdExamTable" scope="request" parameter="method"/>
+    <action path="/teacherExamTable" scope="request" parameter="method"/>
+    <action path="/examArrangeSearch" scope="request" parameter="method"/>
+    <action path="/stdCreditStat" name="page20Form" scope="request" parameter="method"/>
+    <action path="/courseTake" scope="request" parameter="method"/>
+    <action path="/courseTakeSearch" scope="request" parameter="method"/>
+    <action path="/courseTakeForTask" scope="request" parameter="method"/>
+    <action path="/courseTakeForTaskDuplicate" scope="request" parameter="method"/>
+    <action path="/teacherGrade" scope="request" parameter="method"/>
+    <action path="/gradeLog" scope="request" parameter="method"/>
+    <action path="/stdGradeSearch" scope="request" parameter="method"/>
+    <action path="/gradeStateStat" scope="request" parameter="method"/>
+    <action path="/gradeInputSwitch" scope="request" parameter="method"/>
+    <action path="/stdGrade" scope="request" parameter="method"/>
+    <action path="/stdGradeDuplicate" scope="request" parameter="method"/>
+    <action path="/personGrade" scope="request" parameter="method"/>
+    <action path="/collegeGrade" scope="request" parameter="method"/>
+    <action path="/collegeGradeDuplicate" scope="request" parameter="method"/>
+    <action path="/courseGrade" scope="request" parameter="method"/>
+    <action path="/courseGradeDuplicate" scope="request" parameter="method"/>
+    <action path="/teachClassGradeReport" scope="request" parameter="method"/>
+    <action path="/stdGradeReport" scope="request" parameter="method"/>
+    <action path="/stdTermGradeReport" scope="request" parameter="method"/>
+    <action path="/multiStdGradeReport" scope="request" parameter="method"/>
+    <action path="/gradePointRule" scope="request" parameter="method"/>
+    <action path="/stdGP" scope="request" parameter="method"/>
+    <action path="/multiStdGP" scope="request" parameter="method"/>
+    <action path="/gradeTransfer" scope="request" parameter="method"/>
+    <action path="/makeupGrade" scope="request" parameter="method"/>
+    <action path="/endMakeupGrade" scope="request" parameter="method"/>
+    <action path="/markStyleConfig" scope="request" parameter="method"/>
+    <action path="/gradeAnalyse" scope="request" parameter="method"/>
+    <action path="/gradeRank" scope="request" parameter="method"/>
+    <action path="/otherExamSignUp" scope="request" parameter="method"/>
+    <action path="/personOtherExam" scope="request" parameter="method"/>
+    <action path="/otherExamSignUpSetting" scope="request" parameter="method"/>
+    <action path="/otherGradeSearch" scope="request" parameter="method"/>
+    <action path="/otherGrade" scope="request" parameter="method"/>
+    <action path="/moralGrade" scope="request" parameter="method"/>
+    <action path="/moralGradeInstructor" scope="request" parameter="method"/>
+    <action path="/moralGradeClass" scope="request" parameter="method"/>
+    <action path="/textbook" scope="request" parameter="method"/>
+    <action path="/press" scope="request" parameter="method"/>
+    <action path="/bookRequireStat" scope="request" parameter="method"/>
+    <action path="/bookRequirement" scope="request" parameter="method"/>
+    <action path="/bookRequireAudit" scope="request" parameter="method"/>
+    <action path="/teacherTaskAlterRequest" scope="request" parameter="method"/>
+    <action path="/taskAlterRequest" scope="request" parameter="method"/>
+    <action path="/courseArrangeAlteration" scope="request" parameter="method"/>
+    <action path="/resourceManage" scope="request" parameter="method"/>
+    <action path="/roomPriceCatalogue" scope="request" parameter="method"/>
+    <action path="/roomApply" scope="request" parameter="method"/>
+    <action path="/roomApplyApprove" scope="request" parameter="method"/>
+    <action path="/roomApplyDepartApprove" scope="request" parameter="method"/>
+    <action path="/courseStat" scope="request" parameter="method"/>
+    <action path="/roomApplyAccount" scope="request" parameter="method"/>
+    <action path="/roomResourceStat" scope="request" parameter="method"/>
+    <action path="/roomApplyStat" scope="request" parameter="method"/>
+    <action path="/roomApplyApprovedSearch" scope="request" parameter="method"/>
+    <action path="/ecuplRoomApplyApprove" scope="request" parameter="method"/>
+    <action path="/stdSubstituteCourse" scope="request" parameter="method"/>
+    <action path="/majorSubstituteCourse" scope="request" parameter="method"/>
+    <action path="/reservedStudent" scope="request" parameter="method"/>
+	<!-- 考勤明细 -->
+	<action path="/attendStatic" scope="request" parameter="method"/>
+	<!-- 考勤监控 -->
+	<action path="/attendDevice" scope="request" parameter="method"/>
+	<!-- 教师考勤报表 -->
+	<action path="/attendReportTea" scope="request" parameter="method"/>
+	<!--学生考勤报表-->
+	<action path="/attendReportStu" scope="request" parameter="method"/>
+	<!--开放课表-->
+	<action path="/courseTableOpen" scope="request" parameter="method"/>
+	<!--辅导员考勤报表-->
+	<action path="/attendReportCoa" scope="request" parameter="method"/>
+	<action path="/attendReportCoaManage" scope="request" parameter="method"/>
+	<!--教务处考勤报表-->
+	<action path="/attendReportFunc" scope="request" parameter="method"/>
+	<!--院系考勤报表-->
+	<action path="/attendReportDept" scope="request" parameter="method"/>
+	<!-- 在读证明接口 -->
+	<action path="/certificationForStd" scope="request" parameter="method"/>
+	<!-- 管理员课程纬度报表 -->
+	<action path="/attendReportForTeachTask" scope="request" parameter="method"/>
+	<!-- 辅导员课程纬度报表 -->
+    <action path="/attendReportForTaskInstructor" scope="request" parameter="method"/>
+	<!-- 管理员班级纬度报表 -->
+    <action path="/attendReportForAdminClass" scope="request" parameter="method"/>
+	<!-- 辅导员班级纬度报表 -->
+    <action path="/attendReportForClassInstructor" scope="request" parameter="method"/>
+	<action path="/attendReportWithSchool" scope="request" parameter="method"/>
+    <action path="/attendReportWithDept" scope="request" parameter="method"/>
+    <action path="/attendReportWithStudent" scope="request" parameter="method"/>
+	<action path="/attendReportWithStudentForAdmin" scope="request" parameter="method"/>
+	<!-- 考勤预警 -->
+	<action path="/attendWarn" scope="request" parameter="method"/>
+    <action path="/attendWarnInstructor" scope="request" parameter="method"/>
+    <!-- 辅导员考勤明细 -->
+    <action path="/attendReportCoaManage" scope="request" parameter="method"/>
+    <action path="/gradeAchivementSetting" scope="request" parameter="method"/>
+    <action path="/gradeAchivementSearch" scope="request" parameter="method"/>
+    <action path="/gradeAchivementStat" scope="request" parameter="method"/>
+    <action path="/gradeAchivementDepart" scope="request" parameter="method"/>
+    <action path="/gradeAchivementStd" scope="request" parameter="method"/>
+    <action path="/gradeAchivementInstructor" scope="request" parameter="method"/>
+  </action-mappings>
+  <controller>
+    <set-property property="processorClass" value="org.springframework.web.struts.DelegatingRequestProcessor"/> 
+  </controller>
+  <message-resources parameter="application"/>
+  <message-resources key="excelconfig" parameter="excelconfig"/>
+  <plug-in className="org.springframework.web.struts.ContextLoaderPlugIn"> 
+    <set-property property="contextConfigLocation" value="classpath:applicationContext.xml"/> 
+  </plug-in>
+</struts-config>

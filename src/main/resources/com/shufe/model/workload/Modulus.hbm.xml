@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.workload">
+	<!--工作量系数-->
+	<class name="Modulus" table="GZL_XS_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_GZL_XS_T</param>
+			</generator>
+		</id>
+		<discriminator column="GZLXSBS" type="string" length="10"></discriminator>
+		<property name="modulusValue" column="XSZ" not-null="true"></property>
+		<property name="remark" column="BZ" length="500"></property>
+		<many-to-one name="studentType" column="XSLBID"/>
+		<many-to-one name="department" column="BMID"/>
+		<!-- 指导学生工作量系数-->
+		<subclass name="com.shufe.model.workload.instruct.InstructModulus"
+			discriminator-value="ZD">
+			<property name="itemType" column="XMLX" length="50"/>
+		</subclass>
+		<!--教学工作量系数-->
+		<subclass name="com.shufe.model.workload.course.TeachModulus"
+			discriminator-value="JX">
+			<property name="maxPeople" column="JXXSSX" length="5"></property>
+			<property name="minPeople" column="JXXSXX" length="5"></property>
+			<many-to-one name="courseCategory" column="KCZLID"/>
+		</subclass>
+	</class>
+</hibernate-mapping>

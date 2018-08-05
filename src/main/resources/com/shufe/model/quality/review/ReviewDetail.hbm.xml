@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.quality.review"  >
+
+  <!--yushun  教学检查细节-->
+	<class name="ReviewDetail" table="JXZL_JXJC_XJ_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXZL_JXJC_XJ_T</param>
+			</generator>
+		</id>
+		<property name="studyStyle" column="XF" type="string"/>
+		<property name="teachStyle" column="JF" type="string"/>
+		<property name="courseBuild" column="KCJS" length="50" type="string"/>
+		<property name="teachDoc" column="JXWD"/>
+		<property name="graduteDoc" column="BYLW"/>
+		<property name="teachOutline" column="JXDG"/>
+		<property name="other" column="QT"/>
+	</class>
+</hibernate-mapping>

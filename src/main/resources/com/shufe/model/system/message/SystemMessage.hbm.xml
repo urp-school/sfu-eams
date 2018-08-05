@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.system.message">
+	
+	<class name="SystemMessage" table="XX_JS_T" discriminator-value="U">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_XX_JS_T</param>
+			</generator>
+		</id>
+		
+		<discriminator column="XXBS" type="string" length="1"/>	
+		<many-to-one name="recipient" column="JSRID"/>
+		<many-to-one name="message" column="XXID"/>		
+		<property name="status" column="ZT"/>
+		
+		<subclass name="TeacherMessage" discriminator-value="T"/>
+		<subclass name="StudentMessage" discriminator-value="S"/>		
+	</class>
+	
+</hibernate-mapping>

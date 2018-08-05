@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <description>security service</description>
+    
+    <!--权限系统-->
+    <import resource="classpath:com/ekingstar/security/spring-beans.xml"/>
+    
+    <bean id="userService"
+        class="com.ekingstar.eams.system.security.service.impl.EamsUserServiceImpl"
+        autowire="byName"/>
+    
+    <bean id="menuAuthorityService"
+        class="com.ekingstar.eams.system.security.portal.service.impl.EamsMenuAuthorityServiceImpl"
+        autowire="byName"/>
+    <!--监控部分-->
+    <import
+        resource="classpath:com/ekingstar/security/spring-beans-monitor.xml"/>
+    
+    <bean id="profileProvider"
+        class="com.ekingstar.security.concurrent.category.impl.SimpleCategoryProfileProvider"
+        autowire="byName">
+        <property name="profiles">
+            <list>
+                <bean
+                    class="com.ekingstar.security.concurrent.category.CategoryProfile">
+                    <property name="category" value="1"/>
+                    <property name="max" value="1000"/>
+                </bean>
+                <bean
+                    class="com.ekingstar.security.concurrent.category.CategoryProfile">
+                    <property name="category" value="2"/>
+                    <property name="max" value="500"/>
+                </bean>
+                <bean
+                    class="com.ekingstar.security.concurrent.category.CategoryProfile">
+                    <property name="category" value="3"/>
+                    <property name="max" value="500"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="authorityDecisionService"
+        class="com.ekingstar.security.service.impl.AuthorityDecisionServiceImpl"
+        autowire="byName">
+        <property name="ignoreResources">
+            <set>
+                <value>index.do</value>
+                <value>randomCodeImage.do</value>
+                <value>login.do</value>
+                <value>loginForm.do</value>
+                <value>roomResource.do</value>
+                <value>error.do</value>
+                <value>resetPassword.do</value>
+                <value>password.do</value>
+                <value>dataTemplate.do</value>
+                <value>teachOutlineSearch.do</value>
+                <value>loadDispatch.do</value>
+                <value>checkUserMessage.do</value>
+                <value>departmentSelector.do</value>
+                <value>specialitySelector.do</value>
+                <value>specialityAspectSelector.do</value>
+                <value>studentTypeSelector.do</value>
+                <value>courseSelector.do</value>
+                <value>collegeSelector.do</value>
+                <value>teachQualityStatisticAction.do</value>
+                <value>teachTaskSearch.do</value>
+                <value>teachPlanSearch.do</value>
+                <value>adminClassSelector.do</value>
+                <value>courseTypeSelector.do</value>
+                <value>courseSearch.do</value>
+                <value>teacherSearch.do</value>
+                <value>help.do</value>
+                <value>systemMessage.do</value>
+                <value>download.do</value>
+                <!-- 公告管理有管理功能,建议从忽略资源中删除
+                <value>notice.do</value>
+                 -->
+                <value>preference.do</value>
+                <value>dataTemplate.do</value>
+                <value>courseTablePublic.do</value>
+                <value>majorStat.do</value>
+                <value>teacherStat.do</value>
+                <value>teachTaskStat.do</value>
+                <value>courseTakeSearch.do</value>
+                <value>stdOnCampusStat.do</value>
+                <value>teachAccidentSearch.do</value>
+                <value>teachProductStat.do</value>
+                <value>fineCourseStat.do</value>
+                <value>teachQualityStatisticAction.do</value>
+                <value>thesisStatistic.do</value>
+                <value>tutorStatistic.do</value>
+                <value>studentPhoto.do</value>
+                <value>noticeSearch.do</value>
+                <value>projectDocument.do</value>
+                <value>projectMember.do</value>
+                <value>freshman.do</value>
+                <value>certificationForStd.do</value>
+            </set>
+        </property>
+    </bean>
+</beans>

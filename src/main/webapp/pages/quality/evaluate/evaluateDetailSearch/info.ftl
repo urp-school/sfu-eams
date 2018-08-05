@@ -1,0 +1,1 @@
+<#include "/pages/quality/evaluate/evaluateDetailStat/info.ftl"/>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<struts-config>
+	
+    <action-mappings>
+        <action path="/auditStandardSearch" scope="request" name="page20Form" parameter="method"/>
+        
+        <action path="/auditStandard" scope="request" name="page20Form" parameter="method"/>
+        <!--
+        <action path="/auditStandardOperation" scope="request" name="page20Form" parameter="method">
+        <forward name="addForm" path="/pages/graduate/auditStandardAddForm.ftl"/>
+        <forward name="updateForm" path="/pages/graduate/auditStandardUpdateForm.ftl"/>
+        <forward name="updateFrame" path="/pages/graduate/auditStandardUpdateFrame.ftl"/>
+        <forward name="addSuccess" path="/auditStandardManager.do?method=manager"/>
+        <forward name="success" path="/auditStandardManager.do?method=manager" redirect="true"/>
+        <forward name="failure" path="/pages/error.ftl"/>
+        </action>
+        
+        <action path="/auditStandardDetail" scope="request" parameter="method">
+            <forward name="detail" path="/pages/graduate/auditStandardDetail.ftl"/>
+        </action>
+        
+        <action path="/studentAuditStandardDetail" scope="request" parameter="method">
+            <forward name="detail" path="/pages/graduate/auditStandardDetail.ftl"/>
+        </action>
+        -->
+    </action-mappings>
+</struts-config>

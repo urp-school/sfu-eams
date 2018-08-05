@@ -1,0 +1,1 @@
+<#include "../studyProduct/studyProductInfo.ftl"/>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    
+    <bean id="gradeCalculatorFactory"
+        class="com.ekingstar.eams.course.grade.course.calculator.CalculatorFactory">
+        <property name="utilDao" ref="utilDao"/>
+        <property name="calcualtorClass"
+            value="com.ekingstar.eams.course.grade.course.calculator.MoralCalculator"/>
+    </bean>
+    
+    <!-- 其它考试服务类-->
+    <bean id="otherExamSignUpService"
+        class="com.shufe.service.course.grade.other.impl.SHFUOtherExamSignUpServiceImpl"
+        autowire="byName"/>
+    
+	<!--2010-09-16 学校采用cas认证，禁用ldap
+    <bean id="contextSource"
+        class="org.springframework.ldap.support.LdapContextSource">
+        <property name="url" value="ldap://192.168.11.10:389"/>
+        <property name="base" value="ou=People,dc=shfc,dc=edu,dc=cn"/>
+        <property name="userName" value="cn=Directory Manager"/>
+        <property name="password" value="shfcneusoft"/>
+    </bean>
+    
+    <bean id="ldapTemplate" class="org.springframework.ldap.LdapTemplate">
+        <constructor-arg ref="contextSource"/>
+    </bean>
+    
+    <bean id="ldapUserProvider"
+        class="com.ekingstar.security.monitor.providers.DefaultLdapUserProviderS"
+        autowire="byName"/>
+    
+    <bean id="ssoUserProvider"
+        class="com.shufe.service.system.security.impl.DESSsoUserProvider"
+        autowire="byName"/>
+	-->
+    <bean id="ssoUserProvider"
+        class="com.shufe.service.system.security.impl.CasSsoUserProvider"
+        autowire="byName"/>
+		
+    <bean id="securityMonitor"
+        class="com.ekingstar.security.monitor.DefaultSecurityMonitor"
+        autowire="byName">
+        <property name="rememberMeService" ref="rememberMeService"/>
+        <property name="sessionController" ref="sessionController"/>
+        <property name="authorityDecisionService" ref="authorityDecisionService"/>
+        <property name="httpSessionIntegrationFilter"
+            ref="httpSessionIntegrationFilter"/>
+        <property name="providers">
+            <list>
+                <ref bean="ssoUserProvider"></ref>
+                <!--<ref bean="ldapUserProvider"></ref>-->
+                <ref bean="daoUserProvider"></ref>
+            </list>
+        </property>
+    </bean>
+    <bean id="gradePointService"
+        class="com.shufe.service.course.grade.gp.impl.ShfuGradePointServiceImpl"
+        autowire="byName">
+    </bean>
+</beans>

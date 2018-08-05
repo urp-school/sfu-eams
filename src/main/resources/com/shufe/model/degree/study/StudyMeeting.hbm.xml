@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.degree.study">
+	<!-- 科研会议 -->
+	<class name="StudyMeeting" table="KY_HY_T">
+		<id name="id" column="ID" length="32">
+			<generator class="sequence">
+				<param name="sequence">SEQ_KY_HY_T</param>
+			</generator>
+		</id>
+		<many-to-one name="student" column="XSID" not-null="true"/>
+		<property name="name" column="HYMC" length="200"/>
+		<property name="isPassCheck" column="SFTGSH" not-null="true"/>
+		<property name="remark" column="BZ" length="500"/>
+		<property name="authorCount" column="ZZRS"/>
+		<property name="createOn" column="CJSJ" not-null="true"/>
+		<set name="awards" inverse="true"  cascade="all">
+			<key column="LWID"/>
+			<one-to-many class="StudyMeetingAward" />
+		</set>
+		<many-to-one name="meetingType" column="HYLBID"/>
+		<property name="topicName" column="HYLWTM" length="200"/>
+		<property name="meetingOn" column="HYSJ"/>
+		<property name="meetingAddress" column="HYDD" length="200"/>
+		<property name="openDepart" column="JBDW" length="200"/>
+	</class>
+</hibernate-mapping>

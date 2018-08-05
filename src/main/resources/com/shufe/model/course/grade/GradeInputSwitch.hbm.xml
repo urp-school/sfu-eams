@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.course.grade">
+	<!--成绩录入开关-->
+    <class name="GradeInputSwitch" table="CJ_LRKG_T">
+        <id name="id" column="id" unsaved-value="null">
+            <generator class="sequence">
+                <param name="sequence">SEQ_CJ_LRKG_T</param>
+            </generator>
+        </id>
+        <many-to-one name="calendar" column="JXRLID" not-null="true"/>
+        <property name="startAt" column="KSRQ"/>
+        <property name="endAt" column="JSRQ"/>
+        <set name="gradeTypes" table="CJ_LRKG_CJLX_T">
+			<key column="LRKGID"/>
+			<many-to-many column="CJLXID" class="com.ekingstar.eams.system.basecode.industry.GradeType"/>
+		</set>
+        <property name="isOpen" column="KGZT" length="1"/>
+    </class>
+</hibernate-mapping>

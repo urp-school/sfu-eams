@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.quality.evaluate">
+	<class name="EvaluateResult" table="JXZL_PJ_PJJG_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXZL_PJ_PJJG_T</param>
+			</generator>
+		</id>
+		<!--业务主键-->
+		<many-to-one name="task" column="JXRWID"/>
+		<many-to-one name="teacher" column="JZGID"/>
+		<many-to-one name="student" column="XSID" not-null="true"/>
+		
+		<property name="evaluateAt" column="PJSJ" type="date"/>
+		<property name="statState" column="TJZT"/>
+		<many-to-one name="stdDepart" column="XSSSBM" not-null="true"/>
+		<many-to-one name="department" column="KKYX" not-null="true"/>
+		<many-to-one name="stdType" column="XSLBID" not-null="true"/>
+		<many-to-one name="teachCalendar" column="JXRLID" not-null="true"/>
+		<many-to-one name="questionnaire" column="WJID" not-null="true"/>
+		<set name="questionResultSet" cascade="all">
+			<key column="PJJGID"/>
+			<one-to-many class="QuestionResult"/>
+		</set>
+	</class>
+	<sql-query name="removeQuestionResult">
+		<![CDATA[
+			delete from JXZL_PJ_WTJG_T  wtjg where exists(select * from
+			JXZL_PJ_PJJG_T pjjg
+			 where pjjg.id=wtjg.PJJGID and 
+			 pjjg.kkyx in(:departmentIds) and 
+			 pjjg.xslbid in(:stdTypeIds) and 
+			 pjjg.jxrlid in(:teachCalendarIds) )
+			]]>
+	</sql-query>
+	<sql-query name="removeEvaluateResult">
+		<![CDATA[
+			delete from
+			JXZL_PJ_PJJG_T pjjg
+			 where pjjg.kkyx in(:departmentIds) and 
+			 pjjg.xslbid in(:stdTypeIds) and 
+			 pjjg.jxrlid in(:teachCalendarIds)
+			]]>
+	</sql-query>
+</hibernate-mapping>

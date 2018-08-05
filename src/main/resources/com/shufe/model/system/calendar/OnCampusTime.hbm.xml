@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.shufe.model.system.calendar.OnCampusTime" table="JXRL_ZXRL_T">
+		<cache usage="read-write"/>
+		<id name="id" column="ID" unsaved-value="null">
+			<generator  class="sequence">
+				<param name="sequence">SEQ_JXRL_ZXRL_T</param>
+			</generator>
+		</id>
+		<property name="enrollTurn"  column="RXPC" not-null="true"/>
+		<many-to-one name="stdType"	 column="XSLBID" not-null="true"/>
+		<many-to-one name="enrollCalendar"  column="RXXQ"  not-null="false" />
+		<many-to-one name="graduateCalendar"  column="BYXQ"  not-null="false" />
+	</class>
+	<query name="getOnCampusTimes"> <![CDATA[from OnCampusTime time where time.stdType.id in (:stdTypeIds) order by time.enrollTurn desc]]>
+	</query>
+	<query name="getOnCampusTime">
+		 <![CDATA[
+			 from OnCampusTime time
+			 where (time.stdType.id = :stdTypeId and time.enrollTurn = :enrollTurn) 	
+			 order by time.enrollTurn desc		    
+		]]>
+	</query>
+</hibernate-mapping>

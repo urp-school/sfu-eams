@@ -1,0 +1,4 @@
+<form name="pageGoForm" method="post" action="" onsubmit="return false;">
+	<input type="hidden" name="keys" value="college.name,teacherInfo.teacherName,teacherInfo.teacherTitle.name,teacherInfo.eduDegree.name,teacherInfo.teacherType.name,teacherInfo.gender.name,teacherInfo.teacherAge,teacherInfo.teachDepart.name,courseName,courseSeq,studentType.name,isGuaPai,classNames,studentNumber,teachModulus.modulusValue,classNumberOfWeek,weeks,totleCourses,totleWorkload,teachCalendar.year,teachCalendar.term,remark">
+	<input type="hidden" name="titles" value="开课院系,教师名称,教师职称,教师学历名称,教师类别名称,性别,教师年龄,教师所属部门名称,课程名称,课程序号,学生类别,是否挂牌,上课班级,上课学生人数,授课系数,周课时,上课周数,总课时,工作量,学年度,学期,备注">
+</form>

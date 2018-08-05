@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 培养计划课程组表 -->
+<hibernate-mapping package="com.shufe.model.course.plan">
+    <typedef name="terms" class="org.beangle.data.jpa.hibernate.udt.TermsType"/>
+    
+	<class name="PlanCourse" table="V_PYJH_KC_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_PYJH_KC_T</param>
+			</generator>
+		</id>
+		
+		<many-to-one name="course" column="KCID" not-null="true"/>
+		
+		<many-to-one name="teachDepart" column="KKYXID" not-null="true"/>
+		<property name="terms" column="KKXQ" type="terms"/>
+		<many-to-one name="courseGroup" column="KCZID" not-null="true"/>
+		<property name="remark" column="BZ" length="500"/>
+		
+	</class>
+	<query name="getPlanCourseByTerm">
+		<![CDATA[
+			select 
+			  planCourse
+			from
+			  PlanCourse as planCourse
+			  join planCourse.courseGroup as courseGroup
+			where 
+			  (:term is null or bitand(planCourse.terms,:term)>0) and
+			  courseGroup.teachPlan.id = :teachPlanId
+		]]>
+	</query>
+</hibernate-mapping>

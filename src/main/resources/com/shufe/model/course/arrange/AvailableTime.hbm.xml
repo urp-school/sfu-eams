@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 可用时间表 -->
+<hibernate-mapping package="com.shufe.model.course.arrange">
+	<class name="AvailableTime" table="KYSJ_T">			
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_KYSJ_T</param>
+			</generator>
+		</id>
+		<property name="available" column="KYSJFB" length="200" not-null="true"/>
+		<property name="struct" column="SJJG" length="20" not-null="true"/>
+		<property name="remark" column="BZ" length="200"/>
+	</class>
+	<query name="getTeacherAvailTime">
+		<![CDATA[ select teacher.availableTime from com.shufe.model.system.baseinfo.Teacher teacher where teacher.id=:teacherId]]>
+	</query>
+	<query name="getRoomAvailTime">
+		<![CDATA[ select room.availableTime from com.shufe.model.system.baseinfo.Classroom room where room.id=:roomId]]>
+	</query>
+</hibernate-mapping>

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <bean id="baseInfoSearchHelper" autowire="byName" scope="prototype"
+        class="com.shufe.web.helper.BaseInfoSearchHelper">
+        <property name="departmentService" ref="departmentService"/>
+        <property name="studentTypeService" ref="studentTypeService"/>
+        <property name="authorityService" ref="authorityService"/>
+        <property name="utilService" ref="utilService"/>
+    </bean>
+    <bean id="teachTaskSearchHelper" autowire="byName" scope="prototype"
+        class="com.shufe.web.helper.TeachTaskSearchHelper">
+        <property name="departmentService" ref="departmentService"/>
+        <property name="studentTypeService" ref="studentTypeService"/>
+        <property name="authorityService" ref="authorityService"/>
+        <property name="utilService" ref="utilService"/>
+    </bean>
+    <bean id="stdSearchHelper" autowire="byName" scope="prototype"
+        class="com.shufe.web.helper.StdSearchHelper">
+        <property name="departmentService" ref="departmentService"/>
+        <property name="studentTypeService" ref="studentTypeService"/>
+        <property name="authorityService" ref="authorityService"/>
+        <property name="utilService" ref="utilService"/>
+    </bean>
+    
+    <bean id="stdGradeHelper" autowire="byName" scope="prototype"
+        class="com.shufe.web.helper.StdGradeHelper"/>
+    
+    <bean id="courseGradeHelper" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.CourseGradeHelper"/>
+    
+    <bean id="logHelper" autowire="byName" scope="prototype"
+        class="com.shufe.web.helper.LogHelper">
+        <property name="utilService" ref="utilService"/>
+    </bean>
+    
+    <bean id="restrictionHelper" autowire="byName" scope="prototype"
+        class="com.shufe.web.helper.RestrictionHelper"/>
+</beans>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.quality.evaluate">
+	<class name="OptionGroup" table="JXZL_PJ_XXZ_T">
+		<cache usage="read-write" region="evaluateCache"/>
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXZL_PJ_XXZ_T</param>
+			</generator>
+		</id>
+		<property name="name" column="MC"/>
+		<property name="description" column="MS"/>
+		<many-to-one name="depart" column="BMID" not-null="true"/>
+		<set name="options" table="JXZL_PJ_XX_T" cascade="all" inverse="true">
+			<cache usage="read-write" region="evaluateCache"/>
+			<key column="XXZID"/>
+			<one-to-many class="com.shufe.model.quality.evaluate.Option"/>
+		</set>
+	</class>
+</hibernate-mapping>

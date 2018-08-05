@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<struts-config>
+    <action-mappings>
+        <action path="/teachPlan" scope="request" parameter="method"/>
+        <action path="/teachPlanArrangeAlteration" scope="request"
+            parameter="method"/>
+        <action path="/teachPlanConfirm" scope="request" parameter="method"/>
+        <action path="/teachPlanSearch" scope="request" parameter="method"/>
+        <action path="/stdTeachPlan" scope="request" parameter="method"/>
+        <action path="/stdTeachPlanSearch" scope="request" parameter="method"/>
+        <action path="/stdTeachPlanInfo" scope="request" parameter="method"/>
+        <action path="/courseGroup" scope="request" parameter="method"/>
+        <action path="/planCourse" scope="request" parameter="method"/>
+        <action path="/teachPlanCourseStat" scope="request" parameter="method"/>
+        <action path="/teachPlanStat" scope="request" parameter="method"/>
+        <action path="/teachPlanActivityStat" scope="request" parameter="method"/>
+        <action path="/stdSubstitutionCourse" scope="request" parameter="method"/>
+        
+        <action path="/teachTask" scope="request" parameter="method"/>
+        <action path="/teachTaskCheck" scope="request" parameter="method"/>
+        <action path="/teachTaskCollege" scope="request" parameter="method"/>
+        <action path="/teachTaskSearch" scope="request" parameter="method"/>
+        <action path="/teacherOtherOption" scope="request" parameter="method"/>
+        <action path="/teachTaskConfirm" scope="request" parameter="method"/>
+        <action path="/teachTaskGen" scope="request" parameter="method"/>
+        <action path="/teachTaskGenDuplicate" scope="request" parameter="method"/>
+        <action path="/teachTaskStat" parameter="method"/>
+        <action path="/teachTaskParam" parameter="method"/>
+        <action path="/courseTakeForTaskParam" parameter="method"/>
+        <action path="/examUpdate" parameter="method"/>
+        <action path="/examStudent" parameter="method"/>
+        <action path="/requirePrefer" scope="request" parameter="method"/>
+		<!--实验室要求-->
+		<action path="/laboratoryRequirement" scope="request" parameter="method"/>
+        <action path="/multimediaRequirement" scope="request" parameter="method"/>
+        <action path="/teacherTask" scope="request" parameter="method"/>
+        <!-- 排课 -->
+        <action path="/manualArrangeParam" scope="request" parameter="method"/>
+        <action path="/collegeCourseTable" scope="request" parameter="method"/>
+        <action path="/courseArrangeSwitch" scope="request" parameter="method"/>
+        <action path="/teacherTime" scope="request" parameter="method"/>
+        <action path="/teacherAvailTime" scope="request" parameter="method"/>
+        <action path="/roomAvailTime" scope="request" parameter="method"/>
+        <action path="/arrangeSuggest" scope="request" parameter="method"/>
+        <action path="/taskGroup" scope="request" parameter="method"/>
+        <action path="/autoArrange" scope="request" parameter="method"/>
+        <action path="/courseTable" scope="request" parameter="method"/>
+        <action path="/courseTablePublic" scope="request" parameter="method"/>
+        <action path="/courseTableForStd" scope="request" parameter="method"/>
+        <action path="/courseTableForTeacher" scope="request" parameter="method"/>
+        <action path="/manualArrange" scope="request" parameter="method"/>
+        <action path="/allocateTaskForArrange" scope="request" parameter="method"/>
+        <action path="/adjustCourse" scope="request" parameter="method"/>
+        <action path="/courseTableCheck" scope="request" parameter="method"/>
+        
+        <action path="/roomResource" scope="request" parameter="method"/>
+        <action path="/teacherResource" scope="request" parameter="method"/>
+        <action path="/classResource" scope="request" parameter="method"/>
+        
+        <action path="/electScope" scope="request" parameter="method"/>
+        <action path="/creditConstraint" scope="request" parameter="method"/>
+        <action path="/electParams" scope="request" parameter="method"/>
+        <action path="/electCourse" scope="request" parameter="method"/>
+        <action path="/quickElectCourse" scope="request" parameter="method"/>
+        
+        <action path="/examApplyParam" scope="request" parameter="method"/>
+        <action path="/examArrange" scope="request" parameter="method"/>
+        <action path="/examTable" scope="request" parameter="method"/>
+        <action path="/examTurn" scope="request" parameter="method"/>
+        <action path="/examGroup" scope="request" parameter="method"/>
+        <action path="/examiner" scope="request" parameter="method"/>
+        <action path="/examTake" scope="request" parameter="method"/>
+        <action path="/stdExamTable" scope="request" parameter="method"/>
+        <action path="/teacherExamTable" scope="request" parameter="method"/>
+        <action path="/examArrangeSearch" scope="request" parameter="method"/>
+        <action path="/stdCreditStat" name="page20Form" scope="request"
+            parameter="method"/>
+        
+        <action path="/courseTake" scope="request" parameter="method"/>
+        <action path="/courseTakeSearch" scope="request" parameter="method"/>
+        <action path="/courseTakeForTask" scope="request" parameter="method"/>
+        <action path="/courseTakeForTaskDuplicate" scope="request" parameter="method"/>
+        <!--成绩管理-->
+        <action path="/teacherGrade" scope="request" parameter="method"/>
+        <action path="/gradeLog" scope="request" parameter="method"/>
+        <action path="/stdGradeSearch" scope="request" parameter="method"/>
+        <action path="/gradeStateStat" scope="request" parameter="method"/>
+        <action path="/gradeInputSwitch" scope="request" parameter="method"/>
+        <action path="/stdGrade" scope="request" parameter="method"/>
+        <action path="/stdGradeDuplicate" scope="request" parameter="method"/>
+        <action path="/personGrade" scope="request" parameter="method"/>
+        <action path="/collegeGrade" scope="request" parameter="method"/>
+        <action path="/collegeGradeDuplicate" scope="request" parameter="method"/>
+        <action path="/courseGrade" scope="request" parameter="method"/>
+        <action path="/courseGradeDuplicate" scope="request" parameter="method"/>
+        <action path="/teachClassGradeReport" scope="request" parameter="method"/>
+        <action path="/stdGradeReport" scope="request" parameter="method"/>
+        <action path="/stdTermGradeReport" scope="request" parameter="method"/>
+        <action path="/multiStdGradeReport" scope="request" parameter="method"/>
+        <action path="/gradePointRule" scope="request" parameter="method"/>
+        <action path="/stdGP" scope="request" parameter="method"/>
+        <action path="/multiStdGP" scope="request" parameter="method"/>
+        <action path="/gradeTransfer" scope="request" parameter="method"/>
+        <action path="/makeupGrade" scope="request" parameter="method"/>
+        <action path="/endMakeupGrade" scope="request" parameter="method"/>
+        <action path="/markStyleConfig" scope="request" parameter="method"/>
+        <action path="/gradeAnalyse" scope="request" parameter="method"/>
+        <action path="/gradeRank" scope="request" parameter="method"/>
+        
+        <action path="/otherExamSignUp" scope="request" parameter="method"/>
+        <action path="/personOtherExam" scope="request" parameter="method"/>
+        <action path="/otherExamSignUpSetting" scope="request" parameter="method"/>
+        <action path="/otherGradeSearch" scope="request" parameter="method"/>
+        <action path="/otherGrade" scope="request" parameter="method"/>
+        <action path="/moralGrade" scope="request" parameter="method"/>
+        <action path="/moralGradeInstructor" scope="request" parameter="method"/>
+        <action path="/moralGradeClass" scope="request" parameter="method"/>
+        
+        <action path="/textbook" scope="request" parameter="method"/>
+        <action path="/press" scope="request" parameter="method"/>
+        <action path="/bookRequireStat" scope="request" parameter="method"/>
+        <action path="/bookRequirement" scope="request" parameter="method"/>
+        <action path="/bookRequireAudit" scope="request" parameter="method"/>
+        
+        <action path="/teacherTaskAlterRequest" scope="request"
+            parameter="method"/>
+        <action path="/taskAlterRequest" scope="request" parameter="method"/>
+        <action path="/courseArrangeAlteration" scope="request"
+            parameter="method"/>
+        <action path="/resourceManage" scope="request" parameter="method"/>
+        <action path="/roomPriceCatalogue" scope="request" parameter="method"/>
+        <action path="/roomApply" scope="request" parameter="method"/>
+        <action path="/roomApplyApprove" scope="request" parameter="method"/>
+        <action path="/roomApplyDepartApprove" scope="request" parameter="method"/>
+        <action path="/courseStat" scope="request" parameter="method"/>
+        <action path="/roomApplyAccount" scope="request" parameter="method"/>
+        <action path="/roomResourceStat" scope="request" parameter="method"/>
+        <action path="/roomApplyStat" scope="request" parameter="method"/>
+        <action path="/roomApplyApprovedSearch" scope="request"
+            parameter="method"/>
+        <action path="/ecuplRoomApplyApprove" scope="request" parameter="method"/>
+        
+        <action path="/stdSubstituteCourse" scope="request" parameter="method"/>
+        <action path="/majorSubstituteCourse" scope="request" parameter="method"/>
+		<!--
+        <action path="/reservedStudent" scope="request" parameter="method"/>
+		-->
+		<!--考勤管理-->
+        <action path="/attendStatic" scope="request" parameter="method"/>
+		<!-- 教师考勤报表 -->
+		<action path="/attendReportTea" scope="request" parameter="method"/>
+		<!--学生考勤报表-->
+		<action path="/attendReportStu" scope="request" parameter="method"/>
+		<!--开放课表-->
+		<action path="/courseTableOpen" scope="request" parameter="method"/>
+		<!--辅导员考勤报表-->
+		<action path="/attendReportCoa" scope="request" parameter="method"/>
+		<!--教务处考勤报表-->
+		<action path="/attendReportFunc" scope="request" parameter="method"/>
+		<!--院系考勤报表-->
+		<action path="/attendReportDept" scope="request" parameter="method"/>
+    </action-mappings>
+</struts-config>

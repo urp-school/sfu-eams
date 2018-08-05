@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<struts-config>
+	<action-mappings>
+		<action path="/inputDutyRecord" scope="request" name="page20Form" parameter="method">
+			<forward name="search" path="/pages/duty/searchTeachTask.ftl"/>
+			<forward name="inputForm" path="/pages/duty/dutyRecordInputForm.ftl"/>
+			<forward name="inputRedirector" path="/pages/duty/dutyRecordInputRedirector.ftl"/>
+			<forward name="success" path="/inputDutyRecord.do?method=searchTeachTask" redirect="true" />
+			<forward name="maintainRecordByTeachTaskForm" path="/pages/duty/maintainRecordByTeachTaskForm.ftl"/>
+			<forward name="maintainRecordByTeachTask" path="/pages/duty/maintainRecordByTeachTask.ftl"/>
+			<forward name="maintainRecordByTeachTaskSuccess" path="/pages/duty/maintainRecordByTeachTaskSuccess.ftl"/>
+		</action>
+		
+		<action path="/inputDutyRecordWithTeacher" scope="request" name="page20Form" parameter="method">
+			<forward name="search" path="/pages/duty/searchTeachTask.ftl"/>
+			<forward name="inputForm" path="/pages/duty/dutyRecordInputForm.ftl"/>
+			<forward name="inputRedirector" path="/pages/duty/dutyRecordInputRedirector.ftl"/>
+			<forward name="success" path="/inputDutyRecord.do?method=searchTeachTask" redirect="true" />
+			<forward name="maintainRecordByTeachTaskForm" path="/pages/duty/maintainRecordByTeachTaskForm.ftl"/>
+			<forward name="maintainRecordByTeachTask" path="/pages/duty/maintainRecordByTeachTask.ftl"/>
+			<forward name="maintainRecordByTeachTaskSuccess" path="/pages/duty/maintainRecordByTeachTaskSuccess.ftl"/>
+		</action>
+		
+		<action path="/dutyRecordManager" scope="request" name="page20Form" parameter="method">
+			<forward name="search" path="/pages/duty/dutyRecordManager.ftl"/>
+			<forward name="dutyRecordBatchManage" path="/pages/duty/dutyRecordBatchManage.ftl"/>
+			<forward name="recordList" path="/pages/duty/dutyRecordList.ftl"/>
+			<forward name="recordUpdateForm" path="/pages/duty/recordUpdateForm.ftl"/>
+			<forward name="messageSendForm" path="/pages/duty/messageSendForm.ftl"/>
+			<forward name="recordUpdateRedirector" path="/pages/duty/recordUpdateRedirector.ftl"/>
+			<forward name="dutyRecordUpdateForm" path="/pages/duty/dutyRecordUpdateForm.ftl"/>
+			<forward name="success" path="/dutyRecordManager.do?method=manager" redirect="true" />
+			<forward name="recordUpdateSuccess" path="/dutyRecordManager.do?method=modifyRecordByTeachTask" />
+			<forward name="fromInputRecordUpdateSuccess" path="/inputDutyRecord.do?method=searchTeachTask" />
+			<forward name="dutyRecordStatisticsFrame" path="/pages/duty/dutyRecordStatisticsFrame.ftl"/>
+			<forward name="studentStatisticsForm" path="/pages/duty/studentStatisticsForm.ftl"/>
+			<forward name="adminClassStatisticsForm" path="/pages/duty/adminClassStatisticsForm.ftl"/>
+			<forward name="stdDutyRecordStatistics" path="/pages/duty/stdDutyRecordStatistics.ftl"/>
+			<forward name="adminClassRecordStatistics" path="/pages/duty/adminClassRecordStatistics.ftl"/>			
+		</action>
+		
+		<action path="/dutyRecordManagerWithTeacher" name="page20Form" scope="request" parameter="method">
+			<forward name="search" path="/pages/duty/dutyRecordManagerWithTeacher.ftl"/>
+			<forward name="recordList" path="/pages/duty/dutyRecordList.ftl"/>
+			<forward name="recordUpdateForm" path="/pages/duty/recordUpdateForm.ftl"/>
+			<forward name="messageSendForm" path="/pages/duty/messageSendForm.ftl"/>
+			<forward name="dutyRecordUpdateForm" path="/pages/duty/dutyRecordUpdateForm.ftl"/>
+			<forward name="recordUpdateRedirector" path="/pages/duty/recordUpdateRedirector.ftl"/>
+			<forward name="fromInputRecordUpdateSuccess" path="/dutyRecordManagerWithTeacher.do?method=managerByTeacher" />
+			<forward name="success" path="/dutyRecordManager.do?method=manager" redirect="true" />
+			<forward name="inputForm" path="/pages/duty/dutyRecordInputForm.ftl"/>
+			<forward name="inputRedirector" path="/pages/duty/dutyRecordInputRedirector.ftl"/>
+			<forward name="maintainRecordByTeachTaskForm" path="/pages/duty/maintainRecordByTeachTaskForm.ftl"/>
+			<forward name="maintainRecordByTeachTask" path="/pages/duty/maintainRecordByTeachTask.ftl"/>
+			<forward name="maintainRecordByTeachTaskSuccess" path="/pages/duty/maintainRecordByTeachTaskSuccess.ftl"/>
+		</action>
+		
+		<action path="/dutyRecordSearch" name="page20Form" scope="request" parameter="method">
+			<forward name="recordByStudentList" path="/pages/duty/recordByStudentList.ftl" />
+			<forward name="manageByStudentList" path="/pages/duty/manageByStudentList.ftl" />
+			<forward name="recordList" path="/pages/duty/recordListBySearch.ftl"/>
+			<forward name="manageRecordList" path="/pages/duty/manageRecordList.ftl"/>
+			<forward name="recordDetailList" path="/pages/duty/recordDetailListBySearch.ftl"/>
+		</action>
+		
+		<action path="/studentDutyRecord" scope="request" parameter="method">
+			<forward name="recordList" path="/pages/duty/studentRecordList.ftl"/>
+			<forward name="recordDetailList" path="/pages/duty/studentRecordDetailList.ftl"/>
+		</action>
+	</action-mappings>
+</struts-config>

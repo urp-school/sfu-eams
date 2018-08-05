@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.shufe.model.course.grade.other">
+	<!--其他成绩-->
+	<class name="OtherGrade" table="CJ_QT_T">
+		<id name="id" column="id" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_CJ_QT_T</param>
+			</generator>
+		</id>
+		<!-- natural-id -->
+		<many-to-one name="std" column="XSID" not-null="true"/>
+		<many-to-one name="calendar" column="JXRLID" not-null="true"/>
+		<many-to-one name="category" column="QTKSKMID" not-null="true"/>
+		
+		<property name="score" column="DF"/>
+		<property name="isPass" column="SFTG" not-null="true"/>
+		<set name="alterInfos" cascade="all">
+			<key column="CJID"/>
+			<one-to-many
+				class="com.shufe.model.course.grade.alter.OtherGradeAlterInfo"/>
+		</set>
+		<property name="status" column="ZT" not-null="true"/>
+		<many-to-one name="markStyle" column="CJJLFSID" not-null="true"/>
+		<property name="createAt" column="CJSJ"/>
+	</class>
+</hibernate-mapping>

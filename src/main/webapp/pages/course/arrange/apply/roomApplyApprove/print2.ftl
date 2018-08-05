@@ -1,0 +1,1 @@
+<#include "../roomApplyDepartApprove/print2.ftl"/>

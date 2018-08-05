@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.shufe.model.workload.ration">
+	<!-- 配置院系的额定工作量-->
+	<class name="RationWorkloadConfig" table="GZL_EDPZ_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_GZL_EDPZ_T</param>
+			</generator>
+		</id>
+		<property name="configTime" column="PZSJ"/>
+		<many-to-one name="department" column="BMID"/>
+		<many-to-one name="rationWorkload" column="EDGZLID"/>
+		<many-to-one name="teachCalendar"  column="JXRLID"/>
+	</class>
+</hibernate-mapping>

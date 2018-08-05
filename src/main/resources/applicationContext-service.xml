@@ -1,0 +1,801 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <description>general spring service beans</description>
+    
+    <bean id="systemConfigLoader" parent="baseTransactionProxy">
+        <property name="target">
+            <bean
+                class="com.ekingstar.eams.system.config.service.SystemConfigCustomLoader"
+                autowire="byName">
+                <property name="utilDao" ref="utilDao"/>
+            </bean>
+        </property>
+    </bean>
+    
+    <!--stdInfo service-->
+    <bean id="studentService" parent="baseTransactionProxy">
+        <property name="target">
+            <bean class="com.shufe.service.std.impl.StudentServiceImpl"
+                autowire="byName">
+                <property name="studentDAO">
+                    <ref bean="studentDAO"/>
+                </property>
+            </bean>
+        </property>
+    </bean>
+    
+    <bean id="userDWRService"
+        class="com.shufe.service.system.security.impl.UserDWRServiceImpl"
+        autowire="byName"/>
+    <bean id="changeMajorApplicationService"
+        class="com.ekingstar.eams.std.changeMajor.service.impl.ChangeMajorApplicationServiceImpl"
+        autowire="byName"/>
+    
+    <bean id="adminClassDwrService"
+        class="com.shufe.service.system.baseinfo.impl.AdminClassDwrServiceImpl"
+        autowire="byName"/>
+    
+    <bean id="changeMajorPlanService"
+        class="com.ekingstar.eams.std.changeMajor.service.impl.ChangeMajorPlanServiceImpl"
+        autowire="byName"/>
+    
+    <bean id="registerService"
+        class="com.ekingstar.eams.std.registration.service.impl.RegisterServiceImpl"
+        autowire="byName"/>
+    
+    <!--duty service-->
+    <bean id="dutyService" parent="baseTransactionProxy">
+        <property name="target">
+            <bean class="com.shufe.service.duty.DutyServiceImpl"
+                autowire="byName">
+            </bean>
+        </property>
+    </bean>
+    
+    <!--teachCalendar service-->
+    <bean id="teachCalendarService"
+        class="com.shufe.service.system.calendar.impl.TeachCalendarServiceImpl"
+        autowire="byName">
+        <property name="teachCalendarDAO" ref="teachCalendarDAO"/>
+    </bean>
+    
+    <!--基础信息管理服务类-->
+    <bean id="baseCodeService"
+        class="com.shufe.service.system.code.impl.BaseCodeServiceImpl"
+        autowire="byName">
+        <property name="baseCodeDao">
+            <ref bean="baseCodeDao"/>
+        </property>
+    </bean>
+    
+    <bean id="classroomService"
+        class="com.shufe.service.system.baseinfo.impl.ClassroomServiceImpl"
+        autowire="byName">
+        <property name="classroomDAO">
+            <ref bean="classroomDAO"/>
+        </property>
+    </bean>
+    <bean id="teacherService"
+        class="com.shufe.service.system.baseinfo.impl.TeacherServiceImpl"
+        autowire="byName">
+        <property name="teacherDAO">
+            <ref bean="teacherDAO"/>
+        </property>
+    </bean>
+    <bean id="adminClassService"
+        class="com.shufe.service.system.baseinfo.impl.AdminClassServiceImpl"
+        autowire="byName">
+        <property name="adminClassDAO">
+            <ref bean="adminClassDAO"/>
+        </property>
+    </bean>
+    <bean id="specialityService"
+        class="com.shufe.service.system.baseinfo.impl.SpecialityServiceImpl"
+        autowire="byName">
+        <property name="specialityDAO">
+            <ref bean="specialityDAO"/>
+        </property>
+    </bean>
+    <bean id="specialityAspectService"
+        class="com.shufe.service.system.baseinfo.impl.SpecialityAspectServiceImpl"
+        autowire="byName">
+        <property name="specialityAspectDAO">
+            <ref bean="specialityAspectDAO"/>
+        </property>
+    </bean>
+    <bean id="departmentService"
+        class="com.shufe.service.system.baseinfo.impl.DepartmentServiceImpl"
+        autowire="byName">
+        <property name="departmentDAO">
+            <ref bean="departmentDAO"/>
+        </property>
+    </bean>
+    <bean id="studentTypeService"
+        class="com.shufe.service.system.baseinfo.impl.StudentTypeServiceImpl"
+        autowire="byName">
+    </bean>
+    
+    <!--TeachResource service-->
+    <bean id="teachResourceService"
+        class="com.shufe.service.course.arrange.resource.impl.TeachResourceServiceImpl"
+        autowire="byName">
+        <property name="teachResourceDAO">
+            <ref bean="teachResourceDAO"/>
+        </property>
+    </bean>
+    
+    <!-- ElectStdScope Service-->
+    <bean id="electStdScopeService"
+        class="com.shufe.service.course.election.impl.ElectStdScopeServiceImpl"
+        autowire="byName">
+        <property name="teachTaskDAO">
+            <ref bean="teachTaskDAO"/>
+        </property>
+    </bean>
+    <!-- ElectParams Service-->
+    <bean id="electParamsService"
+        class="com.shufe.service.course.election.impl.ElectParamsServiceImpl"
+        autowire="byName">
+        <property name="electParamsDAO">
+            <ref bean="electParamsDAO"/>
+        </property>
+    </bean>
+    <!-- CreditConstraint Service-->
+    <bean id="creditConstraintService"
+        class="com.shufe.service.course.election.impl.CreditConstraintServiceImpl"
+        autowire="byName">
+        <property name="creditDAO" ref="creditConstraintDAO"/>
+        <property name="calendarService" ref="teachCalendarService"/>
+        <property name="teachPlanService" ref="teachPlanService"/>
+    </bean>
+    <!-- AvailTime Service-->
+    <bean id="availTimeService"
+        class="com.shufe.service.course.arrange.impl.AvailTimeServiceImpl"
+        autowire="byName">
+        <property name="availTimeDAO">
+            <ref bean="availTimeDAO"/>
+        </property>
+    </bean>
+    <!-- TaskGroup Service-->
+    <bean id="taskGroupService"
+        class="com.shufe.service.course.arrange.task.impl.TaskGroupServiceImpl"
+        autowire="byName">
+        <property name="taskGroupDAO">
+            <ref bean="taskGroupDAO"/>
+        </property>
+    </bean>
+    
+    <!-- 教学质量部分的Service start -->
+    <bean id="questionTypeService"
+        class="com.shufe.service.quality.evaluate.impl.QuestionTypeServiceImpl"
+        autowire="byName">
+    </bean>
+    <bean id="teachAccidentService"
+        class="com.shufe.service.quality.accident.impl.TeachAccidentServiceImpl"
+        autowire="byName">
+        <property name="teachAccidentDAO" ref="teachAccidentDAO"/>
+    </bean>
+    <bean id="teachProductService"
+        class="com.shufe.service.quality.product.impl.TeachProductServiceImpl"
+        autowire="byName">
+        <property name="teachProductDAO" ref="teachProductDAO"/>
+    </bean>
+    <bean id="fineCourseService"
+        class="com.shufe.service.quality.fineCourse.impl.FineCourseServiceImpl"
+        autowire="byName">
+        <property name="fineCourseDAO" ref="fineCourseDAO"/>
+    </bean>
+    <bean id="reviewDetailService"
+        class="com.shufe.service.quality.review.impl.ReviewDetailServiceImpl"
+        autowire="byName">
+        <property name="reviewDetailDAO" ref="reviewDetailDAO"/>
+    </bean>
+    <bean id="questionnaireStatService"
+        class="com.shufe.service.quality.evaluate.impl.QuestionnaireStatServiceImpl"
+        autowire="byName"/>
+    <bean id="evaluateResultService"
+        class="com.shufe.service.quality.evaluate.impl.EvaluateResultServiceImpl"
+        autowire="byName"/>
+    <bean id="evaluateSwitchService"
+        class="com.shufe.service.quality.evaluate.impl.EvaluateSwitchServiceImpl"
+        autowire="byName"/>
+    <bean id="evaluationCriteriaService"
+        class="com.shufe.service.evaluate.impl.EvaluationCriteriaServiceImpl"
+        autowire="byName"/>
+    <bean id="textEvaluationService"
+        class="com.shufe.service.quality.evaluate.impl.TextEvaluationServiceImpl"
+        autowire="byName">
+        <property name="textEvaluationDAO" ref="textEvaluationDAO"/>
+    </bean>
+    <!-- 教学质量部分的Service end -->
+    
+    <bean id="messageService"
+        class="com.shufe.service.system.message.impl.SystemMessageServiceImpl"
+        autowire="byName">
+    </bean>
+    
+    <!--QuestionnaireRecycleRate Service-->
+    <bean id="questionnaireRecycleRateService"
+        class="com.shufe.service.evaluate.impl.QuestionnaireRecycleRateServiceImpl"
+        autowire="byName">
+        <property name="questionnaireRecycleRateDAO">
+            <ref bean="questionnaireRecycleRateDAO"/>
+        </property>
+    </bean>
+    
+    <!--FeeDetail Service-->
+    <bean id="feeDetailService"
+        class="com.shufe.service.fee.impl.FeeDetailServiceImpl"
+        autowire="byName">
+        <property name="feeDetailDAO">
+            <ref bean="feeDetailDAO"/>
+        </property>
+    </bean>
+    
+    <!---->
+    <bean id="auditStandardService"
+        class="com.shufe.service.graduate.AuditStandardServiceImpl"
+        autowire="byName">
+        <property name="graduateDAO">
+            <ref bean="graduateDAO"/>
+        </property>
+    </bean>
+    <!-- arrangeDAOListener -->
+    <bean id="arrangeDAOListener"
+        class="com.shufe.service.course.arrange.task.auto.impl.ArrangeDAOListener"
+        autowire="byName">
+        <property name="courseActivityDAO">
+            <ref bean="courseActivityDAO"/>
+        </property>
+    </bean>
+    <!-- roomAllocator for course arrangement -->
+    <bean id="roomAllocator"
+        class="com.shufe.service.course.arrange.task.auto.impl.RoomAllocatorImpl"
+        autowire="byName">
+        <property name="teachResourceDAO">
+            <ref bean="teachResourceDAO"/>
+        </property>
+    </bean>
+    <!-- timeAllocator for course arrangement -->
+    <bean id="timeAllocator"
+        class="com.shufe.service.course.arrange.task.auto.impl.TimeAllocatorImpl"
+        autowire="byName">
+        <property name="teachResourceDAO">
+            <ref bean="teachResourceDAO"/>
+        </property>
+    </bean>
+    <!-- arrangeFixture prepare enviroment for course arrangement -->
+    <bean id="arrangeFixture"
+        class="com.shufe.service.course.arrange.task.auto.ArrangeFixture"
+        autowire="byName">
+        <property name="roomAlloc">
+            <ref bean="roomAllocator"/>
+        </property>
+        <property name="timeAlloc">
+            <ref bean="timeAllocator"/>
+        </property>
+        <property name="teacherDAO">
+            <ref bean="teacherDAO"/>
+        </property>
+    </bean>
+    <!--arrangeCourseService-->
+    <bean id="autoArrangeCourseService"
+        class="com.shufe.service.course.arrange.task.auto.ArrangeManager"
+        autowire="byName">
+        <property name="persistence">
+            <ref bean="arrangeDAOListener"/>
+        </property>
+        <property name="fixture">
+            <ref bean="arrangeFixture"/>
+        </property>
+    </bean>
+    <bean id="arrangeTaskValidateService"
+        class="com.shufe.service.course.arrange.task.auto.impl.ArrangeTaskValidatorImpl"
+        autowire="byName">
+    </bean>
+    <bean id="electCourseService"
+        class="com.shufe.service.course.election.impl.ElectCourseServiceImpl"
+        autowire="byName">
+        <property name="courseTakeDAO" ref="courseTakeDAO"/>
+        <property name="teachTaskDAO" ref="teachTaskDAO"/>
+        <property name="electRecordDAO" ref="electRecordDAO"/>
+        <property name="evaluateSwitchService" ref="evaluateSwitchService"/>
+    </bean>
+    
+    <!--graduateAuditService-->
+    <bean id="graduateAuditService"
+        class="com.shufe.service.graduate.GraduateAuditServiceImpl"
+        autowire="byName">
+        <property name="auditStandardService">
+            <ref bean="auditStandardService"/>
+        </property>
+        <property name="teachPlanService">
+            <ref bean="teachPlanService"/>
+        </property>
+        <property name="gradeService">
+            <ref bean="gradeService"/>
+        </property>
+        <property name="studentService">
+            <ref bean="studentService"/>
+        </property>
+    </bean>
+    
+    <!--工作量部分-->
+    <bean id="rationWorkloadService"
+        class="com.shufe.service.workload.ration.impl.RationWorkloadServiceImpl"
+        autowire="byName">
+        <property name="rationWorkloadDAO" ref="rationWorkloadDAO"/>
+    </bean>
+    <bean id="rationWorkloadConfigService"
+        class="com.shufe.service.workload.ration.impl.RationWorkloadConfigServiceImpl"
+        autowire="byName">
+        <property name="rationWorkloadConfigDAO" ref="rationWorkloadConfigDAO"/>
+    </bean>
+    <bean id="teachModulusService"
+        class="com.shufe.service.workload.course.impl.TeachModulusServiceImpl"
+        autowire="byName">
+        <property name="modulusDAO" ref="modulusDAO"/>
+    </bean>
+    <bean id="instructModulusService"
+        class="com.shufe.service.workload.instruct.impl.InstructModulusServiceImpl"
+        autowire="byName">
+        <property name="modulusDAO" ref="modulusDAO"/>
+    </bean>
+    <bean id="instructWorkloadService"
+        class="com.shufe.service.workload.instruct.impl.InstructWorkloadServiceImpl"
+        autowire="byName">
+        <property name="instructWorkloadDAO" ref="instructWorkloadDAO"/>
+    </bean>
+    <bean id="workloadOpenSwitchService"
+        class="com.shufe.service.workload.course.impl.WorkloadOpenSwitchServiceImpl"
+        autowire="byName">
+        <property name="workloadOpenSwitchDAO" ref="workloadOpenSwitchDAO"/>
+    </bean>
+    <bean id="teachWorkloadService"
+        class="com.shufe.service.workload.course.impl.TeachWorkloadServiceImpl"
+        autowire="byName">
+        <property name="teachWorkloadDAO" ref="teachWorkloadDAO"/>
+    </bean>
+    <bean id="teachWorkloadStatService"
+        class="com.shufe.service.workload.course.impl.TeachWorkloadStatServiceImpl"
+        autowire="byName">
+        <property name="teachWorkloadStatDAO" ref="teachWorkloadStatDAO"/>
+    </bean>
+    <bean id="teachCategoryService"
+        class="com.shufe.service.workload.course.impl.TeachCategoryServiceImpl"
+        autowire="byName">
+        <property name="teachCategoryDAO" ref="teachCategoryDAO"/>
+    </bean>
+    <!--tutorService-->
+    <bean id="tutorService"
+        class="com.shufe.service.degree.tutorManager.impl.TutorServiceImpl"
+        autowire="byName">
+        <property name="tutorDAO">
+            <ref bean="tutorDAO"/>
+        </property>
+    </bean>
+    
+    <!--thesisTopicOpenService-->
+    <bean id="topicOpenService"
+        class="com.shufe.service.degree.thesis.topicOpen.impl.TopicOpenServiceImpl"
+        autowire="byName">
+        <property name="topicOpenDAO">
+            <ref bean="topicOpenDAO"/>
+        </property>
+    </bean>
+    <bean id="courseTakeService"
+        class="com.shufe.service.course.arrange.task.impl.CourseTakeServiceImpl"
+        autowire="byName">
+        <property name="courseTakeDAO" ref="courseTakeDAO"/>
+        <property name="gradeDAO" ref="gradeDAO"/>
+        <property name="creditConstraintDAO" ref="creditConstraintDAO"/>
+        <property name="teachCalendarDAO" ref="teachCalendarDAO"/>
+    </bean>
+    
+    <bean id="courseActivityService"
+        class="com.shufe.service.course.arrange.task.impl.CourseActivityServiceImpl"
+        autowire="byName">
+        <property name="courseActivityDAO">
+            <ref bean="courseActivityDAO"/>
+        </property>
+    </bean>
+    <bean id="electRecordService"
+        class="com.shufe.service.course.election.impl.ElectRecordServiceImpl"
+        autowire="byName">
+        <property name="electRecordDAO">
+            <ref bean="electRecordDAO"/>
+        </property>
+    </bean>
+    <!--roomApply service-->
+    <bean id="roomApplyService"
+        class="com.shufe.service.course.arrange.apply.impl.RoomApplyServiceImpl"
+        autowire="byName">
+    </bean>
+    <bean id="baseinfoUtil" class="com.shufe.service.system.impl.BaseinfoUtilImpl"
+        autowire="byName">
+    </bean>
+    
+    <!--培养计划-->
+    <bean id="teachPlanService"
+        class="com.shufe.service.course.plan.impl.TeachPlanServiceImpl"
+        autowire="byName">
+        <property name="teachPlanDAO" ref="teachPlanDAO"/>
+        <property name="studentService" ref="studentService"/>
+        <property name="baseCodeDao" ref="baseCodeDao"/>
+        <property name="calendarService" ref="teachCalendarService"/>
+        <property name="courseGroupDAO" ref="courseGroupDAO"/>
+    </bean>
+    <bean id="stdTeachPlanService"
+        class="com.shufe.service.course.plan.impl.StdTeachPlanServiceImpl"
+        autowire="byName">
+        <property name="teachPlanService" ref="teachPlanService"/>
+    </bean>
+    <bean id="courseGroupService"
+        class="com.shufe.service.course.plan.impl.CourseGroupServiceImpl"
+        autowire="byName">
+        <property name="courseGroupDAO" ref="courseGroupDAO"/>
+        <property name="teachPlanService" ref="teachPlanService"/>
+    </bean>
+    <bean id="planCourseService"
+        class="com.shufe.service.course.plan.impl.PlanCourseServiceImpl"
+        autowire="byName">
+        <property name="planCourseDAO" ref="planCourseDAO"/>
+        <property name="courseGroupService" ref="courseGroupService"/>
+    </bean>
+    <bean id="teachPlanStatService"
+        class="com.shufe.service.course.plan.impl.TeachPlanStatServiceImpl"
+        autowire="byName">
+        <property name="teachPlanStatDAO" ref="teachPlanStatDAO"/>
+    </bean>
+    <!-- 教学任务-->
+    <bean id="teachTaskService"
+        class="com.shufe.service.course.task.impl.TeachTaskServiceImpl"
+        autowire="byName">
+        <property name="teachTaskDAO" ref="teachTaskDAO"/>
+        <property name="calendarService" ref="teachCalendarService"/>
+        <property name="adminClassDAO" ref="adminClassDAO"/>
+        <property name="planCourseDAO" ref="planCourseDAO"/>
+        <property name="teachPlanService" ref="teachPlanService"/>
+        <property name="taskSeqNoGenerator" ref="taskSeqNoGenerator"/>
+    </bean>
+    
+    <bean id="teachTaskParamService"
+        class="com.shufe.service.course.task.impl.TeachTaskParamServiceImpl"
+        autowire="byName">
+        <property name="teachTaskParamDAO" ref="teachTaskParamDAO"/>
+    </bean>
+    
+    <bean id="manualArrangeParamService"
+        class="com.shufe.service.course.arrange.task.impl.ManualArrangeParamServiceImpl"
+        autowire="byName">
+        <property name="manualArrangeParamDao" ref="manualArrangeParamDao"/>
+    </bean>
+    
+    <bean id="courseTakeForTaskParamService"
+        class="com.shufe.service.course.task.impl.CourseTakeForTaskParamServiceImpl"
+        autowire="byName">
+        <property name="courseTakeForTaskParamDao" ref="courseTakeForTaskParamDao"/>
+    </bean>
+    
+    <bean id="teachTaskStatService"
+        class="com.shufe.service.course.task.impl.TeachTaskStatServiceImpl"
+        autowire="byName"/>
+    
+    <bean id="requirePreferService"
+        class="com.shufe.service.course.task.impl.RequirePreferServiceImpl"
+        autowire="byName">
+        <property name="preferenceDAO" ref="requirePreferDAO"/>
+        <property name="taskDAO" ref="teachTaskDAO"/>
+    </bean>
+    <bean id="taskAlterRequestService"
+        class="com.shufe.service.course.task.impl.TaskAlterRequestServiceImpl"
+        autowire="byName">
+        <property name="taskAlterRequestDAO" ref="taskAlterRequestDAO"/>
+    </bean>
+    
+    <bean id="teachQualityStatisticService"
+        class="com.shufe.service.evaluate.impl.TeachQualityStatisticServiceImpl"
+        autowire="byName"/>
+    <bean id="questionnairStatService"
+        class="com.shufe.service.evaluate.impl.QuestionnairStatServiceImpl"
+        autowire="byName"/>
+    <bean id="feeDefaultService"
+        class="com.shufe.service.fee.impl.FeeDefaultServiceImpl"
+        autowire="byName">
+        <property name="feeDefaultDAO">
+            <ref bean="feeDefaultDAO"></ref>
+        </property>
+    </bean>
+    <bean id="tuitionFeeService"
+        class="com.ekingstar.eams.fee.service.impl.TuitionFeeServiceImpl"
+        autowire="byName"/>
+    <bean id="timeSettingService"
+        class="com.shufe.service.system.calendar.impl.TimeSettingServiceImpl"
+        autowire="byName">
+        <property name="timeSettingDAO">
+            <ref bean="timeSettingDAO"></ref>
+        </property>
+    </bean>
+    
+    <bean id="textbookService"
+        class="com.shufe.service.course.textbook.impl.TextbookServiceImpl"
+        autowire="byName">
+        <property name="textbookDAO">
+            <ref bean="textbookDAO"/>
+        </property>
+    </bean>
+    <bean id="level1SubjectService"
+        class="com.shufe.service.degree.subject.impl.Level1SubjectServiceImpl"
+        autowire="byName">
+        <property name="level1SubjectDAO">
+            <ref bean="level1SubjectDAO"/>
+        </property>
+    </bean>
+    <bean id="level2SubjectService"
+        class="com.shufe.service.degree.subject.impl.Level2SubjectServiceImpl"
+        autowire="byName">
+        <property name="level2SubjectDAO">
+            <ref bean="level2SubjectDAO"/>
+        </property>
+    </bean>
+    <bean id="chooseTutorService"
+        class="com.shufe.service.degree.tutorManager.impl.ChooseTutorServiceImpl"
+        autowire="byName">
+        <property name="chooseTutorDAO">
+            <ref bean="chooseTutorDAO"/>
+        </property>
+    </bean>
+    <!--bookRequirementService by yushun  -->
+    <bean id="bookRequirementService"
+        class="com.shufe.service.course.textbook.impl.BookRequirementServiceImpl"
+        autowire="byName">
+        <property name="bookRequirementDAO">
+            <ref bean="bookRequirementDAO"/>
+        </property>
+    </bean>
+    <bean id="tutorApplyService"
+        class="com.shufe.service.degree.tutorManager.impl.TutorApplyServiceImpl"
+        autowire="byName">
+        <property name="tutorApplyDAO">
+            <ref bean="tutorApplyDAO"/>
+        </property>
+    </bean>
+    
+    <bean id="graduatePracticeService"
+        class="com.shufe.service.std.graduation.practice.impl.GraduatePracticeServiceImpl"
+        autowire="byName">
+        <property name="graduatePracticeDAO">
+            <ref bean="graduatePracticeDAO"/>
+        </property>
+    </bean>
+    
+    <bean id="noticeService"
+        class="com.shufe.service.system.notice.impl.NoticeServiceImpl"
+        autowire="byName">
+        
+    </bean>
+    <bean id="thesisManageService"
+        class="com.shufe.service.degree.thesis.impl.ThesisManageServiceImpl"
+        autowire="byName">
+        <property name="thesisManageDAO">
+            <ref bean="thesisManageDAO"/>
+        </property>
+    </bean>
+    <bean id="degreeService"
+        class="com.shufe.service.degree.apply.impl.DegreeServiceImpl"
+        autowire="byName">
+        
+    </bean>
+    <bean id="examArrangeService"
+        class="com.shufe.service.course.arrange.exam.impl.ExamArrangeServiceImpl"
+        autowire="byName">
+    </bean>
+    <!-- <bean id="examApplyParamService"
+        class="com.shufe.service.course.arrange.exam.impl.ExamApplyParamServiceImpl"
+        autowire="byName">
+    </bean> -->
+    <bean id="examTurnService"
+        class="com.shufe.service.course.arrange.exam.impl.ExamTurnServiceImpl"
+        autowire="byName">
+    </bean>
+    <bean id="annotateService"
+        class="com.shufe.service.degree.thesis.annotate.impl.AnnotateServiceImpl"
+        autowire="byName">
+    </bean>
+    <bean id="taskActivityService"
+        class="com.shufe.service.course.arrange.impl.TaskActivityServiceImpl"
+        autowire="byName">
+        <property name="teachCalendarService" ref="teachCalendarService"/>
+    </bean>
+    <bean id="thesisStatisticService"
+        class="com.shufe.service.degree.thesis.thesisStatistic.impl.ThesisStatisticServiceImpl"
+        autowire="byName"/>
+    <bean id="examTakeService"
+        class="com.shufe.service.course.arrange.exam.impl.ExamTakeServiceImpl"
+        autowire="byName"/>
+    <bean id="preAnswerService"
+        class="com.shufe.service.degree.thesis.preAnswer.impl.PreAnswerServiceImpl"
+        autowire="byName"/>
+    <bean id="gradeService"
+        class="com.shufe.service.course.grade.impl.GradeServiceImpl"
+        autowire="byName">
+        <property name="gradeDAO" ref="gradeDAO"/>
+    </bean>
+    <!--
+    <bean id="gradeLogService"
+        class="com.shufe.service.course.grade.impl.GradeLogServiceImpl"
+        autowire="byName">
+    </bean>
+        -->
+        
+        
+     <!--考勤管理-->  
+     <bean id="attendStaticService"
+        class="com.shufe.service.course.attend.impl.AttendStaticServiceImpl"
+        autowire="byName">
+        <property name="attendStaticDAO" ref="attendStaticDAO"/>
+    </bean>
+    <bean id="attendDeviceService"
+        class="com.shufe.service.course.attend.impl.AttendDeviceServiceImpl"
+        autowire="byName">
+        <property name="attendDeviceDAO" ref="attendDeviceDAO"/>
+    </bean>
+    <bean id="attendDeviceJob"
+        class="com.shufe.service.course.attend.AttendDeviceJob"
+        autowire="byName">
+    </bean>
+    <bean id="updateKqjzt" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="attendDeviceJob"/>
+		<property name="targetMethod" value="updateKqjzt"/>
+	</bean>
+	<bean id="updateKqjztTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="updateKqjzt"/>
+		<property name="cronExpression" value="0 * * * * ?"/>
+	</bean>
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="updateKqjztTrigger"/>
+			</list>
+		</property>
+	</bean>
+    <!--成绩转换和计算工厂类-->
+    <bean id="gradeConverterFactory"
+        class="com.ekingstar.eams.course.grade.converter.ConverterFactory">
+        <property name="utilDao" ref="utilDao"/>
+        <property name="converterClass"
+            value="com.ekingstar.eams.course.grade.converter.DefaultConverter"/>
+    </bean>
+    <bean id="gradeCalculatorFactory"
+        class="com.ekingstar.eams.course.grade.course.calculator.CalculatorFactory">
+        <property name="utilDao" ref="utilDao"/>
+        <property name="calcualtorClass"
+            value="com.ekingstar.eams.course.grade.course.calculator.DefaultCalculator"/>
+    </bean>
+    
+    <bean id="examActivityService"
+        class="com.shufe.service.course.arrange.exam.impl.ExamActivityServiceImpl"
+        autowire="byName">
+    </bean>
+    <bean id="gradePointRuleService"
+        class="com.shufe.service.course.grade.gp.impl.GradePointRuleServiceImpl"
+        autowire="byName">
+        <property name="gradePointRuleDAO" ref="gradePointRuleDAO"/>
+    </bean>
+    <bean id="gradePointService"
+        class="com.shufe.service.course.grade.gp.impl.GradePointServiceImpl"
+        autowire="byName">
+    </bean>
+    <bean id="formalAnswerService"
+        class="com.shufe.service.degree.thesis.formalAnswer.impl.FormalAnswerServiceImpl"
+        autowire="byName"/>
+    <bean id="codeGenerator"
+        class="com.shufe.service.system.codeGen.impl.SeqCodeGenerator"
+        autowire="byName"/>
+    <bean id="otherGradeService"
+        class="com.shufe.service.course.grade.other.impl.OtherGradeServiceImpl"
+        autowire="byName"/>
+    <bean id="otherExamSignUpService"
+        class="com.shufe.service.course.grade.other.impl.OtherExamSignUpServiceImpl"
+        autowire="byName"/>
+    <bean id="studyProductService"
+        class="com.shufe.service.degree.study.impl.StudyProductServiceImpl"
+        autowire="byName"/>
+    <bean id="bookRequireStatService"
+        class="com.shufe.service.course.textbook.impl.BookRequireStatServiceImpl"
+        autowire="byName"/>
+    
+    <bean id="courseTableCheckService"
+        class="com.shufe.service.course.arrange.task.impl.CourseTableCheckServiceImpl"
+        autowire="byName"/>
+    <bean id="stdStatService"
+        class="com.shufe.service.std.stat.impl.StdStatServiceImpl"
+        autowire="byName"/>
+    <bean id="teacherStatService"
+        class="com.shufe.service.system.baseinfo.stat.impl.TeacherStatServiceImpl"
+        autowire="byName"/>
+    <bean id="classroomStatService"
+        class="com.shufe.service.system.baseinfo.stat.impl.ClassroomStatServiceImpl"
+        autowire="byName"/>
+    <bean id="specialityStatService"
+        class="com.shufe.service.system.baseinfo.stat.impl.SpecialityStatServiceImpl"
+        autowire="byName"/>
+    <bean id="speciality2ndSignUpService"
+        class="com.shufe.service.std.speciality2nd.impl.Speciality2ndSignUpServiceImpl"
+        autowire="byName"/>
+    <bean id="punishmentService"
+        class="com.shufe.service.std.awardPunish.impl.PunishmentServiceImpl"
+        autowire="byName"/>
+    <bean id="degreeAuditService"
+        class="com.shufe.service.std.graduation.audit.impl.DegreeAuditServiceImpl"
+        autowire="byName"/>
+    <bean id="scheduleService"
+        class="com.shufe.service.degree.thesis.process.impl.ScheduleServiceImpl"
+        autowire="byName"/>
+    <bean id="sequenceDao"
+        class="com.ekingstar.eams.system.firstboot.SequenceDaoHibernate"
+        autowire="byName"/>
+    <bean id="dataRealmHelper" class="com.shufe.web.helper.RestrictionHelper"
+        autowire="byName"/>
+    
+    <bean id="substituteCourseService"
+        class="com.ekingstar.eams.teach.program.service.impl.SubstituteCourseServiceImpl"
+        autowire="byName"/>
+        
+	<bean id="ruleExecutorBuilder"
+		class="org.beanfuse.rule.engine.impl.DefaultRuleExecutorBuilder"/>
+	
+	<bean id="ruleExecutor1"
+		class="com.shufe.service.std.graduation.audit.impl.rule.RuleExecutor1"
+		autowire="byName"/>
+	<bean id="ruleExecutor2"
+		class="com.shufe.service.std.graduation.audit.impl.rule.RuleExecutor2"
+		autowire="byName"/>
+	<bean id="computerChecker"
+		class="com.shufe.service.std.graduation.audit.impl.rule.ComputerChecker"
+		autowire="byName"/>
+	<bean id="degreeCourseChecker"
+		class="com.shufe.service.std.graduation.audit.impl.rule.DegreeCourseChecker"
+		autowire="byName"/>
+	<bean id="doctorComprehensiveExamChecker"
+		class="com.shufe.service.std.graduation.audit.impl.rule.DoctorComprehensiveExamChecker"
+		autowire="byName"/>
+	<bean id="gpaChecker"
+		class="com.shufe.service.std.graduation.audit.impl.rule.GPAChecker"
+		autowire="byName"/>
+	<bean id="graduateLifeChecker"
+		class="com.shufe.service.std.graduation.audit.impl.rule.GraduateLifeChecker"
+		autowire="byName"/>
+	<bean id="languageChecker"
+		class="com.shufe.service.std.graduation.audit.impl.rule.LanguageChecker"
+		autowire="byName"/>
+	<bean id="makeUpChecker"
+		class="com.shufe.service.std.graduation.audit.impl.rule.MakeUpChecker"
+		autowire="byName"/>
+	<bean id="makeUpPassChecker"
+		class="com.shufe.service.std.graduation.audit.impl.rule.MakeUpPassChecker"
+		autowire="byName"/>
+	<bean id="planCompleteChecker"
+		class="com.shufe.service.std.graduation.audit.impl.rule.PlanCompleteChecker"
+		autowire="byName"/>
+	<bean id="punishmentChecker"
+		class="com.shufe.service.std.graduation.audit.impl.rule.PunishmentChecker"
+		autowire="byName"/>
+	<bean id="thesisInCoreMagazineChecker"
+		class="com.shufe.service.std.graduation.audit.impl.rule.ThesisInCoreMagazineChecker"
+		autowire="byName"/>
+	<bean id="thesisScoreChecker"
+		class="com.shufe.service.std.graduation.audit.impl.rule.ThesisScoreChecker"
+		autowire="byName"/>
+
+    <bean id="cet4GradeProvider" class="com.shufe.service.course.achivement.impl.Cet4GradeProviderImpl" autowire="byName"/>
+    <bean id="gaCalculator" class="com.shufe.service.course.achivement.impl.GaCalculatorImpl" autowire="byName"/>
+    <bean id="gradeAchivementService" class="com.shufe.service.course.achivement.impl.GradeAchivementServiceImpl" autowire="byName"/>
+    <bean id="ieGradeProvider" class="com.shufe.service.course.achivement.impl.IeGradeProviderImpl" autowire="byName"/>
+    <bean id="moralGradeProvider" class="com.shufe.service.course.achivement.impl.MoralGradeProviderImpl" autowire="byName"/>
+    <bean id="peGradeProvider" class="com.shufe.service.course.achivement.impl.PeGradeProviderImpl" autowire="byName"/>
+    <bean id="gpaProvider" class="com.shufe.service.course.achivement.impl.GpaProviderImpl" autowire="byName"/>
+</beans>

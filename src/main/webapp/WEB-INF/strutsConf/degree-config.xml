@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<struts-config>
+	<form-beans>
+		<form-bean name="tutorStd" type="org.apache.struts.action.DynaActionForm">
+			<form-property type="com.shufe.model.system.baseinfo.Tutor"
+				name="tutor"/>
+			<form-property type="java.lang.Integer" name="pageNo" initial="1"/>
+			<form-property type="java.lang.Integer" name="pageSize" initial="10"/>
+		</form-bean>
+	</form-beans>
+	
+	<action path="/degreeApplyStd" scope="request" parameter="method"/>
+	<action path="/degreeApply" scope="request" parameter="method"/>
+	<action path="/studyProduct" scope="request" parameter="method"/>
+	<action path="/studyAward" scope="request" parameter="method"/>
+	<action path="/studyProductStd" scope="request" parameter="method"/>
+	<action path="/level1Subject" scope="request" name="page20Form"
+		parameter="method"/>
+	<action path="/level2Subject" scope="request" name="page20Form"
+		parameter="method"/>
+	<action path="/thesisSchedule" scope="request" parameter="method"/>
+	<action path="/thesisDocument" scope="request" parameter="method"/>
+	<action path="/thesisManageStd" scope="request" parameter="method"/>
+	<action path="/thesisManage" scope="request" parameter="method"/>
+	<action path="/thesisManageTutor" scope="request" parameter="method"/>
+	<action path="/thesisDownload" scope="request" parameter="method"/>
+	
+	<!--我的论文-->
+	<action path="/thesisAdmin" scope="request" parameter="method"/>
+	<action path="/thesisStd" scope="request" parameter="method"/>
+	
+	<action path="/instruction" scope="request" parameter="method"/>
+	<!--*************************论文开题**************************-->
+	<action path="/thesisTopicOpen" scope="request" name="page20Form"
+		parameter="method"/>
+	<action path="/thesisTopicOpen_tutor" scope="request" name="page20Form"
+		parameter="method"/>
+	<action path="/loadThesisTopic_std" scope="request" parameter="method"/>
+	
+	<!--***********************论文预答辩************************-->
+	<action path="/preAnswer" scope="request" name="page20Form" parameter="method"/>
+	<action path="/preAnswer_std" scope="request" name="page20Form"
+		parameter="method"/>
+	<action path="/preAnswer_tutor" scope="request" name="page20Form"
+		parameter="method"/>
+	
+	<!--************************论文评阅*************************-->
+	<action path="/annotateAdmin" scope="request" name="page20Form"
+		parameter="method"/>
+	<action path="/annotateTutor" scope="request" name="page20Form"
+		parameter="method"/>
+	<action path="/annotateStd" scope="request" parameter="method"/>
+	
+	<!--*********************** 论文答辩************************-->
+	<action path="/formalAnswerAdmin" scope="request" name="page20Form"
+		parameter="method"/>
+	<action path="/formalAnswerStd" scope="request" name="page20Form"
+		parameter="method"/>
+	
+	<!--***********************论文统计*************************-->
+	<action path="/thesisStatistic" scope="request" name="page20Form"
+		parameter="method"/>
+	<!--导师管理-->
+	<action path="/tutorManager" scope="request" name="page20Form"
+		parameter="method"/>
+	
+	<action path="/tutorManager_tutor" scope="request" name="page20Form"
+		parameter="method">
+		<forward name="doTutorInfo"
+			path="/pages/tutorManager/tutor/tutorInfo.ftl"/>
+		<forward name="doDefault" path="/tutorManager.do?method=doDefault"/>
+		<forward name="failure" path="/pages/tutorManager/errorPage.ftl"/>
+	</action>
+	
+	<action path="/appointTutor" scope="request" name="page20Form"
+		parameter="method"/>
+	<action path="/appointStd" scope="request" name="page20Form"
+		parameter="method"/>
+	
+	<action path="/assistant" scope="request" parameter="method"/>
+	<action path="/assistantTutor" scope="request" parameter="method"/>
+	<action path="/assistantStd" scope="request" parameter="method"/>
+	
+	<action path="/tutorChoose" scope="request" name="page20Form"
+		parameter="method"/>
+	<action path="/tutorChoose_tutor" scope="request" name="page20Form"
+		parameter="method"/>
+	<action path="/tutorStatistic" scope="request" name="page20Form"
+		parameter="method"/>
+	<action path="/tutorStd" scope="request" name="page20Form"
+		parameter="method"/>
+</struts-config>

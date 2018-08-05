@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.shufe.model.system.baseinfo.AdminClass" table="JCXX_BJ_T" dynamic-update="true">
+		<cache usage="read-write" region="baseinfo"/>
+		<id name="id" column="ID">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JCXX_BJ_T</param>
+			</generator>
+		</id>
+		<!--base info-->
+		<property name="code" column="BJDM" not-null="true" length="32"
+			unique="true"/>
+		<property name="name" column="BJMC" not-null="true" length="50"/>
+		<property name="engName" column="BJMC_EN" length="100"/>
+		<property name="abbreviation" column="BJJC" length="50"/>
+		<property name="createAt" column="ZDSJ"/>
+		<property name="modifyAt" column="XGSJ"/>
+		<property name="remark" column="BZ" length="500"/>
+		<property name="state" column="ZTDM" not-null="true"/>
+		<!--adminclass specific-->
+		<property name="eduLength" column="XZ"/>
+		<property name="planStdCount" column="JHRS"/>
+		<property name="actualStdCount" column="SJRS" not-null="true"/>
+		<property name="stdCount" column="RS" not-null="true"/>
+		<property name="enrollYear" column="RXNF" length="10" not-null="true"/>
+		<many-to-one name="instructor" column="FDYID" not-null="false"/>
+		<many-to-one name="department" column="BMID" not-null="true"/>
+		<property name="dateEstablished" column="JBNY"/>
+		<many-to-one name="speciality" column="ZYID" not-null="false"/>
+		<many-to-one name="stdType" column="XSLBID" not-null="true"/>
+		<many-to-one name="aspect" column="ZYFXID" not-null="false"/>
+		<set name="students" table="JCXX_BJ_XS_T">
+			<key column="BJID"/>
+			<many-to-many column="XSID" class="com.shufe.model.std.Student"/>
+		</set>
+		
+		<!--filters-->
+		<filter name="filterAuthorityByDepartment"
+			condition="BMID in (:departmentIds)"/>
+		<filter name="filterAuthorityByStudentType"
+			condition="XSLBID in (:studentTypeIds)"/>
+	</class>
+	<query name="getAllAdminClasses"> <![CDATA[from  AdminClass ]]>
+	</query>
+	<query name="getAdminClasses.depart.speciality.aspect">
+		<![CDATA[from  AdminClass where
+			(:departId = department.id) and
+			(:specialityId = null or speciality.id = :specialityId) and
+			(:aspectId = null or aspect.id = :aspectId)
+	    ]]>
+	</query>
+</hibernate-mapping>

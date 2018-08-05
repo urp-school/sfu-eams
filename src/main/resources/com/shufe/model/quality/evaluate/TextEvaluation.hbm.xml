@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.quality.evaluate">
+	<class name="TextEvaluation" table="JXZL_PJ_WZ_T">
+		<id name="id" column="ID">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXZL_PJ_WZ_T</param>
+			</generator>
+		</id>
+		<property name="context" column="YJNR" length="2000"/>
+		<property name="isAffirm" column="SFQR"/>
+		<property name="isForCourse" column="SFKCPJ"/>
+		<many-to-one name="task" column="JXRWID" not-null="true"/>
+		<many-to-one name="teacher" column="JZGID"/>
+		<many-to-one name="std" column="XSID" not-null="true"/>
+		<many-to-one name="calendar" column="JXRLID" not-null="true"/>
+		<property name="evaluationAt" column="PJSJ"/>
+	</class>
+</hibernate-mapping>

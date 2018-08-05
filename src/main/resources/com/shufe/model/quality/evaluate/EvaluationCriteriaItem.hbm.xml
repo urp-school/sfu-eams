@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.quality.evaluate">
+<class name="EvaluationCriteriaItem" table="JXZL_PJ_PJBZX_T">
+	<cache usage="read-write" region="evaluateCache"/>
+	<id name="id" column="ID" unsaved-value="null">
+		<generator class="sequence">
+			<param name="sequence">SEQ_JXZL_PJ_PJBZX_T</param>
+		</generator>
+	</id>
+	<property name="min" column="ZDF"/>
+	<property name="max" column="ZGF"/>
+	<property name="name" column="PJMC"/>
+</class>
+</hibernate-mapping>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.shufe.model.system.file">
+	<class name="Document" table="XTWD_T">
+		<cache usage="read-write" region="systemCache"/>
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_XTWD_T</param>
+			</generator>
+		</id>
+		<discriminator column="WDLB" type="string" length="1"/>
+		<many-to-one name="uploaded" column="CJR" not-null="true" />
+		<property name="name" column="WDMC" not-null="true" length="500"/>
+		<property name="path" column="WDLJ" not-null="true" length="1000"/>
+		<property name="uploadOn" column="SCSJ" not-null="true"/>
+		<property name="remark" column="BZ" length="500"/>
+		<property name="startDate" column="KSRQ" not-null="false"/>
+        <property name="finishDate" column="JSRQ" not-null="false"/>
+        <property name="isUp" column="SFZD"/>
+        
+		<subclass name="StudentDocument" discriminator-value="S">
+			<set name="studentTypes" table="XTWD_XSLB_T">
+				<key column="XTWDID"/>
+				<many-to-many column="XSLBID"
+					class="com.ekingstar.eams.system.baseinfo.StudentType"/>
+			</set>
+			<set name="departs" table="XTWD_BM_T">
+				<key column="XTWDID"/>
+				<many-to-many column="BMID"
+					class="com.shufe.model.system.baseinfo.Department"/>
+			</set>
+		</subclass>
+		
+		<subclass name="TeacherDocument" discriminator-value="T"/>
+		<subclass name="ManagerDocument" discriminator-value="M"/>
+		<subclass name="DataTemplate" discriminator-value="D"/>
+		<subclass name="DegreeDocument" discriminator-value="W"/>
+	</class>
+</hibernate-mapping>

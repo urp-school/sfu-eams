@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.std.graduation.practice">
+  <!-- 毕业实习 -->
+  <class name="GraduatePractice" table="BYSX_T">
+		<id name="id" column="ID" length="32">
+	      <generator class="sequence">
+	          <param name="sequence">SEQ_BYSX_T</param>
+	      </generator>
+	   </id>
+	  <property name="practiceCompany" column="SXDW" />
+	  <many-to-one name="practiceSource" column="SXLYID"/>
+	  <property name="isPractictBase" column="SFSXJD" />
+      <many-to-one name="student"  column="XSID"/>
+      <many-to-one name="practiceTeacher" column="DDLSID"/>
+      <many-to-one name="teachCalendar" column="JXRLID"/>
+	  <property name="practiceDesc" column="SXMS" length="1200"/>
+	  <property name="remark" column="BZ" length="500"/>
+	  <many-to-one name="majorType" column="ZYLBID" not-null="true"/>
+  </class>
+					
+</hibernate-mapping>

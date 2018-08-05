@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <bean name="/rationWorkload" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.workload.ration.RationWorkloadAction"/>
+    <bean name="/rationWorkloadConfig" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.workload.ration.RationWorkloadConfigAction"/>
+    
+    <bean name="/teachModulus" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.workload.course.TeachModulusAction">
+        <property name="teachModulusService" ref="teachModulusService"/>
+    </bean>
+    <bean name="/workloadOpenSwitch" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.workload.course.WorkloadOpenSwitchAction">
+        <property name="workloadOpenSwitchService" ref="workloadOpenSwitchService"/>
+    </bean>
+    <bean name="/teachWorkload" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.workload.course.TeachWorkloadAction"/>
+    <bean name="/teachWorkloadSearch" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.workload.course.TeachWorkloadSearchAction"/>
+    <bean name="/teacherWorkload" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.workload.course.TeacherWorkloadAction"/>
+    <bean name="/teachWorkloadStat" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.workload.course.TeachWorkloadStatAction"/>
+    <bean name="/teachWorkloadMultiTermStat" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.workload.course.TeachWorkloadMultiTermStatAction"/>
+    <bean name="/teachCategory" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.workload.course.TeachCategoryAction">
+        <property name="teachCategoryService" ref="teachCategoryService"/>
+    </bean>
+    <bean name="/teachWorkloadAlteration" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.workload.course.TeachWorkloadAlterationAction"/>
+    
+    <bean name="/instructModulus" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.workload.instruct.InstructModulusAction">
+        <property name="instructModulusService" ref="instructModulusService"/>
+    </bean>
+    <bean name="/instructWorkload" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.workload.instruct.InstructWorkloadAction"/>
+    <bean name="/instructWorkloadSearch" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.workload.instruct.InstructWorkloadSearchAction"/>
+    <bean name="/collegeWorkloadQuery" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.workload.course.CollegeTeachWorkloadSearchAction"/>
+</beans>

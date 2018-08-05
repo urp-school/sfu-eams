@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 排考课程组 -->
+<hibernate-mapping package="com.shufe.model.course.arrange.exam">
+	<class name="ExamGroup" table="PK_KCZ_T">
+		<id name="id" column="id" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_PK_KCZ_T</param>
+			</generator>
+		</id>
+	  <property name="name" column="KCZMC"  length="100"/>
+	  <many-to-one name="examType" column="KSLXID" not-null="true"/>
+	  <set name="tasks" table="PK_KCZ_RW_T">
+		  <key column="KCZID"/>
+		  <many-to-many class="com.shufe.model.course.task.TeachTask" column="JXRWID"/>
+	  </set>
+	  <property name="isPublish" column="SFFB" />
+	</class>
+</hibernate-mapping>

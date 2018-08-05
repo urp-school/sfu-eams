@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean name="/departmentSelector" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.selector.CollegeSelector">
+		<property name="departmentService">
+			<ref bean="departmentService"/>
+		</property>
+	</bean>
+	<bean name="/specialitySelector" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.selector.SpecialitySelector"/>
+	
+	<bean name="/specialityAspectSelector" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.selector.SpecialityAspectSelector">
+		<property name="specialityAspectService">
+			<ref bean="specialityAspectService"/>
+		</property>
+	</bean>
+	
+	<bean name="/adminClassSelector" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.selector.AdminClassSelector">
+		<property name="studentService">
+			<ref bean="studentService"/>
+		</property>
+		<property name="adminClassService">
+			<ref bean="adminClassService"/>
+		</property>
+	</bean>
+	
+	<bean name="/studentTypeSelector" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.selector.StudentTypeSelector">
+		<property name="studentTypeService">
+			<ref bean="studentTypeService"/>
+		</property>
+	</bean>
+	
+	<bean name="/courseTypeSelector" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.selector.CourseTypeSelector">
+		
+	</bean>
+	
+	<bean name="/courseSelector" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.selector.CourseSelector">
+		<property name="studentTypeService">
+			<ref bean="studentTypeService"/>
+		</property>
+	</bean>
+	<bean name="/collegeSelector" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.selector.CollegeSelector">
+		<property name="departmentService">
+			<ref bean="departmentService"/>
+		</property>
+	</bean>
+</beans>

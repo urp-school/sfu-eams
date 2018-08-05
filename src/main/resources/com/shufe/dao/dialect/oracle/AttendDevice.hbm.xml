@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 考勤机状态监控表-->
+<hibernate-mapping   >
+	<sql-query name="updateKqjztTo1">
+	   <![CDATA[UPDATE eams.DEVICE_JS SET kqjzt=1 WHERE ROUND(TO_NUMBER(sysdate - qdsj) * 24 * 60 * 60)<=65 ]]>
+	</sql-query>
+	<sql-query name="updateKqjztTo0">
+	   <![CDATA[UPDATE eams.DEVICE_JS SET kqjzt=0 WHERE ROUND(TO_NUMBER(sysdate - qdsj) * 24 * 60 * 60)>65 ]]>
+	</sql-query>
+</hibernate-mapping>

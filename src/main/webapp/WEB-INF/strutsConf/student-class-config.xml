@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<struts-config>
+	<action-mappings>
+		<action path="/studentClassManager" scope="request" name="page20Form"
+			parameter="method">
+			<forward name="success"
+				path="/pages/studentClass/studentClassManager.ftl"/>
+		</action>
+		<action path="/adminClassManager" scope="request" name="page20Form"
+			parameter="method">
+			<forward name="success"
+				path="/pages/studentClass/adminClassManager.ftl"/>
+		</action>
+		
+		<action path="/studentClassOperation" scope="request" name="page20Form"
+			parameter="method">
+			<forward name="splitForm"
+				path="/pages/studentClass/studentClassSplitForm.ftl"/>
+			<forward name="autoSplitForm"
+				path="/pages/studentClass/studentClassAutoSplitForm.ftl"/>
+			<forward name="assingClassForm"
+				path="/pages/studentClass/assingStudentClassForm.ftl"/>
+			<forward name="detail"
+				path="/pages/studentClass/studentClassDetail.ftl"/>
+			<forward name="success"
+				path="/studentClassManager.do?method=classManager"
+				redirect="true"/>
+			<forward name="adminSuccess"
+				path="/adminClassManager.do?method=classManager"
+				redirect="true"/>
+			<forward name="assingSuccess"
+				path="/studentClassManager.do?method=studentClassManager"
+				redirect="true"/>
+			<forward name="cancelSuccess"
+				path="/adminClassManager.do?method=classManager"
+				redirect="true"/>
+			<forward name="cancelStudentClassSuccess"
+				path="/studentClassManager.do?method=studentClassManager"
+				redirect="true"/>
+			<forward name="setClassStudentForm"
+				path="/pages/studentClass/setClassStudentForm.ftl"/>
+			<forward name="failure" path="/pages/error.ftl"/>
+		</action>
+		
+		<action path="/studentClassDetail" scope="request" parameter="method">
+			<forward name="detailByStudent"
+				path="/pages/studentClass/detailByStudent.ftl"/>
+		</action>
+		
+	</action-mappings>
+    
+</struts-config>

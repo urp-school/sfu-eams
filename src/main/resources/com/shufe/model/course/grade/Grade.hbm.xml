@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 成绩-->
+<hibernate-mapping package="com.shufe.model.course.grade">
+	<!--总评成绩-->
+	<class name="CourseGrade" table="CJ_ZP_T">
+		<id name="id" column="id" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_CJ_ZP_T</param>
+			</generator>
+		</id>
+		<!-- natural-id -->
+		<many-to-one name="std" column="XSID" not-null="true"/>
+		<many-to-one name="calendar" column="JXRLID" not-null="true"/>
+		<many-to-one name="course" column="KCID" not-null="true" class="com.shufe.model.system.baseinfo.Course"/>
+		
+		<property name="score" column="DF"/>
+		<property name="isPass" column="SFTG" not-null="true"/>
+		<set name="alterInfos" cascade="all">
+			<key column="ZPCJID"/>
+			<one-to-many
+				class="com.shufe.model.course.grade.alter.CourseGradeAlterInfo"/>
+		</set>
+		<property name="status" column="ZT" not-null="true"/>
+		<many-to-one name="markStyle" column="CJJLFSID" not-null="true"/>
+		
+		<property name="taskSeqNo" column="KCXH"/>
+		<many-to-one name="task" column="JXRWID"/>
+		<many-to-one name="courseType" column="KCLBID" not-null="true"/>
+		<many-to-one name="courseTakeType" column="XDLBID"/>
+		<property name="GA" column="ZPCJ"/>
+		<property name="GP" column="JD" not-null="true"/>
+		<property name="credit" column="XF"/>
+		<property name="ratio" column="ratio"/>
+		<many-to-one name="majorType" column="ZYLBID" not-null="true"/>
+		<set name="examGrades" inverse="true" cascade="all-delete-orphan">
+			<key column="ZPCJID"/>
+			<one-to-many class="ExamGrade"/>
+		</set>
+		<property name="createAt" column="CJSJ"/>
+	</class>
+	<!--考试成绩-->
+	<class name="ExamGrade" table="CJ_KS_T">
+		<id name="id" column="id" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_CJ_KS_T</param>
+			</generator>
+		</id>
+		<property name="score" column="CJ"/>
+		<many-to-one name="gradeType" column="CJLXID" not-null="true"/>
+		<many-to-one name="courseGrade" column="ZPCJID" not-null="true"/>
+		<many-to-one name="examStatus" column="KSQKID" not-null="true"/>
+		<property name="status" column="ZT" not-null="true"/>
+		<set name="alterInfos" cascade="all">
+			<key column="CJID"/>
+			<one-to-many class="com.shufe.model.course.grade.alter.ExamGradeAlterInfo"/>
+		</set>
+		<property name="isPass" column="SFTG" not-null="true"/>
+		<property name="createAt" column="CJSJ"/>
+	</class>
+	
+	<!--  民族加分学生 -->
+	<class name="BonusStudent" table="CJ_JFXS_T">
+		<id name="id" column="ID">
+			<generator class="sequence">
+				<param name="sequence">SEQ_CJ_JFXS_T</param>
+			</generator>
+		</id>
+		<many-to-one name="std" column="XSID" unique="true"/>
+	</class>
+
+    <!--  特殊教学任务加分 -->
+    <class name="BonusLesson" table="CJ_JFRW_T">
+        <id name="id" column="ID">
+            <generator class="sequence">
+                <param name="sequence">SEQ_CJ_JFRW_T</param>
+            </generator>
+        </id>
+        <many-to-one name="task" column="JXRWID" unique="true" not-null="true"/>
+        <property name="ratio" column="JFBL" not-null="true"/>
+    </class>
+    <!-- 成绩状态表 -->
+	<class name="GradeState" table="CJ_CJZT_T">
+		<id name="id" column="ID">
+			<generator class="sequence">
+				<param name="sequence">SEQ_CJ_CJZT_T</param>
+			</generator>
+		</id>
+		<!--不要添加null=true，否则影响级联删除-->
+		<many-to-one name="teachTask" column="JXRWID" unique="true"/>
+		<property name="percents" column="BFB" length="50" />
+		<property name="confirmStatus" column="QRZT" not-null="true"/>
+		<property name="publishStatus" column="FBZT" not-null="true"/>
+		<property name="inputStatus" column="LRZT" not-null="true"/>
+		<many-to-one name="markStyle" column="CJJLFSID" not-null="true"/>
+		<property name="precision" column="JQD" not-null="true"/>
+		<property name="moralGradePercent" column="DYCJBFB"/>
+	</class>
+	<query name="getGradeCourses">
+		<![CDATA[
+		select cg.course.id,cg.isPass 	from CourseGrade as cg where cg.std.id = :stdId
+		]]>
+	</query>
+</hibernate-mapping>

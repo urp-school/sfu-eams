@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 排课任务归属院系 -->
+<hibernate-mapping package="com.shufe.model.course.arrange.task">
+    <class name="TaskInDepartment" table="PK_GSYX_T">
+        <id name="id" column="ID" unsaved-value="null">
+            <generator class="sequence">
+                <param name="sequence">SEQ_PK_GSYX_T</param>
+            </generator>
+        </id>
+        
+        <many-to-one name="calendar" column="JXRLID" not-null="true"/>
+        <many-to-one name="department" column="GSYXID" not-null="true"
+            class="com.shufe.model.system.baseinfo.Department"/>
+        <set name="tasks" table="PK_JXRW_GSYX_T">
+            <key column="GSYXID"/>
+            <many-to-many column="JXRWID"
+                class="com.shufe.model.course.task.TeachTask"/>
+        </set>
+    </class>
+</hibernate-mapping>

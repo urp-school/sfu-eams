@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.workload.course">
+	<!--工作量修改详细日志-->
+    <class name="TeachWorkloadStatus" table="GZL_XGRZ_NR_T">
+        <id name="id" column="ID" unsaved-value="null">
+            <generator class="sequence">
+                <param name="sequence">SEQ_GZL_XGRZ_NR_T</param>
+            </generator>
+        </id>
+        <property name="studentNumber" column="SKRS" not-null="true"/>
+        <many-to-one name="modulus" column="GZLXSID" not-null="true"/>
+        <property name="weeks" column="SKZS" not-null="true"/>
+        <property name="totleCourses" column="ZKS" not-null="true"/>
+        <property name="classNumberOfWeek" column="MZKS" not-null="true"/>
+        <property name="totleWorkload" column="SKGZL" not-null="true"/>
+        <property name="payReward" column="YZFBC" not-null="true"/>
+        <property name="calcWorkload" column="JGZL" not-null="true"/>
+        <property name="remark" column="BZ"/>
+    </class>
+</hibernate-mapping>

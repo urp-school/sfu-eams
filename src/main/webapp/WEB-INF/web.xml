@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+<!DOCTYPE web-app
+  PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+  "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:applicationContext.xml</param-value>
+	</context-param>
+	<!--设置字符集-->
+	<filter>
+		<filter-name>SetCharacterEncoding</filter-name>
+		<filter-class>com.ekingstar.commons.mvc.web.filter.EncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<!--设置I18N-->
+	<filter>
+		<filter-name>I18nFilter</filter-name>
+		<filter-class>com.shufe.web.I18nFilter</filter-class>
+	</filter>
+	<!---->
+	<filter>
+		<filter-name>CAS-Filter</filter-name>
+		<filter-class>com.neusoft.education.tp.sso.client.filter.DefaultCASFilter</filter-class>
+	</filter>
+	<!--首先打开hibernate Session-->
+	<filter>
+		<filter-name>OpenSessionInViewFilter</filter-name>
+		<filter-class>
+			org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+		<init-param>
+			<param-name>singleSession</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<!--过滤权限-->
+	<filter>
+		<filter-name>CheckAuthorityFilter</filter-name>
+        <filter-class>com.ekingstar.security.monitor.CheckAuthorityFilter</filter-class>
+		<init-param>
+			<param-name>loginFailPath</param-name>
+			<param-value>loginForm.do</param-value>
+		</init-param>
+		<init-param>
+			<param-name>noAuthorityPath</param-name>
+			<param-value>error.do?errorCode=notEnoughAuthority</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>SetCharacterEncoding</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>I18nFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<!---->
+	<filter-mapping>
+		<filter-name>CAS-Filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>OpenSessionInViewFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>OpenSessionInViewFilter</filter-name>
+		<url-pattern>/dwr/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>CheckAuthorityFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<!--记录在线用户-->
+	<listener id="OnlineUserListener">
+		<listener-class>
+			com.ekingstar.security.monitor.OnlineUserListener</listener-class>
+	</listener>
+  <listener id="OnlineUserListener">
+    <listener-class>
+      com.ekingstar.eams.StaticResourceListener</listener-class>
+  </listener>
+	<!--Struts 配置-->
+    <servlet>
+        <servlet-name>action</servlet-name>
+        <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
+        <init-param>
+            <param-name>config</param-name>
+            <param-value>/WEB-INF/struts-config.xml</param-value>
+        </init-param>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>5</param-value>
+        </init-param>
+        <init-param>
+            <param-name>detail</param-name>
+            <param-value>2</param-value>
+        </init-param>
+        <init-param>
+            <param-name>validate</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>4</load-on-startup>
+    </servlet>
+	<!--Freemarker 配置-->
+	<servlet>
+		<servlet-name>freemarker</servlet-name>
+		<servlet-class>freemarker.ext.servlet.FreemarkerServlet</servlet-class>
+		<init-param>
+			<param-name>TemplatePath</param-name>
+			<param-value>/</param-value>
+		</init-param>
+		<init-param>
+			<param-name>NoCache</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<param-name>ContentType</param-name>
+			<param-value>text/html</param-value>
+		</init-param>
+		<!-- FreeMarker settings: -->
+		<init-param>
+			<param-name>template_update_delay</param-name>
+			<param-value>3600</param-value>
+		</init-param>
+		<init-param>
+			<param-name>default_encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>number_format</param-name>
+			<param-value>0.##</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<!--DWR 配置-->
+	<servlet>
+		<servlet-name>dwr-invoker</servlet-name>
+		<display-name>DWR Servlet</display-name>
+		<description>Direct Web Remoter Servlet</description>
+		<servlet-class>uk.ltd.getahead.dwr.DWRServlet</servlet-class>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<load-on-startup>20</load-on-startup>
+	</servlet>
+	<!--图形显示标签 配置-->
+	<servlet>
+		<servlet-name>CewolfServlet</servlet-name>
+		<servlet-class>de.laures.cewolf.CewolfRenderer</servlet-class>
+		<!-- sets storage implementation -->
+		<init-param>
+			<param-name>storage</param-name>
+			<param-value>de.laures.cewolf.storage.TransientSessionStorage
+				</param-value>
+		</init-param>
+		<!-- sets overlib.js location relative to webapp -->
+		<init-param>
+			<param-name>overliburl</param-name>
+			<param-value>etc/overlib.js</param-value>
+		</init-param>
+		<!-- turn on or off debugging logging -->
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>action</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>freemarker</servlet-name>
+		<url-pattern>*.ftl</url-pattern>
+	</servlet-mapping>
+	<!---->
+	<servlet-mapping>
+		<servlet-name>dwr-invoker</servlet-name>
+		<url-pattern>/dwr/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CewolfServlet</servlet-name>
+		<url-pattern>/cewolf/*</url-pattern>
+	</servlet-mapping>
+
+	<!--数据源配置-->
+	<resource-ref>
+		<res-ref-name>jdbc/hibernate</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+		<res-sharing-scope>Shareable</res-sharing-scope>
+	</resource-ref>
+</web-app>

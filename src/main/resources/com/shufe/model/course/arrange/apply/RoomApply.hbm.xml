@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.course.arrange.apply">
+	<!--教室借用表-->
+    <class name="RoomApply" table="JXYX_JSSQ_T">
+        <id name="id" column="ID" unsaved-value="null">
+            <generator class="sequence">
+                <param name="sequence">SEQ_JXYX_JSSQ_T</param>
+            </generator>
+        </id>
+        <component name="borrower">
+            <many-to-one name="user" column="XTYHID"
+                entity-name="com.ekingstar.security.User"/>
+            <property name="mobile" column="SJH"/>
+            <property name="email" column="DZYX"/>
+            <property name="addr" column="LXDZ"/>
+        </component>
+        <property name="activityName" column="HDMC"/>
+        <many-to-one name="activityType" column="HDLXID"/>
+        <property name="isFree" column="SFFYLJS"/>
+        <property name="leading" column="ZJR"/>
+        <property name="attendance" column="CXDX"/>
+        <property name="attendanceNum" column="CXRS"/>
+        <property name="roomRequest" column="JSYQ"/>
+        <many-to-one name="schoolDistrict" column="XQID"/>
+        <property name="timeRequest" column="SJYQ"/>
+        <property name="applicant" column="SQR"/>
+        <property name="applyAt" column="SQSJ"/>
+        <component name="applyTime" class="ApplyTime">
+            <property name="dateBegin" column="KSRQ"/>
+            <property name="dateEnd" column="JSRQ"/>
+            <property name="timeBegin" column="KSXJ"/>
+            <property name="timeEnd" column="JSSJ"/>
+            <property name="cycleType" column="ZQLX"/>
+            <property name="cycleCount" column="ZQS"/>
+        </component>
+        <many-to-one name="auditDepart" column="SHBMID"/>
+        <many-to-one name="approveBy" column="SHRID"/>
+        <property name="approveAt" type="timestamp" column="QRSJ"/>
+        <property name="isDepartApproved" column="SFGKQR"/>
+        <property name="departApprovedRemark" column="GKQRBZ" length="100"/>
+        <property name="isApproved" column="SFQR"/>
+        <property name="approvedRemark" column="QRBZ" length="100"/>
+        <many-to-one name="departApproveBy" column="GKSHRID"/>
+        <property name="departApproveAt" column="GKSHSJ"/>
+        <property name="hours" column="XSS"/>
+        <property name="money" column="JE"/>
+        <property name="waterFee" column="CSF"/>
+        <property name="isMultimedia" column="SFDMT"/>
+        <set name="activities" table="JXYX_JSSQ_JXHD_T" cascade="all,all-delete-orphan">
+            <key column="JSSQID"/>
+            <many-to-many column="JXHDID" class="com.shufe.model.course.arrange.Activity"/>
+        </set>
+    </class>
+</hibernate-mapping>

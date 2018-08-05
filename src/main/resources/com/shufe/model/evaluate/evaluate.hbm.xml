@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.evaluate" auto-import="false">
+		
+	<!--statistic-->
+	<class name="QuestionnaireRecycleRate" table="JXZL_PJ_HSL_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXZL_PJ_HSL_T</param>
+			</generator>
+		</id>
+		<property name="evaluateAmount" column="SPRC" length="10"/>
+		<property name="totleEvaluateAmount" column="ZPRC" length="10"/>
+		<property name="evaluatePerson" column="SPRS" length="10"/>
+		<property name="totlePerson" column="ZPRS" length="10"/>
+		<property name="statisticTime" column="TJSJ"/>
+		<property name="amountRate" column="RCBL" length="10"/>
+		<property name="totleRate" column="RSBL" length="10"/>
+		<many-to-one name="department" column="BMID"/>
+		<many-to-one name="studentType" column="XSLBID"/>
+		<many-to-one name="teachCalendar" column="JXRLID"/>
+	</class>
+	<filter-def name="filterEvaluateByDepartment">
+		<filter-param type="string" name="departmentId"/>
+	</filter-def>
+	
+</hibernate-mapping>

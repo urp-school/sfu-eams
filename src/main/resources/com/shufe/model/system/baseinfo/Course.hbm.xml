@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<!--课程代码-->	
+	<class name="com.shufe.model.system.baseinfo.Course" table="JCXX_KC_T">
+		<cache usage="read-write" region="baseinfo"/>
+		<id name="id" column="ID">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JCXX_KC_T</param>
+			</generator>
+		</id>
+		<property name="code" column="KCDM" length="32" not-null="true" unique="true"/>
+		<property name="name" column="KCMC" length="100"/>
+		<property name="engName" column="KCMC_EN" length="100"/>
+		<property name="abbreviation" column="KCJC" length="50"/>
+		<property name="createAt" column="ZDSJ"/>
+		<property name="modifyAt" column="XGSJ"/>
+		<property name="remark" column="BZ" length="500"/>
+		<property name="state" column="ZTDM"/>
+		<!--course info-->
+		<property name="credits" column="XF" not-null="true"/>
+		<property name="weekHour" column="ZKS" not-null="true"/>
+		<many-to-one name="languageAbility" column="YYDJID" not-null="false"/>
+		<many-to-one name="stdType" column="XSLBID"	not-null="true" entity-name="com.ekingstar.eams.system.baseinfo.StudentType"/>
+		<many-to-one name="trainingType" column="PYLXID"/>
+		<many-to-one name="category" column="KCZLID"/>
+		<many-to-one name="extInfo" column="KZXXID" cascade="all"/>
+	</class>
+	<query name="getCourses">
+		<![CDATA[ select course from  Course as course,
+			                          StudentType as sty
+				 where course.stdType.id= sty.id and
+			           course.name like :name
+	      ]]>
+	</query>
+</hibernate-mapping>

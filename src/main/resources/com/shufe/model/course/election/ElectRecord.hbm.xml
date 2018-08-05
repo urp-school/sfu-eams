@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 教学任务表 -->
+<hibernate-mapping package="com.shufe.model.course.election">
+	<class name="ElectRecord" table="XK_JG_T">
+		<id name="id" column="id" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_XK_JG_T</param>
+			</generator>
+		</id>
+		<many-to-one name="task" column="JXRWID" not-null="true"/>
+		<many-to-one name="student" column="XSID" not-null="true"/>
+		<property name="turn" column="XKLC" not-null="false"/>
+		<property name="isPitchOn" column="SFXS" not-null="true"/>
+		<property name="electTime" column="XKSJ" not-null="true" type="timestamp"/>
+		<many-to-one name="courseTakeType" column="XDLBID" not-null="true"/>
+	</class>
+	<query name="removeElectRecord">
+		<![CDATA[
+			delete ElectRecord where task = :taskId
+			and student.id =:stdId
+		]]>
+	</query>
+	<query name="removeElectRecords">
+		<![CDATA[
+			delete ElectRecord where task = :taskId
+			and student.id  in (:stdIds)
+		]]>
+	</query>
+	<query name="getElectRecords">
+		<![CDATA[
+			from ElectRecord as record where record.task.id= :taskId
+			and record.student.id=:stdId order by record.electTime
+		]]>
+	</query>
+	<query name="getCourseElected">
+		<![CDATA[
+			select count(*) from  
+			   ElectRecord where task = :task
+    			and student =:std
+			    and (turn=:turn or (turn <:turn and isPitchOn=true))
+		]]>
+	</query>
+
+</hibernate-mapping>

@@ -1,0 +1,1 @@
+<#include "../report/teachClassGradeReport/report.ftl"/>

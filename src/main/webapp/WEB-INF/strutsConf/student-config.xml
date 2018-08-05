@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<struts-config>
+	<form-beans>
+		<form-bean name="importStudentFileForm"
+			type="org.apache.struts.action.DynaActionForm">
+			<form-property type="org.apache.struts.upload.FormFile"
+				name="studentFile"/>
+		</form-bean>
+	</form-beans>
+	
+	<action-mappings>
+		<!--辅导员-->
+		<action path="/instructorStd" scope="request" parameter="method"/>
+		
+		<action path="/freshman" scope="request" parameter="method"/>
+		
+		<action path="/searchStudent" scope="request" name="page20Form"
+			parameter="method">
+			<forward name="success" path="/pages/std/studentSearchForm.ftl"/>
+			<forward name="detail" path="/pages/std/studentInfoDetail.ftl"/>
+		</action>
+		
+		<action path="/studentManager" scope="request" name="page20Form"
+			parameter="method">
+			<forward name="success" path="/pages/std/studentManager.ftl"/>
+		</action>
+		
+		<action path="/studentCodeManager" scope="request" name="page20Form"
+			parameter="method">
+		</action>
+		
+		<action path="/stdStatusStat" scope="request" parameter="method"/>
+		
+		<action path="/studentOperation" scope="request" name="page20Form"
+			parameter="method">
+			<forward name="addForm" path="/pages/std/studentInfoAddForm.ftl"/>
+			<forward name="updateForm"
+				path="/pages/std/studentInfoUpdateForm.ftl"/>
+			<forward name="success"
+				path="/studentManager.do?method=manager&amp;moduleName=StudentManager"
+				redirect="true"/>
+			<forward name="failure" path="/pages/error.ftl"/>
+		</action>
+		
+		<action path="/studentDetailByManager" scope="request" parameter="method">
+			<forward name="detail" path="/pages/std/studentInfoDetail.ftl"/>
+		</action>
+		
+		<action path="/stdDetail" scope="request" parameter="method"/>
+		
+		<action path="/loadStudentBasicInfoUpdateForm" scope="request"
+			parameter="method">
+			<forward name="basicInfoUpdateForm"
+				path="/pages/std/studentBasicInfoUpdateForm.ftl"/>
+		</action>
+		
+		<action path="/updateStudentBasicInfo" scope="request" name="page20Form"
+			parameter="method">
+			<forward name="success" path="/studentDetail.do?method=studentDetail"
+				redirect="true"/>
+		</action>
+		
+		<!--学籍异动 状态维护-->
+		<action path="/studentAlteration" scope="request" parameter="method"/>
+		<action path="/alterationForStd" scope="request" parameter="method"/>
+		<action path="/studentStatus" scope="request" parameter="method"/>
+		
+		<action path="/studentChartStatistics" scope="request" parameter="method"/>
+		<action path="/studentCountStatistics" scope="request" parameter="method"/>
+		
+		<action path="/studentFile" name="importStudentFileForm" scope="request"
+			parameter="method"/>
+		
+		<action path="/studentPhoto" scope="request" parameter="method"/>
+		<action path="/photoByStudent" scope="request" parameter="method"/>
+		<action path="/specialityAlerationAudit" scope="request"
+			parameter="method"/>
+		<action path="/studentInfoUpdateSetting" scope="request"
+			parameter="method"/>
+		<action path="/specialityAlerationApplicaton" scope="request"
+			parameter="method"/>
+		<!--毕业-->
+		<action path="/graduatePractice" scope="request" parameter="method"/>
+		<action path="/stdOnCampusStat" scope="request" parameter="method"/>
+		<action path="/degreeAuditStandard" scope="request" parameter="method"/>
+		<action path="/degreeAudit" scope="request" parameter="method"/>
+		<action path="/auditResultSearch" scope="request" parameter="method"/>
+		<action path="/studentAuditStandardDetail" scope="request" parameter="method"/>
+		<!--双专业管理-->
+		<action path="/speciality2ndStd" scope="request" parameter="method"/>
+		<action path="/speciality2ndSignUp" scope="request" parameter="method"/>
+		<action path="/signUpGPASetting" scope="request" parameter="method"/>
+		<action path="/speciality2ndSignUpGPASetting" scope="request"
+			parameter="method"/>
+		<action path="/speciality2ndSignUpSetting" scope="request"
+			parameter="method"/>
+		<action path="/speciality2ndSignUpSpecialitySetting" scope="request"
+			parameter="method"/>
+		<action path="/speciality2ndSignUpStudent" scope="request"
+			parameter="method"/>
+		<action path="/speciality2ndSignUpStdScope" scope="request"
+			parameter="method"/>
+		<!--注册统计-->
+		<action path="/register" scope="request" parameter="method"/>
+		<action path="/registerUserGroup" scope="request" parameter="method"/>
+		<action path="/stdRegister" scope="request" parameter="method"/>
+		<action path="/registerStat" scope="request" parameter="method"/>
+		
+		<action path="/awardPunishSearch" scope="request" parameter="method"/>
+		<action path="/awardPunish" scope="request" parameter="method"/>
+		<action path="/stdAwardPunish" scope="request" parameter="method"/>
+		<action path="/stdPractice" scope="request" parameter="method"/>
+		<!--居留签证管理-->
+		<action path="/abroadInfo" scope="request" parameter="method"/>
+	</action-mappings>
+</struts-config>

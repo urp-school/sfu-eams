@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 监考信息-->
+<hibernate-mapping package="com.shufe.model.course.arrange.exam">
+	<class name="ExamMonitor" table="PK_JK_T">
+		<id name="id" column="id" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_PK_JK_T</param>
+			</generator>
+		</id>
+		<many-to-one name="examActivity" column="JXHDID"/>
+		<many-to-one name="depart" column="JKYXID" not-null="true"/>
+		<many-to-one name="invigilator" column="JKLSID" not-null="false"/>
+		<property name="examinerName" column="ZKLSMC" length="50"/>
+		<property name="invigilatorName" column="JKLSMC" length="50"/>
+	</class>
+</hibernate-mapping>

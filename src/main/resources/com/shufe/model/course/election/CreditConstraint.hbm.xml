@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 选课学分限制 -->
+<hibernate-mapping package="com.shufe.model.course.election">
+	<class name="StdCreditConstraint" table="XK_XSXF_T">
+		<id name="id" column="id" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_XK_XSXF_T</param>
+			</generator>
+		</id>
+		<many-to-one name="calendar" column="JXRLID" not-null="true"/>
+		<property name="maxCredit" column="XFSX" not-null="true"/>
+		<property name="minCredit" column="XFXX" not-null="true"/>
+		<property name="electedCredit" column="YXXF"/>
+		<property name="awardedCredit" column="JLXF"/>
+		<property name="GPA" column="PJJD"/>
+		<many-to-one name="std" column="XSID" not-null="true"/>
+	</class>
+	<class name="SpecialityCreditConstraint" table="XK_ZYXF_T">
+		<id name="id" column="id" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_XK_ZYXF_T</param>
+			</generator>
+		</id>
+		<many-to-one name="calendar" column="JXRLID" not-null="true"/>
+		<property name="maxCredit" column="XFSX" not-null="true"/>
+		<property name="minCredit" column="XFXX" not-null="true"/>
+		<property name="enrollTurn" column="RXPC" length="10"/>
+		<many-to-one name="stdType" column="XSLBID" not-null="true"/>
+		<many-to-one name="depart" column="BMID" not-null="true"/>
+		<many-to-one name="speciality" column="ZYID" not-null="false"/>
+		<many-to-one name="aspect" column="ZYFXID"/>		
+	</class>
+	<query name="getStdCreditConstriantBySpeciality">
+		<![CDATA[
+			select stdCredit 
+			from SpecialityCreditConstraint as specialityCredit,
+			     StdCreditConstraint as stdCredit join stdCredit.std as std
+			where specialityCredit.id in (:specialityCreditConstraintIds)
+			      and std.enrollYear = specialityCredit.enrollTurn
+			      and std.department = specialityCredit.depart
+			      and ((std.firstMajor =null and specialityCredit.speciality=null) or(std.firstMajor = specialityCredit.speciality) )
+			      and ((std.firstAspect =null and specialityCredit.aspect=null) or (std.firstAspect = specialityCredit.aspect))
+			]]>
+	</query>
+	<query name="getSingleStdCreditConstraint">
+		<![CDATA[
+			from StdCreditConstraint as stdCredit
+			where stdCredit.std.id=:stdId
+			and stdCredit.calendar.id=:calendarId
+			]]>
+	</query>
+</hibernate-mapping>

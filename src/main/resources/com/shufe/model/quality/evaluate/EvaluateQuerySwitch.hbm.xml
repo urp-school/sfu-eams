@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.quality.evaluate">
+	<!--评教查询开关-->
+	<class name="EvaluateQuerySwitch" table="JXZL_PJ_PJCXKG_T">
+		<cache usage="read-write" region="evaluateCache"/>
+		<id name="id" column="ID">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXZL_PJ_PJCXKG_T</param>
+			</generator>
+		</id>
+		<property name="isOpen" column="KGZT" length="1"/>
+		<property name="openAt" column="KFSJ"/>
+		<many-to-one name="teachCalendar" column="jxrlid"/>
+	</class>
+</hibernate-mapping>

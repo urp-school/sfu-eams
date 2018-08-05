@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<description>model spring beans</description>
+	
+	<bean id="entityEnvironment" class="com.ekingstar.commons.model.Model">
+		<property name="context">
+			<ref local="entityContext"/>
+		</property>
+	</bean>
+	
+	<bean id="entityContext"
+		class="com.ekingstar.commons.model.context.HibernateEntityContext">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	
+</beans>

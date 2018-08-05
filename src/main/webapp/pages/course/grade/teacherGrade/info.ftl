@@ -1,0 +1,1 @@
+<#include "../collegeGrade/info.ftl"/>

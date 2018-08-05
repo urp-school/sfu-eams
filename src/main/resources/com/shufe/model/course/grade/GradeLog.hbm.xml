@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 成绩-->
+<hibernate-mapping>
+    <!--日志记录-->
+    <class name="com.shufe.model.course.grade.GradeLog" table="CJ_RZJL_T">
+        <id name="id" column="id" unsaved-value="null">
+            <generator class="sequence">
+                <param name="sequence">SEQ_CJ_RZJL_T</param>
+            </generator>
+        </id>
+        <many-to-one name="stdType" column="XSLBID" not-null="true"/>
+        <property name="stdTypeCode" column="XSLBDM" not-null="true"/>
+        <property name="stdTypeName" column="XSLBXM" not-null="true"/>
+        <many-to-one name="student" column="XSID"/>
+        <property name="stdCode" column="XSXH" not-null="true"/>
+        <property name="stdName" column="XSXM" not-null="true"/>
+        <!--教学日历描述-->
+        <many-to-one name="calendar" column="JXRLID"/>
+        <!--教学日历备用-->
+        <property name="calendarValue" column="JXRLBY" not-null="true"/>
+        <many-to-one name="task" column="JXRWID"/>
+        <!--任务课程序号-->
+        <property name="taskSeqNo" column="RWKCXH"/>
+        <many-to-one name="course" column="RWKCID"/>
+        <property name="courseCode" column="RWKCDM" not-null="true"/>
+        <property name="courseName" column="RWKCMC" not-null="true"/>
+        <!--记录产生状态-->
+        <property name="status" column="JLCSZT" not-null="true"/>
+        <!--记录描述-->
+        <property name="context" column="JLMS" not-null="true" length="2000"/>
+        <!--记录产生时间-->
+        <property name="generateAt" column="JLCSSJ" not-null="true"/>
+        <!--记录产生者-->
+        <many-to-one name="generateBy" column="JLCSZ"/>
+        <property name="userCode" column="YHZH" not-null="true"/>
+        <property name="userName" column="YHMC" not-null="true"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.shufe.model.course.plan.PlanSingleInfo"
+        table="PYJH_BDRZ_XX_T" discriminator-value="0">
+        <id name="id" column="ID" unsaved-value="null" length="32">
+            <generator class="sequence">
+                <param name="sequence">SEQ_PYJH_BDRZ_XX_T</param>
+            </generator>
+        </id>
+        <property name="enrollTurn" column="SZNJ" not-null="true"/>
+        <property name="stdTypeCode" column="XSLBDM" not-null="true"/>
+        <property name="stdTypeName" column="XSLBMC" not-null="true"/>
+        <property name="departmentCode" column="YXDM" not-null="true"/>
+        <property name="departmentName" column="YXMC" not-null="true"/>
+        <property name="majorCode" column="ZYDM"/>
+        <property name="majorName" column="ZYMC"/>
+        <property name="majorTypeCode" column="ZYFXDM"/>
+        <property name="majorTypeName" column="ZYFXMC"/>
+        <property name="terms" column="XQS"/>
+        <property name="termValues" column="XQXX"/>
+        <property name="creditHour" column="ZXS"/>
+        <property name="credit" column="ZXF"/>
+        <property name="groupCount" column="KCZS"/>
+        <property name="allCourseCount" column="ZKCS"/>
+        <property name="teacherNames" column="ZDJSC"/>
+        <property name="isStdPerson" column="SFGR"/>
+        <property name="stdCode" column="XSXH"/>
+        <property name="stdName" column="XSXM"/>
+        <property name="isConfirm" column="SFQR"/>
+        <property name="remark" column="BZ"/>
+    </class>
+</hibernate-mapping>

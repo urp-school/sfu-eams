@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 考勤报表 -->
+<hibernate-mapping package="com.shufe.model.course.attend" >
+	<class name="AttendStaticReport" table="AttendStaticReport"
+		discriminator-value="0">
+		<cache usage="read-write" region="taskCache"/>
+		<id name="id" column="id" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXKQBB_T</param>
+			</generator>
+		</id>
+		<many-to-one name="calendar" column="TEACHCALENDARID" not-null="true"/>
+		<many-to-one name="task" column="JXRWID" />
+		<many-to-one name="student" column="STUID" not-null="true"/>
+		<many-to-one name="teacher" column="TEAID" />
+		<property name="attendYear" column="ATTENDYEAR" not-null="true"/>
+		<property name="attendMonth" column="ATTENDMONTH" not-null="true" />
+		<property name="monthAbesence" column="MONTHABESENCE" not-null="true"/>
+		<property name="termAbesence" column="TERMABESENCE" not-null="true"/>
+	</class>
+</hibernate-mapping>

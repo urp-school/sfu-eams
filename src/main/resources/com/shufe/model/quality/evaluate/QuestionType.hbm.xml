@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.quality.evaluate">
+	<class name="QuestionType" table="JXZL_PJ_WTLB_T">
+		<cache usage="read-write" region="evaluateCache"/>
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXZL_PJ_WTLB_T</param>
+			</generator>
+		</id>
+		<property name="name" column="WTLBMC" length="100" not-null="true"/>
+		<property name="engName" column="WTLBMC_EN" length="50"/>
+		<property name="remark" column="BZ" length="500"/>
+		<property name="priority" column="YXJ" length="10" not-null="true"/>
+		<property name="createAt" column="CJSJ" not-null="true"/>
+		<property name="state" column="ZT" not-null="true"/>
+	</class>
+</hibernate-mapping>

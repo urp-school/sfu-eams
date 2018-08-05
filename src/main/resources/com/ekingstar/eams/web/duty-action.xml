@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <description>duty struts beans</description>
+	
+	<bean id="inputDutyRecord" name="/inputDutyRecord"  autowire="byName" scope="prototype" class="com.shufe.web.action.duty.InputDutyRecord">
+        <property name="courseActivityService">
+            <ref bean="courseActivityService" />
+        </property>
+		<property name="teachTaskService">
+            <ref bean="teachTaskService" />
+        </property>
+		<property name="studentService">
+			<ref bean="studentService"/>
+		</property>
+    </bean>
+	
+	<bean id="dutyRecordManager" name="/dutyRecordManager"  autowire="byName" scope="prototype" class="com.shufe.web.action.duty.DutyRecordManager">
+        <property name="adminClassService">
+            <ref bean="adminClassService" />
+        </property>
+		<property name="teachTaskService">
+            <ref bean="teachTaskService" />
+        </property>
+		<property name="departmentService">
+            <ref bean="departmentService" />
+        </property>
+		<property name="studentTypeService">
+            <ref bean="studentTypeService" />
+        </property>
+		<property name="studentService">
+            <ref bean="studentService" />
+        </property>
+    </bean>
+	
+	<bean id="searchTask"  autowire="byName" scope="prototype" class="com.shufe.web.action.duty.DutyRecordManager">
+	</bean>
+	
+	<bean name="/dutyRecordManagerWithTeacher"  autowire="byName" scope="prototype" class="com.shufe.web.action.duty.DutyRecordManagerByTeacher">
+        <property name="studentService">
+            <ref bean="studentService" />
+        </property>
+		<property name="inputDutyRecord">
+            <ref bean="inputDutyRecord" />
+        </property>
+		<property name="dutyRecordManager">
+            <ref bean="dutyRecordManager" />
+        </property>
+    </bean>
+	
+	<bean name="/dutyRecordSearch"  autowire="byName" scope="prototype" class="com.shufe.web.action.duty.DutyRecordSearch">
+        <property name="studentService">
+            <ref bean="studentService" />
+        </property>
+		<property name="dutyService">
+            <ref bean="dutyService" />
+        </property>
+    </bean>
+	
+	<bean name="/inputDutyRecordWithTeacher"  autowire="byName" scope="prototype" class="com.shufe.web.action.duty.InputDutyRecord">
+        <property name="studentService">
+            <ref bean="studentService" />
+        </property>
+    </bean>
+	
+	<bean name="/studentDutyRecord"  autowire="byName" scope="prototype" class="com.shufe.web.action.duty.DutyRecordSearch">
+        <property name="studentService">
+            <ref bean="studentService" />
+        </property>
+    </bean>
+    
+</beans>

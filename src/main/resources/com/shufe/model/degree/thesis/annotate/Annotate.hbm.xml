@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.degree.thesis.annotate">
+	<!-- 学位论文评阅 -->
+	<class name="Annotate" table="LW_XWPY_T">
+		<id name="id" column="ID" length="32">
+			<generator class="sequence">
+				<param name="sequence">SEQ_LW_XWPY_T</param>
+			</generator>
+		</id>
+		<property name="departmentValidate" column="YXQR"/>
+		<property name="tutorValidate" column="DSQR"/>
+		<property name="isDoubleBlind" column="SMSFXZ"/>
+		<property name="avgMark" column="LWPJCJ" length="20"/>
+		<property name="remark"  column="BZ" length="1000"/>
+		<component name="selfAnnotate" class="SelfAnnotate">
+			<property name="innovateOne" column="CXDY" length="1000"/>
+			<property name="innovateTwo" column="CXDR" length="1000"/>
+			<property name="innovateThree" column="CXDS" length="1000"/>
+			<property name="thesisLack" column="LWBZ" length="1000"/>
+			<property name="innovateOneTeacher" column="CXD1" length="1"/>
+			<property name="innovateTwoTeacher" column="CXD2" length="1"/>
+			<property name="innovateThreeTeacher" column="CXD3" length="1"/>
+			<property name="lackTeacher" column="BZD" length="1"/>
+		</component>
+		<set name="publishThesisSet" table="LW_XS_KY_PY_T" cascade="all">
+			<key column="XWLWPYID"/>
+			<many-to-many column="XSKYLWID"
+				class="com.shufe.model.degree.study.StudyThesis"/>
+		</set>
+		<set name="annotateBooks" table="LW_LWPY_DSPY_T" cascade="all">
+			<key column="XWLWPYID"/>
+			<many-to-many column="DSLWPYID" class="ThesisAnnotateBook"/>
+		</set>
+		<property name="finishOn" column="MSWCSJ"/>
+		<property name="downloadName" column="XZWJM"/>
+		<property name="displayName" column="XZXSWJM"/>
+	</class>
+</hibernate-mapping>

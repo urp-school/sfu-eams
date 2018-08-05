@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.fee.stat">
+    <!--CreditFeeDefault class-->
+	<class name="CreditFeeStat" table="SF_XFSF_V">
+		<id name="id" column="ID" unsaved-value="null">
+            <generator class="assigned"/>
+        </id>
+		<many-to-one name="student" column="XSID" not-null="true"/>
+		<property name="year" column="XNDMC" not-null="true"/>
+		<property name="term" column="XQMC" not-null="true"/>
+		<property name="credits" column="ZXF" not-null="true"/>
+		<property name="payed" column="XFJE" not-null="true"/>
+		<property name="creditFee" column="XFSF" not-null="true"/>
+	</class>
+</hibernate-mapping>

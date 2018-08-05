@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 教学任务表 -->
+<hibernate-mapping package="com.shufe.model.course.election">
+	<class name="ElectStdScope" table="XK_FW_T">
+		<cache usage="read-write" region="taskCache"/>
+		<id name="id" column="id" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_XK_FW_T</param>
+			</generator>
+		</id>
+		<many-to-one name="task" column="JXRWID" not-null="true" />
+		<property name="enrollTurns" column="RXPCC" length="50" not-null="false"/>
+		<property name="stdTypeIds" column="XSLBIDC" length="100" not-null="true"/>
+		<property name="departIds" column="BMIDC" length="100" not-null="true"/>
+		<property name="specialityIds" column="ZYIDC" length="500"
+			not-null="false"/>
+		<property name="aspectIds" column="ZYFXIDC" length="500" not-null="false"/>
+		<property name="adminClassIds" column="BJIDC" length="500"
+			not-null="false"/>
+		<property name="startNo" column="QSXH" length="32" not-null="false"/>
+		<property name="endNo" column="ZZXH" length="32" not-null="false"/>
+	</class>
+	<sql-query name="creditInit" callable="true"> 
+		{call creditinit(:enrollTurn,:stdTypeId,:departId,:specialityId,:aspectId,:calendarId,:maxCredit,:minCredit)}
+    </sql-query>
+	<sql-query name="courseTakeInit" callable="true"> 
+		{call courseTakeInit(:taskId)}
+    </sql-query>
+</hibernate-mapping>

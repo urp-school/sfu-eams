@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.std" >
+	<class name="Student" table="XSXX_V">
+		<id name="id" column="ID">
+			<generator class="sequence">
+				<param name="sequence">SEQ_XSXX_T</param>
+			</generator>
+		</id>
+		<property name="code" column="XH" not-null="true" unique="true" length="32"
+			type="string"/>
+		<property name="name" column="XM" not-null="true" length="50" type="string"/>
+		<property name="engName" column="XM_EN" length="50" type="string"/>
+		<property name="createAt" column="ZDSJ" not-null="true"/>
+		<property name="modifyAt" column="XGSJ" not-null="true"/>
+		<many-to-one name="state" column="XJZTID" not-null="true"/>
+		<property name="inSchool" column="SFZX" not-null="true"/>
+		<property name="active" column="SFZJ" not-null="true"/>
+		<property name="remark" column="BZ" length="500"/>
+		
+		<property name="enrollYear" column="RXNFPC" length="10" not-null="true"/>
+
+		<property name="schoolingLength" column="XZ" length="10"/>
+		<property name="isSecondMajorStudy" column="EZYSFJD"/>
+		<property name="isSecondMajorThesisNeed" column="EZYSFXLW"/>		
+		<many-to-one name="type" column="XSLBID" not-null="true"/>
+		
+		<many-to-one name="schoolDistrict" column="XQID"/>
+		<many-to-one name="department" column="BMID" not-null="true"/>
+		<many-to-one name="managementDepart" column="GLYXID"/>
+		<many-to-one name="firstMajor" column="YZYID"/>
+		<many-to-one name="secondMajor" column="EZYID"/>
+		<many-to-one name="firstAspect" column="YZYFXID"/>
+		<many-to-one name="secondAspect" column="EZYFXID"/>
+		<many-to-one name="languageAbility" column="YZSLCDID"/>
+		
+		<set name="adminClasses" table="JCXX_BJ_XS_T" inverse="true">
+			<key column="XSID"/>
+			<many-to-many column="BJID"
+				class="com.shufe.model.system.baseinfo.AdminClass"/>
+		</set>
+		<many-to-one name="teacher" column="JSID"/>
+		<many-to-one name="tutor" column="EZYJSID"/>
+		<many-to-one name="studentStatusInfo" column="XJXXID" not-null="true"
+			unique="true" class="StudentStatusInfo" cascade="all"/>
+		<many-to-one name="basicInfo" column="JBXXID" not-null="true"
+			class="BasicInfo" unique="true" cascade="all"/>
+		<many-to-one name="abroadStudentInfo" column="LXSXXID" unique="true"
+			class="AbroadStudentInfo" cascade="all"/>
+		<many-to-one name="degreeInfo" column="XLXWID" unique="true" cascade="all"
+			not-null="false"/>
+		<property name="graduateOn" column="BYSJ"/>
+		
+		<set name="auditResults" inverse="true">
+			<key column="XSID"/>
+			<one-to-many
+				class="com.ekingstar.eams.std.graduation.audit.model.AuditResult"/>
+		</set>
+		<filter name="filterAuthorityByDepartment"
+			condition="BMID in (:departmentIds)"/>
+		<filter name="filterAuthorityByStudentType"
+			condition="XSLBID in (:studentTypeIds)"/>
+		<filter name="filterSecondMajorStudent"
+			condition="((EZYID is not null) or (EZYFXID is not null))"/>
+	</class>
+	
+	<!--学籍信息-->
+	<class name="StudentStatusInfo" table="XSXX_XJXX_T">
+		<id name="id" column="ID" length="32" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_XSXX_XJXX_T</param>
+			</generator>
+		</id>
+		<property name="graduateSchool" column="YBYXY" length="100" type="string"/>
+		<property name="originalAddress" column="SYDZ" length="100"/>
+		<property name="examNumber" column="ZKZH" length="25"/>
+		<property name="enrollDate" column="RXSJ"/>
+		<property name="leaveDate" column="LXSJ"/>
+		<property name="gotoWhere" column="LXQX" length="255"/>
+		
+		<many-to-one name="educationBeforEnroll" column="RXQZHXL"/>	
+		<property name="educationBeforEnrollDate" column="RXQZHXLSJ" type="date"/>
+		<property name="educationBeforEnrollSpeciality" column="RXQZHXLZY"
+			type="string" length="100"/>
+		<property name="degreeBeforEnrollDate" column="RXQZHXWSJ" type="date"/>
+		<property name="degreeBeforEnrollOrganization" column="RXQZHXWSYDW"
+			type="string" length="100"/>
+		<property name="rewardsAndPunishment" column="JCJY" type="string"
+			length="500"/>
+		<set name="experienceSet" inverse="true" cascade="all,delete-orphan">
+			<key column="XJXXID"/>
+			<one-to-many class="com.shufe.model.std.StudentExperience"/>
+		</set>
+		<property name="recommendOrganization" column="TJDW" type="string"/>
+		<property name="registerDate" column="BDSJ" type="date"/>
+		<many-to-one name="feeOrigin" column="FYLYID"/>		
+		<many-to-one name="enrollDepartment" column="RXBMID"/>		
+		<many-to-one name="enrollSpeciality" column="RXZYID"/>		
+		<many-to-one name="degreeBeforEnroll" column="RXQZHXW"/>		
+		<many-to-one name="leaveSchoolCause" column="LXYY"/>		
+		<many-to-one name="educationMode" column="PYFS"/>		
+		<many-to-one name="enrollMode" column="RXFS"/>
+	</class>
+	
+	<!--学生基本信息-->
+	<class name="BasicInfo" table="XSXX_JBXX_V">
+		<id name="id" column="ID" length="32" unsaved-value="null">
+			<generator class="sequence">
+	            <param name="sequence">SEQ_XSXX_JBXX_T</param>
+		    </generator>
+		</id>
+		<property name="idCard" column="SFZH" length="25"/>
+		<property name="birthday" column="CSNY"/>
+		<!--
+		<property name="mail" length="100" column="DZYJ"/>
+		<property name="phone" length="50" column="JTDH"/>
+		<property name="mobile" length="50" column="YDDH"/>
+		<property name="postCode" length="25" column="JTDZYB"/>
+		<property name="parentName" length="25" column="JZXM"/>
+		<property name="homeAddress" length="100" column="JTDZ"/>
+		<property name="ancestralAddress" length="100" column="JG"/>
+		<property name="photoName" column="ZPM"/>
+		
+		<property name="workAddress" column="GZDZ" type="string" length="100"/>
+		<property name="workPlace" column="GZDW" type="string" length="100"/>
+		<property name="workPlacePostCode" column="GZDZYB" type="string" length="25"/>
+		<property name="workPhone" column="GZDWDH" type="string" length="50"/>
+		-->
+		<many-to-one name="gender" column="XB" not-null="true"/>		
+		<many-to-one name="maritalStatus" column="HYZK"/>		
+		<many-to-one name="nation" column="MZ"/>		
+		<many-to-one name="politicVisage" column="ZZMM"/>		
+		<many-to-one name="country" column="GJDQ"/>
+	</class>
+	
+	
+	
+	<!--学生社会经历信息-->
+	<class name="StudentExperience" table="XLHSHJL_T">
+		<id name="id" column="id" length="32" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_XLHSHJL_T</param>
+			</generator>
+		</id>
+		<property name="experienceDescription" column="JLMS" length="500"/>		
+		<many-to-one name="studentStatusInfo" column="XJXXID" />
+	</class>
+	
+	<!--留学生信息-->
+	<class name="AbroadStudentInfo" table="XSXX_LXSXX_T">
+		<id name="id" column="ID" length="32" unsaved-value="null">
+			<generator class="sequence">
+	            <param name="sequence">SEQ_XSXX_LXSXX_T</param>
+		    </generator>
+		</id>
+		<property name="CSCNo" type="string" column="CSCBH" />
+		<many-to-one name="HSKDegree" column="HSKJBID" />
+		<property name="passportNo" type="string" column="HZBH" />
+		<property name="passportDeadline" type="date" column="HZDQSJ"/>
+		<many-to-one name="passportType" column="HZLBID"/>
+		<property name="visaNo" type="string" column="QZBH" />
+		<property name="visaDeadline" type="date" column="QZDQSJ"/>
+		<many-to-one name="visaType" column="QZLBID"/>
+		<property name="resideCaedNo" type="string" column="JZXKBH" />
+		<property name="resideCaedDeadline" type="date" column="JZXKDQSJ"/>
+	</class>
+	
+	<class name="PlanAuditResult" table="JHSHJG_T">
+    <id name="id" column="id" length="32" unsaved-value="null">
+      <generator class="sequence">
+        <param name="sequence">SEQ_JHSHJG_T</param>
+      </generator>
+    </id>
+    <property name="graduateAuditStatus" column="YBYSHZT"/>
+    <property name="secondGraduateAuditStatus" column="EBYSHZY"/>
+    <many-to-one name="std" column="XSID" />
+  </class>
+	
+	<filter-def name="filterAuthorityByDepartment">
+		<filter-param type="long" name="departmentIds"/>
+	</filter-def>
+	<filter-def name="filterAuthorityByStudentType">
+		<filter-param type="long" name="studentTypeIds"/>
+	</filter-def>
+	<filter-def name="filterSecondMajorStudent"/>
+</hibernate-mapping>

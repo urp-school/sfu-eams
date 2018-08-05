@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 学生状态表 -->
+<hibernate-mapping>
+    <class name="com.shufe.model.std.alteration.StdStatus" table="XS_XJYD_BDXX_T"
+        discriminator-value="0">
+        <id name="id" column="id" unsaved-value="null">
+            <generator class="sequence">
+                <param name="sequence">SEQ_XS_XJYD_BDXX_T</param>
+            </generator>
+        </id>
+        <property name="enrollYear" column="RXNY" not-null="true"/>
+        <many-to-one name="stdType" column="XSLBID" not-null="true"/>
+        <many-to-one name="department" column="BMID" not-null="true"/>
+        <many-to-one name="speciality" column="ZYID"/>
+        <many-to-one name="aspect" column="ZYFXID"/>
+        <many-to-one name="state" column="XJZTID"/>
+        <property name="graduateOn" column="BYSJ"/>
+        <property name="isActive" column="SFYX"/>
+        <property name="isInSchool" column="SFZX"/>
+        <many-to-one name="adminClass" column="BJID"/>
+    </class>
+</hibernate-mapping>

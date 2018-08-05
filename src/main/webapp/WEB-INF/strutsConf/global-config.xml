@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<struts-config>
+	<global-forwards>
+		<forward name="error" path="/pages/error.ftl"/>
+		<forward name="redirector" path="/templates/redirector.ftl"/>
+		<forward name="processDisplay" path="/templates/processDisplay.ftl"/>
+		<forward name="actionResult" path="/templates/actionResult.ftl" />
+	</global-forwards>
+	
+    <global-exceptions>
+        <exception key="error.loginFailed" type="com.ekingstar.commons.security.monitor.AuthenticationException" path="/pages/system/loginFailure.ftl" />
+        <exception key="error.notEnoughAuthority" type="com.ekingstar.commons.security.monitor.AuthorityException" path="/pages/system/loginFailure.ftl" />
+    </global-exceptions>
+
+	<action-mappings>
+		<action path="/error" scope="request">
+			<forward path="/pages/error.ftl" name="error"/>
+		</action>
+	</action-mappings>
+
+    <controller>
+        <set-property property="processorClass" value="org.springframework.web.struts.DelegatingRequestProcessor" />
+    </controller>
+
+    <message-resources parameter="application"/>
+	<message-resources key="excelconfig" parameter="excelconfig"/>
+	<!--
+    <plug-in className="org.springframework.web.struts.ContextLoaderPlugIn">
+       <set-property property="contextConfigLocation" value="/WEB-INF/classes/com/shufe/web/servlet-action.xml" />
+    </plug-in>
+	-->
+	 <plug-in className="org.springframework.web.struts.ContextLoaderPlugIn">
+       <set-property property="contextConfigLocation" value="classpath:applicationContext.xml" />
+    </plug-in>
+	
+</struts-config>
+

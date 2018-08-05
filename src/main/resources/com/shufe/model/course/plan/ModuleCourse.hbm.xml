@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 模块课程表 -->
+<hibernate-mapping package="com.shufe.model.course.plan">
+	<class name="ModuleCourse" table="PYJH_MKK_T">
+		<id name="id" column="id" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_PYJH_MKK_T</param>
+			</generator>
+		</id>
+		<many-to-one name="course" column="KCID" not-null="true"/>
+		<many-to-one name="courseType" column="KCLBID" not-null="true"/>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.course.attend">
+	<class name="AttendWarn" table="Attend_Warn">
+		<cache usage="read-write" region="taskCache"/>
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_Attend_Warn</param>
+			</generator>
+		</id>				
+		<many-to-one name="std" column="XSID" not-null="true"/>
+		<many-to-one name="calendar" column="JXRLID" not-null="true"/>
+		<property name="zks" column="zks"/>
+		<property name="ycq" column="ycq"/>
+		<property name="ljqq" column="ljqq"/>
+		<property name="ljcd" column="ljcd"/>
+		<property name="ljks" column="ljks"/>
+	</class>
+</hibernate-mapping>

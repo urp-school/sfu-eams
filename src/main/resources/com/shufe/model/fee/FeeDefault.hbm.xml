@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.fee">	
+	<!-- 学生类别 收费类别 对比使用的默认值设定表。-->
+	<class name="FeeDefault" table="SF_MRZ_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">seq_SF_MRZ_T</param>
+			</generator>
+		</id>
+		<many-to-one name="department" column="BMID" not-null="true"/>
+		<many-to-one name="studentType" column="XSLBID" not-null="true"/>
+		<many-to-one name="speciality" column="ZYID"/>
+		<many-to-one name="type"   column="SFXMID" not-null="true"/>
+		<property name="value" column="MRZ" not-null="true"/>
+		<property name="remark" column="remark" length="500"/>
+	</class>
+</hibernate-mapping>

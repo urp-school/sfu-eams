@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 排课开关体映射关系 -->
+<hibernate-mapping package="com.shufe.model.course.arrange.task">
+    <class name="ManualArrangeParam" table="JXRW_PK_CS_T">
+        <cache usage="read-write" region="taskCache"/>
+        <id name="id" column="id" unsaved-value="null">
+            <generator class="sequence">
+                <param name="sequence">SEQ_JXRW_PK_CS_T</param>
+            </generator>
+        </id>
+        <many-to-one name="calendar" column="JXRLID" not-null="true"/>
+        <property name="startDate" column="KSRQ" not-null="true"/>
+        <property name="finishDate" column="JZRQ" not-null="true"/>
+        <property name="isOpenElection" column="SFXK"/>
+        <property name="notice" column="ZYSX" length="500"/>
+     </class>
+</hibernate-mapping>

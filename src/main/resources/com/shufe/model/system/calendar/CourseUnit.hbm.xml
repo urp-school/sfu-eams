@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.ekingstar.eams.system.time.CourseUnit" table="JXRL_XJ_T">
+		<cache usage="read-write" region="longLifeForFewer"/>
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXRL_XJ_T</param>
+			</generator>
+		</id>
+		<property name="index" column="XJBH" not-null="true"/>
+		<property name="name" column="XJMC" not-null="true" length="10"/>
+		<property name="engName" column="XJMC_EN" not-null="true" length="50"/>
+		<property name="startTime" column="KSSJ" not-null="true"/>
+		<property name="finishTime" column="JSSJ" not-null="true"/>
+		<!--所在时段-->
+		<property name="segNo" column="SZSD" not-null="true"/>
+		<many-to-one name="timeSetting" column="SJSZID" not-null="true" class="com.shufe.model.system.calendar.TimeSetting"/>
+	</class>
+</hibernate-mapping>

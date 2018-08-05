@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<description>general struts beans</description>
+	
+	<import resource="classpath:com/ekingstar/eams/web/evaluate-action.xml"/>
+		
+	<import resource="classpath:com/ekingstar/eams/web/helper.xml"/>
+	<import resource="classpath:com/ekingstar/eams/web/course-action.xml"/>
+	<import resource="classpath:com/ekingstar/eams/web/system-action.xml"/>
+	<import resource="classpath:com/ekingstar/eams/web/fee-action.xml"/>
+	
+	<import resource="classpath:com/ekingstar/eams/web/quality-action.xml"/>
+	<import resource="classpath:com/ekingstar/eams/web/selector-action.xml"/>
+	
+	<import resource="classpath:com/ekingstar/eams/web/student-action.xml"/>
+	<import resource="classpath:com/ekingstar/eams/web/graduate-action.xml"/>
+	<import
+		resource="classpath:com/ekingstar/eams/web/student-class-action.xml"/>
+	<import resource="classpath:com/ekingstar/eams/web/duty-action.xml"/>
+	
+	<import resource="classpath:com/ekingstar/eams/web/workload-action.xml"/>
+	
+	<import resource="classpath:com/ekingstar/eams/web/degree-action.xml"/>
+	
+	<import resource="classpath:com/ekingstar/eams/web/misc-action.xml"/>
+	
+	<import resource="classpath:com/ekingstar/eams/web/research-action.xml"/>
+	
+	<import resource="classpath:com/ekingstar/eams/web/ws-action.xml"/>
+	<bean name="/error" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.ErrorAction"/>
+		
+</beans>

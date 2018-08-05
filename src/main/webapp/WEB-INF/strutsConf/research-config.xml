@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<struts-config>
+
+	<form-beans>
+		<form-bean name="projectDocumentForm"
+			type="org.apache.struts.action.DynaActionForm">
+			<form-property type="org.apache.struts.upload.FormFile"
+				name="formFile"/>
+		</form-bean>
+	</form-beans>
+
+	<action-mappings>
+		<action path="/teachProject" scope="request" parameter="method" />
+
+		<action path="/teachProjectApply" scope="request" parameter="method" />
+
+		<action path="/projectDocument" name="projectDocumentForm" scope="request" parameter="method" />
+
+		<action path="/projectMember" scope="request" parameter="method" />
+		
+		<action path="/teachProjectType" scope="request" parameter="method" />
+
+		<action path="/teachProjectTemplate" name="projectDocumentForm" scope="request" parameter="method" />
+	</action-mappings>
+</struts-config>

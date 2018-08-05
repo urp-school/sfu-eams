@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.shufe.model.quality.evaluate.stat.EvaluateCollegeStat" table="JXZL_PJ_QXTJ_T">
+        <id name="id" column="ID">
+            <generator class="sequence">
+                <param name="sequence">SEQ_JXZL_PJ_QXTJ_T</param>
+            </generator>
+        </id>
+        
+        <!--业务主键-->
+        <many-to-one name="calendar" column="JXRLID" not-null="true"/>
+        
+        <property name="sumScore" column="PJZF"/>
+        
+        <property name="count" column="XYZS"/>
+        
+        <bag name="questionsStat" inverse="true" cascade="all,all-delete-orphan">
+            <key column="QXTJID"/>
+            <one-to-many entity-name="com.shufe.model.quality.evaluate.state.CollegeQuery"/>
+        </bag>
+    </class>
+</hibernate-mapping>

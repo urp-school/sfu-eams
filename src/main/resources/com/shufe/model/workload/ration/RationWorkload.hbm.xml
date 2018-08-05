@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.shufe.model.workload.ration">
+	<!--指定额定工作量类型 值-->
+	<class name="RationWorkload" table="GZL_ED_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_GZL_ED_T</param>
+			</generator>
+		</id>
+		<property name="rationCn" column="EDGZLMC" length="100"></property>
+		<property name="rationEn" column="EDGZLMC_EN" length="50"></property>
+		<property name="value" column="EDGZL" length="10"></property>
+		<property name="remark" column="BZ" length="50"></property>
+		<many-to-one name="department" column="BMID"></many-to-one>
+	</class>
+</hibernate-mapping>

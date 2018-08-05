@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.std.config">
+	<class name="StudentInfoUpdateSetting" table="XS_XXXGSZ_T">
+		<id name="id" column="ID">
+			<generator class="sequence">
+				<param name="sequence">XS_XXXGSZ_T</param>
+			</generator>
+		</id>
+		<property name="isBasicInfoAlterable" column="JBXXKG" not-null="true"/>
+		<property name="isEnrollInfoAlterable" column="RXXXKG" not-null="true"/>
+		<property name="isDegreeInfoAlterable" column="XWXXKG" not-null="true"/>
+		<many-to-one name="stdType" column="XSLBID" not-null="true"/>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.degree.apply">
+  <!-- 学位申请 -->
+	<class name="DegreeApply" table="XWSQ_T">
+		<id name="id" column="ID" length="32">
+			<generator class="sequence">
+				<param name="sequence">SEQ_XWSQ_T</param>
+			</generator>
+		</id>
+		<set name="committeeSet" table="XWSQ_DBWYH_T" inverse="true">
+			<key column="XWSQID"/>
+			<many-to-many class="com.shufe.model.degree.thesis.answer.AnswerTeam"
+				column="DSDBID"/>
+		</set>
+		<many-to-one name="student" column="xsxxid" lazy="proxy"/>
+		<many-to-one name="thesisManage" column="XSLWID" lazy="proxy"/>
+		<property name="stdRemark" column="XSBZ" length="200"/>
+		<property name="adminRemark" column="GLBZ" length="200"/>
+		<component name="thesisNumStandard" class="ThesisNumStandard">
+			<property name="inSideMagzas" column="GNZZ" length="32"/>
+			<property name="outSideMagzas" column="GWZZ" length="32"/>
+			<property name="inSideMeeting" column="GNHY" length="32"/>
+			<property name="outSideMeeting" column="GWHY" length="32"/>
+			<property name="scicount" column="SCISM" length="32"/>
+			<property name="eicount" column="EISM" length="32"/>
+			<property name="istpcount" column="ISTPSM" length="32"/>
+			<property name="nationNO1count" column="GJYDJSM" length="32"/>
+			<property name="nationNO2count" column="GJEDJSM" length="32"/>
+			<property name="nationNO3count" column="GJSDJSM" length="32"/>
+			<property name="nationNO4count" column="GJSIDJSM" length="32"/>
+			<property name="provinceNo1count" column="SYDJSM" length="32"/>
+			<property name="provinceNo2count" column="SEDJSM" length="32"/>
+			<property name="provinceNo3count" column="SSDJSM" length="32"/>
+		</component>
+		<many-to-one name="level1Subject" column="YJXKID"/>
+		<property name="totalMark" column="ZXF" length="10"/>
+		<property name="specialityMark" column="ZYKXF" length="10"/>
+		<property name="commitOn" column="TJSJ"/>
+		<property name="isAgree" column="SFTYXW"/>
+	</class>
+</hibernate-mapping>

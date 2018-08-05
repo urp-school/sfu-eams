@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	<!--文印耗材-->
+<hibernate-mapping package="com.ekingstar.eams.misc.fileprint.model">
+	<class name="FilePrintMaterial" table="WYGL_WYHC_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_WYGL_WYHC_T</param>
+			</generator>
+		</id>
+
+		<property name="materialCode" column="HCDM" length="32" />
+		<property name="materialName" column="HCMC" length="100" />
+		<property name="value" column="HCSL" />
+		<property name="payed" column="FYJE" />
+		<property name="payedOne" column="HCDJ" />
+
+		<!--
+		<many-to-one name="currencyCategory" column="HBLBID" not-null="true"/>
+		<many-to-one name="mode" column="SFFSID" not-null="true"/>
+		 -->
+		<many-to-one name="filePrint" column="QYSQID" not-null="true"/>
+		
+		<property name="remark" column="BZ" length="500" />
+	</class>	
+</hibernate-mapping>

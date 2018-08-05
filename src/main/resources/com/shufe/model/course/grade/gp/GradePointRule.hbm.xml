@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+  <!-- 成绩绩点规则 -->
+<hibernate-mapping package="com.shufe.model.course.grade.gp">
+    <class name="GradePointRule" table="CJ_JDBZ_T">
+        <cache usage="read-write" region="longLifeForFewer"/>
+        <id name="id" column="id" unsaved-value="null">
+            <generator class="sequence">
+                <param name="sequence">SEQ_CJ_JDBZ_T</param>
+            </generator>
+        </id>
+        
+        <!-- 业务主键：学生类别和成绩记录方式 -->
+        <many-to-one name="stdType" column="XSLBID"/>
+        <many-to-one name="markStyle" column="CJJLFSID" not-null="true"/>
+        <property name="name" column="MC" not-null="true"/>
+        <set name="GPMappings" cascade="all" inverse="true">
+            <cache usage="read-write" region="longLifeForFewer"/>
+            <key column="JDBZID"/>
+            <one-to-many class="GPMapping"/>
+        </set>
+    </class>
+</hibernate-mapping>

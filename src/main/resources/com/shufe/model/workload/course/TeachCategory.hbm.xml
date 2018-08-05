@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.workload.course">
+	<!--工作量教学性质-->
+	<class name="TeachCategory" table="GZL_JXXZ_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_GZL_JXXZ_T</param>
+			</generator>
+		</id>
+		<property name="code" column="JXXZDM" length="10"></property>
+		<property name="makeTime" column="ZDSJ"></property>
+		<property name="modifyTime" column="XGSJ"></property>
+		<property name="status" column="ZT" length="1"></property>
+		<property name="remark" column="BZ" length="500"></property>
+		<property name="name" column="XZMC" length="100"></property>
+		<many-to-one name="studentType" column="XSLBID"/>
+		<many-to-one name="courseType" column="KCLBID"/>
+	</class>
+</hibernate-mapping>

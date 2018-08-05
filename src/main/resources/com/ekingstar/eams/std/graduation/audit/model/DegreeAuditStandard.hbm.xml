@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.ekingstar.eams.std.graduation.audit.model">
+	<!-- 学位审核标准要求 -->
+	<class name="DegreeAuditStandard" table="BYSH_XWBZ_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_BYSH_XWBZ_T</param>
+			</generator>
+		</id>
+		<property name="name" column="BZMC"/>
+		<property name="isCompletePlan" column="SFWCJH"/>
+		<property name="GPA" column="PJJD"/>
+		
+		<many-to-one name="stdType" column="XSLBID" not-null="true"/>
+		<many-to-one name="majorType" column="ZYLBID" not-null="true"/>
+		<property name="thesisScore" column="LWCJ"/>
+		<set name="languageExams" table="BYSH_XWBZ_WYKSKM_T">
+			<key column="XWBZID"/>
+			<many-to-many column="QTKSKMID"
+				class="com.ekingstar.eams.system.basecode.industry.OtherExamCategory"/>
+		</set>
+		<set name="computerExams" table="BYSH_XWBZ_JSJKSKM_T">
+			<key column="XWBZID"/>
+			<many-to-many column="QTKSKMID"
+				class="com.ekingstar.eams.system.basecode.industry.OtherExamCategory"/>
+		</set>
+		<many-to-one name="lowestPunishType" column="ZDCFID"/>
+		<!--博士审核-->
+		<property name="isPassDoctorComprehensiveExam" column="SFTGZHKS"/>
+		<property name="thesisInCoreMagazine" column="HXQKLWS"/>
+		<set name="ruleConfigs" table="BYSH_XWBZ_GZPZ_T" cascade="all-delete-orphan">
+			<key column="XWBZID" not-null="true"/>
+			<many-to-many column="GZPZID"
+				class="org.beanfuse.rule.model.RuleConfig"/>
+		</set>
+	</class>
+</hibernate-mapping>

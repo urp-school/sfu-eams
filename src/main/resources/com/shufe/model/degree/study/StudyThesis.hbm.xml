@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.degree.study">
+	<!-- 论文 -->
+	<class name="StudyThesis" table="KY_LW_T">
+		<id name="id" column="ID" length="32">
+			<generator class="sequence">
+				<param name="sequence">SEQ_KY_LW_T</param>
+			</generator>
+		</id>
+		<many-to-one name="student" column="XSID" not-null="true"/>
+		<property name="name" column="LWMC" length="300"/>
+		<property name="wordCount" column="ZS" length="10"/>
+		<property name="authorCount" column="ZZRS"/>
+		<property name="authorIndex" column="ZZPX"/>
+		<property name="isPassCheck" column="SFTGSH" not-null="true"/>
+		<property name="remark" column="BZ" length="500"/>
+		<property name="createOn" column="CJSJ" not-null="true"/>
+		<set name="awards" inverse="true"  cascade="all">
+			<key column="LWID"/>
+			<one-to-many class="StudyThesisAward" />
+		</set>
+		
+		<property name="publicationName" column="KWMC" length="300"/>
+		<many-to-one name="publicationLevel" column="KWJBID"/>
+		<property name="publicationNo" column="QKH"/>
+		<property name="publishOn" column="FBSJ"/>
+		<property name="totalCount" column="ZZS"/>
+		<set name="indexes" table="KY_LW_SY_T" cascade="all">
+			<key column="LWID"/>
+			<many-to-many class="ThesisIndex" column="LWSYID"/>
+		</set>
+	</class>
+</hibernate-mapping>

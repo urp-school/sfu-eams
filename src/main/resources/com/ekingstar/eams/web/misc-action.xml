@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <!-- fileprint action-->
+    <bean name="/filePrintApply" autowire="byName" scope="prototype" 
+    	class="com.ekingstar.eams.misc.fileprint.web.action.FilePrintApplyAction">
+    </bean>
+    
+    <bean name="/filePrintAudit" autowire="byName" scope="prototype" 
+	    class="com.ekingstar.eams.misc.fileprint.web.action.FilePrintAuditAction">
+    </bean>
+    
+    <bean name="/filePrintManage" autowire="byName" scope="prototype" 
+    	class="com.ekingstar.eams.misc.fileprint.web.action.FilePrintManageAction">
+    </bean>
+    
+    <bean name="/examinationPaper" autowire="byName" scope="prototype"
+		class="com.ekingstar.eams.misc.examinationpaper.web.action.ExaminationPaperAction">
+	</bean>
+
+</beans>

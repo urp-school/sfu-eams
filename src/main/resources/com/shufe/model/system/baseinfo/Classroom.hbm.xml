@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<!--教室代码-->
+	<class name="com.shufe.model.system.baseinfo.Classroom" table="JCXX_JS_T">
+		<cache usage="read-write" region="baseinfo"/>
+		<id name="id" column="ID">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JCXX_JS_T</param>
+			</generator>
+		</id>
+		<!--base info-->
+		<property name="code" column="JSDM" length="32" not-null="true"
+			unique="true"/>
+		<property name="name" column="JSMC" length="100" not-null="true"/>
+		<property name="engName" column="JSMC_EN" length="100"/>
+		<property name="abbreviation" column="JSJC" length="50"/>
+		<property name="createAt" column="ZDSJ"/>
+		<property name="modifyAt" column="XGSJ"/>
+		<property name="remark" column="BZ" length="500"/>
+		<property name="state" column="ZTDM" not-null="true"/>
+		<!--room attrs-->
+		<property name="capacityOfCourse" column="RNTKRS" not-null="true"/>
+		<property name="capacityOfExam" column="RNKSRS" not-null="true"/>
+		<property name="capacity" column="RNRS" not-null="true"/>
+		<property name="floor" column="SCLC"/>
+		<property name="isCheckActivity" column="SFPKJC" not-null="true"/>
+		<many-to-one name="configType" column="SBPZID" not-null="false"/>
+		<set name="departments" table="JCXX_BM_JS_T" cascade="none" sort="unsorted">
+			<key column="JSID"/>
+			<many-to-many class="com.shufe.model.system.baseinfo.Department"
+				column="BMID"/>
+		</set>
+		<many-to-one name="building" column="JXLID" not-null="false"/>
+		<many-to-one name="schoolDistrict" column="XQID" not-null="true"/>
+		<many-to-one name="availableTime" column="KYSJFBID"
+			class="com.shufe.model.course.arrange.AvailableTime" unique="true"
+			cascade="all"/>
+		<set name="activities" table="JXHD_T">
+			<key column="JSID"/>
+			<one-to-many class="com.shufe.model.course.arrange.Activity"/>
+		</set>
+	</class>
+	<query name="getAllClassrooms"> <![CDATA[ from Classroom    ]]>
+	</query>
+	<query name="getClassroomsByIdsSorted">
+		<![CDATA[ from Classroom room where room.id in (:roomIds)
+			           order by room.building.id,room.name
+	      ]]>
+	</query>
+	<query name="getClassroomsOfDepart">
+		<![CDATA[ select distinct room from Classroom room 
+			           join room.departments as depart 
+			           where depart.id in (:departIds)
+			           order by room.building.id,room.id
+	      ]]>
+	</query>
+</hibernate-mapping>

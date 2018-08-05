@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.shufe.model.system.calendar.TimeSetting" table="JXRL_SJSZ_T">
+		<cache usage="read-write" region="longLifeForFewer"/>
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXRL_SJSZ_T</param>
+			</generator>
+		</id>
+		<property name="name" column="MC" not-null="true" length="100"/>
+		<many-to-one name="stdType" column="XSLBID" not-null="false" />
+		<set name="courseUnits" table="JXRL_XJ_T" cascade="all-delete-orphan"
+			inverse="true">
+			<cache usage="read-write" region="longLifeForFewer"/>
+			<key column="SJSZID"/>
+			<one-to-many class="com.ekingstar.eams.system.time.CourseUnit"/>
+		</set>
+	</class>
+</hibernate-mapping>

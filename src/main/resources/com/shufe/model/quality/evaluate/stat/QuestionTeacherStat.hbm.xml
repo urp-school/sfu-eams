@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.shufe.model.quality.evaluate.stat.QuestionTeacherStat"
+        table="JXZL_PJ_WTTJ_JZG_T">
+        <id name="id" column="ID">
+            <generator class="sequence">
+                <param name="sequence">SEQ_PJ_WTTJ_JZG_T</param>
+            </generator>
+        </id>
+        <many-to-one name="evaluateTeacherStat" column="JSGRID" not-null="true"/>
+        <many-to-one name="question" column="PJWTID" not-null="true"/>
+        <property name="evgPoints" column="DFJZ" not-null="true"/>
+        <!-- 每学期每位教师每门课程某个问题有多少学生评教记录 -->
+        <bag name="questionResults" table="JXZL_PJ_WTTJ_JZG_WTJG_T">
+            <cache usage="read-write"/>
+            <key column="PJJZGID" not-null="true"/>
+            <many-to-many column="WTJGID"
+                entity-name="com.shufe.model.quality.evaluate.QuestionResult"/>
+        </bag>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.degree.study">
+  <!-- 著作 -->
+	<class name="Literature" table="KY_ZZ_T">
+		<id name="id" column="ID" length="32">
+			<generator class="sequence">
+				<param name="sequence">SEQ_KY_ZZ_T</param>
+			</generator>
+		</id>
+		<many-to-one name="student" column="XSID" not-null="true"/>
+		<property name="name" column="ZZMC" length="200"/>
+		<property name="wordCount" column="ZS" length="10"/>
+		<property name="authorCount" column="ZZRS"/>
+		<property name="authorIndex" column="ZZPX"/>
+		<property name="isPassCheck" column="SFTGSH" not-null="true"/>
+		<property name="remark" column="BZ" length="500"/>
+		<property name="createOn" column="CJSJ" not-null="true"/>
+		<set name="awards" inverse="true" cascade="all">
+			<key column="ZZID"/>
+			<one-to-many class="LiteratureAward"/>
+		</set>
+		
+		<property name="publishCompany" column="CBS" length="200"/>
+		<property name="publishOn" column="CBSJ"/>
+		<property name="totalCount" column="ZZS" length="10"/>
+		<many-to-one name="literatureType" column="ZZLBID"/>
+	</class>
+						
+</hibernate-mapping>

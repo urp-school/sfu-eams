@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.degree.subject">
+	<class name="Level1Subject" table="XK_YJ_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_XK_YJ_T</param>
+			</generator>
+		</id>
+		<property name="code" column="YJXKDM" unique="true" not-null="true"
+			length="32"/>
+		<property name="name" column="YJXKMC" length="100" not-null="true"/>
+		<property name="engName" column="YJXKMC_EN" length="100"/>
+		<property name="forDoctor" column="BSXKD" not-null="true"/>
+		<property name="forMaster" column="SSXKD" not-null="true"/>
+		<property name="ratifyTime" column="PZSJ"/>
+		<many-to-one name="category" not-found="ignore" not-null="true"
+			column="XKMLID"/>
+		<set name="level2Subjects">
+			<key column="YJXKID"/>
+			<one-to-many class="com.shufe.model.degree.subject.Level2Subject"/>
+		</set>
+	</class>
+</hibernate-mapping>

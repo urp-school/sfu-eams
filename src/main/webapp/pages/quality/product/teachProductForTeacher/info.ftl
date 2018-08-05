@@ -1,0 +1,1 @@
+<#include "../teachProduct/info.ftl"/>

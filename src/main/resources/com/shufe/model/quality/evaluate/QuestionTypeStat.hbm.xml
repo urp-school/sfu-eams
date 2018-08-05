@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.shufe.model.quality.evaluate">
+<!--问题类别汇总表-->
+<class name="QuestionTypeStat" table="JXZL_PJ_HZWTLB_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXZL_PJ_HZWTLB_T</param>
+			</generator>
+		</id>
+		<property name="score" column="WTLBDF" length="10"/>
+		<many-to-one name="type" column="WTLBID"/>
+	    <many-to-one name="questionnaireStat" column="WJHZID"/>
+	</class>
+</hibernate-mapping>

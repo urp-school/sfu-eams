@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.std.speciality2nd" >	
+	<class name="SignUpSetting" table="SZYBM_SZ_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_SZYBM_SZ_T</param>
+			</generator>
+		</id>
+		<property name="name" column="MC"/>
+		<property name="minGPA" column="YQJD"/>
+		<property name="beginOn" type="date" column="KSSJ"/>
+		<property name="endOn" type="date" column="JSSJ"/>
+		<property name="enrollTurn" column="RXNF" length="10"/>
+		<property name="registerOn" type="string" column="BDSJ"/>
+		<property name="registerAt" length="200" column="BDDD"/>
+		<property name="isOpen" column="LQZT"/>
+		<property name="choiceCount" column="ZYS"/>
+		<many-to-one name="calendar" column="JXRLID"/>
+		<set name="scopes" inverse="true" cascade="all" order-by="id asc">
+			<key column="SZYBMSZID"/>
+			<one-to-many class="SignUpStdScope"/>
+		</set>
+		<set name="specialitySettings" inverse="true" cascade="all"
+			order-by="id asc">
+			<key column="SZYBMSZID"/>
+			<one-to-many class="SignUpSpecialitySetting"/>
+		</set>
+		<property name="isOpenMatriculateResult" column="SFGBLQJG"
+			not-null="true"/>
+		<property name="isRestrictSubjectCategory" column="SFXZXKML"
+			not-null="true"/>	
+	</class>
+</hibernate-mapping>

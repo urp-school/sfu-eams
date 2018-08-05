@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.system.baseinfo">
+	<class name="com.shufe.model.system.baseinfo.Teacher" table="JCXX_JZG_T"
+		discriminator-value="T">
+		<cache usage="read-write" region="baseinfo"/>
+		<id name="id" column="ID">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JCXX_JZG_T</param>
+			</generator>
+		</id>
+		<discriminator column="JZGLBBS" type="string" length="1"/>
+		<property name="code" column="JSZGH" length="32" unique="true"/>
+		<property name="name" not-null="true" column="XM" length="50"/>
+		<property name="engName" column="XM_EN" length="50"/>
+		<property name="birthday" column="CHRQ"/>
+		<many-to-one name="country" column="GJDQID"/>
+		<property name="credentialNumber" column="ZJ" length="50"/>
+		<property name="dateOfJoin" column="LXNY"/>
+		<property name="dateOfTitle" column="XZCNY"/>
+		<many-to-one name="department" column="BMID"
+			class="com.shufe.model.system.baseinfo.Department"/>
+		<property name="duty" column="XZZW" length="50"/>
+		<many-to-one name="engagementType" column="PRQKID" not-null="false"/>
+		
+		<property name="resume" column="GRJJ" length="200"/>
+		<property name="isConcurrent" column="SFJZ"/>
+		<property name="isEngageFormRetire" column="SFTXFP"/>
+		
+		<many-to-one name="nation" column="MZID"/>
+		<property name="remark" column="BZ" length="100"/>
+		<many-to-one name="gender" column="XBID" not-null="true"/>
+		<many-to-one name="teacherType" column="JZGLBID"/>
+		<many-to-one name="title" column="JSZCID"/>
+		<many-to-one name="titleLevel" column="JSZCDJID"/>
+		
+		<property name="createAt" column="ZDSJ"/>
+		<property name="modifyAt" column="XGSJ"/>
+		
+		<many-to-one name="workState" column="JSZZZTID"/>
+		<many-to-one name="addressInfo" column="LXFSID" cascade="all"/>
+		<many-to-one name="degreeInfo" column="XLXWID" unique="true" cascade="all"/>
+		<property name="summaryOfTeaching" column="SKQK" length="500"/>
+		<property name="isTeaching" column="SFRK" not-null="true"/>
+		<property name="jobInfo" column="LHZW"/>
+		
+		<many-to-one name="availableTime" column="KYSJFBID" cascade="all"/>
+		<property name="ratingWorkload" column="EDGZL"/>
+		
+		<subclass name="Tutor" discriminator-value="D">
+			<!--导师信息-->
+			<many-to-one name="tutorType" column="DSLBID"/>
+			<many-to-one name="speciality" class="Speciality" column="ZYID"/>
+			<many-to-one name="aspect" class="SpecialityAspect" column="YDFX"/>
+			<property name="dateOfTutor" column="YDRZNY"/>
+		</subclass>
+	</class>
+	<!--联系方式-->
+	<class name="TeacherAddressInfo" table="JCXX_JZG_LXFS_T">
+		<id name="id" column="ID">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JCXX_JZG_LXFS_T</param>
+			</generator>
+		</id>
+		<!--家庭联系方式-->
+		<property name="phoneOfCorporation" column="DWDH" length="30"/>
+		<property name="corporationAddress" column="DWTXDZ" length="300"/>
+		<property name="postCodeOfCorporation" column="DWDZYB" length="10"/>
+		<!--单位联系方式-->
+		<property name="phoneOfHome" column="JTDH" length="30"/>
+		<property name="postCodeOfFamily" column="JTDZYB" length="10"/>
+		<property name="familyAddress" column="JTTXDZ" length="300"/>
+		<property name="mobilePhone" column="YDDH" length="30"/>
+		<property name="fax" column="CZ" length="20"/>
+		<!--个人联系方式-->
+		<property name="email" column="DZYX" length="100"/>
+		<property name="homepage" column="ZYDZ" length="100"/>
+	</class>
+	<!--教师学历学位信息-->
+	<class name="TeacherDegreeInfo" table="JCXX_JZG_XLXW_T">
+		<id name="id" column="ID">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JCXX_JZG_XLXW_T</param>
+			</generator>
+		</id>
+		<!--学位信息-->
+		<many-to-one name="degree" column="XWID"/>
+		<property name="dateOfDegree" column="XXWNY"/>
+		
+		<!--学历信息-->
+		<many-to-one name="eduDegreeInside" column="GNZGXLID" not-null="false"/>
+		<many-to-one name="eduDegreeOutside" column="GWZGXLID" not-null="false"/>
+		<property name="dateOfEduDegreeInside" column="XXLNYGN"/>
+		<property name="dateOfEduDegreeOutside" column="XXLNYGW"/>
+		<many-to-one name="graduateSchool" column="ZHBYXX" not-null="false"/>
+		<property name="experience" column="JXJL" length="2000"/>
+		<property name="achievements" column="KYCG" length="2000"/>
+		<property name="partTimeJob" column="XSJZ" length="2000"/>
+	</class>
+	<query name="getTeacherNames">
+		<![CDATA[select teacher.name from  Teacher as teacher where teacher.id in (:teacherIds) ]]>
+	</query>
+	<query name="getTeachersById">
+		<![CDATA[from  Teacher as teacher where teacher.id in (:teacherIds) ]]>
+	</query>
+	<query name="getTeachersOfDepart">
+		<![CDATA[from  Teacher as teacher where teacher.department.id in (:departIds) ]]>
+	</query>
+	<sql-query name="convertToTutor">
+	   <![CDATA[UPDATE JCXX_JZG_T SET jzglbbs='D' WHERE ID =:teacherId ]]>
+	</sql-query>
+	<sql-query name="convertToTeacher">
+	   <![CDATA[UPDATE JCXX_JZG_T SET jzglbbs='T' WHERE ID =:teacherId ]]>
+	</sql-query>
+</hibernate-mapping>

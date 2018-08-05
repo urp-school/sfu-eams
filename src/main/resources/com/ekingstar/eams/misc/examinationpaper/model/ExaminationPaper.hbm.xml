@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	<!--文印申请-->
+<hibernate-mapping package="com.ekingstar.eams.misc.examinationpaper.model">
+	<class name="ExaminationPaper" table="SJGL_SJGL_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_SJGL_SJGL_T</param>
+			</generator>
+		</id>
+		<many-to-one name="calendar"  column="JXRLID" not-null="true"/>
+		<many-to-one name="course" column="KCID"/>
+		<property name="fileName" column="FILE_NAME" length="100" />
+		<property name="filePath" column="FILE_PATH" length="100" />
+		<property name="remark" column="BZ" length="500" />
+	</class>	
+</hibernate-mapping>

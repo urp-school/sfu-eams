@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.shufe.model.system.codeGen">
+	<class name="CodeScript" table="XTBMGZ_T">
+		<id name="id" column="ID" unsaved-value="null">
+		   <generator class="sequence">
+				<param name="sequence">SEQ_XTBMGZ_T</param>
+			</generator>
+		</id>
+		<property name="codeName" column="BMMC" not-null="true" length="50"/>
+		<property name="attr" column="BMZD" not-null="true" length="30"/>
+		<property name="codeClassName" column="BMLX" not-null="true" length="100"/>
+		<property name="script" column="BMJB" not-null="true" length="1000"/>
+		<property name="description" column="BMMS" length="500"/>
+		<property name="createAt" column="CJSJ" not-null="true"/>
+		<property name="modifyAt" column="XGSJ" not-null="true"/>
+	</class>
+</hibernate-mapping>

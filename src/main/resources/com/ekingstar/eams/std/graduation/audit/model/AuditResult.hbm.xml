@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.ekingstar.eams.std.graduation.audit.model"  >
+  <!-- 审核结果 -->
+	<class name="AuditResult" table="BYSH_JG_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_BYSH_JG_T</param>
+			</generator>
+		</id>
+		<many-to-one name="std" column="XSID" not-null="true"/>
+		<many-to-one name="majorType" column="ZYLBID" not-null="true"/>
+		<property name="restudyCredits" column="CXXF"/>
+		<property name="isCompletePlan" column="SFWCJH"/>
+		<property name="isDegreeCoursePass" column="SFWCXWKC"/>
+		<property name="GPA" column="PJJD"/>
+		<property name="thesisScore" column="LWCJ"/>
+		<property name="attendanceRatio" column="CQL"/>
+		<many-to-one name="punishmentType" column="CFLBID"/>
+		<set name="languageGrades" table="BYSH_JG_WYCJ_T">
+			<key column="BYSHJGID"/>
+			<many-to-many column="QTKSCJID"
+				class="com.shufe.model.course.grade.other.OtherGrade"/>
+		</set>
+		<set name="computerGrades" table="BYSH_JG_JSJCJ_T">
+			<key column="BYSHJGID"/>
+			<many-to-many column="QTKSCJID" class="com.shufe.model.course.grade.other.OtherGrade"/>
+		</set>
+		<many-to-one name="degree" column="XWID"/>
+		<property name="certificateNo" column="XWZSH"/>
+		<property name="diplomaNo" column="BYZSH"/>
+	    <property name="registrationNo" column="DZZCH"/>
+		<many-to-one name="graduateState" column="BYQKID"/>
+		<property name="isPassDoctorComprehensiveExam" column="SFTGZHKS"/>
+		<property name="thesisInCoreMagazine" column="HXQKLWS"/>
+		<property name="isPass" column="SFTG"/>
+		<property name="auditAt" column="SHSJ"/>
+		<property name="isAffirm" column="SFQR"/>
+		<property name="credits" column="ZXF"/>
+		<property name="remark" column="BZ"/>
+		<map name="degreeAuditInfos" cascade="all-delete-orphan" inverse="true">
+			<key column="BYSHID"/>
+			<map-key type="string" column="XWSHGZID"/>
+			<one-to-many class="com.ekingstar.eams.std.graduation.audit.model.DegreeAuditInfo"/>
+		</map>
+	</class>
+</hibernate-mapping>  

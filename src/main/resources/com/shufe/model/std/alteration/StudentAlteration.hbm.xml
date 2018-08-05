@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.std.alteration">
+	<!--学生学籍信息异动记录-->
+	<class name="StudentAlteration" table="XS_XJYD_T">
+		<id name="id" column="id" length="32" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_XS_XJYD_T</param>
+			</generator>
+		</id>
+		<property name="alterBeginOn" column="BDQSRQ" not-null="true"/>
+		<property name="alterEndOn" column="BDJSRQ"/>
+		<property name="remark" column="BDBZ"/>
+		<many-to-one name="std" column="XSID"/>
+		<many-to-one name="alterBy" column="BDYHID" />
+		<many-to-one name="mode" column="BDLBID" not-null="true"/>
+		<many-to-one name="reason" column="BDYYID"/>
+		<many-to-one name="beforeStatus" column="BDQID" cascade="all"/>
+		<many-to-one name="afterStatus" column="BDHID" cascade="all"/>
+	</class>
+</hibernate-mapping>

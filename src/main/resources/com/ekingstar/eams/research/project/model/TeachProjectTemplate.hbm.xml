@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.ekingstar.eams.research.project.model">
+	<!-- 项目模板 -->
+	<class name="TeachProjectTemplate" table="JXKY_XMMB_T">
+		<id name="id" column="id" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXKY_XMMB_T</param>
+			</generator>
+		</id>
+		<many-to-one name="teachProjectType" column="XMLB" not-null="true" />
+		<property name="fileName" column="FILE_NAME" length="100" />
+		<property name="filePath" column="FILE_PATH" length="100" />
+		<property name="describe" column="WDMS" length="500" />	
+	</class>
+</hibernate-mapping>

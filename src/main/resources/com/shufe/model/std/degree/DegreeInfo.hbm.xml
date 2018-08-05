@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.std.degree" >
+	<!--学位学历信息-->
+	<class name="DegreeInfo" table="XSXX_XWXL_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_XSXX_XWXL_T</param>
+			</generator>
+		</id>
+		<many-to-one name="undergraduate" column="XWXL_BKID" unique="true" cascade="all"/>
+		<many-to-one name="master" column="XWXL_SSID" unique="true" cascade="all"/>
+		<many-to-one name="equivalent" column="XWXL_TDXLID" unique="true" cascade="all"/>
+		<many-to-one name="school" column="PYXXID"/>
+		<many-to-one name="studyType" column="XXFSID"/>
+		<many-to-one name="corporationKind" column="FPDWLBID"/>
+		<property name="isFirstSubject" column="SFYJXK"/>
+		<property name="certificateNo" column="BYZSBH" length="100"/>
+		<property name="graduateOn" column="BYSJ" length="100"/>
+		<property name="patentNum" column="ZLS"/>
+	</class>
+</hibernate-mapping>

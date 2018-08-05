@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="studentClassManager" name="/studentClassManager" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.StudentClassManager">
+		<property name="studentService">
+			<ref bean="studentService"/>
+		</property>
+	</bean>
+	
+	<bean name="/adminClassManager" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.StudentClassManager">
+		<property name="studentService">
+			<ref bean="studentService"/>
+		</property>
+		<property name="adminClassService">
+			<ref bean="adminClassService"/>
+		</property>
+	</bean>
+	
+	<bean name="/studentClassOperation" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.StudentClassOperation">
+		<property name="studentService">
+			<ref bean="studentService"/>
+		</property>
+		<property name="adminClassService">
+			<ref bean="adminClassService"/>
+		</property>
+	</bean>
+	
+	<bean name="/studentClassDetail" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.StudentClassOperation">
+		
+	</bean>
+	
+</beans>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.degree.subject" >
+	<class name="Level2Subject" table="XK_EJ_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_XK_EJ_T</param>
+			</generator>
+		</id>
+		<property name="isSpecial" column="SFZYXW"/>
+		<property name="isReserved" column="SFZZSZ"/>
+		<property name="forDoctor" column="BSXKD"/>
+		<property name="forMaster" column="SSXKD"/>
+		<property name="dateForDoctor" column="bsdsysj"/>
+		<property name="dateForMaster" column="ssdsysj"/>
+		<property name="ratifyTime" column="PZSJ"/>
+		<property name="isSelfForDoctor" column="SFZZSZBS"/>
+		<property name="isSelfForMaster" column="SFZZSZSS"/>
+		<many-to-one name="level1Subject" column="YJXKID"/>
+		<many-to-one name="speciality" not-null="true"
+			column="ZYID"/>
+		<set name="types" table="XK_LB_T">
+			<key column="EJXKID"/>
+			<many-to-many class="com.ekingstar.eams.system.basecode.industry.TypeInfo" column="XKLBID"/>
+		</set>
+	</class>
+</hibernate-mapping>

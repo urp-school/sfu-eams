@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.workload.course">
+    <class name="TeachWorkloadAlteration" table="GZL_XGRZ_T">
+        <id name="id" column="ID" unsaved-value="null">
+            <generator class="sequence">
+                <param name="sequence">SEQ_GZL_XGRZ_T</param>
+            </generator>
+        </id>
+        <many-to-one name="task" column="JXRWID" not-null="true"/>
+        <many-to-one name="teacher" column="JZGID" not-null="true"/>
+        <property name="isHandInput" column="SFSGSR" not-null="true"/>
+        <many-to-one name="courseCategory" column="KCZLID" not-null="true"/>
+        <property name="teacherAffirm" column="JSQR" not-null="true"/>
+        <property name="collegeAffirm" column="YXQR" not-null="true"/>
+        <many-to-one name="alterBefore" column="XGQID" cascade="all"/>
+        <many-to-one name="alterAfter" column="XGHID" cascade="all"/>
+        <many-to-one name="workloadBy" column="XGR" not-null="true" />
+        <property name="workloadFrom" column="FFLJ" not-null="true"/>
+        <property name="workloadAt" column="XGSJ" not-null="true"/>
+    </class>
+</hibernate-mapping>

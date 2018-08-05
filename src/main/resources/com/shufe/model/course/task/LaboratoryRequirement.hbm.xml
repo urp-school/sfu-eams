@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 教学任务开关体映射关系 -->
+<hibernate-mapping package="com.shufe.model.course.task">
+    <class name="LaboratoryRequirement" table="JXRW_SYSYQ_T">
+        <id name="id" column="id" unsaved-value="null">
+            <generator class="sequence">
+                <param name="sequence">SEQ_JXRW_SYSYQ_T</param>
+            </generator>
+        </id>
+        <many-to-one name="task" column="JXRWID" not-null="true"/>
+		<many-to-one name="classroomType" column="JSLXID" not-null="true"/>
+		<property name="overallUnit" column="SYZXS" not-null="true"/>
+		<property name="propExperimental" column="SYBL" length="20" not-null="true"/>
+		<property name="timeDescrition" column="SYSJSJ" length="500" not-null="true"/>
+		<property name="experimentRequirement" column="SYRJHJYQ" length="500" not-null="true"/>
+		<property name="projectDescrition" column="SYXMAP" length="500" not-null="true"/>
+     </class>
+</hibernate-mapping>

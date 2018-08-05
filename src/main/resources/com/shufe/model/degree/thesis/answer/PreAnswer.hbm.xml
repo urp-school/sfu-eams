@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.degree.thesis.answer">
+  <!-- 论文预答辩表 -->
+  <class name="PreAnswer" table="LW_YDB_T" lazy="true">
+		<id name="id" column="ID" unsaved-value="null">
+	      <generator class="sequence">
+			  <param name="sequence">SEQ_LW_YDB_T</param>
+	      </generator>
+	   </id>
+	  <property name="isTutorAffirm" column="DSSFTY" />
+	  <property name="answerTime" column="YDBSJ"/>
+	  <property name="answerNum" column="YDBCS" length="1"/>
+	  <property name="answerAddress" column="YDBDD" length="200"/>
+	  <property name="advice" column="JY" length="2000"/>
+	  <property name="isPassed" column="SFHG"/>
+		<set name="answerTeamSet" table="LW_YDBXZ_T" inverse="true"
+			cascade="all-delete-orphan">
+			<key column="LWYDBID"/>
+			<many-to-many class="AnswerTeam" column="DBDSID"/>
+		</set>
+	  <many-to-one name="thesisManage" column="LWGLID"/>
+	  <property name="finishOn" column="YDBWCSJ"/>
+	  <property name="downloadName" column="XZWJM"/>
+	  <property name="displayName" column="XZXSWJM"/>
+  </class>					
+</hibernate-mapping>

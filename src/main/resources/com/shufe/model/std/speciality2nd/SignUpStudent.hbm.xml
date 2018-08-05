@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.std.speciality2nd" >
+	
+	<class name="SignUpStudent" table="SZYBM_JL_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_SZYBM_JL_T</param>
+			</generator>
+		</id>
+		
+		<many-to-one name="std" column="XSID"/>
+		<many-to-one name="calendar" column="JXRLID"/>
+		<property name="GPA" column="XSJD"/>
+		<property name="matriculateGPA" column="DQJD"/>
+		<property name="isAdjustable" column="SFTJ" not-null="true"/>
+		<property name="signUpAt" type="timestamp" column="BMSJ"/>
+		<many-to-one name="setting" column="SZYBMSZID"/>
+		<set name="records" inverse="true" cascade="all,delete-orphan"
+			order-by="ZYJB asc">
+			<key column="SZYBMJLID"/>
+			<one-to-many class="SignUpStudentRecord"/>
+		</set>
+		<property name="isAdjustMatriculated" column="SFTJLQ"/>
+		<property name="rank"  column="LQZY"/>
+		<many-to-one name="matriculated" column="LQZYSZID"/>
+	</class>
+</hibernate-mapping>

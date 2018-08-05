@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 教学任务开关体映射关系 -->
+<hibernate-mapping package="com.shufe.model.course.arrange.exam">
+    <class name="ExamApplyParam" table="PK_KSSQCS_T">
+        <cache usage="read-write" region="taskCache"/>
+        <id name="id" column="id" unsaved-value="null">
+            <generator class="sequence">
+                <param name="sequence">SEQ_PK_KSSQCS_T</param>
+            </generator>
+        </id>
+        <many-to-one name="calendar" column="JXRLID" not-null="true"/>
+        <property name="startDate" column="KSRQ" not-null="true"/>
+        <property name="finishDate" column="JZRQ" not-null="true"/>
+        <property name="isOpenElection" column="SFXK"/>
+        <property name="notice" column="ZYSX" length="500"/>
+     </class>
+    <query name="getExamApplyParams">
+        <![CDATA[
+            select distinct params
+            from ExamApplyParam as params
+            where params.finishDate+1>= current_date() and params.startDate<=current_date() and params.isOpenElection=1
+            ]]>
+    </query>
+</hibernate-mapping>

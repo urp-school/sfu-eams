@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 培养计划表 -->
+<hibernate-mapping package="com.shufe.model.course.plan">
+	<class name="TeachPlan" table="V_PYJH_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_PYJH_T</param>
+			</generator>
+		</id>
+		
+		<property name="enrollTurn" column="RXPC" length="10"/>
+		<many-to-one name="stdType" column="XSLBID" not-null="true"/>
+		<many-to-one name="department" column="BMID" not-null="true"/>
+		<many-to-one name="speciality" column="ZYID"/>
+		<many-to-one name="aspect" column="ZYFXID"/>
+		<many-to-one name="std" column="XSID"/>
+		
+		<property name="termsCount" column="ZXQS" not-null="true"/>
+		<property name="creditHour" column="ZXS" not-null="true"/>
+		<property name="credit" column="ZXF" not-null="true"/>
+		<property name="teacherNames" column="ZDJSMC" length="100"/>
+		<property name="isConfirm" column="SFQR" not-null="true"/>
+		<property name="remark" column="BZ" length="500"/>
+		<property name="createAt" column="ZDSJ" type="date"/>
+		<property name="modifyAt" column="XGSJ" type="date"/>
+		<set name="courseGroups"  inverse="true" cascade="all,delete-orphan">
+			<key column="PYJHID" not-null="true"/>
+			<one-to-many class="com.shufe.model.course.plan.CourseGroup"/>
+		</set>
+		<filter name="specialityPlanFilter" condition="XH is null"/>
+		<filter name="personPlanFilter" condition="XH is not null"/>
+	</class>
+</hibernate-mapping>

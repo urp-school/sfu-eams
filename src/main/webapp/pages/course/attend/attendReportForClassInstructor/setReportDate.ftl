@@ -1,0 +1,2 @@
+<#ftl>
+<#include "../setReportDate.ftl"/>

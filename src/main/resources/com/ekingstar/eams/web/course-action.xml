@@ -1,0 +1,601 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+    <!--培养计划管理-->
+    <bean name="/teachPlan" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.plan.TeachPlanAction">
+        <property name="teachPlanService" ref="teachPlanService"/>
+    </bean>
+    <bean name="/teachPlanConfirm" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.plan.TeachPlanConfirmAction">
+        <property name="teachPlanService" ref="teachPlanService"/>
+    </bean>
+    <bean name="/teachPlanSearch" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.plan.TeachPlanSearchAction">
+        <property name="teachPlanService" ref="teachPlanService"/>
+    </bean>
+    <bean name="/teachPlanArrangeAlteration" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.plan.TeachPlanArrangeAlterationAction">
+    </bean>
+    <bean name="/stdTeachPlanSearch" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.plan.TeachPlanSearchAction">
+        <property name="teachPlanService" ref="teachPlanService"/>
+    </bean>
+    <bean name="/stdTeachPlan" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.plan.StdTeachPlanAction">
+        <property name="teachPlanService" ref="teachPlanService"/>
+    </bean>
+    <bean name="/teachTaskParam" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.task.TeachTaskParamAction">
+        <property name="teachTaskParamService" ref="teachTaskParamService"/>
+    </bean>
+    <bean name="/courseTakeForTaskParam" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.task.CourseTakeForTaskParamAction">
+        <property name="courseTakeForTaskParamService" ref="courseTakeForTaskParamService"/>
+    </bean>
+    <bean name="/stdTeachPlanInfo" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.plan.TeachPlanSearchAction">
+        <property name="teachPlanService" ref="teachPlanService"/>
+    </bean>
+    <bean name="/courseGroup" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.plan.CourseGroupAction">
+        <property name="courseGroupService" ref="courseGroupService"/>
+        <property name="teachPlanService" ref="teachPlanService"/>
+    </bean>
+    <bean name="/planCourse" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.plan.PlanCourseAction">
+        <property name="planCourseService" ref="planCourseService"/>
+    </bean>
+    <bean name="/teachPlanCourseStat" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.plan.TeachPlanCourseStatAction">
+    </bean>
+    <bean name="/teachPlanStat" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.plan.TeachPlanStatAction">
+        <property name="teachPlanStatService" ref="teachPlanStatService"/>
+    </bean>
+    <bean name="/teachPlanActivityStat" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.plan.TeachPlanActivityStatAction">
+    </bean>
+    <bean name="/stdSubstitutionCourse" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.plan.StdSubstitutionCourseAction">
+        <property name="entityName" value="substitutionCourse"/>
+        <property name="entityClass"
+            value="com.ekingstar.eams.course.program.model.DefaultSubstitutionCourse"/>
+    </bean>
+    <!--教学任务管理action-->
+    <bean name="/teachTask" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.task.TeachTaskAction"/>
+    <bean name="/teachTaskCheck" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.task.TeachTaskCheckAction"/>
+    <bean name="/teachTaskCollege" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.task.TeachTaskCollegeAction"/>
+    <bean name="/teachTaskSearch" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.task.TeachTaskSearchAction">
+        <property name="teachTaskService" ref="teachTaskService"/>
+    </bean>
+    <bean name="/teacherOtherOption" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.task.TeacherOtherOptionAction">
+    </bean>
+    <bean name="/teachTaskGen" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.task.TeachTaskGenAction">
+    </bean>
+    <bean name="/teachTaskGenDuplicate" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.task.TeachTaskGenDuplicateAction">
+    </bean>
+    <bean name="/teachTaskStat" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.task.TeachTaskStatAction">
+    </bean>
+    <bean name="/teachTaskConfirm" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.task.TeachTaskConfirmAction">
+        <property name="teachTaskService" ref="teachTaskService"/>
+    </bean>
+    <bean name="/teacherTime" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.TeacherTimeAction">
+        <property name="availTimeService" ref="availTimeService"/>
+        <property name="timeSettingService" ref="timeSettingService"/>
+    </bean>
+    <bean name="/arrangeSuggest" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.task.SuggestAction">
+        <property name="timeSettingService" ref="timeSettingService"/>
+        <property name="classroomService" ref="classroomService"/>
+    </bean>
+    <!--排课-->
+    <bean name="/manualArrangeParam" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.task.ManualArrangeParamAction">
+        <property name="manualArrangeParamService" ref="manualArrangeParamService"/>
+    </bean>
+    <bean name="/collegeCourseTable" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.task.CollegeCourseTableAction"/>
+    <bean name="/courseArrangeSwitch" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.CourseArrangeSwitchAction"/>
+    <bean name="/teacherAvailTime" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.AvailTimeAction">
+        <property name="availTimeService" ref="availTimeService"/>
+        <property name="timeSettingService" ref="timeSettingService"/>
+        <property name="teacherService" ref="teacherService"/>
+    </bean>
+    <bean name="/roomAvailTime" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.AvailTimeAction">
+        <property name="availTimeService" ref="availTimeService"/>
+        <property name="timeSettingService" ref="timeSettingService"/>
+        <property name="roomService" ref="classroomService"/>
+    </bean>
+    <bean name="/taskGroup" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.task.TaskGroupAction">
+        <property name="roomService" ref="classroomService"/>
+        <property name="groupService" ref="taskGroupService"/>
+        <property name="teachTaskService" ref="teachTaskService"/>
+    </bean>
+    <bean name="/autoArrange" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.task.AutoArrangeAction">
+        <property name="roomService" ref="classroomService"/>
+        <property name="arrangeManager" ref="autoArrangeCourseService"/>
+        <property name="groupService" ref="taskGroupService"/>
+        <property name="teachTaskService" ref="teachTaskService"/>
+        <property name="validateService" ref="arrangeTaskValidateService"/>
+        <property name="courseActivityService" ref="courseActivityService"/>
+    </bean>
+    <bean name="/manualArrange" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.task.ManualArrangeAction">
+    </bean>
+    <bean name="/allocateTaskForArrange" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.task.AllocateTaskForArrangeAction">
+    </bean>
+    <bean name="/adjustCourse" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.task.AdjustCourseAction">
+    </bean>
+    <bean name="/courseTakeForTask" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.task.CourseTakeForTaskAction"/>
+    <bean name="/courseTakeForTaskDuplicate" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.task.CourseTakeForTaskDuplicateAction"/>
+    <bean name="/courseTable" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.task.CourseTableAction">
+        <property name="teachTaskService" ref="teachTaskService"/>
+        <property name="baseInfoSearchHelper" ref="baseInfoSearchHelper"/>
+        <property name="teachPlanService" ref="teachPlanService"/>
+    </bean>
+    <bean name="/courseTablePublic" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.task.CourseTableAction">
+        <property name="teachTaskService" ref="teachTaskService"/>
+        <property name="baseInfoSearchHelper" ref="baseInfoSearchHelper"/>
+        <property name="teachPlanService" ref="teachPlanService"/>
+    </bean>
+    <bean name="/courseTableCheck" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.task.CourseTableCheckAction">
+    </bean>
+    <bean name="/courseTableForStd" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.task.CourseTableAction">
+        <property name="teachTaskService" ref="teachTaskService"/>
+        <property name="studentService" ref="studentService"/>
+    </bean>
+    <bean name="/courseTableForTeacher" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.task.CourseTableAction">
+        <property name="teachTaskService" ref="teachTaskService"/>
+    </bean>
+    <!--选课-->
+    <bean name="/electScope" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.election.ElectScopeAction">
+        <property name="teachTaskService" ref="teachTaskService"/>
+        <property name="electStdScopeService" ref="electStdScopeService"/>
+        <property name="classService" ref="adminClassService"/>
+        <property name="specialityService" ref="specialityService"/>
+    </bean>
+    <bean name="/creditConstraint" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.election.CreditConstraintAction">
+        <property name="creditService" ref="creditConstraintService"/>
+    </bean>
+    <bean name="/electParams" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.election.ElectParamsAction">
+        <property name="paramsService" ref="electParamsService"/>
+    </bean>
+    <bean name="/electCourse" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.election.ElectCourseAction">
+        <property name="electService" ref="electCourseService"/>
+        <property name="gradeService" ref="gradeService"/>
+        <property name="paramsService" ref="electParamsService"/>
+        <property name="teachTaskService" ref="teachTaskService"/>
+        <property name="creditConstraintService" ref="creditConstraintService"/>
+        <property name="planService" ref="teachPlanService"/>
+        <property name="calendarService" ref="teachCalendarService"/>
+    </bean>
+    <bean name="/quickElectCourse" scope="prototype"
+        class="com.shufe.web.action.course.election.ElectCourseAction">
+        <property name="electService" ref="electCourseService"/>
+        <property name="teachTaskService" ref="teachTaskService"/>
+        <property name="planService" ref="teachPlanService"/>
+        <property name="utilService" ref="utilService"/>
+        <property name="paramsService" ref="electParamsService"/>
+    </bean>
+    <bean name="/courseTakeSearch" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.task.CourseTakeSearchAction">
+    </bean>
+    <bean name="/courseTake" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.task.CourseTakeAction">
+        <property name="courseTakeService" ref="courseTakeService"/>
+    </bean>
+    <!--教师模块的任务,要求,变更-->
+    <bean name="/requirePrefer" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.task.RequirePreferAction">
+        <property name="teachTaskService" ref="teachTaskService"/>
+        <property name="preferenceService" ref="requirePreferService"/>
+    </bean>
+	<!--实验室要求-->
+	<bean name="/laboratoryRequirement" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.task.LaboratoryRequirementAction">
+    </bean>
+    <bean name="/multimediaRequirement" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.task.MultimediaRequirementAction">
+    </bean>
+    <bean name="/teacherTask" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.task.TeacherTaskAction">
+    </bean>
+    <bean name="/teacherTaskAlterRequest" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.task.TeacherAlterRequestAction">
+        <property name="taskAlterRequestService" ref="taskAlterRequestService"/>
+    </bean>
+    <bean name="/taskAlterRequest" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.task.AlterRequestAction">
+        <property name="entityName" value="taskAlterRequest"/>
+        <property name="entityClass"
+            value="com.shufe.model.course.task.TaskAlterRequest"/>
+    </bean>
+    <bean name="/courseArrangeAlteration" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.task.CourseArrangeAlterationAction"/>
+    <!--排考-->
+    <bean name="/examApplyParam" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.exam.ExamApplyParamAction">
+    </bean>
+    <bean name="/examArrange" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.exam.ExamArrangeAction">
+    </bean>
+    <bean name="/examTurn" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.exam.ExamTurnAction">
+    </bean>
+    <bean name="/examGroup" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.exam.ExamGroupAction">
+    </bean>
+    <bean name="/examUpdate" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.exam.ExamUpdateAction">
+    </bean>
+    <bean name="/examStudent" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.exam.ExamStudentAction">
+    </bean>
+    <bean name="/examTable" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.exam.ExamTableAction">
+    </bean>
+    <bean name="/examiner" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.exam.ExaminerAction">
+    </bean>
+    <bean name="/examinerDepart" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.exam.ExaminerDepartAction">
+    </bean>
+    <bean name="/examTake" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.exam.ExamTakeAction">
+    </bean>
+    <bean name="/stdExamTable" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.exam.StdExamTableAction">
+    </bean>
+    <bean name="/teacherExamTable" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.exam.TeacherExamTableAction">
+    </bean>
+    <bean name="/examArrangeSearch" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.exam.ExamArrangeSearchAction">
+    </bean>
+    <bean name="/stdCreditStat" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.election.StdCreditStatAction"/>
+    
+    <!--教学资源-->
+    <bean name="/teacherResource" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.resource.TeacherResourceAction">
+        <property name="teachResourceService" ref="teachResourceService"/>
+        <property name="teacherService" ref="teacherService"/>
+    </bean>
+    <bean name="/roomResource" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.resource.RoomResourceAction">
+        <property name="teachResourceService" ref="teachResourceService"/>
+        <property name="roomService" ref="classroomService"/>
+    </bean>
+    <bean name="/classResource" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.resource.ClassResourceAction">
+        <property name="teachResourceService" ref="teachResourceService"/>
+        <property name="adminClassService" ref="adminClassService"/>
+    </bean>
+    <bean name="/roomResourceStat" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.resource.RoomResourceStatAction"/>
+    <!--教材-->
+    <bean name="/textbook" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.textbook.TextbookAction">
+        <property name="textbookService" ref="textbookService"/>
+    </bean>
+    <bean name="/press" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.textbook.PressAction">
+    </bean>
+    <bean name="/bookRequirement" id="bookRequirement" autowire="byName"
+        scope="prototype"
+        class="com.shufe.web.action.course.textbook.BookRequirementAction">
+        <property name="bookRequirementService" ref="bookRequirementService"/>
+    </bean>
+    <bean name="/bookRequireAudit" id="bookRequireAudit" autowire="byName"
+        scope="prototype"
+        class="com.shufe.web.action.course.textbook.BookRequireAuditAction">
+        <property name="bookRequirementService" ref="bookRequirementService"/>
+    </bean>
+    <bean name="/bookRequireStat" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.textbook.BookRequireStatAction">
+    </bean>
+    <!--成绩管理-->
+    <bean name="/teacherGrade" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.TeacherGradeAction">
+        <property name="teachTaskService" ref="teachTaskService"/>
+    </bean>
+    <bean name="/gradeLog" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.GradeLogAction">
+    </bean>
+    <bean name="/stdGradeSearch" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.StdGradeSearchAction">
+    </bean>
+    <bean name="/gradeStateStat" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.GradeStateStatAction">
+    </bean>
+    <bean name="/gradeInputSwitch" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.GradeInputSwitchAction">
+    </bean>
+    <bean name="/stdGrade" id="stdGrade" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.StdGradeAction">
+    </bean>
+    <bean name="/stdGradeDuplicate" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.StdGradeDuplicateAction">
+    </bean>
+    <bean name="/gradeAnalyse" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.GradeAnalyseAction">
+    </bean>
+    
+    <bean name="/gradeRank" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.GradeRankAction">
+    </bean>
+    
+    <bean name="/personGrade" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.PersonGradeAction">
+    </bean>
+    <bean name="/collegeGrade" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.CollegeGradeAction">
+    </bean>
+    <bean name="/collegeGradeDuplicate" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.CollegeGradeDuplicateAction">
+    </bean>
+    <bean name="/courseGrade" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.CourseGradeAction">
+    </bean>
+    <bean name="/courseGradeDuplicate" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.CourseGradeDuplicateAction">
+    </bean>
+    <bean name="/makeupGrade" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.MakeupGradeAction">
+    </bean>
+    <bean name="/endMakeupGrade" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.EndMakeupGradeAction">
+    </bean>
+    <bean name="/teachClassGradeReport" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.report.TeachClassGradeReportAction">
+    </bean>
+    <bean name="/stdGradeReport" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.report.StdGradeReportAction">
+    </bean>
+    <bean name="/stdTermGradeReport" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.report.StdTermGradeReportAction">
+    </bean>
+    <bean name="/multiStdGradeReport" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.report.MultiStdGradeReportAction">
+    </bean>
+    <bean name="/gradePointRule" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.gp.GradePointRuleAction">
+    </bean>
+    <bean name="/stdGP" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.gp.StdGPAction">
+    </bean>
+    <bean name="/multiStdGP" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.gp.MultiStdGPAction">
+    </bean>
+    <bean name="/gradeTransfer" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.GradeTransferAction">
+    </bean>
+    <bean name="/moralGrade" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.moral.MoralGradeAction">
+        <property name="entityName" value="moralGrade"/>
+        <property name="entityClass"
+            value="com.shufe.model.course.grade.MoralGrade"/>
+    </bean>
+    <bean name="/moralGradeInstructor" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.moral.MoralGradeInstructorAction">
+        <property name="entityName" value="moralGrade"/>
+        <property name="entityClass"
+            value="com.shufe.model.course.grade.MoralGrade"/>
+    </bean>
+    <bean name="/moralGradeClass" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.moral.MoralGradeClassAction">
+        <property name="entityName" value="moralGrade"/>
+        <property name="entityClass"
+            value="com.shufe.model.course.grade.MoralGrade"/>
+    </bean>
+    <bean name="/markStyleConfig" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.MarkStyleConfigAction"/>
+    <!--校内外其他考试控制-->
+    <bean name="/otherExamSignUpSetting" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.other.OtherExamSignUpSettingAction">
+    </bean>
+    <bean name="/otherGradeSearch" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.other.OtherGradeSearchAction">
+    </bean>
+    <bean name="/otherGrade" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.other.OtherGradeAction">
+    </bean>
+    <bean name="/otherExamSignUp" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.other.OtherExamSignUpAction">
+    </bean>
+    <bean name="/personOtherExam" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.grade.other.PersonOtherExamAction">
+    </bean>
+    <bean name="/courseStat" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.CourseStatAction">
+    </bean>
+    <!--教室借用-->
+    <bean name="/roomPriceCatalogue" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.resource.RoomPriceCatalogueAction">
+    </bean>
+    <bean name="/roomApply" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.apply.RoomApplyAction">
+        <property name="teachResourceService" ref="teachResourceService"/>
+    </bean>
+    <bean name="/roomApplyApprove" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.apply.RoomApplyApproveAction">
+        <property name="roomApplyService" ref="roomApplyService"/>
+    </bean>
+    <bean name="/roomApplyDepartApprove" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.apply.RoomApplyDepartApproveAction">
+    </bean>
+    <bean name="/roomApplyAccount" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.apply.RoomApplyAccountAction">
+    </bean>
+    
+    <bean name="/roomApplyApprovedSearch" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.apply.RoomApplyApprovedSearchAction">
+    </bean>
+    <bean name="/roomApplyStat" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.apply.RoomApplyStatAction">
+    </bean>
+    <bean name="/ecuplRoomApplyApprove" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.apply.EcuplRoomApplyApproveAction">
+    </bean>
+    
+    <bean name="/stdSubstituteCourse" autowire="byName" scope="prototype"
+        class="com.ekingstar.eams.teach.program.web.action.StdSubstituteCourseAction">
+        <property name="entityName" value="substitutionCourse"/>
+        <property name="entityClass"
+            value="com.ekingstar.eams.teach.program.std.DefaultStdSubstituteCourse"/>
+    </bean>
+    <bean name="/majorSubstituteCourse" autowire="byName" scope="prototype"
+        class="com.ekingstar.eams.teach.program.web.action.MajorSubstituteCourseAction">
+    </bean>
+    
+    <bean name="/reservedStudent" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.election.ReservedStudentAction">
+        <property name="entityName" value="reservedStudent"/>
+        <property name="entityClass"
+            value="com.shufe.model.course.election.ReservedStudent"/>
+    </bean>
+    
+    <!--考勤管理-->
+    <bean name="/attendStatic" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.attend.AttendStaticAction">
+        <property name="attendStaticService" ref="attendStaticService"/>
+    </bean>
+    <bean name="/attendDevice" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.attend.AttendDeviceAction">
+        <property name="attendDeviceService" ref="attendDeviceService"/>
+    </bean>
+    <bean name="/attendReportForTeachTask" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.attend.AttendReportForTeachTaskAction">
+    </bean>
+    <bean name="/attendReportForTaskInstructor" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.attend.AttendReportForTaskInstructorAction">
+    </bean>
+    <bean name="/attendReportForAdminClass" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.attend.AttendReportForAdminClassAction">
+    </bean>
+    <bean name="/attendReportForClassInstructor" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.attend.AttendReportForClassInstructorAction">
+    </bean>
+    <bean name="/attendWarn" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.attend.AttendWarnAction">
+    </bean>
+    <bean name="/attendWarnInstructor" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.attend.AttendWarnInstructorAction">
+    </bean>
+    
+    <!--学生考勤报表-->
+    <bean name="/attendReportStu" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.attend.AttendReportStuAction">
+        <property name="attendStaticService" ref="attendStaticService"/>
+        <property name="teachTaskService" ref="teachTaskService"/>
+    </bean>
+    
+    <!--教师考勤报表-->
+    <bean name="/attendReportTea" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.attend.AttendReportTeaAction">
+        <property name="attendStaticService" ref="attendStaticService"/>
+        <property name="teachTaskService" ref="teachTaskService"/>
+    </bean>
+    
+    <!--辅导员考勤报表-->
+    <bean name="/attendReportCoa" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.attend.AttendReportCoaAction">
+        <property name="attendStaticService" ref="attendStaticService"/>
+        <property name="teachTaskService" ref="teachTaskService"/>
+    </bean>
+    
+    <!--辅导员考勤报表（管理员）-->
+    <bean name="/attendReportCoaManage" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.attend.AttendReportCoaManage">
+    </bean>
+    
+    <!--院系考勤报表-->
+    <bean name="/attendReportDept" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.attend.AttendReportDeptAction">
+        <property name="attendStaticService" ref="attendStaticService"/>
+        <property name="teachTaskSearchHelper" ref="teachTaskSearchHelper"/>
+    </bean>
+    
+    <!--教务处考勤报表-->
+    <bean name="/attendReportFunc" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.attend.AttendReportFuncAction">
+        <property name="attendStaticService" ref="attendStaticService"/>
+        <property name="teachTaskSearchHelper" ref="teachTaskSearchHelper"/>
+    </bean>
+    <!--考勤统计报表（全校）-->
+    <bean name="/attendReportWithSchool" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.attend.AttendReportWithSchoolAction">
+        <property name="attendStaticService" ref="attendStaticService"/>
+        <property name="teachTaskService" ref="teachTaskService"/>
+    </bean>
+    <!--考勤统计报表（院系）-->
+    <bean name="/attendReportWithDept" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.attend.AttendReportWithDeptAction">
+         <property name="attendStaticService" ref="attendStaticService"/>
+        <property name="teachTaskService" ref="teachTaskService"/>
+    </bean>
+    <!--辅导员权限学生纬度考勤统计报表-->
+    <bean name="/attendReportWithStudent" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.attend.AttendReportWithStudentAction">
+        <property name="attendStaticService" ref="attendStaticService"/>
+        <property name="teachTaskService" ref="teachTaskService"/>
+    </bean>
+        <!--管理员权限学生纬度考勤统计报表-->
+    <bean name="/attendReportWithStudentForAdmin" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.attend.AttendReportWithStudentForAdminAction">
+        <property name="attendStaticService" ref="attendStaticService"/>
+        <property name="teachTaskService" ref="teachTaskService"/>
+    </bean>
+    <!--开放课表-->
+    <bean name="/courseTableOpen" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.arrange.task.CourseTableOpenAction"/>
+
+    <bean name="/gradeAchivementStat" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.achivement.GradeAchivementStatAction">
+    </bean>
+    <bean name="/gradeAchivementSearch" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.achivement.GradeAchivementSearchAction">
+    </bean>
+    <bean name="/gradeAchivementSetting" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.achivement.GradeAchivementSettingAction">
+    </bean>
+    <bean name="/gradeAchivementDepart" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.achivement.GradeAchivementDepartAction">
+    </bean>
+    <bean name="/gradeAchivementInstructor" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.achivement.GradeAchivementInstructorAction">
+    </bean>
+    <bean name="/gradeAchivementStd" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.course.achivement.GradeAchivementStdAction">
+    </bean>
+</beans>

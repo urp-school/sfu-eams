@@ -1,0 +1,211 @@
+<?xml version="1.0"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!--辅导员-->
+	<bean name="/instructorStd" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.adminClass.InstructorStdAction"/>
+		
+	<bean name="/freshman" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.adminClass.FreshmanAction"/>	
+	
+	<bean name="/searchStudent" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.StudentManager">
+		<property name="studentService">
+			<ref bean="studentService"/>
+		</property>
+		<property name="specialityService">
+			<ref bean="specialityService"/>
+		</property>
+		<property name="studentTypeService">
+			<ref bean="studentTypeService"/>
+		</property>
+		<property name="departmentService">
+			<ref bean="departmentService"/>
+		</property>
+	</bean>
+	
+	<bean id="studentManager" name="/studentManager" autowire="byName"
+		scope="prototype" class="com.shufe.web.action.std.StudentManager">
+		<property name="studentService">
+			<ref bean="studentService"/>
+		</property>
+	</bean>
+	<!-- 学号管理 by zhihe -->
+	<bean id="studentCodeManager" name="/studentCodeManager" autowire="byName"
+		scope="prototype" class="com.shufe.web.action.std.StudentCodeManager">
+		<property name="entityName" value="std"/>
+		<property name="entityClass"
+			value="com.shufe.model.std.Student"/>
+	</bean>
+	
+	<bean name="/studentOperation" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.StudentOperation">
+		<property name="studentService">
+			<ref bean="studentService"/>
+		</property>
+	</bean>
+	
+	<bean name="/studentDetailByManager" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.StudentOperation"/>
+	
+	<bean name="/stdDetail" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.info.StdDetailAction"/>
+	<!--居留签证管理-->
+	<bean name="/abroadInfo" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.info.AbroadInfoAction"/>
+	
+	<bean name="/loadStudentBasicInfoUpdateForm" autowire="byName"
+		scope="prototype" class="com.shufe.web.action.std.StudentOperation"/>
+	
+	<bean name="/updateStudentBasicInfo" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.StudentOperation"/>
+	<!--学籍状态 学籍异动-->
+	<bean id="studentAlteration" name="/studentAlteration" autowire="byName"
+		scope="prototype"
+		class="com.shufe.web.action.std.alteration.StudentAlterationAction">
+		<property name="entityName" value="alteration"/>
+		<property name="entityClass"
+			value="com.shufe.model.std.alteration.StudentAlteration"/>
+	</bean>
+	<bean id="alterationForStd" name="/alterationForStd" autowire="byName"
+		scope="prototype"
+		class="com.shufe.web.action.std.alteration.AlterationForStdAction">
+	</bean>
+	<bean name="/specialityAlerationAudit" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.alteration.SpecialityAlerationAuditAction"/>
+	
+	<bean name="/specialityAlerationApplicaton" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.alteration.SpecialityAlerationApplicatonAction"/>
+	
+	<bean name="/studentStatus" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.alteration.StudentStatusAction"/>
+	<!--各类统计-->
+	<bean name="/studentChartStatistics" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.statistics.ChartStatistics">
+		<property name="studentService">
+			<ref bean="studentService"/>
+		</property>
+	</bean>
+	
+	<bean name="/studentCountStatistics" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.statistics.CountStatistics">
+		<property name="studentService">
+			<ref bean="studentService"/>
+		</property>
+	</bean>
+	
+	<bean name="/stdStatusStat" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.stat.StdStatusStatAction"/>
+	
+	<bean name="/studentFile" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.StudentFileAction">
+		<property name="adminClassService">
+			<ref bean="adminClassService"/>
+		</property>
+	</bean>
+	
+	<bean name="/studentPhoto" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.StudentPhotoFileAction">
+	</bean>
+	
+	<bean name="/photoByStudent" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.StudentPhotoFileByStudentAction">
+	</bean>
+	
+	<bean name="/graduatePractice" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.graduation.practice.GraduatePracticeAction"/>
+	<bean name="/stdOnCampusStat" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.stat.StdOnCampusStatAction"/>
+	
+	<!--毕业审核部分-->
+	<bean name="/degreeAuditStandard" autowire="byName" scope="prototype"
+		class="com.ekingstar.eams.std.graduation.audit.web.action.DegreeAuditStandardAction">
+		<property name="entityName" value="standard"/>
+		<property name="entityClass"
+			value="com.ekingstar.eams.std.graduation.audit.model.DegreeAuditStandard"/>
+	</bean>
+	
+	<bean name="/degreeAudit" autowire="byName" scope="prototype"
+		class="com.ekingstar.eams.std.graduation.audit.web.action.DegreeAuditAction"/>
+
+	<bean name="/auditStandardSearch" autowire="byName" scope="prototype"
+		class="com.ekingstar.eams.std.graduation.audit.web.action.AuditStandardSearchAction">
+		<property name="auditStandardService">
+			<ref bean="auditStandardService"/>
+		</property>
+	</bean>
+	
+	<bean name="/auditStandard" autowire="byName" scope="prototype"
+		class="com.ekingstar.eams.std.graduation.audit.web.action.AuditStandardAction"/>
+		
+	<bean name="/studentAuditStandardDetail" autowire="byName" scope="prototype"
+		class="com.ekingstar.eams.std.graduation.audit.web.action.StudentAuditStandardDetailAction"/>	
+	
+	<!-- 双专业报名部分-->
+	<bean name="/speciality2ndStd" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.speciality2nd.Speciality2ndStdAction">
+		<property name="entityName" value="student"/>
+		<property name="entityClass" value="com.shufe.model.std.Student"/>
+	</bean>
+	<bean name="/speciality2ndSignUp" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.speciality2nd.Speciality2ndSignUpAction"/>
+	
+	<bean name="/speciality2ndSignUpGPASetting" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.speciality2nd.SignUpGPASettingAction">
+		<property name="entityName" value="signUpGPASetting"/>
+		<property name="entityClass"
+			value="com.shufe.model.std.speciality2nd.SignUpGPASetting"/>
+	</bean>
+	
+	<bean name="/speciality2ndSignUpSetting" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.speciality2nd.SignUpSettingAction">
+		<property name="entityName" value="signUpSetting"/>
+		<property name="entityClass"
+			value="com.shufe.model.std.speciality2nd.SignUpSetting"/>
+	</bean>
+	
+	<bean name="/speciality2ndSignUpSpecialitySetting" autowire="byName"
+		scope="prototype"
+		class="com.shufe.web.action.std.speciality2nd.SignUpSpecialitySettingAction">
+		<property name="entityName" value="specialitySetting"/>
+		<property name="entityClass"
+			value="com.shufe.model.std.speciality2nd.SignUpSpecialitySetting"/>
+	</bean>
+	<bean name="/speciality2ndSignUpStdScope" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.speciality2nd.SignUpStdScopeAction">
+		<property name="entityName" value="stdScope"/>
+		<property name="entityClass"
+			value="com.shufe.model.std.speciality2nd.SignUpStdScope"/>
+	</bean>
+	
+	<bean name="/speciality2ndSignUpStudent" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.speciality2nd.SignUpStudentAction"/>
+	
+	<bean name="/register" autowire="byName" scope="prototype"
+		class="com.ekingstar.eams.std.registration.web.action.RegisterAction"/>
+	
+	<bean name="/stdRegister" autowire="byName" scope="prototype"
+		class="com.ekingstar.eams.std.registration.web.action.StdRegisterAction"/>
+	
+	<bean name="/registerUserGroup" autowire="byName" scope="prototype"
+		class="com.ekingstar.eams.std.registration.web.action.RegisterUserGroupAction">
+		<property name="entityName" value="registerUserGroup"/>
+		<property name="entityClass"
+			value="com.ekingstar.eams.std.registration.model.RegisterUserGroup"/>
+	</bean>
+	<bean name="/registerStat" autowire="byName" scope="prototype"
+		class="com.ekingstar.eams.std.registration.web.action.RegisterStatAction"/>
+	
+	<bean name="/awardPunishSearch" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.awardPunish.AwardPunishSearchAction"/>
+	
+	<bean name="/awardPunish" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.awardPunish.AwardPunishAction"/>
+	
+	<bean name="/stdAwardPunish" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.awardPunish.StdAwardPunishAction"/>
+	<bean name="/stdPractice" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.std.graduation.practice.StdPracticeAction"/>
+</beans>

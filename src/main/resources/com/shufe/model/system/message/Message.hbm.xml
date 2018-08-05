@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.system.message">	
+	<class name="Message" table="XX_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_XX_T</param>
+			</generator>
+		</id>
+		<property name="title" column="BT" length="100"/>
+		<property name="body" column="NR" type="org.springframework.orm.hibernate3.support.ClobStringType"/>
+		<many-to-one name="sender" column="CJYHID" />
+		<many-to-one name="type" column="XXLBID"/>
+		<property name="createAt" column="CJSJ"/>
+		<property name="activeOn" column="JHSJ"/>
+		<property name="invalidateOn" column="GQSJ"/>
+		<set name="receiptors" cascade="all,all-delete-orphan">
+			<key column="XXID"/>
+			<one-to-many class="com.shufe.model.system.message.SystemMessage"/>
+		</set>
+	</class>
+</hibernate-mapping>

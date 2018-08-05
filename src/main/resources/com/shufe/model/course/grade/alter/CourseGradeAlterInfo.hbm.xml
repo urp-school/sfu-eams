@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!--总评成绩的修改记录-->
+<hibernate-mapping package="com.shufe.model.course.grade.alter">	
+	<class name="CourseGradeAlterInfo" table="CJ_ZP_XGJL_T">
+		<id name="id" column="id" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_CJ_ZP_XGJL_T</param>
+			</generator>
+		</id>
+		<property name="modifyAt" column="XGSJ"/>
+		<property name="scoreBefore" column="XGQDF"/>
+		<property name="scoreAfter" column="XGHDF"/>
+		<property name="remark" column="BZ" length="50"/>
+		<many-to-one name="modifyBy" column="XGRID"/>
+		<many-to-one name="grade" column="ZPCJID"/>
+	</class>
+</hibernate-mapping>

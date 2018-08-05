@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<!--专业方向代码-->
+	<class name="com.shufe.model.system.baseinfo.SpecialityAspect" table="JCXX_ZYFX_T">
+			<cache usage="read-write" region="baseinfo"/>
+		<id name="id" column="ID">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JCXX_ZYFX_T</param>
+			</generator>
+		</id>
+		<!--base info-->
+		<property name="code" column="ZYFXDM" length="32" not-null="true" unique="true"/>
+		<property name="name" column="ZYFXMC" length="100" not-null="true"/>
+		<property name="abbreviation" column="ZYFXJC" length="50"/>
+		<property name="createAt" column="ZDSJ" not-null="true"/>
+		<property name="modifyAt" column="XGSJ" not-null="true"/>
+		<property name="engName" column="ZYFXMC_EN" length="100"/>
+		<property name="remark" column="BZ" length="500"/>
+		<property name="state" column="ZTDM"/>
+		<!--speciality aspect specific-->
+		<property name="dateEstablished" column="SLNY"/>
+		<many-to-one name="speciality"  not-null="true" column="ZYID"/>
+		<property name="maxPeople" column="RSSX"/>
+		<!--filter of vaild aspect-->
+	</class>
+	<query name="getAllSpecialityAspects"> <![CDATA[from  SpecialityAspect ]]>
+	</query>
+</hibernate-mapping>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.shufe.model.system.calendar.TeachCalendar" table="JXRL_T">
+        <cache usage="read-write" region="longLifeForFewer"/>
+        <id name="id" column="ID" unsaved-value="null">
+            <generator class="sequence">
+                <param name="sequence">SEQ_JXRL_T</param>
+            </generator>
+        </id>
+        <property name="start" column="QSSJ" not-null="true"/>
+        <property name="finish" column="JZSJ" not-null="true"/>
+        <property name="weeks" column="ZS" not-null="true"/>
+        <property name="weekSpan" column="ZZS" not-null="true"/>
+        <property name="weekStart" column="QSZ" not-null="true"/>
+        <property name="term" column="XQMC" not-null="true" length="100"/>
+        <property name="year" column="XNDMC" not-null="true" length="9"/>
+        <property name="isSmallTerm" column="SFXXQ" not-null="true"/>
+        <many-to-one name="studentType" column="XSLBID" not-null="true"/>
+        <many-to-one name="previous" column="SGXQ" not-null="false"/>
+        <many-to-one name="next" column="XGXQ" not-null="false"/>
+        <many-to-one name="timeSetting" column="SJSZID" not-null="false"/>
+        <many-to-one name="scheme" column="JXRLFAID"/>
+        <property name="displayTimeDetail" column="SFXSSJ"/>
+    </class>
+	<query name="getAllTeachCalendars"> <![CDATA[from TeachCalendar calendar order by calendar.id]]>
+	</query>
+	
+	<query name="getTeachCalendars">
+		<![CDATA[ from  TeachCalendar as calendar
+				 where calendar.studentType.id=:studentTypeId and
+			           calendar.year=:year and
+			           calendar.term=:term]]>
+	</query>
+	<query name="getStdTypesHasCalendar">
+		<![CDATA[
+			select distinct calendar.studentType 
+			from TeachCalendar as calendar
+			where calendar.studentType.id in (:stdTypeIds)
+			]]>
+	</query>
+		<query name="getCalendarsOfOverlapped">
+		<![CDATA[
+			select calendar
+			from TeachCalendar as calendar
+			where calendar.start<=(:finish)
+			      and(:start)<=calendar.finish
+			      and calendar.studentType.id <> (:stdTypeId)
+			]]>
+	</query>
+	<query name="getTermsBetween">
+		<![CDATA[
+			select count(calendar) from TeachCalendar as calendar
+			where calendar.start >=(:firstStart)
+			and calendar.start <=(:secondStart)
+			and calendar.studentType =(:studentType)
+			and ((:omitSmallTerm=true and calendar.isSmallTerm=false) or(:omitSmallTerm=false))
+			]]>
+	</query>
+</hibernate-mapping>

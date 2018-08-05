@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 排考轮次信息-->
+<hibernate-mapping package="com.shufe.model.course.arrange.exam">
+	<class name="ExamTurn" table="PK_CC_T">
+		<id name="id" column="id" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_PK_CC_T</param>
+			</generator>
+		</id>
+		<property name="name" column="CCMC"/>
+		<property name="engName" column="CCMC_EN"/>
+		<property name="beginTime" column="KSSJ"/>
+		<property name="endTime" column="JSSJ"/>
+		<many-to-one name="stdType" column="XSLBID"/>
+	</class>
+</hibernate-mapping>

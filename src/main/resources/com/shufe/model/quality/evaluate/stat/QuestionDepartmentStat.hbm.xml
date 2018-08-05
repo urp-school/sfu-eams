@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.shufe.model.quality.evaluate.stat.QuestionStat" table="JXZL_PJ_WTTJ_YX_T"
+        entity-name="com.shufe.model.quality.evaluate.state.DepartmentQuery">
+        <id name="id" column="ID">
+            <generator class="sequence">
+                <param name="sequence">SEQ_JXZL_PJ_WTTJ_YX_T</param>
+            </generator>
+        </id>
+        <many-to-one name="questionnaireState" column="YXTJID"
+            class="com.shufe.model.quality.evaluate.stat.EvaluateDepartmentStat" not-null="true"/>
+        <many-to-one name="question" column="PJWTID" not-null="true"/>
+        <property name="evgPoints" column="DFJZ" not-null="true"/>
+    </class>
+</hibernate-mapping>

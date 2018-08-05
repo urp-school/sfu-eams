@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 教学活动表 -->
+<hibernate-mapping>
+	<class name="com.shufe.model.course.task.RequirePrefer" table="JXRW_YQPH_T">
+		<id name="id" column="id" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXRW_YQPH_T</param>
+			</generator>
+		</id>
+		<many-to-one name="course" column="KCID" not-null="false"/>
+		<many-to-one name="teacher" column="JZGID" not-null="false" />
+		<!--任务要求-->
+		<component name="require" class="com.shufe.model.course.task.TaskRequirement">
+			<many-to-one name="roomConfigType" column="JSSBPZID" not-null="true"
+				/>
+			<set name="textbooks" table="JXRW_YQPH_JC_T">
+				<key column="JXYQPHID"/>
+				<many-to-many column="JCID"
+					class="com.shufe.model.course.textbook.Textbook"/>
+			</set>
+			<property name="cases" column="AL" length="1000" />
+            <many-to-one name="teachLangType"  column="SKYYLXID" not-null="true"/>
+            <property name="referenceBooks" column="CKS" length="1000" />
+			<property name="requireRemark" column="YQBZ" not-null="false" length="100"/>	
+		</component>
+	</class>
+</hibernate-mapping>

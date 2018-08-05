@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.duty" >
+	<class name="DutyRecord" table="XS_KQ_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_XS_KQ_T</param>
+			</generator>
+		</id>
+		
+		<many-to-one name="student" column="XSID" />
+		<many-to-one name="teachTask"  column="JXRWID"/>
+		<property name="dutyCount" column="CQCS"/>		
+		<property name="absenteeismCount" column="KKCS"/>
+		<property name="lateCount" column="CDCS"/>
+		<property name="leaveEarlyCount" column="ZTCS"/>
+		<property name="askedForLeaveCount" column="QJCS"/>
+		<property name="totalCount" column="ZCS"/>
+		<set name="recordDetailSet"  >
+			<key column="KQID" />
+			<one-to-many class="RecordDetail" />
+		</set>
+	</class>
+	
+	<class name="RecordDetail" table="XS_KQ_MX_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_XS_KQ_MX_T</param>
+			</generator>
+		</id>
+		<many-to-one name="beginUnit" column="KSXJID" not-null="true"/>
+		<many-to-one name="endUnit" column="JSXJID" not-null="true"/>
+		<property name="dutyDate" column="KQSJ" type="date" not-null="true" />
+		<property name="beginUnitIndex" column="KSXJBH" not-null="true"/>
+		<property name="endUnitIndex"  column="JSXJBH" not-null="true"/>
+		<property name="beginTime" column="KSSJ" not-null="true"/>
+		<property name="endTime" column="JSSJ" not-null="true"/>
+		
+		<many-to-one name="dutyStatus" not-null="true" column="CQFSID"/>
+		<many-to-one name="dutyRecord" not-null="true" column="KQID"/>
+	</class>
+	
+	<query name="batchAddDutyRecordCount">
+		<![CDATA[
+			update DutyRecord set
+			  totalCount = totalCount + 1
+			where 
+			  student.id in (:studentIds) and
+			  teachTask.id = :teachTaskId
+		]]>
+	</query>
+	
+	<query name="batchUpdateDutyRecord">
+		<![CDATA[
+			update DutyRecord set
+			  dutyCount = dutyCount + 1
+			where 
+			  student.id in (:studentIds) and
+			  teachTask.id = :teachTaskId
+		]]>
+	</query>
+	
+	<query name="batchUpdateDutyRecordRatio">
+		<![CDATA[
+			update DutyRecord set
+			  dutyRatio = dutyCount/totalCount
+			where 
+			  student.id in (:studentIds) and
+			  teachTask.id = :teachTaskId
+		]]>
+	</query>
+	
+	<query name="listTeachCalendarTerm">
+		<![CDATA[
+			select
+			  distinct term
+			from
+			  com.shufe.model.system.calendar.TeachCalendar
+		]]>
+	</query>
+	
+</hibernate-mapping>

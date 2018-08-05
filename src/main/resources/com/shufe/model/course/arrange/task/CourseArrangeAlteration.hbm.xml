@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 教学任务变更申请表 -->
+<hibernate-mapping>
+    <class name="com.shufe.model.course.arrange.task.CourseArrangeAlteration"
+        table="JXRW_PKBDRZ_T" discriminator-value="0">
+        <id name="id" column="ID" unsaved-value="null" length="32">
+            <generator class="sequence">
+                <param name="sequence">SEQ_JXRW_PKBDRZ_T</param>
+            </generator>
+        </id>
+        <many-to-one name="task" column="JXRWID" not-null="true"/>
+        <property name="alterationBefore" column="BDQXX" not-null="true"/>
+        <property name="alterationAfter" column="BDHXX" not-null="true"/>
+        <many-to-one name="alterBy" column="PKYHID" not-null="true"/>
+        <property name="alterFrom" column="FFLJ" not-null="true"/>
+        <property name="alterationAt" column="BDSJ" not-null="true"/>
+        <property name="happenPlace" column="BFSWZ" not-null="true"/>
+    </class>
+</hibernate-mapping>

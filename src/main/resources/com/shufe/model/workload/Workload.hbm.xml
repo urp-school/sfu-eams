@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.workload">
+	<!--教学工作量-->
+	<class name="Workload" table="GZL_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_GZL_T</param>
+			</generator>
+		</id>
+		<discriminator column="GZLBS" type="string" length="10"></discriminator>
+		<!--统计表中教师的部门内容-->
+		<component name="teacherInfo">
+			<property name="teacherAge" column="JSNL" length="10"></property>
+			<property name="teacherName" column="JSXM" length="100"></property>
+			<many-to-one name="teacher" column="JZGID" not-null="true"/>
+			<many-to-one name="teacherTitle" column="JSZCID"/>
+			<many-to-one name="teachDepart" column="JSSSYX"/>
+			<many-to-one name="teacherType" column="JZGLBID"/>
+			<many-to-one name="eduDegree" column="WHCDID"/>
+			<many-to-one name="gender" column="XBID"/>
+			<many-to-one name="titleLevel" column="JSZCDJID"/>
+			<many-to-one name="degree" column="JSXXWID"/>
+		</component>
+		<!--统计表中的一些具体的字段-->
+		<many-to-one name="studentType" column="XSLBID"/>
+		<property name="studentNumber" column="XSRS" length="10"/><!--该内容里面带弟子人数-->
+		<property name="totleWorkload" column="ZGZL" length="20"/>
+		<property name="teacherAffirm" column="JSQR"/>
+		<property name="isTeachWorkload" column="SFSKGZL" not-null="true"/>
+		<property name="payReward" column="ZFBC" not-null="true"/>
+		<property name="calcWorkload" column="JGZL" not-null="true"/>
+		<property name="statisticTime" column="TJSJ"/>
+		<property name="isHandInput" column="SFSGSR"/>
+		<property name="modifyTime" column="XGSJ"/>
+		<property name="modifyPerson" column="XGR" length="500"/>
+		<property name="remark" column="BZ" length="2048"/>
+		<many-to-one name="teachCalendar" column="JXRLID"/>
+		<!--教学工作量-->
+		<subclass name="com.shufe.model.workload.course.TeachWorkload"
+			discriminator-value="JX">
+			<many-to-one name="teachTask" column="JXRWID"/>
+			<many-to-one name="course" column="KCID"/>
+			<many-to-one name="courseType" column="KCLBID"/>
+			<property name="courseName" column="KCMC" length="100"/>
+			<many-to-one name="courseCategory" column="KCZLID"/>
+			<many-to-one name="teachCategory" column="JXXZID"/>
+			<property name="classIds" column="BJIDS" length="200"/>
+			<property name="classNames" column="BJNAMES" length="600"/>
+			<many-to-one name="teachModulus" column="JXXSID"/>
+			<property name="classNumberOfWeek" column="MZKS" length="10"/>
+			<property name="weeks" column="SKZS" length="10"/>
+			<property name="totleCourses" column="XQZKS" length="10"/>
+			<property name="collegeAffirm" column="YXQR" not-null="true"/>
+			<many-to-one name="college" column="KKYX"/>
+			<property name="courseSeq" column="kcxh" length="32"/>
+		</subclass>
+		<!-- 指导工作量-->
+		<subclass name="com.shufe.model.workload.instruct.InstructWorkload"
+			discriminator-value="ZD">
+			<many-to-one name="modulus" column="ZDXSID"/>
+		</subclass>
+	</class>
+</hibernate-mapping>

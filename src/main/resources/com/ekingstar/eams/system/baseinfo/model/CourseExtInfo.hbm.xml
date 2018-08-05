@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping >
+	<class name="com.ekingstar.eams.system.baseinfo.model.CourseExtInfo"
+		entity-name="com.ekingstar.eams.system.baseinfo.CourseExtInfo"
+		table="JCXX_KC_KZXX_T" discriminator-value="0">
+		<id name="id" column="id" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JCXX_KC_KZXX_T</param>
+			</generator>
+		</id>
+		<property name="requirement" column="KCYQ" length="200"/>
+		<property name="description" column="KCJJ" length="1000"/>
+		<property name="EstablishOn" column="SLRQ"/>
+		<property name="courseHour" column="SKKS"/>
+		<property name="experimentHour" column="SYKS"/>
+		<property name="practiceHour" column="SXKS"/>
+		<property name="exerciseHour" column="LXKS"/>
+		<property name="period" column="XS" not-null="true"/>
+		<many-to-one name="department" column="BMID" class="com.shufe.model.system.baseinfo.Department"/>
+		<many-to-one name="courseType" column="KCLBID"/>
+	</class>
+</hibernate-mapping>

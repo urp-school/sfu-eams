@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.degree.study">
+  <!-- 项目 -->
+	<class name="Project" table="KY_XM_T">
+		<id name="id" column="ID" length="32">
+			<generator class="sequence">
+				<param name="sequence">SEQ_KY_XM_T</param>
+			</generator>
+		</id>
+		<many-to-one name="student" column="XSID" not-null="true"/>
+		<property name="name" column="XMMC" length="200"/>
+		<property name="wordCount" column="ZS" length="10"/>
+		<property name="authorCount" column="ZZRS"/>
+		<property name="authorIndex" column="ZZPX"/>
+		<property name="isPassCheck" column="SFTGSH" not-null="true"/>
+		<property name="remark" column="BZ" length="500"/>
+		<property name="createOn" column="CJSJ" not-null="true"/>
+		<set name="awards" table="KY_XM_HJ_T" inverse="true"  cascade="all">
+			<key column="XMID"/>
+			<one-to-many class="ProjectAward"/>
+		</set>
+		<property name="projectNo" column="XMBH" length="100"/>
+		<property name="company" column="LXDW" length="100"/>
+		<property name="startOn" column="LXRQ"/>
+		<property name="endOn" column="JXRQ"/>
+		<property name="bearTask" column="CDRW" length="1000"/>
+		<property name="principal" column="FZR" length="50"/>
+		<many-to-one name="projectType" column="XMLBID"/>
+	</class>
+						
+</hibernate-mapping>

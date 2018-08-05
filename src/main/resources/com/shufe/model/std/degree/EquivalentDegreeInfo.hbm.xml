@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.std.degree">
+	<!-- 同等学位学位学历信息-->
+	<class name="EquivalentDegreeInfo" table="XSXX_XWXL_TDXL_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_XSXX_XWXL_TDXL_T</param>
+			</generator>
+		</id>
+		<property name="applyOn" column="SQSJ"/>
+		<property name="applyNo" column="SQBH" length="50"/>
+		<property name="adminDuty" column="XZZW" length="100"/>
+		<property name="specialDuty" column="JNZW" length="100"/>
+		<property name="workTime" column="GZNX" length="20"/>
+		<!--推荐人信息-->
+		<property name="recommender1" column="TJRXM1" length="50"/>
+		<property name="recommender1Company" column="TJRDW1" length="100"/>
+		<property name="recommender1SpecialDuty" column="TJRZW1" length="100"/>
+		<property name="recommender2" column="TJRXM2" length="50"/>
+		<property name="recommender2Company" column="TJRDW2" length="100"/>
+		<property name="recommender2SpecialDuty" column="TJRZW2" length="100"/>
+		<!--综合考试-->
+		<property name="exam" column="KSMC" length="50"/>
+		<property name="examScore" column="KSCJ" length="50"/>
+		<property name="examOn" column="KSSJ" length="50"/>
+		<property name="examCertificateNo" column="KSZSBH" length="50"/>
+		<!--外语统考-->
+		<property name="language" column="KSYYMC" length="50"/>
+		<property name="languageScore" column="KSYYCJ" length="50"/>
+		<property name="languageOn" column="KSYYSJ" length="50"/>
+		<property name="languageCertificateNo" column="KSYYZSBH" length="50"/>
+	</class>
+</hibernate-mapping>

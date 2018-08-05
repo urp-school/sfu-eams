@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.quality.evaluate">
+	<class name="EvaluateSwitch" table="JXZL_PJ_PJKG_T">
+		<cache usage="read-write" region="evaluateCache"/>
+		<id name="id" column="ID">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXZL_PJ_PJKG_T</param>
+			</generator>
+		</id>
+		<many-to-one name="calendar" column="JXRLID"/>
+		<property name="isOpen" column="SFKF"></property>
+		<property name="openAt" column="KSSJ"></property>
+		<property name="closeAt" column="JSSJ"></property>
+		<set name="stdTypes" table="JXZL_PJ_PJKG_XSLB_T">
+			<key column="PJKGID"/>
+			<many-to-many column="XSLBID"
+				class="com.ekingstar.eams.system.baseinfo.StudentType"/>
+		</set>
+		<set name="departs" table="JXZL_PJ_PJKG_BM_T">
+			<key column="PJKGID"/>
+			<many-to-many column="BMID"
+				class="com.shufe.model.system.baseinfo.Department"/>
+		</set>
+	</class>
+	<query name="getEvaluateSwitchs">
+		<![CDATA[
+			select switch  from com.shufe.model.quality.evaluate.EvaluateSwitch switch
+			         join switch.stdTypes stdType
+			         join switch.departs depart
+			    where (switch.calendar=:calendar)
+			 and (stdType=:stdType) and (depart=:depart) 
+			]]>
+	</query>
+</hibernate-mapping>

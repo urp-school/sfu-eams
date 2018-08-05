@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.std.degree" >
+	<!--本科学历学位信息-->
+	<class name="UndergraduateDegreeInfo" table="XSXX_XWXL_BK_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_XSXX_XWXL_BK_T</param>
+			</generator>
+		</id>
+		<property name="specialityName" column="BYZYMC" length="100"/>
+		<property name="graduateOn" column="BYSJ" length="100"/>
+		<many-to-one name="school" column="PYXXID"/>
+		<many-to-one name="subjectCategory" column="XKMLID"/>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<struts-config>
+    <action-mappings>
+        <action path="/certificationForStd" scope="request" parameter="method"/>
+    </action-mappings>
+</struts-config>

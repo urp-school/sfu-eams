@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.shufe.model.degree.thesis.annotate">
+	<class name="ThesisAnnotateBook" table="LW_XS_DSPYS_T">
+			<id name="id" column="ID" length="32">
+				<generator class="sequence">
+					<param name="sequence">SEQ_LW_XS_DSPYS_T</param>
+				</generator>
+			</id> 
+			<property name="serial" column="PYBH" length="32"/>
+			<many-to-one name="answerTem" column="PYDSID" cascade="all"/>
+			<property name="isReply" column="SFYXDB" length="1"/>
+			<property name="isPublish" column="SFFB"/>
+			<property name="innovateOne" column="CXD1" length="1"/>
+			<property name="innovateTwo" column="CXD2" length="1"/>
+			<property name="innovateThree" column="CXD3" length="1"/>
+			<property name="lack" column="BZD" length="1"/>
+		    <property name="thesisAppraise" column="DSLWZTPJ" length="2000"/>
+			<many-to-one name="thesisManage" column="LWGLID" lazy="proxy"/>
+			<component name="evaluateIdea" class="EvaluateIdea">
+				<property name="topicMeaning" column="XTYY"/>
+				<property name="lteratureSumUp" column="WXMS" length="1"/>
+				<property name="researchHarvest" column="YJJG" length="1"/>
+				<property name="operationLevel" column="YWSP" length="1"/>
+				<property name="composeAbility" column="XZNL" length="1"/>
+				<property name="mark" column="FS" length="1"/>
+				<property name="learningLevel" column="xssp" length="1"/>
+		   </component>
+	</class>
+</hibernate-mapping>

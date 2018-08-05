@@ -1,0 +1,264 @@
+<?xml version="1.0"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!--basic action-->
+	<bean name="/index" class="com.shufe.web.action.system.IndexAction"
+		scope="prototype"/>
+	
+	<bean name="/randomCodeImage"
+		class="com.ekingstar.security.web.action.RandomCodeImageAction"
+		scope="prototype"/>
+	
+	<bean name="/loadDispatch"
+		class="com.shufe.web.action.system.LoadDispatchAction" scope="prototype">
+		<property name="securityMonitor" ref="securityMonitor"/>
+	</bean>
+	
+	<bean name="/login" class="com.shufe.web.action.system.LoginAction"
+		scope="prototype">
+		<property name="securityMonitor" ref="securityMonitor"/>
+        <property name="utilService" ref="utilService"/>
+	</bean>
+	
+	<bean name="/home" class="com.shufe.web.action.system.home.HomeAction"
+		scope="prototype">
+		<property name="utilService" ref="utilService"/>
+	</bean>
+	
+	<bean name="/defaultHome"
+		class="com.shufe.web.action.system.home.DefaultHomeAction"
+		scope="prototype" autowire="byName">
+		<property name="authorityService" ref="authorityService"/>
+		<property name="systemMessageService" ref="messageService"/>
+		<property name="securityMonitor" ref="securityMonitor"/>
+		<property name="utilService" ref="utilService"/>
+		<property name="noticeService" ref="noticeService"/>
+		<property name="resourceService" ref="resourceService"/>
+		<property name="logHelper" ref="logHelper"/>
+	</bean>
+	
+	<bean name="/simpleHome"
+		class="com.shufe.web.action.system.home.SimpleHomeAction"
+		scope="prototype" autowire="byName">
+		<property name="authorityService" ref="authorityService"/>
+		<property name="systemMessageService" ref="messageService"/>
+		<property name="securityMonitor" ref="securityMonitor"/>
+		<property name="utilService" ref="utilService"/>
+		<property name="noticeService" ref="noticeService"/>
+		<property name="resourceService" ref="resourceService"/>
+		<property name="logHelper" ref="logHelper"/>
+	</bean>
+	
+	<bean name="/logout" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.LogoutAction"/>
+	
+	<bean name="/help" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.HelpAction"/>
+	
+	<bean name="/preference" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.PreferenceAction">
+	</bean>
+	<bean name="/systemConfig" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.SystemConfigAction">
+	</bean>
+	<bean name="/requirement" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.project.RequirementAction">
+	</bean>
+	
+	<!--消息管理部分-->
+	<bean name="/systemMessage" id="systemMessageAction" autowire="byName"
+		scope="prototype"
+		class="com.shufe.web.action.system.message.SystemMessageAction">
+		<property name="messageService" ref="messageService"/>
+	</bean>
+	<bean name="/notice" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.notice.NoticeAction"/>
+	<bean name="/noticeSearch" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.notice.NoticeSearchAction"/>
+	<bean name="/download" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.file.DocumentDownloadAction"/>
+	
+	<bean name="/document" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.file.DocumentAction"/>
+	
+	<bean name="/dataTemplate" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.file.DataTemplateAction"/>
+	
+	<bean name="/systemLog" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.log.SystemLogAction"/>
+	<!--教学日历部分-->
+	<bean name="/calendar" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.calendar.TeachCalendarAction">
+		<property name="calendarService" ref="teachCalendarService"/>
+	</bean>
+	<bean name="/timeSetting" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.calendar.TimeSettingAction">
+		<property name="settingService" ref="timeSettingService"/>
+	</bean>
+	<!--基础代码/信息部分-->
+	<bean name="/baseInfoSearch" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.baseinfo.search.BaseInfoSearchAction"/>
+	<bean name="/baseCode" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.code.BaseCodeAction">
+		<property name="baseCodeService" ref="baseCodeService"/>
+	</bean>
+	<bean name="/courseSearch" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.baseinfo.search.CourseSearchAction"/>
+	<bean name="/course" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.baseinfo.CourseAction">
+		<property name="courseService">
+			<ref bean="courseService"/>
+		</property>
+	</bean>
+	<bean name="/classRoomSearch" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.baseinfo.search.ClassRoomSearchAction"/>
+	<bean name="/classroom" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.baseinfo.ClassroomAction">
+	</bean>
+	<bean name="/classroomStat" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.baseinfo.stat.ClassroomStatAction"/>
+	<bean name="/teacherSearch" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.baseinfo.search.TeacherSearchAction"/>
+	<bean name="/teacher" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.baseinfo.TeacherAction"/>
+	<bean name="/teacherStat" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.baseinfo.stat.TeacherStatAction">
+		<property name="teacherStatService" ref="teacherStatService"/>
+	</bean>
+	<bean name="/specialitySearch" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.baseinfo.search.SpecialitySearchAction"/>
+	<bean name="/speciality" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.baseinfo.SpecialityAction"/>
+	<bean name="/specialityStat" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.baseinfo.stat.SpecialityStatAction">
+		<property name="specialityStatService" ref="specialityStatService"/>
+	</bean>
+	<bean name="/specialityAspectSearch" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.baseinfo.search.SpecialityAspectSearchAction"/>
+	<bean name="/specialityAspect" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.baseinfo.SpecialityAspectAction"/>
+	<bean name="/adminClassSearch" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.baseinfo.search.AdminClassSearchAction">
+		<property name="adminClassService" ref="adminClassService"/>
+	</bean>
+	<bean name="/adminClass" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.baseinfo.AdminClassAction"/>
+	<bean name="/departmentSearch" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.baseinfo.search.DepartmentSearchAction">
+		<property name="departmentService" ref="departmentService"/>
+	</bean>
+	<bean name="/department" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.baseinfo.DepartmentAction"/>
+	<bean name="/studentTypeSearch" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.baseinfo.search.StudentTypeSearchAction"/>
+	<bean name="/studentType" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.baseinfo.StudentTypeAction"/>
+	<bean name="/schoolDistrict" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.baseinfo.SchoolDistrictAction"/>
+	<bean name="/building" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.baseinfo.BuildingAction"/>
+	
+	<!--权限部分-->
+	<bean name="/user" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.security.UserAction">
+		<property name="userService" ref="userService"/>
+		<property name="roleService" ref="roleService"/>
+		<property name="entityName" value="com.ekingstar.security.User"/>
+	</bean>
+	
+	<bean name="/password" scope="prototype" autowire="byName"
+		class="com.ekingstar.security.web.action.PasswordAction">
+		<property name="userService" ref="userService"/>
+		<property name="entityName" value="com.ekingstar.security.User"/>
+		<property name="mailSender" ref="mailSender"/>
+		<property name="message" ref="mailMessage"/>
+	</bean>
+	
+	<bean name="/management" scope="prototype" autowire="byName"
+		class="com.ekingstar.security.web.action.ManagementAction">
+		<property name="userService" ref="userService"/>
+		<property name="entityName" value="com.ekingstar.security.User"/>
+	</bean>
+	
+	<bean name="/role" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.security.RoleAction">
+		<property name="userService" ref="userService"/>
+		<property name="authorityService" ref="authorityService"/>
+		<property name="roleService" ref="roleService"/>
+		<property name="roleMngService" ref="roleMngService"/>
+		<property name="entityName" value="com.ekingstar.security.Role"/>
+	</bean>
+	<bean name="/menu" scope="prototype" autowire="byName"
+		class="com.ekingstar.security.web.action.MenuAction">
+		<property name="entityName"
+			value="com.ekingstar.security.portal.model.Menu"/>
+	</bean>
+	<bean name="/menuProfile" scope="prototype" autowire="byName"
+		class="com.ekingstar.security.web.action.MenuProfileAction">
+		<property name="entityName"
+			value="com.ekingstar.security.portal.model.MenuProfile"/>
+	</bean>
+	<bean name="/resource" scope="prototype" autowire="byName"
+		class="com.ekingstar.security.web.action.ResourceAction">
+		<property name="entityName" value="com.ekingstar.security.Resource"/>
+	</bean>
+	<bean name="/restrictionPattern" scope="prototype" autowire="byName"
+		class="com.ekingstar.security.web.action.RestrictionPatternAction">
+		<property name="entityName"
+			value="com.ekingstar.security.restriction.RestrictionPattern"/>
+	</bean>
+	
+	<bean name="/restriction" scope="prototype" autowire="byName"
+		class="com.ekingstar.security.web.action.RestrictionAction">
+		<property name="entityName"
+			value="com.ekingstar.security.restriction.Restriction"/>
+	</bean>
+	
+	<bean name="/patternParam" scope="prototype" autowire="byName"
+		class="com.ekingstar.security.web.action.PatternParamAction">
+		<property name="entityName"
+			value="com.ekingstar.security.restriction.PatternParam"/>
+	</bean>
+	
+	<bean name="/menuAuthority" scope="prototype" autowire="byName"
+		class="com.ekingstar.security.web.action.MenuAuthorityAction">
+		<property name="authorityService" ref="authorityService"/>
+		<property name="userService" ref="userService"/>
+		<property name="roleService" ref="roleService"/>
+	</bean>
+	<bean name="/onlineRecord" scope="prototype" autowire="byName"
+		class="com.ekingstar.security.web.action.OnlineRecordAction">
+	</bean>
+	<bean name="/onlineUser" scope="prototype" autowire="byName"
+		class="com.ekingstar.security.web.action.OnlineUserAction">
+	</bean>
+	<bean name="/stdUser" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.security.StudentUserAction">
+		<property name="userService" ref="userService"/>
+		<property name="studentService" ref="studentService"/>
+	</bean>
+	<bean name="/teacherUser" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.security.TeacherUserAction">
+		<property name="userService" ref="userService"/>
+	</bean>
+	<!--权限部分-->
+	<bean name="/codeScript" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.codeGen.CodeScriptAction"/>
+	<!-- 规则部分 -->	
+	<bean name="/rule" scope="prototype" autowire="byName"
+		class="com.shufe.web.action.system.rule.RuleAction">
+	</bean>
+	<bean name="/ruleParameter" scope="prototype" autowire="byName"
+		class="com.shufe.web.action.system.rule.RuleParameterAction">
+	</bean>
+	<bean name="/ruleConfig" scope="prototype" autowire="byName"
+		class="com.shufe.web.action.system.rule.RuleConfigAction">
+	</bean>
+	<bean  name="/newCourse" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.baseinfo.NewCourseAction"/>
+	<bean  name="/newCourseSearch" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.system.baseinfo.search.NewCourseSearchAction"/>
+		
+</beans>

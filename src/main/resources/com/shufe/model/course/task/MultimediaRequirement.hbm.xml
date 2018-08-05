@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+    <!-- 教学任务_多媒体教室要求 -->
+<hibernate-mapping package="com.shufe.model.course.task">
+    <class name="MultimediaRequirement" table="JXRW_DMTJSYQ_T">
+        <id name="id" column="id" unsaved-value="null">
+            <generator class="sequence">
+                <param name="sequence">SEQ_JXRW_DMTJSYQ_T</param>
+            </generator>
+        </id>
+
+        <many-to-one name="task" column="JXRWID" not-null="true"/>
+        <property name="addressRequirement" column="DDFQ" length="500" not-null="true"/>
+        <property name="environmentRequirement" column="HJYQ" length="500" not-null="true"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.shufe.model.course.plan.TeachPlanArrangeAlteration"
+        table="PYJH_BDRZ_T" discriminator-value="0">
+        <id name="id" column="ID" unsaved-value="null" length="32">
+            <generator class="sequence">
+                <param name="sequence">SEQ_PYJH_BDRZ_T</param>
+            </generator>
+        </id>
+        <many-to-one name="beforePlanInfo" column="BDQID" cascade="all"/>
+        <many-to-one name="afterPlanInfo" column="BDHID" cascade="all"/>
+        <property name="isModifyGroup" column="SFXGKCZ"/>
+        <property name="isModifyCourse" column="SFXGKC"/>
+        <property name="createAt" column="ZDSJ" type="date"/>
+        <property name="modifyAt" column="XGSJ" type="date"/>
+        <!--产生变动用户ID-->
+        <many-to-one name="alterationBy" column="CSBDYHID" not-null="true"/>
+        <property name="alterationFrom" column="FFLJ" not-null="true"/>
+        <property name="alterationAt" column="FSSJ" not-null="true"/>
+        <property name="happenStatus" column="FSZT" not-null="true"/>
+        <property name="description" column="XXXX" length="2000"/>
+    </class>
+</hibernate-mapping>

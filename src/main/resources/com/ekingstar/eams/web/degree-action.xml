@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <!--________________________________________________________学科______________________________________________________________-->
+    <bean name="/level1Subject"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.subject.Level1SubjectAction">
+        <property name="level1SubjectService">
+            <ref bean="level1SubjectService"/>
+        </property>
+    </bean>
+	<bean name="/level2Subject" autowire="byName" scope="prototype"
+		class="com.shufe.web.action.degree.subject.Level2SubjectAction">
+		<property name="level2SubjectService">
+			<ref bean="level2SubjectService"/>
+		</property>
+	</bean>
+    
+    <!--_________________________________________________________论文管理________________________________________________________-->
+    
+    <bean name="/thesisManage"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.thesis.ThesisManageAction"/>
+    <bean name="/thesisManageTutor"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.thesis.ThesisManageTutorAction"/>
+    <!-- *************************开题*********************************************************-->
+    <!--college operator-->
+    <bean name="/thesisTopicOpen"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.thesis.topicOpen.TopicOpenAction">
+    </bean>
+    <!--tutor operator-->
+    <bean name="/thesisTopicOpen_tutor"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.thesis.topicOpen.TopicOpenTutorAction">
+    </bean>
+    <!--student operator-->
+    <bean name="/loadThesisTopic_std"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.thesis.topicOpen.TopicOpenStdAction">
+    </bean>
+    
+    <!--*****************************预答辩**************************************************-->
+    <bean name="/preAnswer"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.thesis.preAnswer.PreAnswerAction">
+    </bean>
+    <bean name="/preAnswer_std"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.thesis.preAnswer.PreAnswerStdAction">
+    </bean>
+    <bean name="/preAnswer_tutor"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.thesis.preAnswer.PreAnswerTutorAction">
+    </bean>
+    
+    <!--********************************我的论文*************************************************-->
+    <bean name="/thesisAdmin"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.thesis.formalThesis.ThesisAdminAction"/>
+    <bean name="/thesisStd"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.thesis.formalThesis.ThesisStdAction"/>
+    
+    
+    <!--***********************************论文评阅***********************************************************-->
+    <bean name="/annotateAdmin"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.thesis.annotate.AnnotateAdminAction">
+    </bean>
+    <bean name="/annotateStd"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.thesis.annotate.AnnotateStdAction">
+    </bean>
+    <bean name="/annotateTutor"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.thesis.annotate.AnnotateTutorAction"/>
+    
+    
+    <!--*********************************论文答辩*****************************************************************-->
+    <bean name="/formalAnswerAdmin"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.thesis.formalAnswer.FormalAnswerAdminAction"/>
+    <bean name="/formalAnswerStd"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.thesis.formalAnswer.FormalAnswerStdAction"/>
+    
+    <!--**********************************论文统计*************************************************-->
+    <bean name="/thesisStatistic"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.thesis.ThesisStatisticAction"/>
+    
+    <bean name="/thesisSchedule"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.thesis.process.ThesisScheduleAction"/>
+    
+    <!--****************************学位学科文档管理************************************************-->
+    <bean name="/thesisDocument"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.thesis.ThesisDocumentAction"/>
+    <bean name="/thesisDownload"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.thesis.ThesisDownloadAction"/>
+    <!--*****************************学位申请********************************-->
+    <bean name="/degreeApplyStd"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.apply.DegreeApplyStdAction"/>
+    <bean name="/degreeApply"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.apply.DegreeApplyAction"/>
+    
+    <!--**********************************科研管理***********************************************-->
+    <bean name="/studyProduct"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.study.StudyProductAction"/>
+    <bean name="/studyProductStd"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.study.StudyProductStdAction"/>
+    <bean name="/studyAward"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.study.StudyAwardAction"/>
+    <!--*************************************导师管理*********************************************-->
+    <bean name="/tutorManager"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.tutorManager.TutorManagerAction">
+        <property name="utilService">
+            <ref bean="utilService"/>
+        </property>
+        <property name="departmentService">
+            <ref bean="departmentService"/>
+        </property>
+        <property name="baseCodeService">
+            <ref bean="baseCodeService"/>
+        </property>
+    </bean>
+    
+    <bean name="/tutorManager_tutor"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.tutorManager.TutorManagerAction"/>
+    <bean name="/appointTutor"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.tutorManager.AppointTutorAction">
+    </bean>
+    <bean name="/appointStd"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.tutorManager.AppointStdAction">
+    </bean>
+    <bean name="/assistant"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.tutorManager.assistant.AssistantAction">
+        <property name="entityName" value="assistant"/>
+        <property name="entityClass" value="com.shufe.model.degree.tutorManager.Assistant"/>
+    </bean>
+    <bean name="/assistantTutor"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.tutorManager.assistant.AssistantTutorAction"/>
+    <bean name="/assistantStd"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.tutorManager.assistant.AssistantStdAction"/>
+    <bean name="/tutorChoose"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.tutorManager.tutorChoose.TutorChooseAction">
+    </bean>
+    <bean name="/tutorChoose_tutor"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.tutorManager.tutorChoose.TeacherApplyAction">
+    </bean>
+    <bean name="/tutorStatistic"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.tutorManager.TutorStatisticAction"/>
+    <bean name="/thesisManageStd"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.thesis.ThesisManageStdAction"/>
+    <bean name="/instruction"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.instruct.InstructionAction">
+        <property name="entityName" value="instruction"/>
+        <property name="entityClass" value="com.shufe.model.degree.instruct.Instruction"/>
+    </bean>
+    <bean name="/tutorStd"  autowire="byName" scope="prototype"
+        class="com.shufe.web.action.degree.instruct.TutorStdAction"/>
+</beans>

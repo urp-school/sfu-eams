@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <!-- feeDetailInfo action-->
+    <bean name="/feeDetail" id="feeDetailAction" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.fee.FeeDetailAction">
+    </bean>
+    <bean name="/feeSearch" id="feeSearchAction" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.fee.FeeSearchAction">
+        <property name="feeDetailService">
+            <ref bean="feeDetailService"/>
+        </property>
+    </bean>
+    <bean name="/feeOfStd" autowire="byName" scope="prototype" class="com.shufe.web.action.fee.FeeOfStdAction">
+    </bean>
+    <bean name="/courseAndFee" autowire="byName" scope="prototype" class="com.shufe.web.action.fee.CourseAndFeeAction">
+    </bean>
+    <bean name="/feeStat" autowire="byName" scope="prototype" class="com.shufe.web.action.fee.FeeStatAction">
+    </bean>
+    
+    <!--收费默认值配置-->
+    <bean name="/feeDefaultConfig" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.fee.FeeDefaultConfigAction">
+    </bean>
+    <bean name="/creditFeeDefault" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.fee.CreditFeeDefaultAction">
+        <property name="entityName" value="creditFeeDefault"/>
+        <property name="entityClass" value="com.shufe.model.fee.CreditFeeDefault"/>
+    </bean>
+    <bean name="/feeDefault" autowire="byName" scope="prototype" class="com.shufe.web.action.fee.FeeDefaultAction">
+    </bean>
+    
+    <!--收费信息导入-->
+    <bean name="/feeImport" autowire="byName" scope="prototype" class="com.shufe.web.action.fee.FeeImportAction">
+    </bean>
+    <!--学费初始化-->
+    <bean name="/tuitionFee" autowire="byName" scope="prototype"
+        class="com.ekingstar.eams.fee.web.action.TuitionFeeAction">
+    </bean>
+</beans>

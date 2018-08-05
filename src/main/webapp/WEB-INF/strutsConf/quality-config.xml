@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<struts-config>
+    <action-mappings>
+        <!--教学事故-->
+        <action path="/teachAccident" scope="request" parameter="method"/>
+        <action path="/teachAccidentTeacher" scope="request" parameter="method"/>
+        <action path="/teachAccidentSearch" scope="request" parameter="method"/>
+        <action path="/teachReview" scope="request" parameter="method"/>
+        <action path="/lessonCheck" scope="request" parameter="method"/>
+        <!--教学成果-->
+        <action path="/teachProduct" scope="request" parameter="method"/>
+        <action path="/teachProductForTeacher" scope="request" parameter="method"/>
+        <action path="/teachProductStat" scope="request" parameter="method"/>
+        <!--精品课程-->
+        <action path="/fineCourseStat" scope="request" parameter="method"/>
+        <action path="/fineCourse" scope="request" parameter="method"/>
+        <!--评教-->
+        <action path="/questionnaireStat" scope="request" parameter="method"/>
+        <action path="/questionnaireStatSearch" scope="request" parameter="method"/>
+        <action path="/questionnaireStatTeacher" scope="request" parameter="method"/>
+        <action path="/evaluateDetailSearch" scope="request" parameter="method"/>
+        <action path="/evaluateDetailStat" scope="request" parameter="method"/>
+        <action path="/evaluateStatistics" scope="request" parameter="method"/>
+        <action path="/evaluateStd" scope="request" parameter="method"/>
+        <action path="/evaluateSwitch" scope="request" parameter="method"/>
+        <action path="/evaluateQuerySwitch" scope="request" parameter="method"/>
+        <action path="/questionnaireTask" scope="request" parameter="method"/>
+        <action path="/evaluateResult" scope="request" parameter="method"/>
+        
+        <action path="/question" scope="request" parameter="method"/>
+        <action path="/questionType" scope="request" parameter="method"/>
+        <action path="/optionGroup" scope="request" parameter="method"/>
+        <action path="/questionnaire" scope="request" parameter="method"/>
+        <action path="/evaluationCriteria" scope="request" parameter="method"/>
+        <action path="/evaluationConfig" scope="request" parameter="method"/>
+        <action path="/textEvaluationStd" scope="request" parameter="method"/>
+        <action path="/textEvaluationTeacher" scope="request" parameter="method"/>
+        <action path="/textEvaluation" scope="request" parameter="method"/>
+        <action path="/textEvaluationSearch" scope="request" parameter="method"/>
+    </action-mappings>
+</struts-config>

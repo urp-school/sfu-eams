@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 教室借用级差 -->
+<hibernate-mapping>
+	<class name="com.shufe.model.course.arrange.resource.RoomPriceConfig"
+		table="JXYX_JSJC_T">
+		<id name="id" column="id" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXYX_JSJC_T</param>
+			</generator>
+		</id>
+		<many-to-one name="roomConfigType" column="JSPZID" not-null="true"/>
+		<many-to-one name="catalogue" column="JSJMBID" not-null="true"/>
+		<property name="minSeats" column="ZXZWS" not-null="true"/>
+		<property name="maxSeats" column="ZDZWS" not-null="true"/>
+		<property name="price" column="JG" not-null="true"/>
+	</class>
+</hibernate-mapping>

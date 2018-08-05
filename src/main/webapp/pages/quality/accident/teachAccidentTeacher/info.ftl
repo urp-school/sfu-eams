@@ -1,0 +1,1 @@
+<#include "../teachAccidentSearch/info.ftl"/>

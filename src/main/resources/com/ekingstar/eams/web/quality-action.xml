@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<!--教学质量管理部分-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--教学事故-->
+    <bean name="/teachAccident" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.quality.accident.TeachAccidentAction"/>
+    <bean name="/teachAccidentTeacher" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.quality.accident.TeachAccidentTeacherAction"/>
+    <bean name="/teachAccidentSearch" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.quality.accident.TeachAccidentSearchAction"/>
+    <!--教学成果-->
+    <bean name="/teachProduct" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.quality.product.TeachProductAction">
+        <property name="teachProductService" ref="teachProductService"/>
+        <property name="entityName" value="teachProduct"/>
+        <property name="entityClass"
+            value="com.shufe.model.quality.product.TeachProduct"/>
+    </bean>
+    <bean name="/teachProductForTeacher" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.quality.product.TeachProductForTeacherAction">
+        <property name="entityName" value="teachProduct"/>
+        <property name="entityClass"
+            value="com.shufe.model.quality.product.TeachProduct"/>
+    </bean>
+    <bean name="/teachProductStat" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.quality.product.TeachProductStatAction">
+        <property name="entityName" value="teachProduct"/>
+        <property name="entityClass"
+            value="com.shufe.model.quality.product.TeachProduct"/>
+    </bean>
+    <bean name="/teachProductSearch" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.quality.product.TeachProductAction"/>
+    <!--精品课程-->
+    <bean name="/fineCourse" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.quality.fineCourse.FineCourseAction">
+        <property name="entityName" value="fineCourse"/>
+        <property name="entityClass"
+            value="com.shufe.model.quality.fineCourse.FineCourse"/>
+    </bean>
+    <bean name="/fineCourseStat" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.quality.fineCourse.FineCourseStatAction"/>
+    <!--教学检查-->
+    <bean name="/teachReview" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.quality.review.TeachReviewAction">
+        <property name="reviewDetailService" ref="reviewDetailService"/>
+        <property name="teachReviewService" ref="teachReviewService"/>
+    </bean>
+    <!--评教-->
+    <bean name="/questionnaireStat" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.quality.evaluate.QuestionnaireStatAction"/>
+    <bean name="/questionnaireStatSearch" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.quality.evaluate.QuestionnaireStatSearchAction"/>
+    <bean name="/questionnaireStatTeacher" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.quality.evaluate.QuestionnaireStatTeacherAction"/>
+    <bean name="/evaluateStd" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.quality.evaluate.EvaluateStdAction"/>
+    <bean name="/evaluateSwitch" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.quality.evaluate.EvaluateSwitchAction">
+        <property name="entityName" value="switch"/>
+        <property name="entityClass"
+            value="com.shufe.model.quality.evaluate.EvaluateSwitch"/>
+    </bean>
+    <bean name="/evaluateQuerySwitch" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.quality.evaluate.EvaluateQuerySwitchAction"/>
+    <bean name="/questionnaireTask" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.quality.evaluate.QuestionnaireTaskAction"/>
+    
+    <bean name="/evaluateDetailSearch" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.quality.evaluate.EvaluateDetailSearchAction"/>
+    <bean name="/evaluateDetailStat" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.quality.evaluate.EvaluateDetailStatAction"/>
+        
+   	<bean name="/evaluateStatistics" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.quality.evaluate.EvaluateStatisticsAction"/>
+    
+    <bean name="/question" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.quality.evaluate.QuestionAction">
+        <property name="entityName" value="question"/>
+        <property name="entityClass"
+            value="com.shufe.model.quality.evaluate.Question"/>
+    </bean>
+    <bean name="/questionType" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.quality.evaluate.QuestionTypeAction">
+        <property name="entityName" value="questionType"/>
+        <property name="entityClass"
+            value="com.shufe.model.quality.evaluate.QuestionType"/>
+    </bean>
+    <bean name="/optionGroup" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.quality.evaluate.OptionGroupAction">
+        <property name="entityName" value="optionGroup"/>
+        <property name="entityClass"
+            value="com.shufe.model.quality.evaluate.OptionGroup"/>
+    </bean>
+    <bean name="/questionnaire" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.quality.evaluate.QuestionnaireAction">
+        <property name="entityName" value="questionnaire"/>
+        <property name="entityClass"
+            value="com.shufe.model.quality.evaluate.Questionnaire"/>
+    </bean>
+    <bean name="/evaluationCriteria" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.quality.evaluate.EvaluationCriteriaAction">
+        <property name="entityName" value="evaluationCriteria"/>
+        <property name="entityClass"
+            value="com.shufe.model.quality.evaluate.EvaluationCriteria"/>
+    </bean>
+    <bean name="/evaluationConfig" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.quality.evaluate.EvaluationConfigAction"/>
+    
+    <bean name="/evaluateResult" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.quality.evaluate.EvaluateResultAction">
+        <property name="entityName" value="evaluateResult"/>
+        <property name="entityClass"
+            value="com.shufe.model.quality.evaluate.EvaluateResult"/>
+    </bean>
+    <!--文字评教-->
+    <bean name="/textEvaluationStd" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.quality.evaluate.TextEvaluationStdAction"/>
+    <bean name="/textEvaluationTeacher" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.quality.evaluate.TextEvaluationTeacherAction"/>
+    <bean name="/textEvaluationSearch" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.quality.evaluate.TextEvaluationSearchAction"/>
+    <bean name="/textEvaluation" autowire="byName" scope="prototype"
+        class="com.shufe.web.action.quality.evaluate.TextEvaluationAction">
+        <property name="textEvaluationService" ref="textEvaluationService">
+        </property>
+    </bean>
+    <!--督导组听课记录-->
+    <bean name="/lessonCheck" autowire="byName" scope="prototype"
+        class="com.ekingstar.eams.quality.lessoncheck.web.action.LessonCheckAction">
+        <property name="entityName" value="lessonCheck"/>
+        <property name="entityClass"
+            value="com.ekingstar.eams.quality.lessoncheck.model.LessonCheck"/>
+    </bean>
+</beans>

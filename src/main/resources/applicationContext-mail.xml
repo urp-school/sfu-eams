@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<description>mail service</description>
+	
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host">
+			<value>mail.shufe.edu.cn</value>
+		</property>
+		<property name="username">
+			<value>infocms</value>
+		</property>
+		<property name="password">
+			<value>shufejw</value>
+		</property>
+		<property name="port">
+			<value>25</value>
+		</property>
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="mailMessage" class="org.springframework.mail.SimpleMailMessage">
+		<property name="from">
+			<value>infocms@mail.shufe.edu.cn</value>
+		</property>
+	</bean>
+	
+	<bean id="mailService" class="com.shufe.service.system.mail.impl.MailServiceImpl">
+		<property name="mailSender">
+            <ref bean="mailSender" />
+        </property>
+		<property name="templateMessage">
+            <ref bean="mailMessage" />
+        </property>
+	</bean>
+	
+</beans>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.std.speciality2nd">
+	<class name="SignUpGPASetting" table="SZYBM_JC_T">
+        <id name="id" column="ID" unsaved-value="null">
+            <generator class="sequence">
+                <param name="sequence">SEQ_SZYBM_JC_T</param>
+            </generator>
+        </id>
+        <!-- 业务主键 -->
+		<property name="fromRank" column="DQJB"/>
+		<property name="toRank" column="MBJB"/>
+        
+		<property name="GPAGap" column="JC"/>
+	</class>
+</hibernate-mapping>

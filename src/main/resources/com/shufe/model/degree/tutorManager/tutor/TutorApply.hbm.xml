@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.degree.tutorManager.tutor">
+  <!-- 导师申请情况 -->
+  <class name="TutorApply" table="DSSQ_T">
+		<id name="id" column="ID" length="32">
+	      <generator class="sequence">
+	          <param name="sequence">SEQ_DSSQ_T</param>
+	      </generator>
+	   </id>	
+      <many-to-one name="teacher" column="DSID"/>     	
+	  <many-to-one name="tutorType" column="DSLBID"/>
+	  <property name="accessoryName" column="FJMC"/>
+	  <property name="isPass" column="SFTG"/>
+	  <property name="applyTime" column="SQSJ"/>
+	  <property name="passTime" column="TGSJ"/>
+	  <many-to-one name="user" column="TGSYR" />
+  </class>
+</hibernate-mapping>

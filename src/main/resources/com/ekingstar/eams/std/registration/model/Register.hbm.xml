@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+	package="com.ekingstar.eams.std.registration.model">
+	<class name="Register" table="XS_ZCXX_T">
+		<id name="id" column="ID" length="32">
+			<generator class="sequence">
+				<param name="sequence">SEQ_XS_ZCXX_T</param>
+			</generator>
+		</id>
+		<many-to-one name="calendar" column="JXRLID" not-null="true" class="com.shufe.model.system.calendar.TeachCalendar"/>
+		<many-to-one name="std" column="XSID" not-null="true"  class="com.shufe.model.std.Student"/>
+		<many-to-one name="state" column="ZCZTID" not-null="true" />
+		<property name="isPassed" column="SFWCZC" not-null="true" />
+		<property name="isTuitionFeeCompleted" column="SFWCJF"
+			not-null="true" />
+		<property name="registerAt" column="ZCSJ" not-null="true" />
+		<property name="remark" column="BZ" length="100" />
+	</class>
+</hibernate-mapping>

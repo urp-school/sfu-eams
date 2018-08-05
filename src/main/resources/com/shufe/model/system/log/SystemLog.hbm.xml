@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.shufe.model.system.log">
+	<class name="SystemLog" table="XTRZ_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_XTRZ_T</param>
+			</generator>
+		</id>
+		<many-to-one name="user" column="YHID" not-null="true" />
+		<property name="operation" column="CZ" length="500"/>
+		<property name="URI" column="URI"/>
+		<property name="time" column="SJ"/>
+		<property name="params" column="CS" length="2000"/>
+		<property name="host" column="ZJ"/>
+	</class>
+</hibernate-mapping>

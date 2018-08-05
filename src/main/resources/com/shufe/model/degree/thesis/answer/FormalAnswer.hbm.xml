@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.degree.thesis.answer">
+  <!-- 论文答辩表 -->
+  <class name="FormalAnswer" table="LW_DB_T" lazy="true">
+		<id name="id" column="ID" unsaved-value="null">
+	      <generator class="sequence">
+			  <param name="sequence">SEQ_LW_DB_T</param>
+	      </generator>
+	   </id>
+	  <property name="time" column="DBSJ"/>
+	  <property name="address" column="DBDD" length="200"/>
+	  <property name="formelMark" column="DBFS" length="10"/>
+	  <property name="isPassed" column="DBSFTG"/>
+	  <set name="answerTeamSet" table="LW_DBXZ_T" inverse="true" cascade="all-delete-orphan">
+		<key column="LWDBID"/>
+		<many-to-many class="AnswerTeam" column="DBDSID"/>
+	  </set>
+	  <many-to-one name="thesisManage"  column="LWGLID"/>
+	  <many-to-one name="student" column="xsxxid"/>
+	  <property name="finishOn" column="DBWCSJ"/>
+	  <property name="downloadName" column="XZWJM"/>
+	  <property name="displayName" column="XZXSWJM"/>
+  </class>	
+</hibernate-mapping>

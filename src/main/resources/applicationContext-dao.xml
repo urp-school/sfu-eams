@@ -1,0 +1,603 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<description>general spring DAO beans</description>
+	
+	<!--student DAO-->
+	<bean id="studentDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.shufe.dao.std.hibernate.StudentDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<!-- BaseCodeDao -->
+	<bean id="baseCodeDao" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.system.code.hibernate.BaseCodeDaoHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<!--teachcalendarDAO-->
+	<bean id="teachCalendarDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.system.calendar.hibernate.TeachCalendarDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	
+	<!-- Classroom info data access object -->
+	<bean id="classroomDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.system.baseinfo.hibernate.ClassroomDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	
+	<!-- Teacher info data access object -->
+	<bean id="teacherDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.system.baseinfo.hibernate.TeacherDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<!-- AdminClass info data access object -->
+	<bean id="adminClassDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.system.baseinfo.hibernate.AdminClassDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	
+	<!-- Speciality info data access object -->
+	<bean id="specialityDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.system.baseinfo.hibernate.SpecialityDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	
+	<!-- SpecialityAspect info data access object -->
+	<bean id="specialityAspectDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.system.baseinfo.hibernate.SpecialityAspectDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	
+	<!-- department info data access object -->
+	<bean id="departmentDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.system.baseinfo.hibernate.DepartmentDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	
+	<!-- teachResourceDAO -->
+	<bean id="teachResourceDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.course.arrange.resource.hibernate.TeachResourceDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	
+	<!-- CreditConstraint DAO-->
+	<bean id="creditConstraintDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.course.election.hibernate.CreditConstraintDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<!-- electParams DAO-->
+	<bean id="electParamsDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.course.election.hibernate.ElectParamsDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<!--questionnaireRecycleRate DAO-->
+	<bean id="questionnaireRecycleRateDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.evaluate.hibernate.QuestionnaireRecycleRateDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	
+	<!-- graduateDAO -->
+	<bean id="graduateDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.shufe.dao.graduate.GraduateHibernateDAO"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<!--courseActivityDAO-->
+	<bean id="courseActivityDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.course.arrange.task.hibernate.CourseActivityDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<!--availTimeDAO-->
+	<bean id="availTimeDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.course.arrange.hibernate.AvailTimeDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<!-- taskGroupDAO -->
+	<bean id="taskGroupDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.course.arrange.task.hibernate.TaskGroupDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	
+	<!--工作量部分-->
+	<bean id="rationWorkloadDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.workload.ration.hibernate.RationWorkloadDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="rationWorkloadConfigDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.workload.ration.hibernate.RationWorkloadConfigDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="modulusDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.shufe.dao.workload.hibernate.ModulusDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="workloadOpenSwitchDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.workload.course.hibernate.WorkloadOpenSwitchDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="teachWorkloadDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.workload.course.hibernate.TeachWorkloadDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="instructWorkloadDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.workload.instruct.hibernate.InstructWorkloadDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="teachWorkloadStatDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.workload.course.hibernate.TeachWorkloadStatDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="teachCategoryDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.workload.course.hibernate.TeachCategoryDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	
+	<bean id="instructionDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.degree.instruct.hibernate.InstructionDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	
+	<!--tutorDAO-->
+	<bean id="tutorDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.degree.tutorManager.hibernate.TutorHibernateDAO"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<!--thesisTopicOpenDAO-->
+	<bean id="topicOpenDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.degree.thesis.topicOpen.hibernate.TopicOpenHibernateDAO"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<!--收费部分的DAO start-->
+	<bean id="feeDetailDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.shufe.dao.fee.hibernate.FeeDetailDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="feeDefaultDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.shufe.dao.fee.hibernate.FeeDefaultDAOHibernate"
+				autowire="byName"></bean>
+		</property>
+	</bean>
+	<!--收费部分的DAO end-->
+	<!--教学质量部分的DAO start-->
+	<bean id="reviewDetailDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.quality.review.hibernate.ReviewDetailDAOHibernate"
+				autowire="byName"></bean>
+		</property>
+	</bean>
+	<bean id="textEvaluationDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.quality.evaluate.hibernate.TextEvaluationDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="questionnaireStatDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.quality.evaluate.hibernate.QuestionnaireStatDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="teachAccidentDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.quality.accident.hibernate.TeachAccidentDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="teachProductDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.quality.product.hibernate.TeachProductDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="fineCourseDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.quality.fineCourse.hibernate.FineCourseDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<!-- 教学质量部分的DAO end -->
+	
+	<bean id="creditAwardCriteriaDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.course.election.hibernate.CreditAwardCriteriaDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="courseTakeDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.course.arrange.task.hibernate.CourseTakeDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	
+	<bean id="electRecordDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.course.election.hibernate.ElectRecordDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="electStdScopeDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.course.election.hibernate.ElectStdScopeDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	
+	<!--培养计划 -->
+	<bean id="teachPlanDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.course.plan.hibernate.TeachPlanDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="courseGroupDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.course.plan.hibernate.CourseGroupDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="planCourseDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.course.plan.hibernate.PlanCourseDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="teachPlanStatDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.course.plan.hibernate.TeachPlanStatDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<!-- 教学任务 -->
+	<bean id="teachTaskDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.course.task.hibernate.TeachTaskDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	
+	<bean id="teachTaskParamDAO" parent="baseTransactionProxy">
+        <property name="target">
+            <bean
+                class="com.shufe.dao.course.task.hibernate.TeachTaskParamDAOHibernate"
+                autowire="byName"/>
+        </property>
+    </bean>
+    
+    <bean id="manualArrangeParamDao" parent="baseTransactionProxy">
+        <property name="target">
+            <bean
+                class="com.shufe.dao.course.task.hibernate.ManualArrangeParamDaoHibernate"
+                autowire="byName"/>
+        </property>
+    </bean>
+    
+    <bean id="courseTakeForTaskParamDao" parent="baseTransactionProxy">
+        <property name="target">
+            <bean
+                class="com.shufe.dao.course.task.hibernate.CourseTakeForTaskParamDaoHibernate"
+                autowire="byName"/>
+        </property>
+    </bean>
+    
+	<bean id="teachTaskStatDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.course.task.hibernate.TeachTaskStatDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="taskSeqNoGenerator" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.course.task.hibernate.TaskSeqNoGeneratorImpl"
+				autowire="byName">
+			</bean>
+		</property>
+	</bean>
+	<bean id="requirePreferDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.course.task.hibernate.RequirePreferDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="taskAlterRequestDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.course.task.hibernate.TaskAlterRequestDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	
+	<bean id="timeSettingDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.system.calendar.hibernate.TimeSettingDAOHibernate"
+				autowire="byName"></bean>
+		</property>
+	</bean>
+	
+	<bean id="textbookDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.course.textbook.hibernate.TextbookDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="level1SubjectDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.degree.subject.hibernate.Level1SubjectDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="level2SubjectDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.degree.subject.hibernate.Level2SubjectDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="chooseTutorDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.degree.tutorManager.hibernate.ChooseTutorHibernateDAO"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<!--bookRequirementDAO by yushun-->
+	<bean id="bookRequirementDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.course.textbook.hibernate.BookRequirementDAOHibernate"
+				autowire="byName"></bean>
+		</property>
+	</bean>
+	<bean id="tutorApplyDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.degree.tutorManager.hibernate.TutorApplyHibernateDAO"
+				autowire="byName"></bean>
+		</property>
+	</bean>
+	
+	<!--systemMessageDAO-->
+	<bean id="systemMessageDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.system.message.hibernate.SystemMessageDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="graduatePracticeDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.std.graduation.practice.hibernate.GraduatePracticeDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	
+	<bean id="noticeDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.system.notice.hibernate.NoticeDAOHibernate"
+				autowire="byName">
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="thesisManageDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.degree.thesis.hibernate.ThesisManageHibernateDAO"
+				autowire="byName">
+			</bean>
+		</property>
+	</bean>
+	<bean id="degreeDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.shufe.dao.degree.apply.hibernate.DegreeDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="examArrangeDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.course.arrange.exam.hibernate.ExamArrangeDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="examApplyParamDao" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.course.arrange.exam.hibernate.ExamApplyParamDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="examTakeDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.course.arrange.exam.hibernate.ExamTakeDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="annotateDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.degree.thesis.annotate.hibernate.AnnotateDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="thesisStatisticDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.degree.thesis.thesisStatistic.hibernate.ThesisStatisticDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="preAnswerDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.degree.thesis.preAnswer.hibernate.PreAnswerDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="gradeDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.shufe.dao.course.grade.hibernate.GradeDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="gradePointRuleDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.course.grade.gp.hibernate.GradePointRuleDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="formalAnswerDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.degree.thesis.formalAnswer.hibernate.FormalAnswerHibernateDAO"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="studyProductDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.degree.study.hibernate.StudyProductHibernateDAO"
+				autowire="byName"/>
+		</property>
+	</bean>
+	
+	<bean id="speciality2ndSignUpDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.std.speciality2nd.hibernate.Speciality2ndSignUpDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="tacheSettingDao" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.degree.thesis.hibernate.TacheSettingDaoHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<!--考勤管理-->
+	<bean id="attendStaticDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.course.attend.hibernate.AttendStaticDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+	<bean id="attendDeviceDAO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.shufe.dao.course.attend.hibernate.AttendDeviceDAOHibernate"
+				autowire="byName"/>
+		</property>
+	</bean>
+</beans>

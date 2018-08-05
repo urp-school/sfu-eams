@@ -1,0 +1,1 @@
+<#include "../teachPlanSearch/list.ftl"/>

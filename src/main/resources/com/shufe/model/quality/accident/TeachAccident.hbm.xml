@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.quality.accident">
+	<class name="TeachAccident" table="JXZL_JXSG_T">
+		<id name="id" column="Id" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXZL_JXSG_T</param>
+			</generator>
+		</id>
+		<property name="occurAt" column="FSSJ" not-null="true"/>
+		<property name="description" column="SGMS" length="500" not-null="true"/>
+		<property name="remark" column="BZ" length="500"/>
+		<many-to-one name="task" column="JXRWID" not-null="true"/>
+		<property name="modifyAt" column="XGSJ" not-null="true"/>
+		<many-to-one name="teacher" column="JSID" not-null="true"/>
+		<many-to-one name="handleType" column="CLLBID"/>
+	</class>
+</hibernate-mapping>

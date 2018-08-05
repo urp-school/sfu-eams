@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<struts-config>
+	<action-mappings>
+        
+        <action path="/departmentSelector" scope="request" parameter="method">
+            <forward path="/pages/selector/departmentSelector.ftl" name="success"/>
+        </action>
+        
+        <action path="/specialitySelector" scope="request" parameter="method">
+            <forward path="/pages/selector/specialitySelector.ftl" name="success"/>
+        </action>
+        
+        <action path="/specialityAspectSelector" scope="request" parameter="method">
+            <forward path="/pages/selector/specialityAspectSelector.ftl" name="success"/>
+			<forward path="/pages/selector/secondSpecialityAspectSelector.ftl" name="secondSuccess"/>
+        </action>
+		
+		<action path="/adminClassSelector" scope="request" parameter="method">
+            <forward path="/pages/selector/adminClassSelector.ftl" name="success"/>			
+        </action>
+        
+        <action path="/studentTypeSelector" scope="request" parameter="method">
+            <forward path="/pages/selector/studentTypeSelector.ftl" name="success"/>
+        </action>
+		
+		<action path="/courseTypeSelector" scope="request" parameter="method">
+            <forward path="/pages/selector/courseTypeSelector.ftl" name="success"/>
+        </action>
+		
+		<action path="/courseSelector" scope="request" parameter="method">
+			<forward name="list" path="/pages/selector/courseSelector.ftl"/>
+		</action>
+		<action path="/collegeSelector" scope="request" parameter="method">
+			<forward name="list" path="/pages/selector/collegeSelector.ftl"/>
+		</action>
+    </action-mappings>
+
+</struts-config>

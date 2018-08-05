@@ -1,0 +1,1 @@
+<#include "/pages/std/info/stdDetail/abroadInfo.ftl"/>

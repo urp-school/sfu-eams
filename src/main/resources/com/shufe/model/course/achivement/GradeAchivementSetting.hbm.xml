@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.course.achivement"  >
+	<class name="GradeAchivementSetting" table="JXJ_PDSZ_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXJ_PDSZ_T</param>
+			</generator>
+		</id>
+		<property name="name" column="MC"/>
+		<property name="grades" column="RXNFPC"/>
+		<many-to-one name="fromSemester" column="KSJXRLID" not-null="true"/>
+		<many-to-one name="toSemester" column="JSJXRLID" not-null="true"/>
+		<property name="published" column="SFFB" not-null="true"/>
+	</class>
+</hibernate-mapping>  

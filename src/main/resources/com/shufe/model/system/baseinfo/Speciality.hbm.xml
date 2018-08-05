@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<!--专业代码-->
+	<class name="com.shufe.model.system.baseinfo.Speciality" table="JCXX_ZY_T">
+		<cache usage="read-write" region="baseinfo"/>
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JCXX_ZY_T</param>
+			</generator>
+		</id>
+		<!--base info-->
+		<property name="code" column="ZYDM" length="32" unique="true"/>
+		<property name="name" column="ZYMC" length="100"/>
+		<property name="engName" column="ZYMC_EN" length="100"/>
+		<property name="abbreviation" column="ZYJC" length="50"/>
+		<property name="createAt" column="ZDSJ" type="date"/>
+		<property name="modifyAt" column="XGSJ" type="date"/>
+		<property name="remark" column="BZ" length="500"/>
+		<property name="state" column="ZTDM"/>
+		
+		<many-to-one name="department" column="BMID" not-null="true" class="com.shufe.model.system.baseinfo.Department"/>
+		<many-to-one name="majorType" column="ZYLBID" not-null="true"/>
+		<many-to-one name="stdType" column ="XSLBID"/>
+		<set name="aspects" >
+			<key column="ZYID"/>
+			<one-to-many
+				class="com.shufe.model.system.baseinfo.SpecialityAspect"/>
+		</set>
+		<many-to-one name="subjectCategory" not-found="ignore" column="XKMLID"/>
+		<filter name="filterSpecialityByDepartment"
+			condition="instr(:departmentIds, to_char(BMID))>0"/>
+	</class>
+	
+	<query name="getAllSpecialities">
+		<![CDATA[ 
+           from  Speciality
+        ]]>
+	</query>
+	
+	<filter-def name="filterSpecialityByDepartment">
+		<filter-param type="string" name="departmentIds"/>
+	</filter-def>
+</hibernate-mapping>

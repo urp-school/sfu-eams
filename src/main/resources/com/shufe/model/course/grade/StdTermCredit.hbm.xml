@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.shufe.model.course.grade.stat">
+	<class name="StdTermCredit" table="XS_MXQXF_V">
+        <id name="id" column="ID" unsaved-value="null">
+			<generator class="assigned"/>
+		</id>
+		<many-to-one name="std" column="XSID" not-null="true"/>
+		<many-to-one name="calendar" column="JXRLID" not-null="true"/>
+		<property name="credits" column="XF" not-null="true"/>
+		<property name="totalCredits" column="ZXF" not-null="true"/>
+	</class>
+</hibernate-mapping>

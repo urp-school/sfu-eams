@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.shufe.model.degree.study">
+	<class name="ThesisIndex" table="KY_SY_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_KY_SY_T</param>
+			</generator>
+		</id>
+		<many-to-one name="thesisIndexType" column="LWSYLBID"/>
+		<property name="thesisIndexNo" column="LWSYBH" length="50">
+		</property>
+	</class>
+</hibernate-mapping>

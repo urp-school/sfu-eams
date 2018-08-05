@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 1.0//EN" "http://www.getahead.ltd.uk/dwr/dwr.dtd">
+	
+<dwr>
+    <allow>
+        
+        <create creator="spring" javascript="messageService">
+            <param name="beanName" value="messageService"/>
+            <include method="checkStudentMessage"/>
+        </create>
+        <convert converter="bean" match="com.shufe.model.system.baseinfo.Department">
+            <param name="exclude" value="stdTypes,specialitis,teachers,classrooms"/>
+        </convert>
+        <convert converter="bean" match="com.shufe.model.system.baseinfo.Speciality">
+            <param name="exclude" value="aspects,stdType,department"/>
+        </convert>
+        <convert converter="bean" match="com.shufe.model.system.baseinfo.SpecialityAspect">
+            <param name="exclude" value="speciality"></param>
+        </convert>
+        <convert converter="bean" match="com.ekingstar.eams.system.basecode.BaseCode"/>
+        <convert converter="bean" match="com.shufe.model.course.plan.PlanCourse"/>
+        <convert converter="bean" match="com.ekingstar.eams.system.baseinfo.model.CourseExtInfo"/>
+        <convert converter="bean" match="com.ekingstar.eams.system.basecode.industry.HSKDegree"/>
+        <convert converter="bean" match="com.shufe.model.course.election.StdCreditConstraint"/>
+        <convert converter="bean" match="com.shufe.model.system.baseinfo.StudentType"/>
+        <convert converter="bean" match="com.ekingstar.security.User"/>
+        
+        <convert converter="hibernate" match="com.shufe.model.system.baseinfo.Classroom"/>
+        <convert converter="hibernate" match="com.shufe.model.system.baseinfo.AdminClass"/>
+        <convert converter="hibernate" match="com.shufe.model.system.baseinfo.Teacher"/>
+        
+        <convert converter="hibernate" match="com.shufe.model.system.baseinfo.TeacherDegreeInfo"/>
+        
+        <convert converter="hibernate" match="com.shufe.model.system.baseinfo.TeacherAddressInfo"/>
+        
+        <convert converter="hibernate" match="com.ekingstar.eams.system.time.CourseUnit"/>
+        
+        <convert converter="hibernate" match="com.ekingstar.eams.std.registration.model.Register"/>
+        
+        <convert converter="hibernate"
+            match="com.ekingstar.eams.system.basecode.industry.AlterReason">
+        </convert>
+        <convert converter="hibernate" match="com.shufe.model.course.textbook.Textbook"/>
+        <convert converter="hibernate" match="com.shufe.model.system.baseinfo.Course"/>
+        <convert converter="hibernate" match="com.ekingstar.eams.system.basecode.industry.Press"/>
+        
+        <convert converter="hibernate" match="com.shufe.model.teachCheck.TeachCheckDetail"/>
+        <convert converter="hibernate" match="com.shufe.model.teachCheck.TeachCheckTable"/>
+        
+        <convert converter="hibernate" match="com.shufe.model.std.Student"/>
+        <convert converter="map" match="java.util.Map"/>
+        <create creator="spring" javascript="utilservice">
+            <param name="beanName" value="utilService"/>
+            <include method="checkEntityIfExists"/>
+        </create>
+        <create creator="spring" javascript="userDWRService">
+            <param name="beanName" value="userDWRService"/>
+        </create>
+        
+        <create creator="spring" javascript="baseinfoUtil">
+            <param name="beanName" value="baseinfoUtil"/>
+            <include method="checkCodeIfExists"/>
+        </create>
+        <create creator="spring" javascript="studentService">
+            <param name="beanName" value="studentService"/>
+            <include method="checkStdNoIfExists"/>
+            <include method="getAlterationReasonList"/>
+            <include method="getStd"/>
+        </create>
+		
+        <create creator="spring" javascript="studentManager">
+            <param name="beanName" value="studentManager"/>
+            <include method="getStdBeanMap"/>
+        </create>
+        <create creator="spring" javascript="studentClassManager">
+            <param name="beanName" value="studentClassManager"/>
+            <include method="getStdBeanMap"/>
+        </create>
+        <create creator="spring" javascript="inputDutyRecord">
+            <param name="beanName" value="inputDutyRecord"/>
+            <include method="getCourseUnitList"/>
+        </create>
+        <create creator="spring" javascript="DutyRecordManager">
+            <param name="beanName" value="dutyRecordManager"/>
+            <include method="searchTeachTaskForDuty"/>
+        </create>
+        <create creator="spring" javascript="feeDetailAction">
+            <param name="beanName" value="feeDetailAction"/>
+            <include method="statFeeFor"/>
+        </create>
+			
+        <create javascript="bookRequirement" creator="spring">
+            <param name="beanName" value="bookRequirement"></param>
+            <include method="getTeachTasks"></include>
+        </create>
+        
+        <create creator="spring" javascript="gradeService">
+            <param name="beanName" value="gradeService"></param>
+        </create>
+        <create creator="spring" javascript="checkTeachPlan">
+            <param name="beanName" value="graduateAuditService"></param>
+            <include method="auditStudentTeachPlan"></include>
+        </create>
+        <create javascript="checkThesisOpenAffrim" creator="spring">
+            <param name="beanName" value="topicOpenService"></param>
+            <include method="checkThesisOpenAffirmByCode"></include>
+        </create>
+        <create javascript="stdGrade" creator="spring">
+            <param name="beanName" value="stdGrade"/>
+            <include method="getCourseGradeInfo"/>
+            <include method="getTeachTaskInfos"/>
+        </create>
+		 
+        <create creator="spring" javascript="dutyService">
+            <param name="beanName" value="dutyService"/>
+            <include method="checkDutyRecordsIfExists"/>
+            <include method="getDutyRecordIdIfExists"/>
+        </create>
+        <create creator="spring" javascript="taskActivityService">
+            <param name="beanName" value="taskActivityService"/>
+            <include method="isBeenTaskForTeacher"/>
+        </create>
+        
+        <create creator="spring" javascript="departmentService">
+            <param name="beanName" value="departmentService"/>
+            <include method="getDepartments"/>
+        </create>
+        <create creator="spring" javascript="departmentDAO">
+            <param name="beanName" value="departmentDAO"/>
+        </create>
+        <create creator="spring" javascript="specialityDAO">
+            <param name="beanName" value="specialityDAO"/>
+        </create>
+        <create creator="spring" javascript="specialityAspectDAO">
+            <param name="beanName" value="specialityAspectDAO"/>
+        </create>
+        <create creator="spring" javascript="teacherDAO">
+            <param name="beanName" value="teacherDAO"/>
+        </create>
+		<create creator="spring" javascript="adminClassService">
+            <param name="beanName" value="adminClassDwrService"/>
+        </create>
+        <!--培养计划所需-->
+        <create creator="spring" javascript="planCourseService">
+            <param name="beanName" value="planCourseService"/>
+            <include method="getPlanCourse"/>
+        </create>
+        <create creator="spring" javascript="teachPlanService">
+            <param name="beanName" value="teachPlanService"/>
+            <include method="isExist"/>
+            <include method="statOverallCredit"/>
+            <include method="statOverallCreditHour"/>
+        </create>
+        <!--选课学分限制-->
+        <create creator="spring" javascript="creditConstraintService">
+            <param name="beanName" value="creditConstraintService"></param>
+            <include method="getPersonCreditConstraints"></include>
+        </create>
+        <create creator="new" javascript="date">
+            <param name="class" value="java.util.Date"/>
+        </create>
+        <create creator="spring" javascript="calendarDAO">
+            <param name="beanName" value="teachCalendarDAO"/>
+            <include method="getTermsOrderByDistance"/>
+            <include method="getYearsOrderByDistance"/>
+            <include method="getWeekTimeMap"/>
+			<include method="getTeachCalendarNames"/>
+        </create>
+        <create creator="spring" javascript="studentDAO">
+            <param name="beanName" value="studentDAO"/>
+            <include method="getBasicInfoName"></include>
+        </create>
+        <create creator="spring" javascript="textbookDAO">
+            <param name="beanName" value="textbookDAO"/>
+            <include method="getTextbooksByName"/>
+            <include method="getTextbook"/>
+        </create>
+        <create creator="spring" javascript="courseDao">
+            <param name="beanName" value="courseDao"/>
+            <include method="getCourseByCode"/>
+        </create>
+        <create creator="spring" javascript="courseTakeDAO">
+            <param name="beanName" value="courseTakeDAO"/>
+            <include method="stdCourseValidator"/>
+        </create>
+		
+        <!-- 学生注册 -->
+        <create creator="spring" javascript="registerService">
+            <param name="beanName" value="registerService"/>
+            <include method="getRegister"></include>
+            <include method="getUser"></include>
+        </create>
+        <!---->
+        <create creator="spring" javascript="examActivityService">
+            <param name="beanName" value="examActivityService"/>
+        </create>
+        <create javascript="TimeUnit" creator="new">
+            <param name="class" value="com.ekingstar.eams.system.time.TimeUnit"/>
+        </create>
+        
+        <create creator="spring" javascript="teachTaskService">
+            <param name="beanName" value="teachTaskService"/>
+            <include method="getTeachTaskDWR"/>
+        </create>
+        
+        <convert converter="bean" match="com.ekingstar.eams.system.time.TimeUnit"/>
+        
+        <create creator="spring" javascript="adminClassDAO">
+            <param name="beanName" value="adminClassDAO"/>
+        </create>
+    </allow>
+</dwr>

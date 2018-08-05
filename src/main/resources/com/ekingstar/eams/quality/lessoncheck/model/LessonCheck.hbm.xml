@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 督导组听课 -->
+<hibernate-mapping>
+	<class name="com.ekingstar.eams.quality.lessoncheck.model.LessonCheck" table="JXRW_DDZTK_T"
+		discriminator-value="0">
+		<cache usage="read-write" region="taskCache"/>
+		<id name="id" column="id" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXRW_DDZTK_T</param>
+			</generator>
+		</id>
+		<many-to-one name="calendar" column="JXRLID" not-null="true"/>
+		<many-to-one name="task" column="JXRWID" not-null="true"/>
+		<many-to-one name="lessonCheckType" column="TKLBID" not-null="true"/>
+		<many-to-one name="checkRoom" column="SKDDID" not-null="true"/>
+		<property name="checkAt" column="SKSJ"/>
+		<property name="checkers" column="TKDX"/>
+	</class>
+</hibernate-mapping>

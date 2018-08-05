@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 排课分组表 -->
+<hibernate-mapping package="com.shufe.model.course.arrange.task">
+	<class name="TaskGroup" table="JXRW_KCZ_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_JXRW_KCZ_T</param>
+			</generator>
+		</id>
+		
+		<property name="name" column="KCZMC" length="100"/>
+		<property name="isSameTime" column="SFTYSJ"/>
+		<property name="isClassChange" column="SFYXBJBD"/>
+		<set name="directTasks" table="JXRW_T" inverse="true">
+			<key column="KCZID"/>
+			<one-to-many class="com.shufe.model.course.task.TeachTask"/>
+		</set>
+		<set name="groups" inverse="true">
+			<key column="FKCZID"/>
+			<one-to-many class="TaskGroup"/>
+		</set>
+		<many-to-one name="parent" column="FKCZID"/>
+		<property name="priority" column="YXJ"/>
+		<!-- 排课建议-->
+		<component name="suggest">
+			<many-to-one name="time" column="SJFBID"
+				class="com.shufe.model.course.arrange.AvailableTime"
+				unique="true" cascade="all"/>
+			<set name="rooms" table="JXRW_KCZJS_T">
+				<cache usage="read-write"/>
+				<key column="KCZID" not-null="true"/>
+				<many-to-many class="com.shufe.model.system.baseinfo.Classroom"
+					column="JSID"/>
+			</set>
+		</component>
+		<many-to-one name="course" column="KCID" not-null="false"/>
+		<many-to-one name="courseType" column="KCLBID" not-null="false"/>
+	</class>
+	<query name="getTaskGroups">
+		<![CDATA[         	select distinct taskGroup from TaskGroup as taskGroup join taskGroup.directTasks as task 			where task.arrangeInfo.teachDepart.id in (:teachDepartIds) and task.calendar.id = :calendarId		]]>
+	</query>
+	<query name="getDirectTaskCountOfGroups">
+		<![CDATA[         	select count(task) from TeachTask as task 			 where task.taskGroup in (:groups)		]]>
+	</query>
+</hibernate-mapping>

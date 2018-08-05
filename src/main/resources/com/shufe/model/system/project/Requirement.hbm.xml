@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.shufe.model.system.project">
+	<class name="Requirement" table="XTXQ_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_XTXQ_T</param>
+			</generator>
+		</id>
+		<property name="content" column="NR" not-null="true" length="500"/>
+		<property name="module" column="MKMC" not-null="true" length="50"/>
+		<property name="fromUser" column="YH" not-null="true" length="20"/>
+		<!--涉众-->
+		<property name="stackHolders" column="SZ" length="50"/>
+		<property name="developers" column="KFZ" length="20" not-null="true"/>
+		<property name="priority" column="YXJ" not-null="true"/>
+		<property name="suggestSolution" column="JYFA" length="300"/>
+		<property name="planCompleteOn" column="JHWCSJ" not-null="true"/>
+		<property name="actualCompleteOn" column="SJWCSJ"/>
+		<property name="status" column="XQZT" not-null="true"/>
+		<property name="background" column="XQBJ" length="200"/>
+		<property name="workload" column="GZL"/>
+		<property name="type" column="XQLXID" not-null="true"/>
+		<property name="lastModifiedOn" column="XGSJ" not-null="true"/>
+		<property name="createdOn" column="CJSJ" not-null="true"/>
+		<property name="remark" column="BZ" length="100"/>
+	</class>
+</hibernate-mapping>

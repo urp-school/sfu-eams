@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.shufe.model.workload.course">
+	<!--工作量查询开关-->
+	<class name="WorkloadOpenSwitch" table="GZL_CXKG_T">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="sequence">
+				<param name="sequence">SEQ_GZL_CXKG_T</param>
+			</generator>
+		</id>
+		<property name="isOpen" column="CXKG"/>
+		<property name="openTime" column="KFSJ"/>
+		<many-to-one name="teachCalendar" column="JXRLID"/>
+	</class>
+</hibernate-mapping>
